@@ -80,6 +80,7 @@ final class TerminalPaneView: NSView {
     let mode = engine.appearanceMode
     appearance = mode.appearance
     layer?.backgroundColor = mode.background.cgColor
+    header.layer?.backgroundColor = mode.headerBackground.cgColor
     titleLabel.textColor = mode.foreground
     pathLabel.textColor = mode.secondaryForeground
     errorLabel.textColor = mode.secondaryForeground
@@ -296,6 +297,7 @@ final class TerminalPaneView: NSView {
   }
 
   private func configureViews() {
+    header.wantsLayer = true
     for view in [header, body] {
       addSubview(view)
       view.translatesAutoresizingMaskIntoConstraints = false

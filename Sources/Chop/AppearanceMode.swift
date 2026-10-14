@@ -26,6 +26,12 @@ enum AppearanceMode: String, CaseIterable {
     self == .light ? .white : NSColor(srgbRed: 30 / 255, green: 32 / 255, blue: 38 / 255, alpha: 1)
   }
 
+  var headerBackground: NSColor {
+    self == .light
+      ? NSColor(srgbRed: 243 / 255, green: 244 / 255, blue: 246 / 255, alpha: 1)
+      : NSColor(srgbRed: 41 / 255, green: 45 / 255, blue: 53 / 255, alpha: 1)
+  }
+
   var foreground: NSColor {
     self == .light ? NSColor(srgbRed: 36 / 255, green: 38 / 255, blue: 43 / 255, alpha: 1) : .white
   }
