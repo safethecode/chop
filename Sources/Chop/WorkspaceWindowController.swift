@@ -2,10 +2,11 @@ import AppKit
 
 @MainActor
 final class WorkspaceWindowController: NSWindowController, NSWindowDelegate {
-  let pane: TerminalPaneView
+  let workspace: WorkspaceView
+  var pane: TerminalPaneView { workspace.focusedPane }
 
   init(engine: TerminalEngine) {
-    pane = TerminalPaneView(engine: engine)
+    workspace = WorkspaceView(engine: engine)
     let window = NSWindow(
       contentRect: NSRect(x: 0, y: 0, width: 1100, height: 720),
       styleMask: [.titled, .closable, .miniaturizable, .resizable],
@@ -18,14 +19,25 @@ final class WorkspaceWindowController: NSWindowController, NSWindowDelegate {
     window.setFrameAutosaveName("ChopWorkspaceWindow")
     window.center()
 
-    window.contentView = pane
+    window.contentView = workspace
 
     super.init(window: window)
     window.delegate = self
+    workspace.onMinimumSizeChange = { [weak window] size in
+      guard let window else { return }
+      let minimum = NSSize(width: max(640, size.width), height: max(400, size.height + 48))
+      window.contentMinSize = minimum
+      let current = window.contentLayoutRect.size
+      if current.width < minimum.width || current.height < minimum.height {
+        window.setContentSize(
+          NSSize(
+            width: max(current.width, minimum.width), height: max(current.height, minimum.height)))
+      }
+    }
   }
 
   func windowShouldClose(_ sender: NSWindow) -> Bool {
-    if pane.needsConfirmClose {
+    if workspace.needsConfirmClose {
       let alert = NSAlert()
       alert.messageText = "윈도우를 닫을까요?"
       alert.informativeText = "이 윈도우에서 실행 중인 작업이 종료됩니다."
@@ -33,7 +45,7 @@ final class WorkspaceWindowController: NSWindowController, NSWindowDelegate {
       alert.addButton(withTitle: "윈도우 닫기")
       guard alert.runModal() == .alertSecondButtonReturn else { return false }
     }
-    pane.closeTerminal()
+    workspace.closeAll()
     return true
   }
 
