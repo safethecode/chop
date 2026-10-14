@@ -23,4 +23,8 @@
 
 | V-14 | 사용자 요청으로 상단에 모드 아이콘을 추가하고 글자 레이아웃 선택기를 구조 아이콘으로 바꿨다. 기본 canvas·선택 강조·분할 동작은 유지했다. | accepted-difference (사용자 요청), 행동 검증 완료 | [상단 아이콘 관찰](evidence/pr10-toolbar-icons.md), 실제 4개 preset/두 모드/최소 창/재실행 |
 
+| V-15 / F-MOVE-01 | 사용자 교정: 검은 손잡이 아이콘 대신 창 전체가 이동하는 모션이 필요하다. 첫 구현에서 이동 결과만 확인한 검토 누락을 기록한다. 전체 칸 chrome/실제 GPU 화면 미리보기와 짧은 배치 모션으로 수정했다. | fixed-and-verified (자동 테스트·실제 이동·사용자 모션 확인) | [칸 이동 관찰](evidence/pr11-pane-reordering.md) E-M1–7; 자동화의 중간 프레임 한계와 사용자 확인을 구분 |
+
+| V-16 | 없는 SF Symbol을 강제 unwrap해 첫 통합 테스트가 중단됐다. 제공되는 네 방향 화살표와 optional 처리로 바꿨다. | fixed-and-verified | 11개 테스트 통과와 실제 헤더 손잡이 표시 |
+
 현재 총괄은 실제 관찰한 v0.1 범위에서 aligned다. 스크롤백 키보드 경로도 실제 앱과 PTY 테스트로 검증했다. 최종 디자인 게이트는 `gate-report.json`과 `failure-events.jsonl`에 기록한다. 빌드 통과가 시각 검증을 대신하지 않으며, VoiceOver 전체 탐색과 macOS 14 실기기까지 검증했다고 주장하지 않는다.

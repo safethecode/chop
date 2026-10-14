@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "catalog_version": 5,
-  "scope_notes": "Native macOS Chop v0.1, user task and DESIGN comparison. macOS26.5.2/CI15; macOS14 physical, full VoiceOver/all IMEs and hardware wheel are explicitly outside verified combinations. Shell/TUI VT styling and standard OS chrome are distinguished from app-owned labels. cmux is technical/feature inspiration, not a visual pixel reference. User correction 2026-10-14 adds R-DEFAULT canvas screenshot as a visual/state reference; first shell + three empty plus panes is mandatory at default entry. Previous main gate lacked that condition; its historical ledger is retained. PR #8: user-requested light/dark modes; preserve default grid in both modes, apply to native chrome and all terminals without PTY replacement, persist selection. Evidence is self review, with actual CUA observations recorded as Markdown. PR #10: user-requested icon-only mode toggle and layout presets. Preserve R-DEFAULT canvas and R-TOOLBAR location/options/selection; icons are an intentional user-requested change from text, not an exact crop clone.",
+  "scope_notes": "Native macOS Chop v0.1, user task and DESIGN comparison. macOS26.5.2/CI15; macOS14 physical, full VoiceOver/all IMEs and hardware wheel are explicitly outside verified combinations. Shell/TUI VT styling and standard OS chrome are distinguished from app-owned labels. cmux is technical/feature inspiration, not a visual pixel reference. User correction 2026-10-14 adds R-DEFAULT canvas screenshot as a visual/state reference; first shell + three empty plus panes is mandatory at default entry. Previous main gate lacked that condition; its historical ledger is retained. PR #8: user-requested light/dark modes; preserve default grid in both modes, apply to native chrome and all terminals without PTY replacement, persist selection. Evidence is self review, with actual CUA observations recorded as Markdown. PR #10: user-requested icon-only mode toggle and layout presets. Preserve R-DEFAULT canvas and R-TOOLBAR location/options/selection; icons are an intentional user-requested change from text, not an exact crop clone. PR #11: editing-only same-workspace pane exchange with whole-pane/GPU drag preview and placement motion, requested and directly accepted by user. Preserve live PTY and split geometry. CUA before/after observations are separate from user motion feedback; no mid-drag frame capture or physical Reduce Motion execution is claimed.",
   "targets": [
     "Sources",
     "Resources/terminal.conf",
@@ -113,7 +113,7 @@
       "id": "ORC-F08",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "요청된 확대·닫기는 각 칸 헤더에 상시 둬 조작을 찾을 수 있게 한다. hover 전용으로 숨기지 않는 네이티브 접근성 예외다. 중앙 실행 칸 +는 편집 모드에서만 표시한다.",
+      "reason": "헤더 확대·닫기는 유지하며 이동 손잡이만 편집 중 두 칸 이상에서 표시한다. 중앙 +와 중복하지 않고 이동은 헤더/메뉴·키보드로 제공한다.",
       "checks": [
         "code",
         "visual",
@@ -122,8 +122,8 @@
       "exceptions": [
         {
           "id": "CHOP-ORC-F08",
-          "reason": "요청된 확대·닫기는 각 칸 헤더에 상시 둬 조작을 찾을 수 있게 한다. hover 전용으로 숨기지 않는 네이티브 접근성 예외다. 중앙 실행 칸 +는 편집 모드에서만 표시한다.",
-          "basis": "DESIGN.md: native platform and user-requested central plus / 1-2-4 layout contract"
+          "reason": "헤더 확대·닫기는 유지하며 이동 손잡이만 편집 중 두 칸 이상에서 표시한다. 중앙 +와 중복하지 않고 이동은 헤더/메뉴·키보드로 제공한다.",
+          "basis": "DESIGN.md; user-requested pane movement/motion and E-M1–7 actual observations"
         }
       ]
     },
@@ -142,7 +142,7 @@
       "id": "ORC-F10",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "네 개 layout 구조와 mode의 SF Symbols를 native image 슬롯 중앙에 두었다. preset32pt/icon14pt medium, mode28pt 클릭 영역과 실제 단일/좌우/상하/4칸 방향을 대조했다.",
+      "reason": "28pt 헤더 손잡이의 SF Symbol은 14pt medium으로 중앙 정렬한다. 두 모드의 비대칭 5칸, 약295pt 좁은 칸에서 제목·확대·닫기 정렬을 확인했다.",
       "checks": [
         "code",
         "visual"
@@ -175,7 +175,7 @@
       "id": "ORC-F13",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "HTML onClick 요소가 아닌 NSButton/NSSegmentedControl/NSSplitView다. AppKit 기본 화살표/분할/터미널 I-beam 커서를 유지하는 네이티브 예외다.",
+      "reason": "이동 손잡이는 native openHand cursor를 제공한다. 다른 native 버튼·splitter는 기존 플랫폼 커서를 유지한다.",
       "checks": [
         "code",
         "visual",
@@ -184,8 +184,8 @@
       "exceptions": [
         {
           "id": "CHOP-ORC-F13",
-          "reason": "HTML onClick 요소가 아닌 NSButton/NSSegmentedControl/NSSplitView다. AppKit 기본 화살표/분할/터미널 I-beam 커서를 유지하는 네이티브 예외다.",
-          "basis": "DESIGN.md: native platform and user-requested central plus / 1-2-4 layout contract"
+          "reason": "이동 손잡이는 native openHand cursor를 제공한다. 다른 native 버튼·splitter는 기존 플랫폼 커서를 유지한다.",
+          "basis": "DESIGN.md; user-requested pane movement/motion and E-M1–7 actual observations"
         }
       ]
     },
@@ -283,7 +283,7 @@
       "id": "ORC-G05",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "사용자 정의 hover transform/scale/shadow/opacity 코드가 없다. 표준 AppKit 버튼의 pressed/hover 표현은 플랫폼 동작으로 유지하며 실제 클릭·선택 전환을 관찰했다.",
+      "reason": "hover 장식은 없다. 사용자가 요청한 직접 드래그/배치 transform0.18초와 source alpha0.35만 허용한다. 사용자가 최신 모션을 직접 확인했다. Reduce Motion 분기는 코드 확인이며 해당 시스템 설정의 체감 검증을 주장하지 않는다.",
       "checks": [
         "code",
         "visual",
@@ -292,8 +292,8 @@
       "exceptions": [
         {
           "id": "CHOP-ORC-G05",
-          "reason": "사용자 정의 hover transform/scale/shadow/opacity 코드가 없다. 표준 AppKit 버튼의 pressed/hover 표현은 플랫폼 동작으로 유지하며 실제 클릭·선택 전환을 관찰했다.",
-          "basis": "DESIGN.md: native platform and user-requested central plus / 1-2-4 layout contract"
+          "reason": "hover 장식은 없다. 사용자가 요청한 직접 드래그/배치 transform0.18초와 source alpha0.35만 허용한다. 사용자가 최신 모션을 직접 확인했다. Reduce Motion 분기는 코드 확인이며 해당 시스템 설정의 체감 검증을 주장하지 않는다.",
+          "basis": "DESIGN.md; user-requested pane movement/motion and E-M1–7 actual observations"
         }
       ]
     },
@@ -429,7 +429,7 @@
       "id": "ORC-G16",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "핵심 칸 관리 확대/닫기의 상시 표시를 의도적으로 유지한다. hover-only 제한 대신 네이티브 버튼과 tooltip/AX/키보드 경로를 제공한다.",
+      "reason": "이동은 편집 중 헤더에만 추가한다. 다른 칸의 실제 대상은 드롭 경계로 표시하며 종료 뒤 강조를 정리한다. 일반 터미널 본문에 상시 조작을 추가하지 않는다.",
       "checks": [
         "code",
         "visual",
@@ -438,8 +438,8 @@
       "exceptions": [
         {
           "id": "CHOP-ORC-G16",
-          "reason": "핵심 칸 관리 확대/닫기의 상시 표시를 의도적으로 유지한다. hover-only 제한 대신 네이티브 버튼과 tooltip/AX/키보드 경로를 제공한다.",
-          "basis": "DESIGN.md: native platform and user-requested central plus / 1-2-4 layout contract"
+          "reason": "이동은 편집 중 헤더에만 추가한다. 다른 칸의 실제 대상은 드롭 경계로 표시하며 종료 뒤 강조를 정리한다. 일반 터미널 본문에 상시 조작을 추가하지 않는다.",
+          "basis": "DESIGN.md; user-requested pane movement/motion and E-M1–7 actual observations"
         }
       ]
     },
@@ -458,7 +458,7 @@
       "id": "ORC-G18",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "plus/xmark/확대와 함께 rectangle/split/moon/sun.max를 SF Symbols로 사용한다. 실제 네 preset/두 mode의 이미지·AX·동작이 일치했다. 앱 자체 SVG나 아이콘 장식을 만들지 않았다.",
+      "reason": "네 방향 화살표는 실제 자리 교환을 나타낸다. SF Symbols 출처와 실제 헤더 위치·AX 이름·드래그 행동을 대조했다.",
       "checks": [
         "code",
         "visual"
@@ -491,7 +491,7 @@
       "id": "ORC-G21",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "웹 cursor:pointer/not-allowed 대신 AppKit의 NSButton/NSSplitView/텍스트 기본 커서를 유지한다. 클릭 영역과 비활성 상태는 네이티브 컨트롤에서 확인했다.",
+      "reason": "이동 조작에는 native openHand, 버튼·splitter에는 기존 AppKit 커서를 사용한다. 웹의 pointer 모양을 macOS에 강제하지 않는다.",
       "checks": [
         "code",
         "visual",
@@ -500,8 +500,8 @@
       "exceptions": [
         {
           "id": "CHOP-ORC-G21",
-          "reason": "웹 cursor:pointer/not-allowed 대신 AppKit의 NSButton/NSSplitView/텍스트 기본 커서를 유지한다. 클릭 영역과 비활성 상태는 네이티브 컨트롤에서 확인했다.",
-          "basis": "DESIGN.md: native platform and user-requested central plus / 1-2-4 layout contract"
+          "reason": "이동 조작에는 native openHand, 버튼·splitter에는 기존 AppKit 커서를 사용한다. 웹의 pointer 모양을 macOS에 강제하지 않는다.",
+          "basis": "DESIGN.md; user-requested pane movement/motion and E-M1–7 actual observations"
         }
       ]
     },
@@ -732,7 +732,7 @@
       "id": "RUI-04",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "중앙 추가→독립 셸→분할/리사이즈→포커스/확대/닫기→정상 종료/새 셸 복원 흐름을 실제 앱과 PTY 테스트로 실행했다.",
+      "reason": "실제 비대칭 5칸의 드래그·취소·키보드 좌우 교환과 동일 PID/변수를 확인했다. PTY identity·preview·geometry·snapshot roundtrip은 11개 테스트에서 검증했다.",
       "checks": [
         "spec",
         "interaction"
@@ -826,7 +826,7 @@
       "id": "RUI-12",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "기존 SF Symbols/NSButton 예외를 유지하고 사용자가 요청한 rectangle/split과 moon/sun.max를 추가했다. 14pt medium 구조 그림/32pt segment, mode28pt 클릭 영역과 tooltip/AX 이름, 실제 방향/전환을 확인했다.",
+      "reason": "이동용 arrow.up.and.down.and.arrow.left.and.right를 기존 SF Symbols 예외로 추가했다. 14pt medium/28pt handle·대상 이름 AX·자리 바꾸기 tooltip/메뉴가 실제 행동과 일치한다.",
       "checks": [
         "code",
         "visual"
@@ -834,8 +834,8 @@
       "exceptions": [
         {
           "id": "CHOP-RUI-12",
-          "reason": "기존 SF Symbols/NSButton 예외를 유지하고 사용자가 요청한 rectangle/split과 moon/sun.max를 추가했다. 14pt medium 구조 그림/32pt segment, mode28pt 클릭 영역과 tooltip/AX 이름, 실제 방향/전환을 확인했다.",
-          "basis": "DESIGN.md: native platform and user-requested central plus / 1-2-4 layout contract"
+          "reason": "이동용 arrow.up.and.down.and.arrow.left.and.right를 기존 SF Symbols 예외로 추가했다. 14pt medium/28pt handle·대상 이름 AX·자리 바꾸기 tooltip/메뉴가 실제 행동과 일치한다.",
+          "basis": "DESIGN.md; user-requested pane movement/motion and E-M1–7 actual observations"
         }
       ]
     },
@@ -884,7 +884,7 @@
       "id": "RUI-16",
       "applicable": true,
       "scope": "R-DEFAULT 사용자 canvas crop와 Chop 기본 진입 화면의 구조/상태/컴포넌트 관계",
-      "reason": "R-DEFAULT canvas의 첫 셸+세 중앙 +·4칸 구조를 유지한다. 새 R-TOOLBAR crop의 왼쪽 위치·4개 선택지·native 선택 강조를 보존하고 사용자 추가 요청에 따라 글자만 구조 SF Symbols로 대체했다. 실제 이미지/분할 방향과 두 모드를 판독했다.",
+      "reason": "기본 첫 셸+세 중앙 +와 toolbar 관계는 유지한다. 사용자 요청으로 편집 중 헤더 손잡이/전체 칸 미리보기를 추가했다. 사용 중인 비대칭 5칸을 보존하며 실제 화면을 확인했고 기본 진입은 기존 근거와 재실행 PTY 검사를 유지한다.",
       "checks": [
         "spec",
         "visual"
@@ -895,7 +895,7 @@
       "id": "RUI-17",
       "applicable": true,
       "scope": "R-DEFAULT 사용자 canvas crop와 Chop 기본 진입 화면의 구조/상태/컴포넌트 관계",
-      "reason": "기본 canvas의 작업 순서와 넓은 터미널 영역을 유지하고, 왼쪽 layout 구조 아이콘/오른쪽 mode 아이콘으로 전역 조작을 표현한다. 추가 요청한 아이콘화에서 같은 과제·정보 위계·선택 표시가 유지되는 것을 전체/최소 창과 두 모드에서 확인했다.",
+      "reason": "전체 작업 공간의 넓은 터미널·중앙 +·상단 전역 조작을 유지한다. 편집에 필요한 이동만 헤더에 추가하며 사용자가 전체 칸 모션을 직접 확인해 수용했다. 정지 화면만으로 부드러움을 판정하지 않았다.",
       "checks": [
         "spec",
         "visual"
@@ -953,7 +953,7 @@
       "id": "RUI-22",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "canvas 외부 추가 padding 없이 pane header12/terminal12를 각각 소유한다. 중복 margin이 없고 최종 4/5칸·확대 및 최소 창에서 이름/버튼 가림을 확인했다.",
+      "reason": "기존 header40/inset12/28pt 조작부를 유지한다. 편집 손잡이+간격40pt로 제목 시작점만 이동하고 약295pt 좁은 칸과 두 모드에서 버튼/이름 겹침이 없었다. 경계/alpha 변화는 실제 layout 치수를 바꾸지 않는다.",
       "checks": [
         "code",
         "visual"
@@ -964,7 +964,7 @@
       "id": "RUI-23",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "빈 칸/실행/편집/확대/복원에서 동일 pane 컴포넌트와 tokens를 쓴다. 기본 폭의 실제 화면 묶음과 최소 창 상태를 대조했다. 시트는 모두 AppKit을 유지한다.",
+      "reason": "같은 pane 컴포넌트로 빈/실행/편집·두 모드를 처리한다. 5칸 헤더의 동일 토큰과 실제 정렬을 재검토했고 드래그 중 흐림은 종료/취소 시 정리한다.",
       "checks": [
         "spec",
         "code",
@@ -1011,7 +1011,7 @@
       "id": "PROJECT-LAYOUT",
       "applicable": true,
       "scope": "User-authorized Chop v0.1 behavior; PROJECT-LAYOUT",
-      "reason": "1/좌우/상하/4와 재귀 분할, 최소 크기, 드래그, 실행 셸 보존을 구현했다. 실제 680pt 드래그와 재실행 비율을 확인했고 unsafe 축소는 테스트/실제 UI에서 거절했다.",
+      "reason": "기존 split geometry/unsafe 축소 거절을 유지하며 새 교환은 leaf 위치만 바꾼다. 비대칭 실제5칸/키보드/취소, 모델의 역교환과 geometry/직렬화를 확인했다.",
       "checks": [
         "spec",
         "code",
@@ -1024,7 +1024,7 @@
       "id": "PROJECT-MANAGE",
       "applicable": true,
       "scope": "User-authorized Chop v0.1 behavior; PROJECT-MANAGE",
-      "reason": "공간 포커스/확대/복귀/이름 변경/빈 칸 제거와 마지막 칸 보존을 실행했다. 숨긴 셸의 작업 완료와 기존 변수/identity를 PTY에서 확인했다.",
+      "reason": "자리 교환에서도 기존 pane/terminal/surface를 재사용하고 source로 포커스를 유지한다. 실제 셸 PID88966·변수 보존과 PTY 통합 테스트로 확인했다.",
       "checks": [
         "spec",
         "code",
@@ -1050,7 +1050,7 @@
       "id": "PROJECT-RESTORE",
       "applicable": true,
       "scope": "User-authorized Chop v0.1 behavior; PROJECT-RESTORE",
-      "reason": "사용 중이던 저장 layout/비율/이름/cwd/focus와 새 셸 복원을 유지한다. 실행 칸이 하나도 없으면 첫 칸만 열고, 이전 단일 빈 저장은 이름/cwd를 유지해 기본 grid로 전환한다. 실제 PTY로 각 상태를 확인했다.",
+      "reason": "새 자리 순서는 기존 snapshot 저장 경로를 사용한다. 실제 화면과 저장 순서11·16·15·14·13/실행3개가 일치했다. 교환 snapshot roundtrip은 테스트했다. 이번 실제 앱은 사용자 작업을 유지해 재시작하지 않았다.",
       "checks": [
         "spec",
         "code",
@@ -1089,7 +1089,7 @@
       "id": "PROJECT-TRUTH",
       "applicable": true,
       "scope": "User-authorized Chop v0.1 behavior; PROJECT-TRUTH",
-      "reason": "가짜 terminal text/불필요한 logo/sidebar를 만들지 않았다. 실제 PTY 출력·상태를 사용하며 관찰 문서를 PNG나 독립적 리뷰 승인으로 표시하지 않는다.",
+      "reason": "미리보기는 실제 AppKit chrome와 Ghostty IOSurface를 사용하며 가짜 터미널 텍스트를 만들지 않는다. 실제 화면·자동 테스트·중간 프레임 자동화 한계·사용자 모션 확인을 구분해 기록했다.",
       "checks": [
         "spec",
         "code",
@@ -1129,6 +1129,19 @@
       "applicable": true,
       "scope": "상단 왼쪽 4개 layout 선택지와 오른쪽 mode 전환 버튼, 두 appearance/최소 창/재실행",
       "reason": "사용자가 요청한 icon-only 조작. 레이아웃 그림과 실제 구조/선택이 일치하고 모드 아이콘이 다음 전환 대상을 뜻한다. tooltip/AX 의미를 유지하고 메뉴 동기화·셸 유지·저장·최소 창 접근을 실제 확인한다.",
+      "checks": [
+        "spec",
+        "code",
+        "visual",
+        "interaction"
+      ],
+      "exceptions": []
+    },
+    {
+      "id": "PROJECT-REORDER",
+      "applicable": true,
+      "scope": "편집 모드의 같은 작업 공간 칸 교환, 실제 전체 칸 drag preview와 배치 모션",
+      "reason": "작은 아이콘만 드래그하지 않는다. 사용자 요청과 수정 확인을 보존하며 분할 geometry/살아 있는 셸·포커스/저장 형식·취소 정리를 검증한다. 미실행 플랫폼 조합은 근거 문서에 구분한다.",
       "checks": [
         "spec",
         "code",
