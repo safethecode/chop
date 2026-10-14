@@ -126,9 +126,20 @@ import Testing
   window.contentView = workspace
   window.layoutIfNeeded()
   defer { workspace.closeAll() }
-  workspace.focusedPane.openTerminal()
+  #expect(workspace.layout.paneIDs.count == 4)
+  #expect(
+    workspace.layout.paneIDs.compactMap { workspace.panes[$0]?.name } == [
+      "터미널 1", "터미널 2", "터미널 3", "터미널 4",
+    ])
+  workspace.startRestoredTerminals()
+  #expect(workspace.panes.values.filter { $0.isRunning }.count == 1)
+  #expect(workspace.layout.paneIDs.dropFirst().allSatisfy { workspace.panes[$0]?.terminal == nil })
   let firstID = workspace.focusedID
   let first = try #require(workspace.focusedPane.terminal)
+  workspace.startRestoredTerminals()
+  #expect(
+    workspace.focusedPane.terminal === first,
+    "Reopening the workspace must not duplicate the default shell")
   try await waitFor { !first.needsConfirmClose }
   first.insertText(
     "export CHOP_PANE_VALUE=preserved", replacementRange: NSRange(location: NSNotFound, length: 0))
@@ -136,7 +147,10 @@ import Testing
   try await waitFor { !first.needsConfirmClose }
   #expect(workspace.applyPreset(.grid))
   #expect(workspace.panes[firstID]?.terminal === first)
-  for id in workspace.layout.paneIDs where id != firstID { workspace.panes[id]?.openTerminal() }
+  for (index, id) in workspace.layout.paneIDs.enumerated() where id != firstID {
+    workspace.panes[id]?.openTerminal()
+    #expect(workspace.panes.values.filter { $0.isRunning }.count == index + 1)
+  }
   try await waitFor { !workspace.needsConfirmClose }
   #expect(workspace.panes.values.filter { $0.isRunning }.count == 4)
   #expect(!workspace.applyPreset(.columns), "A smaller preset must never kill running shells")
@@ -245,6 +259,36 @@ import Testing
   empty.openTerminal()
   #expect(missingPaths.count == 1)
   #expect(empty.workingDirectory == FileManager.default.homeDirectoryForCurrentUser.path)
+  restored.closeAll()
+
+  let legacyID = UUID()
+  let legacy = WorkspaceSnapshot(
+    layout: .pane(legacyID),
+    panes: [
+      PaneSnapshot(id: legacyID, name: "이전 이름", workingDirectory: directory.path, wasRunning: false)
+    ], focusedID: legacyID)
+  let migrated = WorkspaceView(engine: engine, snapshot: legacy)
+  window.contentView = migrated
+  window.layoutIfNeeded()
+  defer { migrated.closeAll() }
+  migrated.startRestoredTerminals()
+  #expect(migrated.layout.paneIDs.count == 4)
+  #expect(migrated.layout.paneIDs.first == legacyID)
+  #expect(migrated.focusedPane.name == "이전 이름")
+  #expect(migrated.focusedPane.workingDirectory == directory.path)
+  #expect(migrated.panes.values.filter { $0.isRunning }.count == 1)
+  migrated.closeAll()
+  migrated.panes[try #require(migrated.layout.paneIDs.last)]?.focus()
+  let emptyGrid = migrated.snapshot()
+  let emptyRestored = WorkspaceView(engine: engine, snapshot: emptyGrid)
+  window.contentView = emptyRestored
+  window.layoutIfNeeded()
+  defer { emptyRestored.closeAll() }
+  emptyRestored.startRestoredTerminals()
+  #expect(emptyRestored.layout == emptyGrid.layout)
+  #expect(emptyRestored.panes.values.filter { $0.isRunning }.count == 1)
+  #expect(emptyRestored.panes[emptyGrid.layout.paneIDs[0]]?.isRunning == true)
+  #expect(emptyRestored.focusedID == emptyGrid.layout.paneIDs[0])
 }
 
 @MainActor
