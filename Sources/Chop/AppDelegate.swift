@@ -172,6 +172,28 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
       withTitle: "붙여넣기", action: #selector(TerminalView.paste(_:)), keyEquivalent: "v")
     editMenu.addItem(
       withTitle: "전체 선택", action: #selector(TerminalView.selectAll(_:)), keyEquivalent: "a")
+    editMenu.addItem(.separator())
+    for (title, action, key, modifiers) in [
+      (
+        "한 페이지 위로", #selector(TerminalView.scrollPageUp(_:)),
+        String(UnicodeScalar(NSPageUpFunctionKey)!), NSEvent.ModifierFlags.shift
+      ),
+      (
+        "한 페이지 아래로", #selector(TerminalView.scrollPageDown(_:)),
+        String(UnicodeScalar(NSPageDownFunctionKey)!), .shift
+      ),
+      (
+        "맨 위로 스크롤", #selector(TerminalView.scrollToTop(_:)),
+        String(UnicodeScalar(NSUpArrowFunctionKey)!), .command
+      ),
+      (
+        "맨 아래로 스크롤", #selector(TerminalView.scrollToBottom(_:)),
+        String(UnicodeScalar(NSDownArrowFunctionKey)!), .command
+      ),
+    ] {
+      let item = editMenu.addItem(withTitle: title, action: action, keyEquivalent: key)
+      item.keyEquivalentModifierMask = modifiers
+    }
     editItem.submenu = editMenu
     mainMenu.addItem(editItem)
 
