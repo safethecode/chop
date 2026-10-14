@@ -189,6 +189,28 @@ import Testing
   #expect(workspace.layout == beforeSwap)
   workspace.toggleEditing()
   let originalLayout = workspace.layout
+  let browserSuite = "chop-workspace-files-\(UUID().uuidString)"
+  let browserDefaults = try #require(UserDefaults(suiteName: browserSuite))
+  defer { browserDefaults.removePersistentDomain(forName: browserSuite) }
+  browserDefaults.set(directory.path, forKey: "fileTreeRootPath")
+  let workspaceSplit = workspace.installFileBrowser(defaults: browserDefaults)
+  window.layoutIfNeeded()
+  let bodyFrame = workspaceSplit.convert(workspaceSplit.bounds, to: workspace)
+  #expect(
+    abs(workspace.bounds.maxY - bodyFrame.maxY - 48) < 0.5,
+    "The global toolbar must span above both terminals and the file tree")
+  #expect(workspaceSplit.fileBrowser.frame.height == workspaceSplit.bounds.height)
+  #expect(workspaceSplit.isFileTreeVisible)
+  #expect(workspaceSplit.minimumContentSize.width >= workspace.layout.minimumSize.width + 281)
+  workspaceSplit.toggleFileTree()
+  #expect(!workspaceSplit.isFileTreeVisible && workspace.sidePanelMinimumWidth == 0)
+  workspaceSplit.toggleFileTree()
+  #expect(workspaceSplit.isFileTreeVisible && workspace.sidePanelMinimumWidth == 281)
+  #expect(workspaceSplit.fileBrowser.frame.width >= WorkspaceSplitView.fileTreeMinimumWidth)
+  #expect(workspaceSplit.fileBrowser.frame.maxX == workspaceSplit.bounds.maxX)
+  #expect(workspace.layout == originalLayout && workspace.focusedPane.terminal === first)
+  #expect(first.surface == liveSurface, "File tree visibility must not restart a terminal")
+  workspaceSplit.toggleFileTree()
   workspace.moveFocus(.right)
   #expect(workspace.focusedID == workspace.layout.paneIDs[1])
   #expect(workspace.renameFocused(to: "서버"))

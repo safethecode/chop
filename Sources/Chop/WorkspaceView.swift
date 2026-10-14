@@ -15,13 +15,19 @@ final class WorkspaceView: NSView {
   var onMinimumSizeChange: ((CGSize) -> Void)?
   var onMissingDirectories: (([String]) -> Void)?
   var onAppearanceChangeRequested: ((AppearanceMode) -> Void)?
+  var onFileTreeToggleRequested: (() -> Void)?
+  var sidePanelMinimumWidth: CGFloat = 0
   private var nextName = 1
   private let canvas = NSView()
+  private let bodyHost = NSView()
+  private(set) var fileSplit: WorkspaceSplitView?
   private var root: NSView?
   private let presets = NSSegmentedControl()
   private let editButton = NSButton(title: "레이아웃 편집", target: nil, action: nil)
   private lazy var appearanceButton = ChopStyle.iconButton(
     "moon", label: "다크 모드로 전환", target: self, action: #selector(toggleAppearance))
+  private lazy var fileTreeButton = ChopStyle.iconButton(
+    "sidebar.right", label: "파일 트리 보기", target: self, action: #selector(toggleFileTree))
   private(set) var isEditing = false
   private var restoredRunningIDs: [UUID] = []
   private let dragGroupID = UUID()
@@ -61,6 +67,7 @@ final class WorkspaceView: NSView {
     layer?.backgroundColor = mode.background.cgColor
     // Hidden panes are retained in this dictionary during zoom.
     for pane in panes.values { pane.applyAppearance() }
+    fileSplit?.applyAppearance(mode)
     updateAppearanceButton()
   }
 
@@ -75,6 +82,28 @@ final class WorkspaceView: NSView {
       systemSymbolName: isLight ? "moon" : "sun.max", accessibilityDescription: label)
     appearanceButton.toolTip = label
     appearanceButton.setAccessibilityLabel(label)
+  }
+
+  func setFileTreeVisible(_ visible: Bool) {
+    let label = visible ? "파일 트리 숨기기" : "파일 트리 보기"
+    fileTreeButton.toolTip = label
+    fileTreeButton.setAccessibilityLabel(label)
+    fileTreeButton.state = visible ? .on : .off
+  }
+
+  @objc private func toggleFileTree() { onFileTreeToggleRequested?() }
+
+  /// File browsing shares the canvas level; the global toolbar remains above both regions.
+  @discardableResult
+  func installFileBrowser(defaults: UserDefaults = .standard) -> WorkspaceSplitView {
+    if let fileSplit { return fileSplit }
+    canvas.removeFromSuperview()
+    let split = WorkspaceSplitView(workspace: self, canvas: canvas, defaults: defaults)
+    fileSplit = split
+    bodyHost.addSubview(split)
+    split.frame = bodyHost.bounds
+    split.autoresizingMask = [.width, .height]
+    return split
   }
 
   private func addPane(_ id: UUID, directory: String? = nil, name: String? = nil) {
@@ -151,7 +180,7 @@ final class WorkspaceView: NSView {
     guard panes[id] != nil, layout.paneIDs.count < 16 else { return false }
     let minimum = layout.splitting(id, axis: axis, adding: UUID()).minimumSize
     guard let screen = window?.screen else { return true }
-    return minimum.width <= screen.visibleFrame.width
+    return minimum.width + sidePanelMinimumWidth <= screen.visibleFrame.width
       && minimum.height + 80 <= screen.visibleFrame.height
   }
 
@@ -382,6 +411,7 @@ final class WorkspaceView: NSView {
   }
 
   private func configureToolbar() {
+    bodyHost.clipsToBounds = true
     presets.target = self
     presets.font = ChopStyle.font
     presets.action = #selector(selectPreset(_:))
@@ -406,24 +436,30 @@ final class WorkspaceView: NSView {
     editButton.bezelStyle = .rounded
     editButton.font = ChopStyle.font
     let spacer = NSView()
-    let toolbar = NSStackView(views: [presets, spacer, editButton, appearanceButton])
+    fileTreeButton.setButtonType(.pushOnPushOff)
+    let toolbar = NSStackView(views: [
+      presets, spacer, editButton, fileTreeButton, appearanceButton,
+    ])
     toolbar.orientation = .horizontal
     toolbar.distribution = .fill
     toolbar.spacing = 12
     toolbar.alignment = .centerY
-    for view in [toolbar, canvas] {
+    for view in [toolbar, bodyHost] {
       addSubview(view)
       view.translatesAutoresizingMaskIntoConstraints = false
     }
+    bodyHost.addSubview(canvas)
+    canvas.frame = bodyHost.bounds
+    canvas.autoresizingMask = [.width, .height]
     NSLayoutConstraint.activate([
       toolbar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
       toolbar.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
       toolbar.topAnchor.constraint(equalTo: topAnchor),
       toolbar.heightAnchor.constraint(equalToConstant: 48),
-      canvas.topAnchor.constraint(equalTo: toolbar.bottomAnchor),
-      canvas.leadingAnchor.constraint(equalTo: leadingAnchor),
-      canvas.trailingAnchor.constraint(equalTo: trailingAnchor),
-      canvas.bottomAnchor.constraint(equalTo: bottomAnchor),
+      bodyHost.topAnchor.constraint(equalTo: toolbar.bottomAnchor),
+      bodyHost.leadingAnchor.constraint(equalTo: leadingAnchor),
+      bodyHost.trailingAnchor.constraint(equalTo: trailingAnchor),
+      bodyHost.bottomAnchor.constraint(equalTo: bottomAnchor),
     ])
   }
 

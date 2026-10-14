@@ -94,6 +94,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
   @objc private func toggleZoom() { workspaceWindow?.workspace.toggleZoom() }
   @objc private func renamePane() { workspaceWindow?.workspace.requestRename() }
   @objc private func retrySave() { session.retrySave() }
+  @objc private func toggleFileTree() { workspaceWindow?.content.toggleFileTree() }
+  @objc private func chooseFileTreeFolder() {
+    workspaceWindow?.content.showFileTree()
+    guard workspaceWindow?.content.isFileTreeVisible == true else { return }
+    workspaceWindow?.content.fileBrowser.chooseFolder()
+  }
 
   @objc private func chooseAppearance(_ sender: NSMenuItem) {
     guard let value = sender.representedObject as? String,
@@ -118,6 +124,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     guard let workspace = workspaceWindow?.workspace, workspaceWindow?.window?.isVisible == true
     else { return false }
     switch menuItem.action {
+    case #selector(toggleFileTree):
+      menuItem.title =
+        workspaceWindow?.content.isFileTreeVisible == true
+        ? "파일 트리 숨기기" : "파일 트리 보기"
+      return true
     case #selector(splitRight): return workspace.canSplit(workspace.focusedID, axis: .horizontal)
     case #selector(splitDown): return workspace.canSplit(workspace.focusedID, axis: .vertical)
     case #selector(toggleZoom): return workspace.layout.paneIDs.count > 1
@@ -253,6 +264,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
       item.target = self
       item.representedObject = mode.rawValue
     }
+    viewMenu.addItem(.separator())
+    let fileTree = viewMenu.addItem(
+      withTitle: "파일 트리 보기", action: #selector(toggleFileTree), keyEquivalent: "e")
+    fileTree.keyEquivalentModifierMask = [.command, .shift]
+    fileTree.target = self
+    let folder = viewMenu.addItem(
+      withTitle: "폴더 선택…", action: #selector(chooseFileTreeFolder), keyEquivalent: "o")
+    folder.target = self
     viewItem.submenu = viewMenu
     mainMenu.addItem(viewItem)
 
