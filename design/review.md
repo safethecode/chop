@@ -68,3 +68,5 @@ V-34 / F-ROWS-COUNT: 마지막 상하2개 전환 제한과 empty 슬롯 삭제 �
 V-35 / APP-ICON: 사용자 제공 열매 원본을 보존한 native continuous mask/transparent margin/ICNS를 적용했다. 실제 두 모드 정보 창/Finder 아이콘과22개 검사/번들 디코딩을 확인했다. accepted-difference (사용자 브랜드 지정), verified. [관찰](evidence/macos-app-icon.md).
 
 V-36 / F-ICON-SHADOW-SCALE: 작은 출력에서 CGContext 축척만으로 그림자가 줄어든다고 가정해 모서리에 약한 alpha가 남았다. 모든 좌표/그림자를 pixel 비율로 계산해 최종10개 representation의 투명 모서리를 다시 확인했다. fixed-and-verified.
+
+V-37 / README-PRESENTATION: 사용자 지정 Wratop README 구성을 Chop의 실제 기능에 맞춰 적용하고 실제 macOS 창 사진3장을 추가했다. 개인 Downloads 대신 공개 프로젝트 복사본을 촬영하고 원래 앱 상태를 복원했다. 최종 로컬 이미지·GitHub 로고/배지/격자/탭 사진·목차5개 클릭·링크/alt·22개 검사를 확인했다. aligned (문서/사진 범위); 앱 UI 코드는 변경하지 않았다. [관찰](evidence/readme-presentation.md).
