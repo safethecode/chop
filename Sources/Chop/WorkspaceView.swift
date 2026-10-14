@@ -38,9 +38,8 @@ final class WorkspaceView: NSView {
     }
     focusedID = valid?.focusedID ?? ids[0]
     super.init(frame: .zero)
-    appearance = NSAppearance(named: .aqua)
     wantsLayer = true
-    layer?.backgroundColor = ChopStyle.background.cgColor
+    applyAppearance(engine.appearanceMode)
     configureToolbar()
     for id in ids {
       let saved = valid?.panes.first { $0.id == id }
@@ -52,6 +51,14 @@ final class WorkspaceView: NSView {
 
   @available(*, unavailable)
   required init?(coder: NSCoder) { fatalError("Use init(engine:).") }
+
+  func applyAppearance(_ mode: AppearanceMode) {
+    engine.applyAppearance(mode)
+    appearance = mode.appearance
+    layer?.backgroundColor = mode.background.cgColor
+    // Hidden panes are retained in this dictionary during zoom.
+    for pane in panes.values { pane.applyAppearance() }
+  }
 
   private func addPane(_ id: UUID, directory: String? = nil, name: String? = nil) {
     while panes.values.contains(where: { $0.name == "터미널 \(nextName)" }) { nextName += 1 }

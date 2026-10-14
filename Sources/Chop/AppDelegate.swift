@@ -14,8 +14,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
 
   func applicationDidFinishLaunching(_ notification: Notification) {
     NSApp.setActivationPolicy(.regular)
+    let mode = AppearanceMode.load()
+    NSApp.appearance = mode.appearance
     do {
-      try engine.start()
+      try engine.start(appearanceMode: mode)
     } catch {
       let alert = NSAlert()
       alert.messageText = error.localizedDescription
@@ -86,7 +88,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
   @objc private func renamePane() { workspaceWindow?.workspace.requestRename() }
   @objc private func retrySave() { session.retrySave() }
 
+  @objc private func chooseAppearance(_ sender: NSMenuItem) {
+    guard let value = sender.representedObject as? String,
+      let mode = AppearanceMode(rawValue: value)
+    else { return }
+    engine.applyAppearance(mode)
+    NSApp.appearance = mode.appearance
+    workspaceWindow?.workspace.applyAppearance(mode)
+    mode.save()
+  }
+
   func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+    if menuItem.action == #selector(chooseAppearance(_:)) {
+      menuItem.state =
+        (menuItem.representedObject as? String) == engine.appearanceMode.rawValue ? .on : .off
+      return true
+    }
     guard let workspace = workspaceWindow?.workspace, workspaceWindow?.window?.isVisible == true
     else { return false }
     switch menuItem.action {
@@ -196,6 +213,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     }
     editItem.submenu = editMenu
     mainMenu.addItem(editItem)
+
+    let viewItem = NSMenuItem()
+    let viewMenu = NSMenu(title: "보기")
+    for mode in AppearanceMode.allCases {
+      let item = viewMenu.addItem(
+        withTitle: mode.title, action: #selector(chooseAppearance(_:)), keyEquivalent: "")
+      item.target = self
+      item.representedObject = mode.rawValue
+    }
+    viewItem.submenu = viewMenu
+    mainMenu.addItem(viewItem)
 
     let windowItem = NSMenuItem()
     let windowMenu = NSMenu(title: "윈도우")
