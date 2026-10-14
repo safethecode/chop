@@ -19,11 +19,11 @@ import Testing
 
 @Test func presetsHaveUsableNonoverlappingFrames() {
   for preset in LayoutPreset.allCases {
-    let ids = (0..<preset.capacity).map { _ in UUID() }
+    let ids = (0..<preset.defaultPaneCount).map { _ in UUID() }
     let tree = LayoutNode.preset(preset, ids: ids)
     let frames = tree.frames(in: CGRect(origin: .zero, size: tree.minimumSize))
     #expect(tree.paneIDs == ids)
-    #expect(frames.count == preset.capacity)
+    #expect(frames.count == preset.defaultPaneCount)
     for frame in frames.values {
       #expect(frame.width >= 280)
       #expect(frame.height >= 180)
@@ -75,4 +75,22 @@ import Testing
   #expect(tree.swapping(ids[0], with: ids[0]) == tree)
   let restored = try JSONDecoder().decode(LayoutNode.self, from: JSONEncoder().encode(moved))
   #expect(restored == moved)
+}
+
+@Test func arbitraryPaneCountsRemainReachableInUniformLayouts() throws {
+  for count in [1, 3, 5, 7, 16] {
+    let ids = (0..<count).map { _ in UUID() }
+    for preset in [LayoutPreset.columns, .rows, .grid] {
+      let tree = LayoutNode.preset(preset, ids: ids)
+      let frames = tree.frames(in: CGRect(origin: .zero, size: tree.minimumSize))
+      #expect(tree.paneIDs == ids && frames.count == count)
+      for frame in frames.values {
+        #expect(frame.width >= LayoutNode.paneMinimum.width - 0.01)
+        #expect(frame.height >= LayoutNode.paneMinimum.height - 0.01)
+      }
+      for a in ids { for b in ids where a != b { #expect(!frames[a]!.intersects(frames[b]!)) } }
+      let restored = try JSONDecoder().decode(LayoutNode.self, from: JSONEncoder().encode(tree))
+      #expect(restored == tree)
+    }
+  }
 }

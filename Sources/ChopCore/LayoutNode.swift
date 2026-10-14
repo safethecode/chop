@@ -12,7 +12,7 @@ public enum FocusDirection: Sendable {
 
 public enum LayoutPreset: Int, CaseIterable, Sendable {
   case single, columns, rows, grid
-  public var capacity: Int { self == .single ? 1 : self == .grid ? 4 : 2 }
+  public var defaultPaneCount: Int { self == .single ? 1 : self == .grid ? 4 : 2 }
 }
 
 /// A layout contains identities, never terminal processes or views.
@@ -43,18 +43,26 @@ public indirect enum LayoutNode: Codable, Equatable, Sendable {
   }
 
   public static func preset(_ preset: LayoutPreset, ids: [UUID]) -> LayoutNode {
-    precondition(ids.count == preset.capacity)
-    func pair(_ a: LayoutNode, _ b: LayoutNode, _ axis: SplitAxis) -> LayoutNode {
-      .split(id: UUID(), axis: axis, ratio: 0.5, first: a, second: b)
+    precondition(!ids.isEmpty && (preset != .single || ids.count == 1))
+    func line(_ nodes: ArraySlice<LayoutNode>, _ axis: SplitAxis) -> LayoutNode {
+      guard nodes.count > 1 else { return nodes.first! }
+      let middle = nodes.index(nodes.startIndex, offsetBy: nodes.count / 2)
+      let first = nodes[..<middle]
+      return .split(
+        id: UUID(), axis: axis, ratio: Double(first.count) / Double(nodes.count),
+        first: line(first, axis), second: line(nodes[middle...], axis))
     }
     let leaves = ids.map { LayoutNode.pane($0) }
     switch preset {
     case .single: return leaves[0]
-    case .columns: return pair(leaves[0], leaves[1], .horizontal)
-    case .rows: return pair(leaves[0], leaves[1], .vertical)
+    case .columns: return line(leaves[...], .horizontal)
+    case .rows: return line(leaves[...], .vertical)
     case .grid:
-      return pair(
-        pair(leaves[0], leaves[1], .horizontal), pair(leaves[2], leaves[3], .horizontal), .vertical)
+      let columns = Int(ceil(sqrt(Double(leaves.count))))
+      let rows = stride(from: 0, to: leaves.count, by: columns).map { start in
+        line(leaves[start..<min(start + columns, leaves.count)], .horizontal)
+      }
+      return line(rows[...], .vertical)
     }
   }
 
