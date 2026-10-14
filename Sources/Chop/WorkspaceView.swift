@@ -162,41 +162,15 @@ final class WorkspaceView: NSView {
       rebuild()
       return true
     }
-    if preset == .columns || preset == .grid {
-      isTabbed = false
-      maximizedID = nil
-      var ids = layout.paneIDs
-      while ids.count < preset.defaultPaneCount {
-        let id = UUID()
-        ids.append(id)
-        addPane(id)
-      }
-      layout = .preset(preset, ids: ids)
-      rebuild()
-      return true
-    }
-    let existing = layout.paneIDs
-    let running = existing.filter { panes[$0]?.isRunning == true }
-    guard running.count <= preset.defaultPaneCount else {
-      refreshControls()
-      return false
-    }
     isTabbed = false
     maximizedID = nil
-    var retained = Set(running)
-    for id in existing where retained.count < preset.defaultPaneCount { retained.insert(id) }
-    var ids = existing.filter { retained.contains($0) }
+    var ids = layout.paneIDs
     while ids.count < preset.defaultPaneCount {
       let id = UUID()
       ids.append(id)
       addPane(id)
     }
-    for id in existing where !ids.contains(id) {
-      panes[id]?.removeFromSuperview()
-      panes.removeValue(forKey: id)
-    }
     layout = .preset(preset, ids: ids)
-    if !ids.contains(focusedID) { focusedID = ids[0] }
     rebuild()
     return true
   }
@@ -531,7 +505,7 @@ final class WorkspaceView: NSView {
     for (preset, symbol, label) in [
       (LayoutPreset.single, "rectangle", "탭으로 보기"),
       (.columns, "rectangle.split.2x1", "좌우로 나란히"),
-      (.rows, "rectangle.split.1x2", "상하 2칸"),
+      (.rows, "rectangle.split.1x2", "상하로 나란히"),
       (.grid, "rectangle.split.2x2", "격자로 보기"),
     ] {
       let image = NSImage(systemSymbolName: symbol, accessibilityDescription: label)!
@@ -579,10 +553,9 @@ final class WorkspaceView: NSView {
   }
 
   private func refreshControls() {
-    let running = panes.values.filter { $0.isRunning }.count
     for preset in LayoutPreset.allCases {
       presets.setEnabled(
-        preset != .rows || running <= preset.defaultPaneCount, forSegment: preset.rawValue)
+        true, forSegment: preset.rawValue)
     }
     presets.selectedSegment = -1
     // Selection is derived from structure, not just pane count (free splits can have any shape).
@@ -604,7 +577,7 @@ final class WorkspaceView: NSView {
     }
     let count = layout.paneIDs.count
     guard
-      preset == .single || preset == .rows
+      preset == .single
         ? count == preset.defaultPaneCount : count >= preset.defaultPaneCount
     else { return false }
     return shape(layout) == shape(.preset(preset, ids: layout.paneIDs))

@@ -202,6 +202,12 @@ import Testing
   #expect(workspace.focusedPane.bounds.width <= workspace.bounds.width + 1)
   #expect(workspace.focusedPane.terminal === addedTerminal)
   workspace.toggleZoom()
+  #expect(workspace.applyPreset(.rows))
+  try await Task.sleep(for: .milliseconds(50))
+  window.layoutIfNeeded()
+  #expect(workspace.layout.paneIDs.count == 5 && workspace.focusedPane.terminal === addedTerminal)
+  let rowFrame = workspace.focusedPane.convert(workspace.focusedPane.bounds, to: workspace)
+  #expect(rowFrame.minY >= -1 && rowFrame.maxY <= workspace.bounds.height - 48 + 1)
   #expect(workspace.applyPreset(.grid))
   #expect(workspace.layout.paneIDs.count == 5 && workspace.focusedPane.terminal === addedTerminal)
   #expect(workspace.applyPreset(.single))
@@ -223,6 +229,14 @@ import Testing
     let frame = try #require(
       workspace.panes[id]?.convert(workspace.panes[id]!.bounds, to: workspace))
     #expect(frame.minX >= -1 && frame.maxX <= workspace.bounds.width + 1)
+  }
+  #expect(workspace.applyPreset(.rows))
+  #expect(workspace.layout.paneIDs == tabIDs && workspace.panes.count == 4)
+  for id in tabIDs {
+    workspace.panes[id]?.focus()
+    let frame = try #require(
+      workspace.panes[id]?.convert(workspace.panes[id]!.bounds, to: workspace))
+    #expect(frame.minY >= -1 && frame.maxY <= workspace.bounds.height - 48 + 1)
   }
   #expect(workspace.applyPreset(.grid))
   workspace.panes[firstID]?.focus()
