@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "catalog_version": 5,
-  "scope_notes": "Native macOS Chop v0.1, user task and DESIGN comparison. macOS26.5.2/CI15; macOS14 physical, full VoiceOver/all IMEs and hardware wheel are explicitly outside verified combinations. Shell/TUI VT styling and standard OS chrome are distinguished from app-owned labels. cmux is technical/feature inspiration, not a visual pixel reference. User correction 2026-10-14 adds R-DEFAULT canvas screenshot as a visual/state reference; first shell + three empty plus panes is mandatory at default entry. Previous main gate lacked that condition; its historical ledger is retained. PR #8: user-requested light/dark modes; preserve default grid in both modes, apply to native chrome and all terminals without PTY replacement, persist selection. Evidence is self review, with actual CUA observations recorded as Markdown. PR #10: user-requested icon-only mode toggle and layout presets. Preserve R-DEFAULT canvas and R-TOOLBAR location/options/selection; icons are an intentional user-requested change from text, not an exact crop clone. PR #11: editing-only same-workspace pane exchange with whole-pane/GPU drag preview and placement motion, requested and directly accepted by user. Preserve live PTY and split geometry. CUA before/after observations are separate from user motion feedback; no mid-drag frame capture or physical Reduce Motion execution is claimed. PR #12: user-requested uniform header background distinct from body in both modes, not per-terminal colors. Actual five-pane light/dark, editing, zoom and hidden-pane mode update rechecked without changing geometry. PR #13: explicit user request removes the blue pane outline on input focus; preserve real terminal cursor, first responder, focus navigation/storage and native button/menu focus. Drag-target outline is a separate transient state. Actual two-mode four-pane mouse/keyboard input, zoom and swap-back rechecked. PR #14: user-requested right file tree is a peer of terminal canvas below the full-width global toolbar. User hierarchy/stray-divider corrections and internal long-path/reopen issues were fixed and rechecked. New lazy file navigation, native picker/shortcuts, async stale-result protection and separate settings preserve terminal surfaces. OS open wait on final restart was observed; native folder reselection recovered it without UI blocking. Two-mode default/minimum UI and final drag/keyboard restoration are scoped separately from prior evidence. PR #14 review follow-up: isolate child metadata failures with a literal-name/leaf fallback, keep root errors.16 tests and latest normal folder expansion rechecked; no layout change. CodeRabbit covered5101fb1, follow-up self-reviewed; docstring coverage warning is disclosed separately. Path focus PR: user-requested path field focus-ring removal only. Native caret/selection/editing remain; other requested refinements are separate. Header seam PR: reuse the same header row and foreground; fill only the functional file divider header segment. Actual two-mode/resize/hide/editing consumers rechecked; PTY unchanged. Location icons PR: user Finder crop adapted to three native full-row icon/name shortcuts, fixed aspect-fit16pt column and14pt labels. Actual three locations, two modes/minimum window and empty/long outline rechecked. File drop work in progress: native file URL writer and existing-terminal input with literal argument quoting;19 tests pass. Actual CUA NSCoreDrag remains awaiting mouse-up with no destination entry observed. Do not mark product/merge complete until native endpoint is verified.  Native endpoint subsequently observed in the same clean app after user interaction: the exact fixture file path appeared as a quoted shell argument in terminal11. Earlier CUA failure remains historical.  Shortcut navigation group now has a neutral surface separate from file contents; actual two-mode/minimum-size/empty/long/three-destination checks.  Single-view tabs preserve all pane identities and shells; actual four-running-shell/native tab flows, long/overflow/minimum/two-mode/restore verified. Uniform split changes remain subsequent PRs.",
+  "scope_notes": "Native macOS Chop v0.1, user task and DESIGN comparison. macOS26.5.2/CI15; macOS14 physical, full VoiceOver/all IMEs and hardware wheel are explicitly outside verified combinations. Shell/TUI VT styling and standard OS chrome are distinguished from app-owned labels. cmux is technical/feature inspiration, not a visual pixel reference. User correction 2026-10-14 adds R-DEFAULT canvas screenshot as a visual/state reference; first shell + three empty plus panes is mandatory at default entry. Previous main gate lacked that condition; its historical ledger is retained. PR #8: user-requested light/dark modes; preserve default grid in both modes, apply to native chrome and all terminals without PTY replacement, persist selection. Evidence is self review, with actual CUA observations recorded as Markdown. PR #10: user-requested icon-only mode toggle and layout presets. Preserve R-DEFAULT canvas and R-TOOLBAR location/options/selection; icons are an intentional user-requested change from text, not an exact crop clone. PR #11: editing-only same-workspace pane exchange with whole-pane/GPU drag preview and placement motion, requested and directly accepted by user. Preserve live PTY and split geometry. CUA before/after observations are separate from user motion feedback; no mid-drag frame capture or physical Reduce Motion execution is claimed. PR #12: user-requested uniform header background distinct from body in both modes, not per-terminal colors. Actual five-pane light/dark, editing, zoom and hidden-pane mode update rechecked without changing geometry. PR #13: explicit user request removes the blue pane outline on input focus; preserve real terminal cursor, first responder, focus navigation/storage and native button/menu focus. Drag-target outline is a separate transient state. Actual two-mode four-pane mouse/keyboard input, zoom and swap-back rechecked. PR #14: user-requested right file tree is a peer of terminal canvas below the full-width global toolbar. User hierarchy/stray-divider corrections and internal long-path/reopen issues were fixed and rechecked. New lazy file navigation, native picker/shortcuts, async stale-result protection and separate settings preserve terminal surfaces. OS open wait on final restart was observed; native folder reselection recovered it without UI blocking. Two-mode default/minimum UI and final drag/keyboard restoration are scoped separately from prior evidence. PR #14 review follow-up: isolate child metadata failures with a literal-name/leaf fallback, keep root errors.16 tests and latest normal folder expansion rechecked; no layout change. CodeRabbit covered5101fb1, follow-up self-reviewed; docstring coverage warning is disclosed separately. Path focus PR: user-requested path field focus-ring removal only. Native caret/selection/editing remain; other requested refinements are separate. Header seam PR: reuse the same header row and foreground; fill only the functional file divider header segment. Actual two-mode/resize/hide/editing consumers rechecked; PTY unchanged. Location icons PR: user Finder crop adapted to three native full-row icon/name shortcuts, fixed aspect-fit16pt column and14pt labels. Actual three locations, two modes/minimum window and empty/long outline rechecked. File drop work in progress: native file URL writer and existing-terminal input with literal argument quoting;19 tests pass. Actual CUA NSCoreDrag remains awaiting mouse-up with no destination entry observed. Do not mark product/merge complete until native endpoint is verified.  Native endpoint subsequently observed in the same clean app after user interaction: the exact fixture file path appeared as a quoted shell argument in terminal11. Earlier CUA failure remains historical.  Shortcut navigation group now has a neutral surface separate from file contents; actual two-mode/minimum-size/empty/long/three-destination checks.  Single-view tabs preserve all pane identities and shells; actual four-running-shell/native tab flows, long/overflow/minimum/two-mode/restore verified. Uniform split changes remain subsequent PRs.  All-pane columns and grid with scrollable canvas, actual four/five PTYs and two-mode/minimum/native focus/zoom/roundtrips verified; rows follow separately.",
   "targets": [
     "Sources",
     "Resources/terminal.conf",
@@ -206,7 +206,7 @@
       "id": "ORC-F16",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "세 바로가기는 고정 높이의 목적지 행이고 외부 scroller를 추가하지 않았다. 실제 빈 폴더는 scrollbar가 없고 긴 파일 목록만 기존 native scroll을 표시했다.",
+      "reason": "세 바로가기는 고정 높이의 목적지 행이고 외부 scroller를 추가하지 않았다. 실제 빈 폴더는 scrollbar가 없고 긴 파일 목록만 기존 native scroll을 표시했다. 이번 overflow canvas는 실제 pane 최소 크기 때문에만 native 스크롤하며 반대 축 불필요 scroller를 legacy 회귀와 실제 두 모드로 검증했다.",
       "checks": [
         "code",
         "visual",
@@ -734,7 +734,7 @@
       "id": "RUI-04",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "홈 아이콘 포인터 클릭과 문서/다운로드 실제 클릭으로 각 목적지 경로가 바뀌는 것을 확인했다. native full-row hit/AX 버튼 역할과16개 기존 경로/PTY 검사를 보존한다. 파일 드롭의 실제 사용자 조작 후 endpoint를 AX로 확인했으며 Enter 미전송은 실제 PTY 검사로 별도 확인했다. 이번 단일 탭 보기는 실제4셸 전환/ENV 보존/추가·닫기/가로 탐색/복원을 확인했다.",
+      "reason": "홈 아이콘 포인터 클릭과 문서/다운로드 실제 클릭으로 각 목적지 경로가 바뀌는 것을 확인했다. native full-row hit/AX 버튼 역할과16개 기존 경로/PTY 검사를 보존한다. 파일 드롭의 실제 사용자 조작 후 endpoint를 AX로 확인했으며 Enter 미전송은 실제 PTY 검사로 별도 확인했다. 이번 단일 탭 보기는 실제4셸 전환/ENV 보존/추가·닫기/가로 탐색/복원을 확인했다. 실제4/5셸 좌우/격자/탭 전환과 keyboard/manual scroll, ENV 보존 및 확대를 확인했다.",
       "checks": [
         "spec",
         "interaction"
@@ -756,7 +756,7 @@
       "id": "RUI-06",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "바로가기 native button 구성·hitTest/AX 의미를 셀프 리뷰했다. strict format/build/signature와 전체16개 테스트4.907초 및 실제 목적지 입력을 확인했다. 파일 드롭 source/대상 수명·인용을 셀프 리뷰했고19개 검사4.111초와 최신 원격 CI가 통과했다.",
+      "reason": "바로가기 native button 구성·hitTest/AX 의미를 셀프 리뷰했다. strict format/build/signature와 전체16개 테스트4.907초 및 실제 목적지 입력을 확인했다. 파일 드롭 source/대상 수명·인용을 셀프 리뷰했고19개 검사4.111초와 최신 원격 CI가 통과했다. 좌우↔탭 실제 전환에서 발견한 display-cycle crash를 다음 main queue 크기 정리로 수정하고 실제5회 왕복과22개 검사를 다시 확인했다.",
       "checks": [
         "code"
       ],
@@ -845,7 +845,7 @@
       "id": "RUI-13",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "세로 행으로 바꾼 뒤 최소842×442pt에서 header/path/세 바로가기와 파일 목록이 가려지지 않는 것을 두 모드로 확인했다. 빈 상태는 scrollbar 없이, 긴 파일 목록은 기존 native scroll로 표시한다. 108pt 묶음과 기존 header/path/목록이 두 모드 최소842×442에서도 가려지지 않았다. 탭 overflow와 긴 이름/681×432 최소 창을 두 모드에서 확인했고 크기 변경 후 선택 탭을 드러내도록 수정했다.",
+      "reason": "세로 행으로 바꾼 뒤 최소842×442pt에서 header/path/세 바로가기와 파일 목록이 가려지지 않는 것을 두 모드로 확인했다. 빈 상태는 scrollbar 없이, 긴 파일 목록은 기존 native scroll로 표시한다. 108pt 묶음과 기존 header/path/목록이 두 모드 최소842×442에서도 가려지지 않았다. 탭 overflow와 긴 이름/681×432 최소 창을 두 모드에서 확인했고 크기 변경 후 선택 탭을 드러내도록 수정했다. 실제 두 모드/최소842×442에서 모든 칸에 가로 탐색/키보드 focus로 접근하며 창을 화면 밖으로 강제 확대하지 않는다.",
       "checks": [
         "code",
         "visual",
@@ -1024,7 +1024,7 @@
       "id": "PROJECT-LAYOUT",
       "applicable": true,
       "scope": "User-authorized Chop v0.1 behavior; PROJECT-LAYOUT",
-      "reason": "새 body split은 global toolbar 아래에만 설치하며 terminal canvas 내부 geometry/model을 유지한다. panel min280과 layout min을 합산하고 화면에 들어가지 않는 추가/열기를 거절한다. 최소 창·개폐·geometry 테스트와 실제 교환을 확인했다. 이번 PR은 단일 보기의1칸 제한만 해제하고 layout/surface를 모두 보존하는 presentation을 추가했다. 좌우/상하의 기존 제한은 후속 PR이다.",
+      "reason": "새 body split은 global toolbar 아래에만 설치하며 terminal canvas 내부 geometry/model을 유지한다. panel min280과 layout min을 합산하고 화면에 들어가지 않는 추가/열기를 거절한다. 최소 창·개폐·geometry 테스트와 실제 교환을 확인했다. 이번 PR은 단일 보기의1칸 제한만 해제하고 layout/surface를 모두 보존하는 presentation을 추가했다. 좌우/상하의 기존 제한은 후속 PR이다. 이후 좌우/격자의 모든 pane 보존 요구에 맞춰 실제 문서 최소/viewport 최소를 분리하고 화면 공간에 따른 추가 거절을 native overflow로 대체했다. 상하는 다음 PR이다.",
       "checks": [
         "spec",
         "code",
@@ -1037,7 +1037,7 @@
       "id": "PROJECT-MANAGE",
       "applicable": true,
       "scope": "User-authorized Chop v0.1 behavior; PROJECT-MANAGE",
-      "reason": "새 파일 탐색과 panel 개폐는 기존 canvas/view/surface를 재사용한다. 실제 PID/변수 보존, terminal zoom과11→16 교환/원위치 복원, 자동 surface/focus 검사로 확인했다. 경로 탐색은 셸 cwd를 바꾸지 않는다. 파일 드롭 시 기존 target focus/surface·다른 셸 유지와 닫힌 대상 거절을 PTY로 확인했다. 실제 단일 탭 전환 전후 같은 ENV를 출력했고 자동 검사에서4개 surface/포커스 유지와5번째 추가·닫기를 확인했다.",
+      "reason": "새 파일 탐색과 panel 개폐는 기존 canvas/view/surface를 재사용한다. 실제 PID/변수 보존, terminal zoom과11→16 교환/원위치 복원, 자동 surface/focus 검사로 확인했다. 경로 탐색은 셸 cwd를 바꾸지 않는다. 파일 드롭 시 기존 target focus/surface·다른 셸 유지와 닫힌 대상 거절을 PTY로 확인했다. 실제 단일 탭 전환 전후 같은 ENV를 출력했고 자동 검사에서4개 surface/포커스 유지와5번째 추가·닫기를 확인했다. 4/5셸의 surface/포커스/ENV·순서를 유지하고 실제 keyboard scroll/five roundtrips/zoom 복귀를 확인했다.",
       "checks": [
         "spec",
         "code",
@@ -1063,7 +1063,7 @@
       "id": "PROJECT-RESTORE",
       "applicable": true,
       "scope": "User-authorized Chop v0.1 behavior; PROJECT-RESTORE",
-      "reason": "기존 session snapshot은 바꾸지 않고 file root/표시/폭만 별도 UserDefaults에 저장한다. 실제 사용자4칸 복원, 마지막 성공 루트만 저장하는 격리 테스트를 확인했다. 최종 재실행 OS open 대기와 선택기 복구는 E-T10 후속 기록에 명시한다. 이후 단일 탭 보기 요구에 따라 v1 snapshot에 optional tabbed 필드를 추가했다. 구 저장 decode/새 flag roundtrip과 실제 네 셸·선택 복원을 확인했다.",
+      "reason": "기존 session snapshot은 바꾸지 않고 file root/표시/폭만 별도 UserDefaults에 저장한다. 실제 사용자4칸 복원, 마지막 성공 루트만 저장하는 격리 테스트를 확인했다. 최종 재실행 OS open 대기와 선택기 복구는 E-T10 후속 기록에 명시한다. 이후 단일 탭 보기 요구에 따라 v1 snapshot에 optional tabbed 필드를 추가했다. 구 저장 decode/새 flag roundtrip과 실제 네 셸·선택 복원을 확인했다. 임의 개수 balanced split tree는 기존 Codable schema로 저장하고 실제4열 복원 및22개 roundtrip 검사를 확인했다.",
       "checks": [
         "spec",
         "code",
@@ -1128,7 +1128,7 @@
       "id": "PROJECT-APPEARANCE",
       "applicable": true,
       "scope": "상단 mode icon, 보기 메뉴, native chrome, 빈/실행/숨긴 칸, 새/복원 셸, 재실행 설정",
-      "reason": "새 icon/label의 동적 labelColor와 기존 mode를 실제 기본/최소 창의 light/dark에서 확인했다. 기존 header/본문 및 path focus 예외는 유지한다. 바로가기 묶음도 기존 headerBackground를 두 모드에서 갱신하는 것을 실제 확인했다. 새 탭/선택/넘침과 복원된 단일 보기에서도 두 모드 토큰과 native 강조를 실제 확인했다.",
+      "reason": "새 icon/label의 동적 labelColor와 기존 mode를 실제 기본/최소 창의 light/dark에서 확인했다. 기존 header/본문 및 path focus 예외는 유지한다. 바로가기 묶음도 기존 headerBackground를 두 모드에서 갱신하는 것을 실제 확인했다. 새 탭/선택/넘침과 복원된 단일 보기에서도 두 모드 토큰과 native 강조를 실제 확인했다. 새 overflow canvas는 투명 native scroll 배경 안의 기존 두 모드 terminal/header를 유지하며 최소/기본 창을 실제 확인했다.",
       "checks": [
         "spec",
         "code",
@@ -1272,6 +1272,19 @@
       "applicable": true,
       "scope": "단일 보기의 모든 pane 보존, 상단 탭/추가·닫기/긴 이름/넘침/두 모드/저장 복원",
       "reason": "실제4셸·ENV 보존/새 탭/닫기/긴 이름·최소 창 가로 탐색/두 모드/재실행을 확인했고20개 검사로 surface/focus/legacy decode와 복원을 검증했다.",
+      "checks": [
+        "spec",
+        "code",
+        "visual",
+        "interaction"
+      ],
+      "exceptions": []
+    },
+    {
+      "id": "PROJECT-ALL-COLUMNS",
+      "applicable": true,
+      "scope": "모든 pane 좌우/격자 보존과 viewport overflow/focus/zoom/scroller display-cycle",
+      "reason": "실제4/5셸의 native 전환/두 모드/최소 창/keyboard·manual scroll/ENV/확대와22개 검사를 확인했다. 발견한 불필요 축과 display-cycle crash를 수정하고5회 실제 왕복 및 최종 확대/복귀로 재검증했다.",
       "checks": [
         "spec",
         "code",

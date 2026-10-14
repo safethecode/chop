@@ -56,3 +56,9 @@ V-28 / F-SHORTCUT-SECTION: 사용자 교정으로 세 바로가기를 중립 배
 V-29 / F-SINGLE-TABS: 사용자 교정에 따라 단일 보기 전환의1칸 제한을 없애고 모든 세션을 상단 탭으로 유지했다. 실제 네 셸/ENV/추가·닫기/긴 이름/두 모드·최소/재실행과20개 검사를 확인했다. fixed-and-verified. [관찰](evidence/single-view-tabs.md).
 
 V-30 / F-TAB-RESIZE: 초기 창 축소 때 선택한 긴 탭이 가려졌다. viewport 변경 때 선택 탭을 드러내도록 수정하고681×432 두 모드/실제 Scroll Left/⌘W를 재검증했다. fixed-and-verified.
+
+V-31 / F-COLUMNS-COUNT: 좌우2개/격자4개 전환 제한을 없애고 모든 pane을 보존했다. 실제4/5셸·두 모드/최소/가로 탐색/ENV·확대·복원과22개 검사를 확인했다. fixed-and-verified. [관찰](evidence/all-terminal-columns.md).
+
+V-32 / F-CANVAS-SCROLL-AXIS: 가로 넘침 뒤 불필요한 세로 scroller를 실제 발견해 clip 크기에 맞추고 legacy 축 회귀를 추가했다. fixed-and-verified.
+
+V-33 / F-CANVAS-DISPLAY-CYCLE: 첫 scroller 수정의 layout 내 재타일링으로 native 전환 중 충돌했다. main queue 다음 갱신에서 수렴시키도록 수정해 실제5회 왕복·5셸 모드·최종 확대/복귀와22개 검사를 확인했다. fixed-and-verified; 최초 crash를 기록에 보존한다.
