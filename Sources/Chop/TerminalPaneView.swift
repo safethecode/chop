@@ -130,6 +130,7 @@ final class TerminalPaneView: NSView {
     closeButton = close
     let row = NSStackView(views: [titleLabel, pathLabel, close])
     row.orientation = .horizontal
+    row.distribution = .fill
     row.spacing = 12
     row.alignment = .centerY
     row.translatesAutoresizingMaskIntoConstraints = false
