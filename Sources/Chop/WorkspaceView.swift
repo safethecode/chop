@@ -9,6 +9,14 @@ final class WorkspaceView: NSView {
   private(set) var panes: [UUID: TerminalPaneView] = [:]
   private(set) var focusedID: UUID
   private(set) var maximizedID: UUID?
+  private(set) var isTabbed = false
+  private var tabBar: TerminalTabBar?
+  var displayMinimumSize: CGSize {
+    isTabbed
+      ? CGSize(
+        width: LayoutNode.paneMinimum.width,
+        height: LayoutNode.paneMinimum.height + ChopStyle.headerHeight) : layout.minimumSize
+  }
   var focusedPane: TerminalPaneView { panes[focusedID]! }
   var needsConfirmClose: Bool { panes.values.contains { $0.needsConfirmClose } }
   var onChange: (() -> Void)?
@@ -38,13 +46,16 @@ final class WorkspaceView: NSView {
     var ids = valid?.layout.paneIDs ?? (0..<4).map { _ in UUID() }
     // Upgrade the old blank single-pane start while retaining its name and cwd.
     let useDefaultGrid =
-      valid == nil || (valid?.panes.count == 1 && valid?.panes.first?.wasRunning == false)
+      valid == nil
+      || (valid?.panes.count == 1 && valid?.panes.first?.wasRunning == false
+        && valid?.tabbed != true)
     if useDefaultGrid {
       while ids.count < 4 { ids.append(UUID()) }
       layout = .preset(.grid, ids: ids)
     } else {
       layout = valid!.layout
     }
+    isTabbed = !useDefaultGrid && valid?.tabbed == true
     focusedID = valid?.focusedID ?? ids[0]
     super.init(frame: .zero)
     wantsLayer = true
@@ -68,6 +79,7 @@ final class WorkspaceView: NSView {
     // Hidden panes are retained in this dictionary during zoom.
     for pane in panes.values { pane.applyAppearance() }
     fileSplit?.applyAppearance(mode)
+    tabBar?.applyAppearance(mode)
     updateAppearanceButton()
   }
 
@@ -139,12 +151,19 @@ final class WorkspaceView: NSView {
 
   @discardableResult
   func applyPreset(_ preset: LayoutPreset) -> Bool {
+    if preset == .single {
+      isTabbed = true
+      maximizedID = nil
+      rebuild()
+      return true
+    }
     let existing = layout.paneIDs
     let running = existing.filter { panes[$0]?.isRunning == true }
     guard running.count <= preset.capacity else {
       refreshControls()
       return false
     }
+    isTabbed = false
     maximizedID = nil
     var retained = Set(running)
     for id in existing where retained.count < preset.capacity { retained.insert(id) }
@@ -170,6 +189,7 @@ final class WorkspaceView: NSView {
     let proposed = layout.splitting(id, axis: axis, adding: newID)
     addPane(newID, directory: source.workingDirectory)
     layout = proposed
+    isTabbed = false
     maximizedID = nil
     focusedID = newID
     rebuild()
@@ -188,7 +208,7 @@ final class WorkspaceView: NSView {
   @objc func splitDown() { split(focusedID, axis: .vertical) }
 
   func canSwapPanes(_ source: UUID, with destination: UUID) -> Bool {
-    isEditing && maximizedID == nil && source != destination
+    isEditing && !isTabbed && maximizedID == nil && source != destination
       && panes[source] != nil && panes[destination] != nil
   }
 
@@ -266,7 +286,7 @@ final class WorkspaceView: NSView {
         return PaneSnapshot(
           id: id, name: pane.name, workingDirectory: pane.workingDirectory,
           wasRunning: pane.isRunning)
-      }, focusedID: focusedID)
+      }, focusedID: focusedID, tabbed: isTabbed ? true : nil)
   }
 
   func startRestoredTerminals() {
@@ -299,15 +319,26 @@ final class WorkspaceView: NSView {
     alert.runModal()
   }
 
-  func refreshMinimumSize() { onMinimumSizeChange?(layout.minimumSize) }
+  func refreshMinimumSize() { onMinimumSizeChange?(displayMinimumSize) }
 
   private func didFocus(_ id: UUID) {
     guard panes[id] != nil else { return }
+    if isTabbed, id != focusedID {
+      selectTab(id)
+      return
+    }
     focusedID = id
     onChange?()
   }
 
   func moveFocus(_ direction: FocusDirection) {
+    if isTabbed {
+      let ids = layout.paneIDs
+      guard let index = ids.firstIndex(of: focusedID) else { return }
+      let next = index + (direction == .left || direction == .up ? -1 : 1)
+      if ids.indices.contains(next) { selectTab(ids[next]) }
+      return
+    }
     guard let id = layout.neighbor(of: focusedID, toward: direction, in: canvas.bounds) else {
       return
     }
@@ -321,7 +352,7 @@ final class WorkspaceView: NSView {
 
   func toggleZoom(_ id: UUID? = nil) {
     let target = id ?? focusedID
-    guard panes[target] != nil, layout.paneIDs.count > 1 else { return }
+    guard !isTabbed, panes[target] != nil, layout.paneIDs.count > 1 else { return }
     maximizedID = maximizedID == target ? nil : target
     focusedID = target
     rebuild()
@@ -392,22 +423,76 @@ final class WorkspaceView: NSView {
     }
     for pane in panes.values {
       pane.canRemove = panes.count > 1
-      pane.canZoom = panes.count > 1
+      pane.showsHeader = !isTabbed
+      pane.canZoom = panes.count > 1 && !isTabbed
       pane.isZoomed = maximizedID == pane.id
     }
-    let view = makeView(maximizedID.map { .pane($0) } ?? layout)
+    tabBar = nil
+    let view: NSView
+    if isTabbed {
+      let container = NSView()
+      let bar = TerminalTabBar(
+        panes: layout.paneIDs.compactMap { panes[$0] }, selectedID: focusedID,
+        mode: engine.appearanceMode,
+        onSelect: { [weak self] in self?.selectTab($0) }, onAdd: { [weak self] in self?.addTab() },
+        onClose: { [weak self] in self?.requestCloseFocused() })
+      tabBar = bar
+      let pane = focusedPane
+      for child in [bar, pane] {
+        child.translatesAutoresizingMaskIntoConstraints = false
+        container.addSubview(child)
+      }
+      NSLayoutConstraint.activate([
+        bar.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+        bar.trailingAnchor.constraint(equalTo: container.trailingAnchor),
+        bar.topAnchor.constraint(equalTo: container.topAnchor),
+        bar.heightAnchor.constraint(equalToConstant: ChopStyle.headerHeight),
+        pane.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+        pane.trailingAnchor.constraint(equalTo: container.trailingAnchor),
+        pane.topAnchor.constraint(equalTo: bar.bottomAnchor),
+        pane.bottomAnchor.constraint(equalTo: container.bottomAnchor),
+      ])
+      view = container
+    } else {
+      for pane in panes.values { pane.translatesAutoresizingMaskIntoConstraints = true }
+      view = makeView(maximizedID.map { .pane($0) } ?? layout)
+    }
     canvas.addSubview(view)
     view.frame = canvas.bounds
     view.autoresizingMask = [.width, .height]
     root = view
-    onMinimumSizeChange?(layout.minimumSize)
+    onMinimumSizeChange?(displayMinimumSize)
     layoutSubtreeIfNeeded()
     focusedPane.focus()
     for pane in panes.values {
-      pane.terminal?.setVisible(maximizedID == nil || maximizedID == pane.id)
+      pane.terminal?.setVisible(
+        isTabbed ? focusedID == pane.id : maximizedID == nil || maximizedID == pane.id)
     }
     refreshControls()
+    tabBar?.revealSelection(focusedID)
     onChange?()
+  }
+
+  func selectTab(_ id: UUID) {
+    guard isTabbed, panes[id] != nil, id != focusedID else { return }
+    focusedID = id
+    rebuild()
+  }
+
+  func requestCloseFocused() {
+    let id = focusedID
+    focusedPane.requestClose()
+    if isTabbed, panes[id]?.isRunning == false { removeEmptyPane(id) }
+  }
+
+  func addTab() {
+    guard isTabbed, panes.count < 16, let last = layout.paneIDs.last else { return }
+    let id = UUID()
+    addPane(id, directory: focusedPane.workingDirectory)
+    layout = layout.splitting(last, axis: .horizontal, adding: id)
+    focusedID = id
+    rebuild()
+    focusedPane.openTerminal()
   }
 
   private func configureToolbar() {
@@ -419,7 +504,7 @@ final class WorkspaceView: NSView {
     presets.trackingMode = .selectOne
     presets.segmentCount = LayoutPreset.allCases.count
     for (preset, symbol, label) in [
-      (LayoutPreset.single, "rectangle", "1칸"),
+      (LayoutPreset.single, "rectangle", "탭으로 보기"),
       (.columns, "rectangle.split.2x1", "좌우 2칸"),
       (.rows, "rectangle.split.1x2", "상하 2칸"),
       (.grid, "rectangle.split.2x2", "4칸"),
@@ -471,18 +556,21 @@ final class WorkspaceView: NSView {
   private func refreshControls() {
     let running = panes.values.filter { $0.isRunning }.count
     for preset in LayoutPreset.allCases {
-      presets.setEnabled(running <= preset.capacity, forSegment: preset.rawValue)
+      presets.setEnabled(
+        preset == .single || running <= preset.capacity, forSegment: preset.rawValue)
     }
     presets.selectedSegment = -1
     // Selection is derived from structure, not just pane count (free splits can have any shape).
     for preset in LayoutPreset.allCases where matchesPreset(preset) {
       presets.selectedSegment = preset.rawValue
     }
+    tabBar?.update(panes: layout.paneIDs.compactMap { panes[$0] }, selectedID: focusedID)
     editButton.state = isEditing ? .on : .off
     editButton.title = isEditing ? "편집 완료" : "레이아웃 편집"
   }
 
   private func matchesPreset(_ preset: LayoutPreset) -> Bool {
+    if isTabbed { return preset == .single }
     func shape(_ node: LayoutNode) -> String {
       switch node {
       case .pane: return "p"

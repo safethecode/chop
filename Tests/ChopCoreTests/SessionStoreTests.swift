@@ -106,3 +106,19 @@ private func snapshot() -> WorkspaceSnapshot {
   #expect(throws: (any Error).self) { try store.save(snapshot()) }
   #expect(try Data(contentsOf: notDirectory) == original)
 }
+
+@Test func tabbedPresentationRoundTripsAndLegacySessionsRemainReadable() throws {
+  let legacy = snapshot()
+  let decoder = JSONDecoder()
+  let encoder = JSONEncoder()
+  let legacyData = try encoder.encode(legacy)
+  let fields = try #require(JSONSerialization.jsonObject(with: legacyData) as? [String: Any])
+  #expect(fields["tabbed"] == nil)
+  #expect(try decoder.decode(WorkspaceSnapshot.self, from: legacyData).tabbed == nil)
+  let tabbed = WorkspaceSnapshot(
+    layout: legacy.layout, panes: legacy.panes, focusedID: legacy.focusedID, tabbed: true)
+  let restored = try decoder.decode(WorkspaceSnapshot.self, from: encoder.encode(tabbed))
+  try restored.validate()
+  #expect(restored == tabbed)
+  #expect(restored.layout.paneIDs == legacy.layout.paneIDs)
+}

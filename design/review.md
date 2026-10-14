@@ -52,3 +52,7 @@ V-26 / F-SHORTCUT-ALIGNMENT: 구현 중 glyph 고유 폭 때문에 바로가기 
 V-27 / FILE-DROP-NATIVE:19개 검사와 native URL writer 시작은 확인했다. CUA의 OS drag가 놓기 이벤트를 기다려 실제 terminal 입력 종료를 확인하지 못했다. 후속 사용자 조작 뒤 같은 clean 앱의 터미널11에서 정확한 fixture 경로의 인용 입력과 셸 결과를 실제 AX로 확인했다. 핵심 native endpoint는 verified; 최초 자동화 한계와 물리 변형/자동 검사의 범위는 증거에 따로 유지한다. [범위](evidence/file-path-drag-drop.md).
 
 V-28 / F-SHORTCUT-SECTION: 사용자 교정으로 세 바로가기를 중립 배경 묶음으로 분리했다. 실제 두 모드·기본/최소 창·세 목적지·빈/긴 목록을 확인해 fixed-and-verified. [관찰](evidence/shortcut-section.md).
+
+V-29 / F-SINGLE-TABS: 사용자 교정에 따라 단일 보기 전환의1칸 제한을 없애고 모든 세션을 상단 탭으로 유지했다. 실제 네 셸/ENV/추가·닫기/긴 이름/두 모드·최소/재실행과20개 검사를 확인했다. fixed-and-verified. [관찰](evidence/single-view-tabs.md).
+
+V-30 / F-TAB-RESIZE: 초기 창 축소 때 선택한 긴 탭이 가려졌다. viewport 변경 때 선택 탭을 드러내도록 수정하고681×432 두 모드/실제 Scroll Left/⌘W를 재검증했다. fixed-and-verified.
