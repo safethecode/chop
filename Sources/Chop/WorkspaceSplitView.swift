@@ -14,6 +14,7 @@ final class WorkspaceSplitView: NSSplitView, NSSplitViewDelegate {
   private var applying = false
   private var userResizing = false
   private var background = NSColor.white
+  private var headerBackground = NSColor.white
   private(set) var isFileTreeVisible: Bool
 
   override var dividerThickness: CGFloat { isFileTreeVisible ? 1 : 0 }
@@ -104,6 +105,7 @@ final class WorkspaceSplitView: NSSplitView, NSSplitViewDelegate {
 
   func applyAppearance(_ mode: AppearanceMode) {
     background = mode.background
+    headerBackground = mode.headerBackground
     appearance = mode.appearance
     fileBrowser.applyAppearance(mode)
     needsDisplay = true
@@ -119,7 +121,15 @@ final class WorkspaceSplitView: NSSplitView, NSSplitViewDelegate {
   }
 
   override func drawDivider(in rect: NSRect) {
-    if isFileTreeVisible { super.drawDivider(in: rect) }
+    guard isFileTreeVisible else { return }
+    super.drawDivider(in: rect)
+    // Continue the shared header surface across the functional resize divider.
+    let height = min(ChopStyle.headerHeight, bounds.height)
+    let header = NSRect(
+      x: rect.minX, y: isFlipped ? bounds.minY : bounds.maxY - height,
+      width: rect.width, height: height)
+    headerBackground.setFill()
+    header.intersection(rect).fill()
   }
 
   private func applyVisibility() {

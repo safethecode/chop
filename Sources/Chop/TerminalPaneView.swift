@@ -322,12 +322,7 @@ final class TerminalPaneView: NSView {
       self?.onDragEnded?()
     }
     moveHandle.isHidden = true
-    let row = NSStackView(views: [moveHandle, titleLabel, pathLabel, zoomButton, close])
-    row.orientation = .horizontal
-    row.distribution = .fill
-    row.spacing = 12
-    row.alignment = .centerY
-    row.translatesAutoresizingMaskIntoConstraints = false
+    let row = ChopStyle.headerRow(views: [moveHandle, titleLabel, pathLabel, zoomButton, close])
     header.addSubview(row)
     openButton = NSButton(
       image: NSImage(systemSymbolName: "plus", accessibilityDescription: "터미널 열기")!, target: self,

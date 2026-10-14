@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "reviewer": "Codex self-review; actual code/test/CUA observations, not independent approval",
-  "reviewed_at": "2026-10-14T15:54:37.333761+00:00",
-  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics. PR #8: changed appearance scopes rechecked against actual light/dark screenshots and E-A1–A6; unchanged structure/native exceptions retain earlier evidence; local 10-test suite rerun. No independent approval or exported PNG claimed. PR #10: toolbar icon roles, copy, geometry and actions rechecked in actual CUA images/AX, four layouts, both modes, minimum window and restart. Existing scopes outside changed toolbar retain prior observations and rerun PTY checks. PR #11: changed handle, preview, movement, keyboard, same live PTY and persisted order rechecked; direct user acceptance covers requested motion. CUA cannot capture transient drag frames; Reduce Motion physical settings were not changed. Unchanged exclusions/native exceptions retain prior evidence; 11-test checks rerun. PR #12: actual CUA light/dark header/body contrast, five-pane editing/zoom/hidden-pane updates rechecked; no new text/geometry. Existing exceptions and unrelated observations retained. 11-test check passed. Final PR #12 review follow-up adds only three doc comments in response to CodeRabbit coverage warning. Strict format/diff checks passed; no executable behavior or visual contract changed, so E-H1–5 remains applicable. External review coverage is explicitly fccec, follow-up comments self-reviewed. PR #13: pane focus outline removed by explicit user request. Real mouse/keyboard shell input and AX focus, light/dark, zoom and drag swap-back were rechecked in current CUA renders. Previous focus-border appearance is historical; RUI-23 declares the user-requested terminal-only exception, native control focus remains. No transient drag screenshot or full VoiceOver claim. Unchanged scopes retain prior evidence. PR #14: changed toolbar/body/file-panel consumers rechecked in actual CUA, including user hierarchy and stray-line corrections, long path, reopen, two-mode minimum, native folder picker, literal paths, folder expansion, copy/Finder and live shell preservation.15 tests passed. Final restart OS open wait and picker recovery are documented; no permission root cause claimed. Final pointer swap succeeded with2× image coordinates, keyboard restored original order. No drag implementation change or transient-frame claim. Unchanged native exclusions retain prior evidence. PR #14 follow-up: CodeRabbit actual review5101fb1/19files found one valid child metadata failure propagation. Minimal fallback plus deterministic injected-I/O regression test passed with all16 tests3.737s. Latest app restored project root and expanded Sources. Unchanged layout/appearance observations remain applicable; no external re-review of this follow-up is claimed. Path field actual dark/light click/selection/caret/edit+Enter rechecked;16 tests3.597s passed. Other native/layout/terminal consumers are unchanged.",
+  "reviewed_at": "2026-10-14T16:00:24.904498+00:00",
+  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics. PR #8: changed appearance scopes rechecked against actual light/dark screenshots and E-A1–A6; unchanged structure/native exceptions retain earlier evidence; local 10-test suite rerun. No independent approval or exported PNG claimed. PR #10: toolbar icon roles, copy, geometry and actions rechecked in actual CUA images/AX, four layouts, both modes, minimum window and restart. Existing scopes outside changed toolbar retain prior observations and rerun PTY checks. PR #11: changed handle, preview, movement, keyboard, same live PTY and persisted order rechecked; direct user acceptance covers requested motion. CUA cannot capture transient drag frames; Reduce Motion physical settings were not changed. Unchanged exclusions/native exceptions retain prior evidence; 11-test checks rerun. PR #12: actual CUA light/dark header/body contrast, five-pane editing/zoom/hidden-pane updates rechecked; no new text/geometry. Existing exceptions and unrelated observations retained. 11-test check passed. Final PR #12 review follow-up adds only three doc comments in response to CodeRabbit coverage warning. Strict format/diff checks passed; no executable behavior or visual contract changed, so E-H1–5 remains applicable. External review coverage is explicitly fccec, follow-up comments self-reviewed. PR #13: pane focus outline removed by explicit user request. Real mouse/keyboard shell input and AX focus, light/dark, zoom and drag swap-back were rechecked in current CUA renders. Previous focus-border appearance is historical; RUI-23 declares the user-requested terminal-only exception, native control focus remains. No transient drag screenshot or full VoiceOver claim. Unchanged scopes retain prior evidence. PR #14: changed toolbar/body/file-panel consumers rechecked in actual CUA, including user hierarchy and stray-line corrections, long path, reopen, two-mode minimum, native folder picker, literal paths, folder expansion, copy/Finder and live shell preservation.15 tests passed. Final restart OS open wait and picker recovery are documented; no permission root cause claimed. Final pointer swap succeeded with2× image coordinates, keyboard restored original order. No drag implementation change or transient-frame claim. Unchanged native exclusions retain prior evidence. PR #14 follow-up: CodeRabbit actual review5101fb1/19files found one valid child metadata failure propagation. Minimal fallback plus deterministic injected-I/O regression test passed with all16 tests3.737s. Latest app restored project root and expanded Sources. Unchanged layout/appearance observations remain applicable; no external re-review of this follow-up is claimed. Path field actual dark/light click/selection/caret/edit+Enter rechecked;16 tests3.597s passed. Other native/layout/terminal consumers are unchanged. Header seam scope rechecked in actual light/dark,300→340→300pt file width,hide/reopen and editing headers.16 tests3.606s passed; no new input/drag/icon behavior.",
   "catalog_sha256": "9af51eedfbd6625fdcae46aa6a55e6206c447fe43b23fb1d0ff61f8ac800114f",
-  "contract_sha256": "80658fe71101da66825c1a040cc1f5edc4321a6fecc78375b16802fb3facc10e",
-  "target_sha256": "0a896de57583cd21f14cf5fb6567b11e5da49c6262f13ede7b5b16860a9ff898",
+  "contract_sha256": "148e5d31fb6a9ea291c3f2b4f8a6681fb9595effaa28aa928526958cc88e9386",
+  "target_sha256": "0180bc4c271a9f8ad83a93b6f603575253660f2a6331b2f3395000c150af31e1",
   "results": [
     {
       "id": "ORC-F01",
@@ -344,7 +344,7 @@
     {
       "id": "ORC-F10",
       "status": "pass",
-      "reason": "파일 header40/조작28과 terminal header40, row28의16pt 아이콘/14pt medium 이름을 실제 전체·최소 창/두 모드에서 대조했다. 이름과 아이콘의 수직 정렬/잘림을 확인했다.",
+      "reason": "파일/terminal header가 같은 ChopStyle.headerRow의 centerY/spacing12를 사용한다. 두 모드·일반/편집과 실제300→340→300pt panel 폭 변경에서 제목·아이콘 정렬을 확인했다.",
       "evidence": [
         {
           "kind": "code",
@@ -405,6 +405,16 @@
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
           "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
         }
       ]
     },
@@ -438,7 +448,7 @@
     {
       "id": "ORC-F12",
       "status": "pass",
-      "reason": "새 파일 탐색의 inset12/gap8/path28/row28/indent16과 기존 header40/toolbar48을 대조했다. 좌우 여백은 같고1pt 기능 divider/비율 분배는 spacing 값과 구별한다.",
+      "reason": "양쪽 header row 간격12/inset12/40pt와 본문 inset을 통일했다.1pt divider는 조작부이며 상단40pt 색 면만 연결한다. 실제 경계 이동에서도 중복 여백이 생기지 않았다.",
       "evidence": [
         {
           "kind": "code",
@@ -494,6 +504,16 @@
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
           "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
         }
       ]
     },
@@ -1060,7 +1080,7 @@
     {
       "id": "ORC-G10",
       "status": "pass",
-      "reason": "새 파일 헤더와 terminal header의 같은 mode 색/40pt 높이, 본문 톤,14pt 글꼴/28pt 컨트롤을 E-T1/9에서 두 모드로 대조했다.",
+      "reason": "terminal/file 헤더가 동일 mode.headerBackground/foreground와 공통 행을 소비한다. 두 모드 실제 화면에서 header 사이 기능 경계의 색 틈이 없어 같은 표면으로 읽힌다.",
       "evidence": [
         {
           "kind": "code",
@@ -1121,13 +1141,23 @@
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
           "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
         }
       ]
     },
     {
       "id": "ORC-G11",
       "status": "exception",
-      "reason": "전체/최소 창·두 모드에서 파일 제목/경로/바로가기/상태/행을 읽고 긴 경로가 한 줄 편집/중간 말줄임으로 유지됨을 확인했다. tooltip/AX에는 전체 경로가 남는다.",
+      "reason": "일반/편집/폭 변경의 실제 화면에서 terminal/file 제목·경로·아이콘이 같은 중앙선에 놓이고 읽혔다. 글자/본문 치수는 바꾸지 않았다.",
       "evidence": [
         {
           "kind": "code",
@@ -1183,6 +1213,16 @@
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
           "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
         }
       ],
       "exception_id": "CHOP-ORC-G11"
@@ -1377,7 +1417,7 @@
     {
       "id": "ORC-G18",
       "status": "pass",
-      "reason": "기존 SF Symbols 체계의 sidebar.right/folder/doc/arrow.clockwise를 목적에 맞게 쓴다. header/파일 row의 수직 중앙 정렬과 실제 아이콘 동작을 확인했다.",
+      "reason": "기존 SF 버튼을 같은 header row에 배치했다. 파일 폴더/갱신과 terminal 확대/닫기/이동은28pt 영역의 세로 중앙을 공유한다.",
       "evidence": [
         {
           "kind": "code",
@@ -1433,6 +1473,16 @@
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
           "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
         }
       ]
     },
@@ -1466,7 +1516,7 @@
     {
       "id": "ORC-G20",
       "status": "pass",
-      "reason": "panel 내부 여백12/행간8·header inset12/조작28을 중복 부모 padding 없이 적용했다. 실제 전체/최소 창과 path/바로가기/목록 소비 영역을 대조했다.",
+      "reason": "두 header의 spacing8/12 차이를 공통12로 통일하고 양쪽 inset12와40pt 높이를 유지했다. 실제 두 모드/개폐/resize에서 배경 연결·정렬을 확인했다.",
       "evidence": [
         {
           "kind": "code",
@@ -1522,6 +1572,16 @@
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
           "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
         }
       ]
     },
@@ -2057,7 +2117,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "spec",
@@ -2074,7 +2134,7 @@
     {
       "id": "RUI-02",
       "status": "pass",
-      "reason": "새 FileBrowserView/WorkspaceSplitView가 AppearanceMode 본문/header 색과 ChopStyle14pt를 실제 소비한다. toolbar 아래 bodyHost를 clip하며 mode 변경은 숨긴 browser에도 적용한다.",
+      "reason": "ChopStyle.headerRow와 AppearanceMode.headerBackground/foreground를 파일/terminal 실제 소비처에 연결했다. hidden file browser의 mode 갱신과 기존 terminal layer 초기화 순서는 보존한다.",
       "evidence": [
         {
           "kind": "code",
@@ -2105,6 +2165,11 @@
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
           "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
         }
       ]
     },
@@ -2116,7 +2181,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "spec",
@@ -2153,7 +2218,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "interaction",
@@ -2235,7 +2300,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "visual",
@@ -2304,12 +2369,12 @@
     {
       "id": "RUI-07",
       "status": "pass",
-      "reason": "전역 toolbar를 전체 폭에 두고 그 아래 terminal canvas와 파일 탐색을 같은 위계로 배치한다. 파일 선택/경로/바로가기는 해당 panel 안에 둔다. 사용자 교정 E-T1/8/9로 실제 계층을 확인했다.",
+      "reason": "사용자 요청의 peer body 구조를 보존하고 맞닿은 두 header의 면/행을 연결했다. 공통 toolbar 위치와 terminal/file 행동의 소속은 바꾸지 않았다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "visual",
@@ -2365,6 +2430,16 @@
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
           "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
         }
       ]
     },
@@ -2376,7 +2451,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "code",
@@ -2486,7 +2561,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "visual",
@@ -2533,7 +2608,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "visual",
@@ -2695,7 +2770,7 @@
     {
       "id": "RUI-14",
       "status": "exception",
-      "reason": "새 native divider는 toolbar 아래 canvas/file 경계의 폭 조절 조작부다. 닫으면 경계도 없어진다. 양쪽40pt header는 실제 이름/조작 소속이며 장식 바·선택 밑줄을 추가하지 않았다.",
+      "reason": "새 장식 바를 만들지 않고 기능 divider의 header 부분만 동일 배경으로 채운다. 본문 resize hit 영역을 유지하며 숨김 때 divider와 잔상이 없다.",
       "evidence": [
         {
           "kind": "code",
@@ -2756,6 +2831,16 @@
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
           "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
         }
       ],
       "exception_id": "CHOP-RUI-14"
@@ -2769,7 +2854,7 @@
     {
       "id": "RUI-16",
       "status": "pass",
-      "reason": "원본 사용자 canvas의 넓은 본문/빈 중앙+와 후속 header/no-focus-border 요구를 보존했다. 새 file panel은 후속 명시 요청이며 toolbar 아래 같은 위계라는 교정을 실제 화면/geometry 검사로 반영했다.",
+      "reason": "기존 사용자 canvas/헤더 배경 요구와 file peer hierarchy를 유지하며 새 유격 교정을 반영했다. 높이 변경으로 원본 비율을 훼손하지 않고 색 면/행 구성의 실제 대응을 확인했다.",
       "evidence": [
         {
           "kind": "spec",
@@ -2789,7 +2874,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "visual",
@@ -2840,13 +2925,23 @@
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
           "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
         }
       ]
     },
     {
       "id": "RUI-17",
       "status": "pass",
-      "reason": "사용자 교정 전의 toolbar 침범/검은 선을 의도적 차이로 통과시키지 않았다. bodyHost와 clipping/숨긴 divider를 수정하고 E-T1/8/9에서 전체 조합을 재검증했다.",
+      "reason": "이전 PASS 뒤 들어온 header 유격을 무시하지 않았다.1pt 경계의 header 단절과 row 간격 차이를 고쳐 두 모드·resize·개폐·편집 전체 조합을 다시 확인했다.",
       "evidence": [
         {
           "kind": "spec",
@@ -2866,7 +2961,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "visual",
@@ -2917,6 +3012,16 @@
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
           "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
         }
       ]
     },
@@ -2928,7 +3033,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "visual",
@@ -3004,7 +3109,7 @@
     {
       "id": "RUI-22",
       "status": "pass",
-      "reason": "부모 toolbar48와 bodyHost 아래 panel header40/단일 inset12/gap8을 쓴다. 경로/행에 추가 부모 패딩을 중첩하지 않는다. 최소/기본 창 두 모드와 개폐/폭 변경의 실제 화면을 확인했다.",
+      "reason": "header row의 단일12pt 간격과 inset12/40pt를 공유한다. 공통 부모 padding/강제 빈 slot을 추가하지 않고 native body/frame geometry와16개 회귀 검사를 유지했다.",
       "evidence": [
         {
           "kind": "code",
@@ -3075,6 +3180,16 @@
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
           "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
         }
       ]
     },
@@ -3086,7 +3201,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "code",
@@ -3209,7 +3324,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "visual",
@@ -3246,12 +3361,12 @@
     {
       "id": "RUI-25",
       "status": "pass",
-      "reason": "전체 폭 toolbar와 아래 두 peer 작업 영역을 명확히 나눈다. 파일 header는 terminal header와 같은 높이에서 시작하며 파일 path/바로가기/outline이 그 아래에 속한다. E-T1/8/9 실제 결과와 회귀 테스트를 연결했다.",
+      "reason": "global toolbar 아래 terminal/file peer 영역은 그대로다. 같은 높이의 실제 header 면을 연결하고 제목/조작 소속은 해당 영역 안에 남긴다. 실제 개폐·폭 변경과 편집 모드에서도 대조했다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "visual",
@@ -3302,6 +3417,16 @@
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
           "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
         }
       ]
     },
@@ -3313,7 +3438,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "code",
@@ -3435,7 +3560,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "code",
@@ -3577,7 +3702,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "code",
@@ -3729,7 +3854,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "code",
@@ -3801,7 +3926,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "code",
@@ -3913,7 +4038,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "code",
@@ -3985,7 +4110,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "code",
@@ -4092,12 +4217,12 @@
     {
       "id": "PROJECT-TRUTH",
       "status": "pass",
-      "reason": "한 줄 표시 속성 변경과 실제 두 모드 편집·기존16개 검사 결과를 구분했다. 후속 헤더/아이콘/파일 드래그나 전체 VoiceOver를 이미 검증했다고 주장하지 않는다.",
+      "reason": "이전40pt 높이를 잘못됐다고 주장하지 않고 실제1pt header 틈과 row8/12 차이를 기록했다. 직접 CUA 두 모드/resize/개폐 관찰·16개 검사와 미실행 플랫폼을 구분한다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "code",
@@ -4248,6 +4373,26 @@
           "kind": "interaction",
           "path": "design/evidence/path-focus-ring.md",
           "sha256": "14c25fc7671ef1963780d4810b48a1d6367a85dea6505c8c1603bd493c22a6ed"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
         }
       ]
     },
@@ -4289,7 +4434,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "code",
@@ -4321,12 +4466,12 @@
     {
       "id": "PROJECT-APPEARANCE",
       "status": "pass",
-      "reason": "새 파일 header/body/controls에도 같은 mode를 적용하고 실제 두 모드/전체·최소 창/개폐를 확인했다. 터미널 surface 재생성 없이 기존 hidden pane theme 검사도 통과했다.",
+      "reason": "파일 제목 전경과 경계 header 구간이 mode 토큰을 소비한다. 실제 light/dark와 숨김/재열기에서 갱신을 대조하고 기존 숨긴 terminal surface theme 검사를 통과했다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "code",
@@ -4432,6 +4577,26 @@
           "kind": "interaction",
           "path": "design/evidence/pr14-file-tree.md",
           "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
         }
       ]
     },
@@ -4443,7 +4608,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
+          "sha256": "4e4d3c3ebd7bdd8063f43dfa1aeddca92c0191eb22c67c622e61a2910f1ea8c9"
         },
         {
           "kind": "code",
@@ -4592,7 +4757,7 @@
     {
       "id": "PROJECT-HEADER-BACKGROUND",
       "status": "pass",
-      "reason": "file header도 terminal과 같은40pt/mode.headerBackground를 소비한다. 실제 두 모드와 최소/전체 창에서 본문 대비/정렬을 대조했다. 기존 숨긴 pane mode 검사도 통과했다.",
+      "reason": "파일/terminal header의 mode별 배경/전경·40pt·공통 행 구성을 적용한다. 상단 경계도 같은 배경으로 연결하며 두 모드·일반/편집·resize를 실제 확인했다.",
       "evidence": [
         {
           "kind": "spec",
@@ -4653,6 +4818,26 @@
           "kind": "interaction",
           "path": "design/evidence/pr14-file-tree.md",
           "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
         }
       ]
     },
@@ -4753,7 +4938,7 @@
     {
       "id": "PROJECT-FILETREE-HIERARCHY",
       "status": "pass",
-      "reason": "사용자 교정의 toolbar 침범/검은 선과 내부 발견의0폭 재열기를 수정했다. E-T1/8/9/11에서 실제 기본/최소 창·개폐·폭·zoom/교환과 geometry/surface 회귀 검사로 재검증했다.",
+      "reason": "canvas/file peer hierarchy와 header40pt를 유지하고 경계 상단 표면을 연결했다. 두 모드·폭300→340→300·숨김/재열기·편집 header와 기존 geometry/surface 검사16개를 확인했다.",
       "evidence": [
         {
           "kind": "spec",
@@ -4774,6 +4959,26 @@
           "kind": "interaction",
           "path": "design/evidence/pr14-file-tree.md",
           "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/header-seam.md",
+          "sha256": "c6c6e4c41d06206b69f4f7264135d4083034e51ff1703f9e378cd98f54c31d5e"
         }
       ]
     },
