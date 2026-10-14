@@ -69,6 +69,22 @@ import Testing
     return pasted.components(separatedBy: "CHOP_PASTE_OK").count >= 3
       && !terminal.needsConfirmClose
   }
+  terminal.insertText("printf 'CHOP_", replacementRange: NSRange(location: NSNotFound, length: 0))
+  terminal.setMarkedText(
+    "한글", selectedRange: NSRange(location: 2, length: 0),
+    replacementRange: NSRange(location: NSNotFound, length: 0))
+  #expect(terminal.hasMarkedText())
+  #expect(terminal.markedRange().length == 2)
+  terminal.insertText("한글", replacementRange: NSRange(location: NSNotFound, length: 0))
+  #expect(!terminal.hasMarkedText())
+  terminal.insertText("_IME_OK\\n'", replacementRange: NSRange(location: NSNotFound, length: 0))
+  try pressReturn(on: terminal, window: window)
+  try await waitFor {
+    let text = terminal.accessibilityValue() as? String ?? ""
+    return text.components(separatedBy: "\n").contains {
+      $0.trimmingCharacters(in: .whitespacesAndNewlines) == "CHOP_한글_IME_OK"
+    } && !terminal.needsConfirmClose
+  }
   terminal.insertText("exit", replacementRange: NSRange(location: NSNotFound, length: 0))
   try pressReturn(on: terminal, window: window)
   do {
