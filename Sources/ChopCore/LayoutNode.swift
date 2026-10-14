@@ -82,6 +82,23 @@ public indirect enum LayoutNode: Codable, Equatable, Sendable {
     }
   }
 
+  /// Exchange leaf positions without changing split geometry or pane identity.
+  public func swapping(_ firstID: UUID, with secondID: UUID) -> LayoutNode {
+    guard firstID != secondID, paneIDs.contains(firstID), paneIDs.contains(secondID) else {
+      return self
+    }
+    func exchange(_ node: LayoutNode) -> LayoutNode {
+      switch node {
+      case .pane(let id):
+        return .pane(id == firstID ? secondID : id == secondID ? firstID : id)
+      case .split(let id, let axis, let ratio, let first, let second):
+        return .split(
+          id: id, axis: axis, ratio: ratio, first: exchange(first), second: exchange(second))
+      }
+    }
+    return exchange(self)
+  }
+
   public func updatingRatio(_ target: UUID, to value: Double) -> LayoutNode {
     guard value.isFinite else { return self }
     switch self {

@@ -55,3 +55,24 @@ import Testing
   #expect(tree.neighbor(of: ids[0], toward: .left, in: bounds) == nil)
   #expect(tree.neighbor(of: ids[3], toward: .down, in: bounds) == nil)
 }
+
+@Test func swappingLeavesPreservesGeometryAndRoundTrips() throws {
+  let ids = (0..<3).map { _ in UUID() }
+  let rootID = UUID()
+  let tree = LayoutNode.split(
+    id: rootID, axis: .horizontal, ratio: 0.63, first: .pane(ids[0]),
+    second: .pane(ids[1]).splitting(ids[1], axis: .vertical, adding: ids[2]))
+  let bounds = CGRect(x: 0, y: 0, width: 1200, height: 800)
+  let before = tree.frames(in: bounds)
+  let moved = tree.swapping(ids[0], with: ids[2])
+  #expect(moved.paneIDs == [ids[2], ids[1], ids[0]])
+  #expect(moved.minimumSize == tree.minimumSize)
+  #expect(moved.frames(in: bounds)[ids[0]] == before[ids[2]])
+  #expect(moved.frames(in: bounds)[ids[2]] == before[ids[0]])
+  #expect(moved.frames(in: bounds)[ids[1]] == before[ids[1]])
+  #expect(moved.swapping(ids[2], with: ids[0]) == tree)
+  #expect(tree.swapping(ids[0], with: UUID()) == tree)
+  #expect(tree.swapping(ids[0], with: ids[0]) == tree)
+  let restored = try JSONDecoder().decode(LayoutNode.self, from: JSONEncoder().encode(moved))
+  #expect(restored == moved)
+}
