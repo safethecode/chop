@@ -734,7 +734,7 @@
       "id": "RUI-04",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "실제 사용자 조작 후 clean 앱의 터미널11에서 fixture 파일 경로의 인용 입력을 AX로 확인했다. 최초 CUA 놓기 대기와 후속 endpoint 관찰을 구분한다. Enter 미전송·다른 칸/surface·닫힌 target·인용/거절은19개 자동 검사와 코드로 검증하며 물리 변형 전체를 실행했다고 주장하지 않는다.",
+      "reason": "홈 아이콘 포인터 클릭과 문서/다운로드 실제 클릭으로 각 목적지 경로가 바뀌는 것을 확인했다. native full-row hit/AX 버튼 역할과16개 기존 경로/PTY 검사를 보존한다. 파일 드롭의 실제 사용자 조작 후 endpoint를 AX로 확인했으며 Enter 미전송은 실제 PTY 검사로 별도 확인했다.",
       "checks": [
         "spec",
         "interaction"
@@ -756,7 +756,7 @@
       "id": "RUI-06",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "실제 사용자 조작 후 clean 앱의 터미널11에서 fixture 파일 경로의 인용 입력을 AX로 확인했다. 최초 CUA 놓기 대기와 후속 endpoint 관찰을 구분한다. Enter 미전송·다른 칸/surface·닫힌 target·인용/거절은19개 자동 검사와 코드로 검증하며 물리 변형 전체를 실행했다고 주장하지 않는다.",
+      "reason": "바로가기 native button 구성·hitTest/AX 의미를 셀프 리뷰했다. strict format/build/signature와 전체16개 테스트4.907초 및 실제 목적지 입력을 확인했다. 파일 드롭 source/대상 수명·인용을 셀프 리뷰했고19개 검사4.111초와 최신 원격 CI가 통과했다.",
       "checks": [
         "code"
       ],
@@ -828,7 +828,7 @@
       "id": "RUI-12",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "실제 사용자 조작 후 clean 앱의 터미널11에서 fixture 파일 경로의 인용 입력을 AX로 확인했다. 최초 CUA 놓기 대기와 후속 endpoint 관찰을 구분한다. Enter 미전송·다른 칸/surface·닫힌 target·인용/거절은19개 자동 검사와 코드로 검증하며 물리 변형 전체를 실행했다고 주장하지 않는다.",
+      "reason": "사용자 Finder crop와 SF Symbols 출처를 기록했다. 홈=house/다운로드=arrow.down.circle/문서=doc 의미·방향과 실제 목적지 행동을 대조했고 image를 비율 유지해 표시한다.",
       "checks": [
         "code",
         "visual"
@@ -1037,7 +1037,7 @@
       "id": "PROJECT-MANAGE",
       "applicable": true,
       "scope": "User-authorized Chop v0.1 behavior; PROJECT-MANAGE",
-      "reason": "실제 사용자 조작 후 clean 앱의 터미널11에서 fixture 파일 경로의 인용 입력을 AX로 확인했다. 최초 CUA 놓기 대기와 후속 endpoint 관찰을 구분한다. Enter 미전송·다른 칸/surface·닫힌 target·인용/거절은19개 자동 검사와 코드로 검증하며 물리 변형 전체를 실행했다고 주장하지 않는다.",
+      "reason": "새 파일 탐색과 panel 개폐는 기존 canvas/view/surface를 재사용한다. 실제 PID/변수 보존, terminal zoom과11→16 교환/원위치 복원, 자동 surface/focus 검사로 확인했다. 경로 탐색은 셸 cwd를 바꾸지 않는다. 파일 드롭 시 기존 target focus/surface·다른 셸 유지와 닫힌 대상 거절을 PTY로 확인했다.",
       "checks": [
         "spec",
         "code",
@@ -1102,7 +1102,7 @@
       "id": "PROJECT-TRUTH",
       "applicable": true,
       "scope": "User-authorized Chop v0.1 behavior; PROJECT-TRUTH",
-      "reason": "실제 사용자 조작 후 clean 앱의 터미널11에서 fixture 파일 경로의 인용 입력을 AX로 확인했다. 최초 CUA 놓기 대기와 후속 endpoint 관찰을 구분한다. Enter 미전송·다른 칸/surface·닫힌 target·인용/거절은19개 자동 검사와 코드로 검증하며 물리 변형 전체를 실행했다고 주장하지 않는다.",
+      "reason": "사용자 crop 원본 관찰·선택한 pt/각색·초기 정렬 실패/수정·실제 세 목적지 클릭을 구분했다.16개 검사와 실제 화면을 구별하며 새 파일 drag를 완료했다고 표시하지 않는다. 파일 드롭은 최초 CUA 놓기 대기와 후속 사용자 조작 후 실제 endpoint 관찰을 구분해 기록한다.",
       "checks": [
         "spec",
         "code",
@@ -1193,7 +1193,7 @@
       "id": "PROJECT-FILETREE",
       "applicable": true,
       "scope": "오른쪽 native outline의 경로 입력/폴더 선택기/홈·다운로드·문서·하위 lazy read/상태 복구/Finder·복사/설정 저장",
-      "reason": "실제 사용자 조작 후 clean 앱의 터미널11에서 fixture 파일 경로의 인용 입력을 AX로 확인했다. 최초 CUA 놓기 대기와 후속 endpoint 관찰을 구분한다. Enter 미전송·다른 칸/surface·닫힌 target·인용/거절은19개 자동 검사와 코드로 검증하며 물리 변형 전체를 실행했다고 주장하지 않는다.",
+      "reason": "새 아이콘/이름 행에서 기존 홈·다운로드·문서 URL과 target-action을 그대로 쓴다. 실제 세 경로 이동·빈 폴더와 긴 목록을 확인했고 탐색/비동기/PTY는 바꾸지 않았다. 파일/폴더 행에 native file URL writer를 추가했고 파일 경로가 실제 terminal endpoint에 도달한 것을 확인했다.",
       "checks": [
         "spec",
         "code",
