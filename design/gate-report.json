@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "reviewer": "Codex self-review; actual code/test/CUA observations, not independent approval",
-  "reviewed_at": "2026-10-14T15:42:53.996534+00:00",
-  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics. PR #8: changed appearance scopes rechecked against actual light/dark screenshots and E-A1–A6; unchanged structure/native exceptions retain earlier evidence; local 10-test suite rerun. No independent approval or exported PNG claimed. PR #10: toolbar icon roles, copy, geometry and actions rechecked in actual CUA images/AX, four layouts, both modes, minimum window and restart. Existing scopes outside changed toolbar retain prior observations and rerun PTY checks. PR #11: changed handle, preview, movement, keyboard, same live PTY and persisted order rechecked; direct user acceptance covers requested motion. CUA cannot capture transient drag frames; Reduce Motion physical settings were not changed. Unchanged exclusions/native exceptions retain prior evidence; 11-test checks rerun. PR #12: actual CUA light/dark header/body contrast, five-pane editing/zoom/hidden-pane updates rechecked; no new text/geometry. Existing exceptions and unrelated observations retained. 11-test check passed. Final PR #12 review follow-up adds only three doc comments in response to CodeRabbit coverage warning. Strict format/diff checks passed; no executable behavior or visual contract changed, so E-H1–5 remains applicable. External review coverage is explicitly fccec, follow-up comments self-reviewed. PR #13: pane focus outline removed by explicit user request. Real mouse/keyboard shell input and AX focus, light/dark, zoom and drag swap-back were rechecked in current CUA renders. Previous focus-border appearance is historical; RUI-23 declares the user-requested terminal-only exception, native control focus remains. No transient drag screenshot or full VoiceOver claim. Unchanged scopes retain prior evidence. PR #14: changed toolbar/body/file-panel consumers rechecked in actual CUA, including user hierarchy and stray-line corrections, long path, reopen, two-mode minimum, native folder picker, literal paths, folder expansion, copy/Finder and live shell preservation.15 tests passed. Final restart OS open wait and picker recovery are documented; no permission root cause claimed. Final pointer swap succeeded with2× image coordinates, keyboard restored original order. No drag implementation change or transient-frame claim. Unchanged native exclusions retain prior evidence. PR #14 follow-up: CodeRabbit actual review5101fb1/19files found one valid child metadata failure propagation. Minimal fallback plus deterministic injected-I/O regression test passed with all16 tests3.737s. Latest app restored project root and expanded Sources. Unchanged layout/appearance observations remain applicable; no external re-review of this follow-up is claimed.",
+  "reviewed_at": "2026-10-14T15:54:37.333761+00:00",
+  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics. PR #8: changed appearance scopes rechecked against actual light/dark screenshots and E-A1–A6; unchanged structure/native exceptions retain earlier evidence; local 10-test suite rerun. No independent approval or exported PNG claimed. PR #10: toolbar icon roles, copy, geometry and actions rechecked in actual CUA images/AX, four layouts, both modes, minimum window and restart. Existing scopes outside changed toolbar retain prior observations and rerun PTY checks. PR #11: changed handle, preview, movement, keyboard, same live PTY and persisted order rechecked; direct user acceptance covers requested motion. CUA cannot capture transient drag frames; Reduce Motion physical settings were not changed. Unchanged exclusions/native exceptions retain prior evidence; 11-test checks rerun. PR #12: actual CUA light/dark header/body contrast, five-pane editing/zoom/hidden-pane updates rechecked; no new text/geometry. Existing exceptions and unrelated observations retained. 11-test check passed. Final PR #12 review follow-up adds only three doc comments in response to CodeRabbit coverage warning. Strict format/diff checks passed; no executable behavior or visual contract changed, so E-H1–5 remains applicable. External review coverage is explicitly fccec, follow-up comments self-reviewed. PR #13: pane focus outline removed by explicit user request. Real mouse/keyboard shell input and AX focus, light/dark, zoom and drag swap-back were rechecked in current CUA renders. Previous focus-border appearance is historical; RUI-23 declares the user-requested terminal-only exception, native control focus remains. No transient drag screenshot or full VoiceOver claim. Unchanged scopes retain prior evidence. PR #14: changed toolbar/body/file-panel consumers rechecked in actual CUA, including user hierarchy and stray-line corrections, long path, reopen, two-mode minimum, native folder picker, literal paths, folder expansion, copy/Finder and live shell preservation.15 tests passed. Final restart OS open wait and picker recovery are documented; no permission root cause claimed. Final pointer swap succeeded with2× image coordinates, keyboard restored original order. No drag implementation change or transient-frame claim. Unchanged native exclusions retain prior evidence. PR #14 follow-up: CodeRabbit actual review5101fb1/19files found one valid child metadata failure propagation. Minimal fallback plus deterministic injected-I/O regression test passed with all16 tests3.737s. Latest app restored project root and expanded Sources. Unchanged layout/appearance observations remain applicable; no external re-review of this follow-up is claimed. Path field actual dark/light click/selection/caret/edit+Enter rechecked;16 tests3.597s passed. Other native/layout/terminal consumers are unchanged.",
   "catalog_sha256": "9af51eedfbd6625fdcae46aa6a55e6206c447fe43b23fb1d0ff61f8ac800114f",
-  "contract_sha256": "0e28b919f61ba3301238d883b0d0759592be236d3161483120e54628b31d514b",
-  "target_sha256": "45ef1e50e10e3da3fbf67bbb8cd85ba8563af0313be4a7cdd3fd1d09cc4052f0",
+  "contract_sha256": "80658fe71101da66825c1a040cc1f5edc4321a6fecc78375b16802fb3facc10e",
+  "target_sha256": "0a896de57583cd21f14cf5fb6567b11e5da49c6262f13ede7b5b16860a9ff898",
   "results": [
     {
       "id": "ORC-F01",
@@ -27,7 +27,7 @@
     {
       "id": "ORC-F02",
       "status": "pass",
-      "reason": "native accent는 파일 트리만의 색이 아니다. 공통 layout/edit 선택과 native 컨트롤 초점에도 사용하며 패널을 접어도 남는다. 사용자 요청의 terminal pane 포커스 경계 제거는 유지한다. 실제 패널 개폐/선택을 대조했다.",
+      "reason": "사용자 요청으로 terminal pane와 파일 경로 입력의 파란 외곽선을 없애도 공통 layout/edit/native 버튼 선택의 accent는 남는다. 경로 caret/selection을 유지하며 두 모드 실제 클릭/편집을 대조했다.",
       "evidence": [
         {
           "kind": "code",
@@ -38,13 +38,23 @@
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
           "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/path-focus-ring.md",
+          "sha256": "14c25fc7671ef1963780d4810b48a1d6367a85dea6505c8c1603bd493c22a6ed"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/path-focus-ring.md",
+          "sha256": "14c25fc7671ef1963780d4810b48a1d6367a85dea6505c8c1603bd493c22a6ed"
         }
       ]
     },
     {
       "id": "ORC-F03",
       "status": "exception",
-      "reason": "두 모드의 텍스트/헤더 대비를 유지한다. pane 포커스 경계는 사용자 요청으로 없애고 실제 terminal 입력 커서/AX 초점을 보존한다. E-F1–5에서 실제 입력과 함께 확인했다.",
+      "reason": "두 모드의 경로 글자/선택/caret 대비를 실제 확인했다. 사용자 요청으로 경로 field 외곽 focus ring만 제거했고 기존 terminal 입력 커서와 다른 native 컨트롤의 초점은 유지한다.",
       "evidence": [
         {
           "kind": "code",
@@ -100,6 +110,16 @@
           "kind": "visual",
           "path": "design/evidence/pr13-no-focus-border.md",
           "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/path-focus-ring.md",
+          "sha256": "14c25fc7671ef1963780d4810b48a1d6367a85dea6505c8c1603bd493c22a6ed"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/path-focus-ring.md",
+          "sha256": "14c25fc7671ef1963780d4810b48a1d6367a85dea6505c8c1603bd493c22a6ed"
         }
       ],
       "exception_id": "CHOP-ORC-F03"
@@ -1753,7 +1773,7 @@
     {
       "id": "ORC-A04",
       "status": "exception",
-      "reason": "Tailwind blue-500을 새로 선택하지 않았다. 사용자 요청으로 pane 입력 포커스 테두리를 없애되 native 컨트롤 선택/키보드 초점과 별도 드롭 대상의 system accent는 유지한다.",
+      "reason": "임의 blue-500을 추가하지 않는다. 사용자 명시 요청으로 terminal pane와 파일 경로 field의 focus outline을 표시하지 않지만 caret/선택과 toolbar/native 버튼 초점·drag 대상은 유지한다.",
       "evidence": [
         {
           "kind": "code",
@@ -1794,6 +1814,16 @@
           "kind": "visual",
           "path": "design/evidence/pr13-no-focus-border.md",
           "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/path-focus-ring.md",
+          "sha256": "14c25fc7671ef1963780d4810b48a1d6367a85dea6505c8c1603bd493c22a6ed"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/path-focus-ring.md",
+          "sha256": "14c25fc7671ef1963780d4810b48a1d6367a85dea6505c8c1603bd493c22a6ed"
         }
       ],
       "exception_id": "CHOP-ORC-A04"
@@ -2027,7 +2057,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "spec",
@@ -2081,12 +2111,12 @@
     {
       "id": "RUI-03",
       "status": "pass",
-      "reason": "사용자가 배제한 것은 왼쪽 terminal tab 사이드바다. 명시 요청한 오른쪽 파일 탐색은 toolbar 아래에 허용한다. active 규칙과 이전 피드백은 보존하고 OS open 대기/물리 환경 미확인은 근거 문서에 구분한다.",
+      "reason": "사용자 요청의 path field focus-ring 제거를 terminal-only 예외와 구분해 추가했다. 나머지 active 규칙과 과거 실패를 보존하며 헤더/바로가기/파일 드래그 요청을 이 PR에서 완료했다고 주장하지 않는다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "spec",
@@ -2107,6 +2137,11 @@
           "kind": "spec",
           "path": "design/evidence/pr14-file-tree.md",
           "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/path-focus-ring.md",
+          "sha256": "14c25fc7671ef1963780d4810b48a1d6367a85dea6505c8c1603bd493c22a6ed"
         }
       ]
     },
@@ -2118,7 +2153,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "interaction",
@@ -2200,7 +2235,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "visual",
@@ -2242,7 +2277,7 @@
     {
       "id": "RUI-06",
       "status": "pass",
-      "reason": "strict Swift format/셸 syntax/plist/release build/signature/15개 테스트를 통과했다. FileTree literal path/비동기 late response와 실제 PTY wrapper geometry를 검증했다. CodeRabbit 후속 metadata 오류 처리를 셀프 리뷰하고 strict 검사/전체16개 테스트3.737초를 통과했다.",
+      "reason": "pathField native focusRingType 변경을 셀프 리뷰하고 strict format/build/signature 및 전체16개 테스트3.597초를 통과했다. 입력/비동기/기존 PTY 구현은 바꾸지 않았다.",
       "evidence": [
         {
           "kind": "code",
@@ -2258,6 +2293,11 @@
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
           "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/path-focus-ring.md",
+          "sha256": "14c25fc7671ef1963780d4810b48a1d6367a85dea6505c8c1603bd493c22a6ed"
         }
       ]
     },
@@ -2269,7 +2309,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "visual",
@@ -2336,7 +2376,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "code",
@@ -2446,7 +2486,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "visual",
@@ -2493,7 +2533,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "visual",
@@ -2749,7 +2789,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "visual",
@@ -2826,7 +2866,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "visual",
@@ -2888,7 +2928,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "visual",
@@ -3041,12 +3081,12 @@
     {
       "id": "RUI-23",
       "status": "exception",
-      "reason": "사용자가 제거한 terminal pane focus border는 추가하지 않는다. native 파일 입력 focus ring/row 선택은 유지하며 기존 toolbar/terminal과 같은 mode/14pt/28pt 체계다. E-T1/9/11에서 실제 표시/초점을 확인했다.",
+      "reason": "사용자 요청으로 terminal pane와 파일 경로 field의 외곽 focus ring은 생략하되 실제 caret/selection/입력 초점은 유지한다. 나머지 native 버튼/메뉴·행 선택의 초점은 유지하고 두 모드 field 편집을 실제 실행했다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "code",
@@ -3142,9 +3182,24 @@
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
           "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/path-focus-ring.md",
+          "sha256": "14c25fc7671ef1963780d4810b48a1d6367a85dea6505c8c1603bd493c22a6ed"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/path-focus-ring.md",
+          "sha256": "14c25fc7671ef1963780d4810b48a1d6367a85dea6505c8c1603bd493c22a6ed"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/path-focus-ring.md",
+          "sha256": "14c25fc7671ef1963780d4810b48a1d6367a85dea6505c8c1603bd493c22a6ed"
         }
       ],
-      "exception_id": "CHOP-RUI-23-FOCUS"
+      "exception_id": "CHOP-PATH-FOCUS-RUI23"
     },
     {
       "id": "RUI-24",
@@ -3154,7 +3209,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "visual",
@@ -3196,7 +3251,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "visual",
@@ -3258,7 +3313,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "code",
@@ -3380,7 +3435,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "code",
@@ -3522,7 +3577,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "code",
@@ -3674,7 +3729,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "code",
@@ -3746,7 +3801,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "code",
@@ -3858,7 +3913,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "code",
@@ -3930,7 +3985,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "code",
@@ -4037,12 +4092,12 @@
     {
       "id": "PROJECT-TRUTH",
       "status": "pass",
-      "reason": "실제 CUA 관찰·sample OS open 대기·자동 검사·스크린샷 좌표 오류를 구분했다. 가짜 파일/terminal 출력은 만들지 않으며 테스트 fixture와 사용자 실제 프로젝트 목록을 구별한다. 독립 승인/중간 drag 프레임/전 플랫폼 검증을 주장하지 않는다. 실제 CodeRabbit 리뷰는5101fb1까지19개 파일·지적1건이다. 후속 수정/16개 검사와 최신 앱 관찰은 셀프 리뷰이며 외부 재승인으로 표시하지 않는다.",
+      "reason": "한 줄 표시 속성 변경과 실제 두 모드 편집·기존16개 검사 결과를 구분했다. 후속 헤더/아이콘/파일 드래그나 전체 VoiceOver를 이미 검증했다고 주장하지 않는다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "code",
@@ -4173,6 +4228,26 @@
           "kind": "interaction",
           "path": "design/evidence/pr14-file-tree.md",
           "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/path-focus-ring.md",
+          "sha256": "14c25fc7671ef1963780d4810b48a1d6367a85dea6505c8c1603bd493c22a6ed"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/path-focus-ring.md",
+          "sha256": "14c25fc7671ef1963780d4810b48a1d6367a85dea6505c8c1603bd493c22a6ed"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/path-focus-ring.md",
+          "sha256": "14c25fc7671ef1963780d4810b48a1d6367a85dea6505c8c1603bd493c22a6ed"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/path-focus-ring.md",
+          "sha256": "14c25fc7671ef1963780d4810b48a1d6367a85dea6505c8c1603bd493c22a6ed"
         }
       ]
     },
@@ -4214,7 +4289,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "code",
@@ -4251,7 +4326,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "code",
@@ -4368,7 +4443,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
+          "sha256": "f7548d25853e24dd71a9d152eb78ee64ac3763f7b6bd93ecb6a8da51971123bb"
         },
         {
           "kind": "code",
@@ -4631,7 +4706,7 @@
     {
       "id": "PROJECT-FILETREE",
       "status": "pass",
-      "reason": "문자 그대로의 경로/one-level 정렬/async generation·성공 루트 저장을 테스트했다. E-T2–7/10의 실제 동작과 OS open 대기 후 선택기 복구를 구분하고 기존 PTY를 보존한다. 자식 metadata 읽기 하나가 실패해도 이름/비폴더 leaf와 다른 항목을 보존한다. 루트 오류는 유지하고 결정적인 오류 주입 검사/최신 앱 복원·펼치기를 확인했다.",
+      "reason": "경로 입력 field의 외곽 ring만 생략한다. 실제 두 모드 클릭/선택/좌우 caret/문자 편집/Enter를 실행했고 루트 읽기·바로가기·선택기·async generation 구현은 그대로다.",
       "evidence": [
         {
           "kind": "spec",
@@ -4652,6 +4727,26 @@
           "kind": "interaction",
           "path": "design/evidence/pr14-file-tree.md",
           "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/path-focus-ring.md",
+          "sha256": "14c25fc7671ef1963780d4810b48a1d6367a85dea6505c8c1603bd493c22a6ed"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/path-focus-ring.md",
+          "sha256": "14c25fc7671ef1963780d4810b48a1d6367a85dea6505c8c1603bd493c22a6ed"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/path-focus-ring.md",
+          "sha256": "14c25fc7671ef1963780d4810b48a1d6367a85dea6505c8c1603bd493c22a6ed"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/path-focus-ring.md",
+          "sha256": "14c25fc7671ef1963780d4810b48a1d6367a85dea6505c8c1603bd493c22a6ed"
         }
       ]
     },
@@ -4679,6 +4774,33 @@
           "kind": "interaction",
           "path": "design/evidence/pr14-file-tree.md",
           "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
+        }
+      ]
+    },
+    {
+      "id": "PROJECT-PATH-FOCUS",
+      "status": "pass",
+      "reason": "사용자 요청대로 외곽 focus ring 없이 실제 caret/selection/editing/Enter를 유지한다. 두 모드 실제 조작과 기존16개 검사를 확인했다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "design/evidence/path-focus-ring.md",
+          "sha256": "14c25fc7671ef1963780d4810b48a1d6367a85dea6505c8c1603bd493c22a6ed"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/path-focus-ring.md",
+          "sha256": "14c25fc7671ef1963780d4810b48a1d6367a85dea6505c8c1603bd493c22a6ed"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/path-focus-ring.md",
+          "sha256": "14c25fc7671ef1963780d4810b48a1d6367a85dea6505c8c1603bd493c22a6ed"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/path-focus-ring.md",
+          "sha256": "14c25fc7671ef1963780d4810b48a1d6367a85dea6505c8c1603bd493c22a6ed"
         }
       ]
     }
