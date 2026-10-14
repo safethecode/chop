@@ -275,7 +275,6 @@ final class WorkspaceView: NSView {
   private func didFocus(_ id: UUID) {
     guard panes[id] != nil else { return }
     focusedID = id
-    for pane in panes.values { pane.isFocused = pane.id == id }
     onChange?()
   }
 
