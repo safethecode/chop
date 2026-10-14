@@ -33,6 +33,48 @@ private final class FileOutlineView: NSOutlineView {
 }
 
 @MainActor
+private final class FileLocationButton: NSButton {
+  init(name: String, symbol: String, target: AnyObject, action: Selector) {
+    super.init(frame: .zero)
+    self.target = target
+    self.action = action
+    title = ""
+    setButtonType(.momentaryPushIn)
+    bezelStyle = .inline
+    isBordered = false
+    setAccessibilityLabel(name)
+    let icon = NSImageView()
+    icon.image = NSImage(systemSymbolName: symbol, accessibilityDescription: nil)?
+      .withSymbolConfiguration(.init(pointSize: 14, weight: .medium))
+    icon.imageScaling = .scaleProportionallyDown
+    icon.contentTintColor = .labelColor
+    let label = NSTextField(labelWithString: name)
+    label.font = ChopStyle.font
+    for view in [icon, label] {
+      view.setAccessibilityElement(false)
+      view.translatesAutoresizingMaskIntoConstraints = false
+      addSubview(view)
+    }
+    NSLayoutConstraint.activate([
+      icon.leadingAnchor.constraint(equalTo: leadingAnchor),
+      icon.centerYAnchor.constraint(equalTo: centerYAnchor),
+      icon.widthAnchor.constraint(equalToConstant: 16),
+      icon.heightAnchor.constraint(equalToConstant: 16),
+      label.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 8),
+      label.centerYAnchor.constraint(equalTo: centerYAnchor),
+      label.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
+    ])
+  }
+
+  @available(*, unavailable)
+  required init?(coder: NSCoder) { fatalError("Use init(name:symbol:target:action:).") }
+
+  override func hitTest(_ point: NSPoint) -> NSView? {
+    super.hitTest(point) == nil ? nil : self
+  }
+}
+
+@MainActor
 final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDelegate,
   NSMenuDelegate, NSMenuItemValidation
 {
@@ -295,15 +337,22 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
     pathField.target = self
     pathField.action = #selector(goToPath)
     let shortcuts = NSStackView()
-    shortcuts.spacing = 8
-    shortcuts.distribution = .fillEqually
-    for (index, name) in ["홈", "다운로드", "문서"].enumerated() {
-      let button = NSButton(title: name, target: self, action: #selector(visitShortcut(_:)))
-      button.font = ChopStyle.font
-      button.bezelStyle = .rounded
+    shortcuts.orientation = .vertical
+    shortcuts.alignment = .leading
+    shortcuts.spacing = 4
+    let locations = [("홈", "house"), ("다운로드", "arrow.down.circle"), ("문서", "doc")]
+    for (index, location) in locations.enumerated() {
+      let (name, symbol) = location
+      let button = FileLocationButton(
+        name: name, symbol: symbol, target: self, action: #selector(visitShortcut(_:)))
       button.tag = index
       button.toolTip = quickLocations[index].path
       shortcuts.addArrangedSubview(button)
+      button.translatesAutoresizingMaskIntoConstraints = false
+      NSLayoutConstraint.activate([
+        button.widthAnchor.constraint(equalTo: shortcuts.widthAnchor),
+        button.heightAnchor.constraint(equalToConstant: 28),
+      ])
     }
     statusLabel.font = ChopStyle.font
     statusLabel.setContentCompressionResistancePriority(.required, for: .vertical)
