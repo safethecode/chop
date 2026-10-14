@@ -13,13 +13,14 @@ final class WorkspaceView: NSView {
   var onChange: (() -> Void)?
   var onMinimumSizeChange: ((CGSize) -> Void)?
   var onMissingDirectories: (([String]) -> Void)?
+  var onAppearanceChangeRequested: ((AppearanceMode) -> Void)?
   private var nextName = 1
   private let canvas = NSView()
   private var root: NSView?
-  private let presets = NSSegmentedControl(
-    labels: ["1", "좌우", "상하", "4"],
-    trackingMode: .selectOne, target: nil, action: nil)
+  private let presets = NSSegmentedControl()
   private let editButton = NSButton(title: "레이아웃 편집", target: nil, action: nil)
+  private lazy var appearanceButton = ChopStyle.iconButton(
+    "moon", label: "다크 모드로 전환", target: self, action: #selector(toggleAppearance))
   private(set) var isEditing = false
   private var restoredRunningIDs: [UUID] = []
 
@@ -58,6 +59,20 @@ final class WorkspaceView: NSView {
     layer?.backgroundColor = mode.background.cgColor
     // Hidden panes are retained in this dictionary during zoom.
     for pane in panes.values { pane.applyAppearance() }
+    updateAppearanceButton()
+  }
+
+  @objc private func toggleAppearance() {
+    onAppearanceChangeRequested?(engine.appearanceMode == .light ? .dark : .light)
+  }
+
+  private func updateAppearanceButton() {
+    let isLight = engine.appearanceMode == .light
+    let label = isLight ? "다크 모드로 전환" : "라이트 모드로 전환"
+    appearanceButton.image = NSImage(
+      systemSymbolName: isLight ? "moon" : "sun.max", accessibilityDescription: label)
+    appearanceButton.toolTip = label
+    appearanceButton.setAccessibilityLabel(label)
   }
 
   private func addPane(_ id: UUID, directory: String? = nil, name: String? = nil) {
@@ -302,13 +317,27 @@ final class WorkspaceView: NSView {
     presets.font = ChopStyle.font
     presets.action = #selector(selectPreset(_:))
     presets.setAccessibilityLabel("레이아웃 프리셋")
+    presets.trackingMode = .selectOne
+    presets.segmentCount = LayoutPreset.allCases.count
+    for (preset, symbol, label) in [
+      (LayoutPreset.single, "rectangle", "1칸"),
+      (.columns, "rectangle.split.2x1", "좌우 2칸"),
+      (.rows, "rectangle.split.1x2", "상하 2칸"),
+      (.grid, "rectangle.split.2x2", "4칸"),
+    ] {
+      let image = NSImage(systemSymbolName: symbol, accessibilityDescription: label)!
+        .withSymbolConfiguration(.init(pointSize: 14, weight: .medium))!
+      presets.setImage(image, forSegment: preset.rawValue)
+      presets.setToolTip(label, forSegment: preset.rawValue)
+      presets.setWidth(32, forSegment: preset.rawValue)
+    }
     editButton.target = self
     editButton.action = #selector(toggleEditing)
     editButton.setButtonType(.pushOnPushOff)
     editButton.bezelStyle = .rounded
     editButton.font = ChopStyle.font
     let spacer = NSView()
-    let toolbar = NSStackView(views: [presets, spacer, editButton])
+    let toolbar = NSStackView(views: [presets, spacer, editButton, appearanceButton])
     toolbar.orientation = .horizontal
     toolbar.distribution = .fill
     toolbar.spacing = 12

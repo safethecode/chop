@@ -45,6 +45,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
   private func showWorkspace() {
     if workspaceWindow == nil {
       workspaceWindow = WorkspaceWindowController(engine: engine, snapshot: initialSnapshot)
+      workspaceWindow?.workspace.onAppearanceChangeRequested = { [weak self] mode in
+        self?.applyAppearance(mode)
+      }
       initialSnapshot = nil
     }
     workspaceWindow?.showWindow(nil)
@@ -92,6 +95,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     guard let value = sender.representedObject as? String,
       let mode = AppearanceMode(rawValue: value)
     else { return }
+    applyAppearance(mode)
+  }
+
+  private func applyAppearance(_ mode: AppearanceMode) {
     engine.applyAppearance(mode)
     NSApp.appearance = mode.appearance
     workspaceWindow?.workspace.applyAppearance(mode)

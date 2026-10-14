@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "reviewer": "Codex self-review; actual code/test/CUA observations, not independent approval",
-  "reviewed_at": "2026-10-14T12:38:17.035252+00:00",
-  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics. PR #8: changed appearance scopes rechecked against actual light/dark screenshots and E-A1–A6; unchanged structure/native exceptions retain earlier evidence; local 10-test suite rerun. No independent approval or exported PNG claimed.",
+  "reviewed_at": "2026-10-14T13:15:23.510698+00:00",
+  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics. PR #8: changed appearance scopes rechecked against actual light/dark screenshots and E-A1–A6; unchanged structure/native exceptions retain earlier evidence; local 10-test suite rerun. No independent approval or exported PNG claimed. PR #10: toolbar icon roles, copy, geometry and actions rechecked in actual CUA images/AX, four layouts, both modes, minimum window and restart. Existing scopes outside changed toolbar retain prior observations and rerun PTY checks.",
   "catalog_sha256": "9af51eedfbd6625fdcae46aa6a55e6206c447fe43b23fb1d0ff61f8ac800114f",
-  "contract_sha256": "acddabd31561e38ff45d1085d367ebd89e0a8cb6cc8777b9646a54a2e190583e",
-  "target_sha256": "f1344ca93b7d736f930ef5496abfbb5ce735b813eab321fbd91d6ed8fed20e98",
+  "contract_sha256": "48d731003d801a42d2a54be0f2e61e50ed5ec89f73bc1003361a389efff42af3",
+  "target_sha256": "8d2706650987c9cb8e33eda4a64558ecab5dccb974359e6ac938ab70f21e4aec",
   "results": [
     {
       "id": "ORC-F01",
@@ -27,7 +27,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -60,7 +60,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -76,6 +76,11 @@
           "kind": "visual",
           "path": "design/evidence/pr7-default-grid.md",
           "sha256": "fb05f883e15ed0429f3d77516de5d66eb68a3d8928f8493517c64ad0ca29c103"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ],
       "exception_id": "CHOP-ORC-F04"
@@ -94,7 +99,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -126,7 +131,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -153,7 +158,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -168,7 +173,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "7d7bdd8bcd4c73f8d690a92be07c9a8fe9c577b1a0df024d0cfd148b24d73380"
+          "sha256": "77058c65ef54b86bcdaec6767a3e0efc7c02670d256329732bd8e7d87049e2aa"
         },
         {
           "kind": "code",
@@ -184,6 +189,16 @@
           "kind": "interaction",
           "path": "design/evidence/pr7-default-grid.md",
           "sha256": "fb05f883e15ed0429f3d77516de5d66eb68a3d8928f8493517c64ad0ca29c103"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ],
       "exception_id": "CHOP-ORC-F08"
@@ -197,12 +212,12 @@
     {
       "id": "ORC-F10",
       "status": "pass",
-      "reason": "헤더 row centerY와 NSButton 이미지 중앙 정렬을 사용한다. 중앙 +는 텍스트 문자가 아닌 SF Symbol이며 실제 버튼 중앙/가장자리 동작을 확인했다.",
+      "reason": "네 개 layout 구조와 mode의 SF Symbols를 native image 슬롯 중앙에 두었다. preset32pt/icon14pt medium, mode28pt 클릭 영역과 실제 단일/좌우/상하/4칸 방향을 대조했다.",
       "evidence": [
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -223,6 +238,11 @@
           "kind": "visual",
           "path": "design/evidence/pr8-appearance.md",
           "sha256": "cc766d28956ed9f75c836c06bccefda289349d7aeb77fcb2313a1e13dc2e2538"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ]
     },
@@ -240,7 +260,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -256,6 +276,11 @@
           "kind": "visual",
           "path": "design/evidence/pr7-default-grid.md",
           "sha256": "fb05f883e15ed0429f3d77516de5d66eb68a3d8928f8493517c64ad0ca29c103"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ]
     },
@@ -267,7 +292,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -282,7 +307,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "7d7bdd8bcd4c73f8d690a92be07c9a8fe9c577b1a0df024d0cfd148b24d73380"
+          "sha256": "77058c65ef54b86bcdaec6767a3e0efc7c02670d256329732bd8e7d87049e2aa"
         },
         {
           "kind": "code",
@@ -316,7 +341,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -331,7 +356,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "7d7bdd8bcd4c73f8d690a92be07c9a8fe9c577b1a0df024d0cfd148b24d73380"
+          "sha256": "77058c65ef54b86bcdaec6767a3e0efc7c02670d256329732bd8e7d87049e2aa"
         },
         {
           "kind": "code",
@@ -358,7 +383,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -390,7 +415,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -422,7 +447,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -455,7 +480,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -471,6 +496,11 @@
           "kind": "visual",
           "path": "design/evidence/pr7-default-grid.md",
           "sha256": "fb05f883e15ed0429f3d77516de5d66eb68a3d8928f8493517c64ad0ca29c103"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ],
       "exception_id": "CHOP-ORC-G03"
@@ -483,7 +513,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -515,7 +545,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -530,7 +560,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "7d7bdd8bcd4c73f8d690a92be07c9a8fe9c577b1a0df024d0cfd148b24d73380"
+          "sha256": "77058c65ef54b86bcdaec6767a3e0efc7c02670d256329732bd8e7d87049e2aa"
         },
         {
           "kind": "code",
@@ -568,7 +598,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -601,7 +631,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -617,6 +647,11 @@
           "kind": "visual",
           "path": "design/evidence/pr7-default-grid.md",
           "sha256": "fb05f883e15ed0429f3d77516de5d66eb68a3d8928f8493517c64ad0ca29c103"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ]
     },
@@ -628,7 +663,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -655,7 +690,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -682,7 +717,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -703,6 +738,11 @@
           "kind": "visual",
           "path": "design/evidence/pr8-appearance.md",
           "sha256": "cc766d28956ed9f75c836c06bccefda289349d7aeb77fcb2313a1e13dc2e2538"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ]
     },
@@ -714,7 +754,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -747,7 +787,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -763,6 +803,11 @@
           "kind": "visual",
           "path": "design/evidence/pr7-default-grid.md",
           "sha256": "fb05f883e15ed0429f3d77516de5d66eb68a3d8928f8493517c64ad0ca29c103"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ],
       "exception_id": "CHOP-ORC-G12"
@@ -781,7 +826,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -813,7 +858,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -840,7 +885,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -855,7 +900,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "7d7bdd8bcd4c73f8d690a92be07c9a8fe9c577b1a0df024d0cfd148b24d73380"
+          "sha256": "77058c65ef54b86bcdaec6767a3e0efc7c02670d256329732bd8e7d87049e2aa"
         },
         {
           "kind": "code",
@@ -871,6 +916,16 @@
           "kind": "interaction",
           "path": "design/evidence/pr7-default-grid.md",
           "sha256": "fb05f883e15ed0429f3d77516de5d66eb68a3d8928f8493517c64ad0ca29c103"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ],
       "exception_id": "CHOP-ORC-G16"
@@ -884,12 +939,12 @@
     {
       "id": "ORC-G18",
       "status": "pass",
-      "reason": "SF Symbols plus/xmark/확대·복귀를 NSButton 슬롯에 배치했다. 이미지/클릭 영역/포커스를 구별하고 실제 가장자리 클릭에서 한 동작만 실행됐다.",
+      "reason": "plus/xmark/확대와 함께 rectangle/split/moon/sun.max를 SF Symbols로 사용한다. 실제 네 preset/두 mode의 이미지·AX·동작이 일치했다. 앱 자체 SVG나 아이콘 장식을 만들지 않았다.",
       "evidence": [
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -905,6 +960,11 @@
           "kind": "visual",
           "path": "design/evidence/pr7-default-grid.md",
           "sha256": "fb05f883e15ed0429f3d77516de5d66eb68a3d8928f8493517c64ad0ca29c103"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ]
     },
@@ -922,7 +982,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -938,6 +998,11 @@
           "kind": "visual",
           "path": "design/evidence/pr7-default-grid.md",
           "sha256": "fb05f883e15ed0429f3d77516de5d66eb68a3d8928f8493517c64ad0ca29c103"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ]
     },
@@ -949,7 +1014,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -964,7 +1029,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "7d7bdd8bcd4c73f8d690a92be07c9a8fe9c577b1a0df024d0cfd148b24d73380"
+          "sha256": "77058c65ef54b86bcdaec6767a3e0efc7c02670d256329732bd8e7d87049e2aa"
         },
         {
           "kind": "code",
@@ -980,6 +1045,16 @@
           "kind": "interaction",
           "path": "design/evidence/pr7-default-grid.md",
           "sha256": "fb05f883e15ed0429f3d77516de5d66eb68a3d8928f8493517c64ad0ca29c103"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ],
       "exception_id": "CHOP-ORC-G21"
@@ -998,7 +1073,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -1013,7 +1088,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "7d7bdd8bcd4c73f8d690a92be07c9a8fe9c577b1a0df024d0cfd148b24d73380"
+          "sha256": "77058c65ef54b86bcdaec6767a3e0efc7c02670d256329732bd8e7d87049e2aa"
         },
         {
           "kind": "code",
@@ -1046,7 +1121,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -1062,6 +1137,11 @@
           "kind": "visual",
           "path": "design/evidence/pr7-default-grid.md",
           "sha256": "fb05f883e15ed0429f3d77516de5d66eb68a3d8928f8493517c64ad0ca29c103"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ]
     },
@@ -1073,7 +1153,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -1106,7 +1186,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -1139,7 +1219,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -1160,6 +1240,11 @@
           "kind": "visual",
           "path": "design/evidence/pr8-appearance.md",
           "sha256": "cc766d28956ed9f75c836c06bccefda289349d7aeb77fcb2313a1e13dc2e2538"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ],
       "exception_id": "CHOP-ORC-A04"
@@ -1172,7 +1257,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -1200,7 +1285,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -1223,12 +1308,12 @@
     {
       "id": "ORC-A07",
       "status": "exception",
-      "reason": "사용자가 요청한 중앙 + 및 네이티브 헤더 아이콘은 시각 텍스트 대신 tooltip/AX 이름/메뉴·단축키를 제공한다. 기능 아이콘의 의미와 조작을 실제 실행했다.",
+      "reason": "사용자가 중앙 +·header·상단 layout/mode를 아이콘으로 요청했다. 각 native 버튼/segment에 tooltip·AX 의미를 제공하고 실제 네 preset 방향 및 두 모드 상태를 실행했다.",
       "evidence": [
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -1244,6 +1329,11 @@
           "kind": "visual",
           "path": "design/evidence/pr7-default-grid.md",
           "sha256": "fb05f883e15ed0429f3d77516de5d66eb68a3d8928f8493517c64ad0ca29c103"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ],
       "exception_id": "CHOP-ORC-A07"
@@ -1262,7 +1352,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -1290,7 +1380,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -1305,7 +1395,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "7d7bdd8bcd4c73f8d690a92be07c9a8fe9c577b1a0df024d0cfd148b24d73380"
+          "sha256": "77058c65ef54b86bcdaec6767a3e0efc7c02670d256329732bd8e7d87049e2aa"
         },
         {
           "kind": "code",
@@ -1331,6 +1421,16 @@
           "kind": "interaction",
           "path": "design/evidence/pr8-appearance.md",
           "sha256": "cc766d28956ed9f75c836c06bccefda289349d7aeb77fcb2313a1e13dc2e2538"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ],
       "exception_id": "CHOP-ORC-A10"
@@ -1343,7 +1443,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "214804fe582f1c3ef6fab7d2cbb0ffac126fa1b1d59ff44e7ad7955a7a689c8e"
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
         },
         {
           "kind": "spec",
@@ -1360,7 +1460,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "code",
@@ -1377,7 +1477,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "214804fe582f1c3ef6fab7d2cbb0ffac126fa1b1d59ff44e7ad7955a7a689c8e"
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
         },
         {
           "kind": "spec",
@@ -1394,7 +1494,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "214804fe582f1c3ef6fab7d2cbb0ffac126fa1b1d59ff44e7ad7955a7a689c8e"
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
         },
         {
           "kind": "interaction",
@@ -1404,7 +1504,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "7d7bdd8bcd4c73f8d690a92be07c9a8fe9c577b1a0df024d0cfd148b24d73380"
+          "sha256": "77058c65ef54b86bcdaec6767a3e0efc7c02670d256329732bd8e7d87049e2aa"
         },
         {
           "kind": "spec",
@@ -1420,6 +1520,11 @@
           "kind": "interaction",
           "path": "design/evidence/pr8-appearance.md",
           "sha256": "cc766d28956ed9f75c836c06bccefda289349d7aeb77fcb2313a1e13dc2e2538"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ]
     },
@@ -1431,7 +1536,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "214804fe582f1c3ef6fab7d2cbb0ffac126fa1b1d59ff44e7ad7955a7a689c8e"
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
         },
         {
           "kind": "visual",
@@ -1458,7 +1563,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "code",
@@ -1475,7 +1580,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "214804fe582f1c3ef6fab7d2cbb0ffac126fa1b1d59ff44e7ad7955a7a689c8e"
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
         },
         {
           "kind": "visual",
@@ -1496,6 +1601,11 @@
           "kind": "visual",
           "path": "design/evidence/pr8-appearance.md",
           "sha256": "cc766d28956ed9f75c836c06bccefda289349d7aeb77fcb2313a1e13dc2e2538"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ]
     },
@@ -1507,12 +1617,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "214804fe582f1c3ef6fab7d2cbb0ffac126fa1b1d59ff44e7ad7955a7a689c8e"
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -1533,6 +1643,11 @@
           "kind": "visual",
           "path": "design/evidence/pr7-default-grid.md",
           "sha256": "fb05f883e15ed0429f3d77516de5d66eb68a3d8928f8493517c64ad0ca29c103"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ]
     },
@@ -1544,7 +1659,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -1565,6 +1680,11 @@
           "kind": "visual",
           "path": "design/evidence/pr8-appearance.md",
           "sha256": "cc766d28956ed9f75c836c06bccefda289349d7aeb77fcb2313a1e13dc2e2538"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ],
       "exception_id": "CHOP-RUI-09"
@@ -1572,12 +1692,12 @@
     {
       "id": "RUI-10",
       "status": "pass",
-      "reason": "레이아웃 선택은 native segmented control, 편집은 push-on/off 버튼, 빈 칸 열기는 원형 plus다. 기본/선택/비활성 모양과 실제 동작이 구분됐다.",
+      "reason": "layout 선택은 icon-only NSSegmentedControl, 편집은 push-on/off, mode는 native icon button이다. 네 가지 선택/비활성 경로와 실제 두 mode/메뉴 상태가 일치하며 native 선택 강조를 유지한다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "214804fe582f1c3ef6fab7d2cbb0ffac126fa1b1d59ff44e7ad7955a7a689c8e"
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
         },
         {
           "kind": "visual",
@@ -1598,6 +1718,11 @@
           "kind": "visual",
           "path": "design/evidence/pr8-appearance.md",
           "sha256": "cc766d28956ed9f75c836c06bccefda289349d7aeb77fcb2313a1e13dc2e2538"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ]
     },
@@ -1609,7 +1734,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "214804fe582f1c3ef6fab7d2cbb0ffac126fa1b1d59ff44e7ad7955a7a689c8e"
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
         },
         {
           "kind": "visual",
@@ -1630,18 +1755,23 @@
           "kind": "visual",
           "path": "design/evidence/pr8-appearance.md",
           "sha256": "cc766d28956ed9f75c836c06bccefda289349d7aeb77fcb2313a1e13dc2e2538"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ]
     },
     {
       "id": "RUI-12",
       "status": "exception",
-      "reason": "기존 macOS 시스템인 SF Symbols/NSButton을 사용한다. DESIGN에 네이티브 예외를 선언했고 plus/xmark/zoom/restore의 출처·의미·AX 이름을 확인했다.",
+      "reason": "기존 SF Symbols/NSButton 예외를 유지하고 사용자가 요청한 rectangle/split과 moon/sun.max를 추가했다. 14pt medium 구조 그림/32pt segment, mode28pt 클릭 영역과 tooltip/AX 이름, 실제 방향/전환을 확인했다.",
       "evidence": [
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -1657,6 +1787,11 @@
           "kind": "visual",
           "path": "design/evidence/pr7-default-grid.md",
           "sha256": "fb05f883e15ed0429f3d77516de5d66eb68a3d8928f8493517c64ad0ca29c103"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ],
       "exception_id": "CHOP-RUI-12"
@@ -1669,7 +1804,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -1684,7 +1819,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "7d7bdd8bcd4c73f8d690a92be07c9a8fe9c577b1a0df024d0cfd148b24d73380"
+          "sha256": "77058c65ef54b86bcdaec6767a3e0efc7c02670d256329732bd8e7d87049e2aa"
         },
         {
           "kind": "code",
@@ -1711,7 +1846,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -1740,7 +1875,7 @@
     {
       "id": "RUI-16",
       "status": "pass",
-      "reason": "사용자 R-DEFAULT canvas crop와 최종 라이트 화면에서 2×2, 좌상단 셸/포커스, 세 중앙 + 및 헤더·아이콘·간격 관계를 직접 대조했다. 다크는 명시적 추가 요청에 따른 같은 구조의 색상 변형이며 양쪽에서 관계를 유지했다.",
+      "reason": "R-DEFAULT canvas의 첫 셸+세 중앙 +·4칸 구조를 유지한다. 새 R-TOOLBAR crop의 왼쪽 위치·4개 선택지·native 선택 강조를 보존하고 사용자 추가 요청에 따라 글자만 구조 SF Symbols로 대체했다. 실제 이미지/분할 방향과 두 모드를 판독했다.",
       "evidence": [
         {
           "kind": "spec",
@@ -1760,19 +1895,24 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "214804fe582f1c3ef6fab7d2cbb0ffac126fa1b1d59ff44e7ad7955a7a689c8e"
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr8-appearance.md",
           "sha256": "cc766d28956ed9f75c836c06bccefda289349d7aeb77fcb2313a1e13dc2e2538"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ]
     },
     {
       "id": "RUI-17",
       "status": "pass",
-      "reason": "최종 라이트는 사용자 원본의 밝은 평면/균등4칸/첫 셸+세 빈 칸 조합을 유지한다. 명시적으로 요청한 다크에서도 같은 정보 위계·배치·동작을 실제 확인했다. 사용자 모드 선택으로 외형을 확장하고 별도 장식·소개를 추가하지 않았다.",
+      "reason": "기본 canvas의 작업 순서와 넓은 터미널 영역을 유지하고, 왼쪽 layout 구조 아이콘/오른쪽 mode 아이콘으로 전역 조작을 표현한다. 추가 요청한 아이콘화에서 같은 과제·정보 위계·선택 표시가 유지되는 것을 전체/최소 창과 두 모드에서 확인했다.",
       "evidence": [
         {
           "kind": "spec",
@@ -1792,12 +1932,17 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "214804fe582f1c3ef6fab7d2cbb0ffac126fa1b1d59ff44e7ad7955a7a689c8e"
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr8-appearance.md",
           "sha256": "cc766d28956ed9f75c836c06bccefda289349d7aeb77fcb2313a1e13dc2e2538"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ]
     },
@@ -1809,7 +1954,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "214804fe582f1c3ef6fab7d2cbb0ffac126fa1b1d59ff44e7ad7955a7a689c8e"
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
         },
         {
           "kind": "visual",
@@ -1842,7 +1987,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -1880,7 +2025,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -1901,6 +2046,11 @@
           "kind": "visual",
           "path": "design/evidence/pr8-appearance.md",
           "sha256": "cc766d28956ed9f75c836c06bccefda289349d7aeb77fcb2313a1e13dc2e2538"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ]
     },
@@ -1912,12 +2062,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "214804fe582f1c3ef6fab7d2cbb0ffac126fa1b1d59ff44e7ad7955a7a689c8e"
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -1943,6 +2093,11 @@
           "kind": "visual",
           "path": "design/evidence/pr8-appearance.md",
           "sha256": "cc766d28956ed9f75c836c06bccefda289349d7aeb77fcb2313a1e13dc2e2538"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ]
     },
@@ -1954,7 +2109,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "214804fe582f1c3ef6fab7d2cbb0ffac126fa1b1d59ff44e7ad7955a7a689c8e"
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
         },
         {
           "kind": "visual",
@@ -1970,6 +2125,11 @@
           "kind": "visual",
           "path": "design/evidence/pr7-default-grid.md",
           "sha256": "fb05f883e15ed0429f3d77516de5d66eb68a3d8928f8493517c64ad0ca29c103"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ]
     },
@@ -1981,7 +2141,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "214804fe582f1c3ef6fab7d2cbb0ffac126fa1b1d59ff44e7ad7955a7a689c8e"
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
         },
         {
           "kind": "visual",
@@ -1997,6 +2157,11 @@
           "kind": "visual",
           "path": "design/evidence/pr7-default-grid.md",
           "sha256": "fb05f883e15ed0429f3d77516de5d66eb68a3d8928f8493517c64ad0ca29c103"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ]
     },
@@ -2008,12 +2173,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "214804fe582f1c3ef6fab7d2cbb0ffac126fa1b1d59ff44e7ad7955a7a689c8e"
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -2028,7 +2193,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "7d7bdd8bcd4c73f8d690a92be07c9a8fe9c577b1a0df024d0cfd148b24d73380"
+          "sha256": "77058c65ef54b86bcdaec6767a3e0efc7c02670d256329732bd8e7d87049e2aa"
         },
         {
           "kind": "interaction",
@@ -2069,6 +2234,16 @@
           "kind": "interaction",
           "path": "design/evidence/pr8-appearance.md",
           "sha256": "cc766d28956ed9f75c836c06bccefda289349d7aeb77fcb2313a1e13dc2e2538"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ]
     },
@@ -2080,12 +2255,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "214804fe582f1c3ef6fab7d2cbb0ffac126fa1b1d59ff44e7ad7955a7a689c8e"
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -2100,7 +2275,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "7d7bdd8bcd4c73f8d690a92be07c9a8fe9c577b1a0df024d0cfd148b24d73380"
+          "sha256": "77058c65ef54b86bcdaec6767a3e0efc7c02670d256329732bd8e7d87049e2aa"
         },
         {
           "kind": "interaction",
@@ -2141,6 +2316,16 @@
           "kind": "interaction",
           "path": "design/evidence/pr8-appearance.md",
           "sha256": "cc766d28956ed9f75c836c06bccefda289349d7aeb77fcb2313a1e13dc2e2538"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ]
     },
@@ -2152,12 +2337,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "214804fe582f1c3ef6fab7d2cbb0ffac126fa1b1d59ff44e7ad7955a7a689c8e"
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -2172,7 +2357,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "7d7bdd8bcd4c73f8d690a92be07c9a8fe9c577b1a0df024d0cfd148b24d73380"
+          "sha256": "77058c65ef54b86bcdaec6767a3e0efc7c02670d256329732bd8e7d87049e2aa"
         },
         {
           "kind": "interaction",
@@ -2224,12 +2409,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "214804fe582f1c3ef6fab7d2cbb0ffac126fa1b1d59ff44e7ad7955a7a689c8e"
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -2244,7 +2429,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "7d7bdd8bcd4c73f8d690a92be07c9a8fe9c577b1a0df024d0cfd148b24d73380"
+          "sha256": "77058c65ef54b86bcdaec6767a3e0efc7c02670d256329732bd8e7d87049e2aa"
         },
         {
           "kind": "interaction",
@@ -2296,12 +2481,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "214804fe582f1c3ef6fab7d2cbb0ffac126fa1b1d59ff44e7ad7955a7a689c8e"
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -2316,7 +2501,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "7d7bdd8bcd4c73f8d690a92be07c9a8fe9c577b1a0df024d0cfd148b24d73380"
+          "sha256": "77058c65ef54b86bcdaec6767a3e0efc7c02670d256329732bd8e7d87049e2aa"
         },
         {
           "kind": "interaction",
@@ -2368,12 +2553,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "214804fe582f1c3ef6fab7d2cbb0ffac126fa1b1d59ff44e7ad7955a7a689c8e"
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -2388,7 +2573,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "7d7bdd8bcd4c73f8d690a92be07c9a8fe9c577b1a0df024d0cfd148b24d73380"
+          "sha256": "77058c65ef54b86bcdaec6767a3e0efc7c02670d256329732bd8e7d87049e2aa"
         },
         {
           "kind": "interaction",
@@ -2440,12 +2625,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "214804fe582f1c3ef6fab7d2cbb0ffac126fa1b1d59ff44e7ad7955a7a689c8e"
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -2460,7 +2645,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "7d7bdd8bcd4c73f8d690a92be07c9a8fe9c577b1a0df024d0cfd148b24d73380"
+          "sha256": "77058c65ef54b86bcdaec6767a3e0efc7c02670d256329732bd8e7d87049e2aa"
         },
         {
           "kind": "interaction",
@@ -2512,12 +2697,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "214804fe582f1c3ef6fab7d2cbb0ffac126fa1b1d59ff44e7ad7955a7a689c8e"
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -2532,7 +2717,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "7d7bdd8bcd4c73f8d690a92be07c9a8fe9c577b1a0df024d0cfd148b24d73380"
+          "sha256": "77058c65ef54b86bcdaec6767a3e0efc7c02670d256329732bd8e7d87049e2aa"
         },
         {
           "kind": "interaction",
@@ -2573,6 +2758,16 @@
           "kind": "interaction",
           "path": "design/evidence/pr8-appearance.md",
           "sha256": "cc766d28956ed9f75c836c06bccefda289349d7aeb77fcb2313a1e13dc2e2538"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ]
     },
@@ -2609,17 +2804,17 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "7d7bdd8bcd4c73f8d690a92be07c9a8fe9c577b1a0df024d0cfd148b24d73380"
+          "sha256": "77058c65ef54b86bcdaec6767a3e0efc7c02670d256329732bd8e7d87049e2aa"
         },
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "214804fe582f1c3ef6fab7d2cbb0ffac126fa1b1d59ff44e7ad7955a7a689c8e"
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -2630,23 +2825,33 @@
           "kind": "interaction",
           "path": "design/evidence/pr8-appearance.md",
           "sha256": "cc766d28956ed9f75c836c06bccefda289349d7aeb77fcb2313a1e13dc2e2538"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ]
     },
     {
       "id": "PROJECT-APPEARANCE",
       "status": "pass",
-      "reason": "E-A1–A7에서 두 모드의 기존·새·숨긴 터미널, native 대화상자와 재실행을 실제 확인했다. 10개 테스트로 같은 surface/셸 변수/layout/focus, 숨긴 작업 완료, 새/복원 셸의 appearance와 격리된 설정값 round trip을 검증했다. 구현자가 수행한 셀프 리뷰다. 실제 마우스 선택을 두 모드에서 유지하며 읽었다.",
+      "reason": "상단 moon/sun.max 아이콘과 보기 메뉴가 같은 선택/저장 경로를 사용한다. 두 모드의 전체 칸/새 셸/숨긴 셸 갱신과 셸 보존을 유지하고, 실제 버튼/메뉴 상태 동기화 및 아이콘 선택 모드의 재실행 복원을 확인했다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "214804fe582f1c3ef6fab7d2cbb0ffac126fa1b1d59ff44e7ad7955a7a689c8e"
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "499ffe514df25a7eb51acc2b17bdaca43df20853a7f79b7eebcdc957cafe552a"
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
         },
         {
           "kind": "visual",
@@ -2657,6 +2862,43 @@
           "kind": "interaction",
           "path": "design/evidence/pr8-appearance.md",
           "sha256": "cc766d28956ed9f75c836c06bccefda289349d7aeb77fcb2313a1e13dc2e2538"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
+        }
+      ]
+    },
+    {
+      "id": "PROJECT-TOOLBAR-ICONS",
+      "status": "pass",
+      "reason": "E-I1–6에서 네 구조 아이콘의 preset 방향/선택, 두 mode icon/menu 동기화, 실제 셸 변수 보존, 전체/최소 창과 icon 선택 모드 재실행을 확인했다. AX 이름과 SF Symbols 출처·기존 token 소비를 대조했다. 10개 기존 테스트도 재실행했다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "DESIGN.md",
+          "sha256": "2cef83d42ac88c7a23c404cc40cbb769d9e5705b0186d6018e052c7119a49e10"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "b0711b8eb806d4260217a2fefcac8cd922f442de11c48a47d9fb4634758851ea"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr10-toolbar-icons.md",
+          "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
         }
       ]
     }

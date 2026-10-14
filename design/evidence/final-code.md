@@ -23,3 +23,5 @@
 PR #7 기본 상태 재검토: WorkspaceView.init은 fresh/이전 단일 빈 저장을 grid로 구성한다. window 배치 후 startRestoredTerminals가 저장 실행 칸 또는 실행 칸이 없을 때 첫 칸만 연다. 다음 빈 칸은 기존 openTerminal guard와 중앙 +를 사용한다. LayoutSplitView는 window minimum 적용 전 0-size 배치도 부모 영역 안으로 제한한다.
 
 PR #8 화면 모드 재검토: 양쪽 번들 설정을 시작 시 검증하고 app_update_config로 기존/숨긴 surface와 이후 새 surface 설정을 갱신한다. weak TerminalView registry가 각 scheme을 전달한다. Workspace의 pane 사전을 순회해 숨긴 헤더까지 갱신하며 AppDelegate가 NSApp.appearance와 UserDefaults를 변경한다. 포커스 CGColor는 선택 appearance 안에서 다시 계산한다. start 시 저장 모드를 먼저 적용하고, 메뉴 검증은 창이 닫힌 상태에서도 모드 선택을 허용한다. 셸을 닫거나 레이아웃·포커스를 바꾸는 호출은 전환 경로에 없다. 실제 두 모드와 native 이름 변경 대화상자, 반복 전환/숨긴 칸/새 셸/재실행을 대조했다.
+
+PR #10 toolbar 재검토: Workspace의 모드 버튼은 onAppearanceChangeRequested를 통해 AppDelegate의 공통 applyAppearance로 라우팅한다. 메뉴도 같은 함수로 저장/NSApp appearance/전체 칸을 갱신한다. weak self callback으로 순환 참조를 피한다. applyAppearance는 모드 버튼 image/tooltip/AX를 갱신한다. LayoutPreset rawValue 순서에 해당하는 네 SF Symbol image와 image 접근성 설명/tooltip을 native segmented control에 지정했다. 기존 selectPreset/applyPreset와 running guard를 그대로 사용한다. 새 segment 폭32와 icon14pt medium 이외에 기존 toolbar48/inset12/spacing12/본문 제약은 유지한다.
