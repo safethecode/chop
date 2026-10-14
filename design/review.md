@@ -21,4 +21,6 @@
 
 | V-13 | 사용자 요청으로 라이트·다크 선택을 추가했다. 이전 흰 콘텐츠 고정은 두 팔레트와 선택한 Aqua/Dark Aqua로 확장했다. 구조·치수를 유지하고 기존/숨긴/새 셸과 앱 재실행에 일관되게 적용한다. | accepted-difference (사용자 요청), 행동 검증 완료 | [화면 모드 관찰](evidence/pr8-appearance.md), 10개 테스트 및 두 모드 재실행 |
 
+| V-14 | 사용자 요청으로 상단에 모드 아이콘을 추가하고 글자 레이아웃 선택기를 구조 아이콘으로 바꿨다. 기본 canvas·선택 강조·분할 동작은 유지했다. | accepted-difference (사용자 요청), 행동 검증 완료 | [상단 아이콘 관찰](evidence/pr10-toolbar-icons.md), 실제 4개 preset/두 모드/최소 창/재실행 |
+
 현재 총괄은 실제 관찰한 v0.1 범위에서 aligned다. 스크롤백 키보드 경로도 실제 앱과 PTY 테스트로 검증했다. 최종 디자인 게이트는 `gate-report.json`과 `failure-events.jsonl`에 기록한다. 빌드 통과가 시각 검증을 대신하지 않으며, VoiceOver 전체 탐색과 macOS 14 실기기까지 검증했다고 주장하지 않는다.
