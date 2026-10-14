@@ -3,6 +3,7 @@
 원하는 칸에 터미널을 추가하고 나눠 쓰는 macOS 네이티브 앱입니다.
 Swift와 AppKit, [libghostty](https://github.com/ghostty-org/ghostty)의 Metal 터미널 엔진을 사용합니다.
 [cmux](https://github.com/manaflow-ai/cmux)의 작업 공간과 알림 기능을 참고하되, Chop은 중앙 `+`와 레이아웃 중심의 조작 방식을 사용합니다.
+앱 아이콘은 제공된 보라색 열매 로고를 macOS용 둥근 아이콘으로 적용합니다. [원본과 재생성 방법](Resources/AppIcon.md).
 
 처음 열면 2×2의 4칸을 배치하고 왼쪽 위 **터미널 1을 바로 실행**합니다.
 터미널 2·3·4는 빈 칸 중앙의 `+`를 눌렀을 때 열립니다. 입력·한글·선택·스크롤·복사·붙여넣기를 사용할 수 있습니다.

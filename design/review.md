@@ -64,3 +64,7 @@ V-32 / F-CANVAS-SCROLL-AXIS: 가로 넘침 뒤 불필요한 세로 scroller를 �
 V-33 / F-CANVAS-DISPLAY-CYCLE: 첫 scroller 수정의 layout 내 재타일링으로 native 전환 중 충돌했다. main queue 다음 갱신에서 수렴시키도록 수정해 실제5회 왕복·5셸 모드·최종 확대/복귀와22개 검사를 확인했다. fixed-and-verified; 최초 crash를 기록에 보존한다.
 
 V-34 / F-ROWS-COUNT: 마지막 상하2개 전환 제한과 empty 슬롯 삭제 경로를 없앴다. 실제4/5셸 모든 모드/ENV/두 모드·최소 창·세로 탐색/재실행 복원과22개 검사를 확인했다. fixed-and-verified. [관찰](evidence/all-terminal-rows.md).
+
+V-35 / APP-ICON: 사용자 제공 열매 원본을 보존한 native continuous mask/transparent margin/ICNS를 적용했다. 실제 두 모드 정보 창/Finder 아이콘과22개 검사/번들 디코딩을 확인했다. accepted-difference (사용자 브랜드 지정), verified. [관찰](evidence/macos-app-icon.md).
+
+V-36 / F-ICON-SHADOW-SCALE: 작은 출력에서 CGContext 축척만으로 그림자가 줄어든다고 가정해 모서리에 약한 alpha가 남았다. 모든 좌표/그림자를 pixel 비율로 계산해 최종10개 representation의 투명 모서리를 다시 확인했다. fixed-and-verified.

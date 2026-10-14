@@ -25,6 +25,7 @@ mkdir -p "$app_path/Contents/Resources"
 cp "$project_directory/Resources/terminal.conf" "$app_path/Contents/Resources/terminal.conf"
 cp "$project_directory/Resources/terminal-light.conf" "$project_directory/Resources/terminal-dark.conf" "$app_path/Contents/Resources/"
 cp -R "$project_directory/Dependencies/ghostty-resources/." "$app_path/Contents/Resources/"
+cp "$project_directory/Resources/AppIcon.icns" "$app_path/Contents/Resources/AppIcon.icns"
 
 # Local development signature; release distribution will need Developer ID signing.
 codesign --force --sign - "$app_path"
