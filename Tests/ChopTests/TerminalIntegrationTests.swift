@@ -123,6 +123,30 @@ import Testing
   try await waitFor { !workspace.needsConfirmClose }
   #expect(workspace.panes.values.filter { $0.isRunning }.count == 4)
   #expect(!workspace.applyPreset(.columns), "A smaller preset must never kill running shells")
+  workspace.panes[firstID]?.focus()
+  let originalLayout = workspace.layout
+  workspace.moveFocus(.right)
+  #expect(workspace.focusedID == workspace.layout.paneIDs[1])
+  #expect(workspace.renameFocused(to: "서버"))
+  #expect(workspace.focusedPane.name == "서버")
+  #expect(!workspace.renameFocused(to: "  "))
+  #expect(!workspace.renameFocused(to: String(repeating: "a", count: 65)))
+  first.insertText(
+    "sleep 0.2; printf 'HIDDEN_TASK_DONE\\n'",
+    replacementRange: NSRange(location: NSNotFound, length: 0))
+  try pressReturn(on: first, window: window)
+  workspace.toggleZoom()
+  #expect(workspace.maximizedID == workspace.focusedID)
+  #expect(workspace.layout == originalLayout)
+  try await waitFor {
+    (first.accessibilityValue() as? String ?? "").components(separatedBy: "HIDDEN_TASK_DONE").count
+      >= 3 && !first.needsConfirmClose
+  }
+  workspace.toggleZoom()
+  #expect(workspace.maximizedID == nil)
+  #expect(workspace.panes[firstID]?.terminal === first)
+  workspace.removeEmptyPane(firstID)
+  #expect(workspace.layout == originalLayout, "Removing a running pane is never allowed")
   first.insertText(
     "printf 'VALUE=%s\\n' \"$CHOP_PANE_VALUE\"",
     replacementRange: NSRange(location: NSNotFound, length: 0))
@@ -148,6 +172,13 @@ import Testing
     workspace.layout.paneIDs == [keepID],
     "Shrinking keeps a running pane even when it was the last slot")
   #expect(workspace.focusedPane.terminal === keep)
+  workspace.focusedPane.closeTerminal()
+  workspace.removeEmptyPane(keepID)
+  #expect(workspace.layout.paneIDs == [keepID], "Keep the final empty slot")
+  #expect(workspace.applyPreset(.columns))
+  let emptyID = try #require(workspace.layout.paneIDs.last)
+  workspace.removeEmptyPane(emptyID)
+  #expect(workspace.layout.paneIDs == [keepID])
 }
 
 @MainActor

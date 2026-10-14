@@ -7,6 +7,7 @@ final class WorkspaceView: NSView {
   private(set) var layout: LayoutNode
   private(set) var panes: [UUID: TerminalPaneView] = [:]
   private(set) var focusedID: UUID
+  private(set) var maximizedID: UUID?
   var focusedPane: TerminalPaneView { panes[focusedID]! }
   var needsConfirmClose: Bool { panes.values.contains { $0.needsConfirmClose } }
   var onChange: (() -> Void)?
@@ -42,13 +43,15 @@ final class WorkspaceView: NSView {
       engine: engine, id: id, name: "터미널 \(nextName)",
       workingDirectory: directory ?? FileManager.default.homeDirectoryForCurrentUser.path)
     nextName += 1
-    pane.onFocus = { [weak self] in self?.focusedID = id }
+    pane.onFocus = { [weak self] in self?.didFocus(id) }
     pane.onChange = { [weak self] in
       self?.refreshControls()
       self?.onChange?()
     }
     pane.onSplitRequested = { [weak self] axis in self?.split(id, axis: axis) }
     pane.canSplit = { [weak self] axis in self?.canSplit(id, axis: axis) ?? false }
+    pane.onRemoveRequested = { [weak self] in self?.removeEmptyPane(id) }
+    pane.onZoomRequested = { [weak self] in self?.toggleZoom(id) }
     pane.isEditing = isEditing
     panes[id] = pane
   }
@@ -61,6 +64,7 @@ final class WorkspaceView: NSView {
       refreshControls()
       return false
     }
+    maximizedID = nil
     var retained = Set(running)
     for id in existing where retained.count < preset.capacity { retained.insert(id) }
     var ids = existing.filter { retained.contains($0) }
@@ -85,6 +89,7 @@ final class WorkspaceView: NSView {
     let proposed = layout.splitting(id, axis: axis, adding: newID)
     addPane(newID, directory: source.workingDirectory)
     layout = proposed
+    maximizedID = nil
     focusedID = newID
     rebuild()
     panes[newID]?.openTerminal()
@@ -102,6 +107,10 @@ final class WorkspaceView: NSView {
   @objc func splitDown() { split(focusedID, axis: .vertical) }
 
   @objc func toggleEditing() {
+    if maximizedID != nil {
+      maximizedID = nil
+      rebuild()
+    }
     isEditing.toggle()
     for pane in panes.values { pane.isEditing = isEditing }
     refreshControls()
@@ -109,6 +118,76 @@ final class WorkspaceView: NSView {
 
   func closeAll() {
     for pane in panes.values { pane.closeTerminal() }
+  }
+
+  private func didFocus(_ id: UUID) {
+    guard panes[id] != nil else { return }
+    focusedID = id
+    for pane in panes.values { pane.isFocused = pane.id == id }
+    onChange?()
+  }
+
+  func moveFocus(_ direction: FocusDirection) {
+    guard let id = layout.neighbor(of: focusedID, toward: direction, in: canvas.bounds) else {
+      return
+    }
+    focusedID = id
+    if maximizedID != nil {
+      maximizedID = id
+      rebuild()
+    }
+    focusedPane.focus()
+  }
+
+  func toggleZoom(_ id: UUID? = nil) {
+    let target = id ?? focusedID
+    guard panes[target] != nil, layout.paneIDs.count > 1 else { return }
+    maximizedID = maximizedID == target ? nil : target
+    focusedID = target
+    rebuild()
+  }
+
+  func removeEmptyPane(_ id: UUID) {
+    guard let pane = panes[id], !pane.isRunning, layout.paneIDs.count > 1,
+      let replacement = layout.removing(id)
+    else { return }
+    pane.removeFromSuperview()
+    panes.removeValue(forKey: id)
+    layout = replacement
+    if maximizedID == id { maximizedID = nil }
+    if focusedID == id { focusedID = replacement.paneIDs[0] }
+    rebuild()
+  }
+
+  @discardableResult
+  func renameFocused(to name: String) -> Bool {
+    let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+    guard !trimmed.isEmpty, trimmed.count <= 64,
+      !trimmed.unicodeScalars.contains(where: { CharacterSet.controlCharacters.contains($0) })
+    else { return false }
+    focusedPane.name = trimmed
+    return true
+  }
+
+  @objc func requestRename() {
+    let field = NSTextField(string: focusedPane.name)
+    field.frame = NSRect(x: 0, y: 0, width: 300, height: 24)
+    field.font = ChopStyle.font
+    field.setAccessibilityLabel("칸 이름")
+    let alert = NSAlert()
+    alert.messageText = "칸 이름 바꾸기"
+    alert.informativeText = "최대 64자로 입력해 주세요."
+    alert.accessoryView = field
+    alert.addButton(withTitle: "취소")
+    alert.addButton(withTitle: "변경")
+    alert.buttons[0].keyEquivalent = "\u{1b}"
+    alert.buttons[1].keyEquivalent = "\r"
+    alert.window.initialFirstResponder = field
+    while alert.runModal() == .alertSecondButtonReturn {
+      if renameFocused(to: field.stringValue) { break }
+      alert.informativeText = "이름을 줄바꿈 없이 1~64자로 입력해 주세요."
+    }
+    focusedPane.focus()
   }
 
   private func rebuild() {
@@ -131,7 +210,12 @@ final class WorkspaceView: NSView {
         return split
       }
     }
-    let view = makeView(layout)
+    for pane in panes.values {
+      pane.canRemove = panes.count > 1
+      pane.canZoom = panes.count > 1
+      pane.isZoomed = maximizedID == pane.id
+    }
+    let view = makeView(maximizedID.map { .pane($0) } ?? layout)
     canvas.addSubview(view)
     view.frame = canvas.bounds
     view.autoresizingMask = [.width, .height]
@@ -139,6 +223,9 @@ final class WorkspaceView: NSView {
     onMinimumSizeChange?(layout.minimumSize)
     layoutSubtreeIfNeeded()
     focusedPane.focus()
+    for pane in panes.values {
+      pane.terminal?.setVisible(maximizedID == nil || maximizedID == pane.id)
+    }
     refreshControls()
     onChange?()
   }

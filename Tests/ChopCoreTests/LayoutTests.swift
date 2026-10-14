@@ -44,3 +44,14 @@ import Testing
   let frames = resized.frames(in: CGRect(x: 0, y: 0, width: 1001, height: 600))
   #expect(frames[tree.paneIDs[0]]?.width == 700)
 }
+
+@Test func focusUsesSpatialNeighborsAndStopsAtEdges() {
+  let ids = (0..<4).map { _ in UUID() }
+  let tree = LayoutNode.preset(.grid, ids: ids)
+  let bounds = CGRect(x: 0, y: 0, width: 1100, height: 720)
+  #expect(tree.neighbor(of: ids[0], toward: .right, in: bounds) == ids[1])
+  #expect(tree.neighbor(of: ids[0], toward: .down, in: bounds) == ids[2])
+  #expect(tree.neighbor(of: ids[3], toward: .up, in: bounds) == ids[1])
+  #expect(tree.neighbor(of: ids[0], toward: .left, in: bounds) == nil)
+  #expect(tree.neighbor(of: ids[3], toward: .down, in: bounds) == nil)
+}

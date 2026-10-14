@@ -1,7 +1,7 @@
 import AppKit
 
 @MainActor
-final class AppDelegate: NSObject, NSApplicationDelegate {
+final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
   private var workspaceWindow: WorkspaceWindowController?
   private let engine = TerminalEngine()
 
@@ -62,6 +62,26 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
   @objc private func splitRight() { workspaceWindow?.workspace.splitRight() }
   @objc private func splitDown() { workspaceWindow?.workspace.splitDown() }
   @objc private func toggleLayoutEditing() { workspaceWindow?.workspace.toggleEditing() }
+  @objc private func focusLeft() { workspaceWindow?.workspace.moveFocus(.left) }
+  @objc private func focusRight() { workspaceWindow?.workspace.moveFocus(.right) }
+  @objc private func focusUp() { workspaceWindow?.workspace.moveFocus(.up) }
+  @objc private func focusDown() { workspaceWindow?.workspace.moveFocus(.down) }
+  @objc private func toggleZoom() { workspaceWindow?.workspace.toggleZoom() }
+  @objc private func renamePane() { workspaceWindow?.workspace.requestRename() }
+
+  func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+    guard let workspace = workspaceWindow?.workspace, workspaceWindow?.window?.isVisible == true
+    else { return false }
+    switch menuItem.action {
+    case #selector(splitRight): return workspace.canSplit(workspace.focusedID, axis: .horizontal)
+    case #selector(splitDown): return workspace.canSplit(workspace.focusedID, axis: .vertical)
+    case #selector(toggleZoom): return workspace.layout.paneIDs.count > 1
+    case #selector(closeTerminal):
+      menuItem.title = workspace.focusedPane.isRunning ? "터미널 닫기" : "빈 칸 제거"
+      return workspace.focusedPane.isRunning || workspace.layout.paneIDs.count > 1
+    default: return true
+    }
+  }
 
   private func configureMainMenu() {
     let mainMenu = NSMenu()
@@ -101,6 +121,24 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
       ("오른쪽으로 나누기", #selector(splitRight), "d", NSEvent.ModifierFlags.command),
       ("아래로 나누기", #selector(splitDown), "d", [.command, .shift]),
       ("레이아웃 편집", #selector(toggleLayoutEditing), "l", [.command, .shift]),
+      ("칸 확대·복귀", #selector(toggleZoom), "\r", [.command, .shift]),
+      ("칸 이름 바꾸기…", #selector(renamePane), "r", [.command, .shift]),
+      (
+        "왼쪽 칸으로 이동", #selector(focusLeft), String(UnicodeScalar(NSLeftArrowFunctionKey)!),
+        [.command, .option]
+      ),
+      (
+        "오른쪽 칸으로 이동", #selector(focusRight), String(UnicodeScalar(NSRightArrowFunctionKey)!),
+        [.command, .option]
+      ),
+      (
+        "위 칸으로 이동", #selector(focusUp), String(UnicodeScalar(NSUpArrowFunctionKey)!),
+        [.command, .option]
+      ),
+      (
+        "아래 칸으로 이동", #selector(focusDown), String(UnicodeScalar(NSDownArrowFunctionKey)!),
+        [.command, .option]
+      ),
     ] {
       let item = terminalMenu.addItem(withTitle: title, action: action, keyEquivalent: key)
       item.target = self

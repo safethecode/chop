@@ -15,6 +15,11 @@ enum ChopStyle {
       image: NSImage(systemSymbolName: symbol, accessibilityDescription: label)!, target: target,
       action: action)
     button.bezelStyle = .inline
+    button.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      button.widthAnchor.constraint(equalToConstant: 28),
+      button.heightAnchor.constraint(equalToConstant: 28),
+    ])
     button.toolTip = label
     button.setAccessibilityLabel(label)
     return button

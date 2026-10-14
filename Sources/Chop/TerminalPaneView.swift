@@ -7,11 +7,27 @@ final class TerminalPaneView: NSView {
   let engine: TerminalEngine
   private(set) var terminal: TerminalView?
   var workingDirectory: String
-  var name: String { didSet { updateHeader() } }
+  var name: String {
+    didSet {
+      updateHeader()
+      onChange?()
+    }
+  }
   var onChange: (() -> Void)?
   var onFocus: (() -> Void)?
   var onSplitRequested: ((SplitAxis) -> Void)?
   var canSplit: ((SplitAxis) -> Bool)?
+  var onRemoveRequested: (() -> Void)?
+  var onZoomRequested: (() -> Void)?
+  var canRemove = false { didSet { updateHeader() } }
+  var canZoom = false { didSet { updateHeader() } }
+  var isZoomed = false { didSet { updateHeader() } }
+  var isFocused = false {
+    didSet {
+      layer?.borderWidth = isFocused ? 1 : 0
+      layer?.borderColor = NSColor.keyboardFocusIndicatorColor.cgColor
+    }
+  }
   var isEditing = false { didSet { updateAddButton() } }
   private let header = NSView()
   private let body = NSView()
@@ -20,6 +36,7 @@ final class TerminalPaneView: NSView {
   private let errorLabel = NSTextField(wrappingLabelWithString: "")
   private var openButton: NSButton!
   private var closeButton: NSButton!
+  private var zoomButton: NSButton!
 
   init(
     engine: TerminalEngine, id: UUID = UUID(), name: String = "터미널 1",
@@ -106,7 +123,10 @@ final class TerminalPaneView: NSView {
   }
 
   @objc func requestClose() {
-    guard isRunning else { return }
+    guard isRunning else {
+      onRemoveRequested?()
+      return
+    }
     if needsConfirmClose {
       let alert = NSAlert()
       alert.messageText = "이 터미널을 닫을까요?"
@@ -117,6 +137,10 @@ final class TerminalPaneView: NSView {
     }
     closeTerminal()
   }
+
+  override func mouseDown(with event: NSEvent) { focus() }
+
+  @objc private func toggleZoom() { onZoomRequested?() }
 
   @objc private func addFromCenter() {
     guard isRunning else {
@@ -154,6 +178,8 @@ final class TerminalPaneView: NSView {
     }
     titleLabel.font = ChopStyle.font
     titleLabel.textColor = ChopStyle.foreground
+    titleLabel.lineBreakMode = .byTruncatingTail
+    titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     pathLabel.font = ChopStyle.font
     pathLabel.textColor = .secondaryLabelColor
     pathLabel.lineBreakMode = .byTruncatingMiddle
@@ -162,7 +188,10 @@ final class TerminalPaneView: NSView {
     let close = ChopStyle.iconButton(
       "xmark", label: "터미널 닫기", target: self, action: #selector(requestClose))
     closeButton = close
-    let row = NSStackView(views: [titleLabel, pathLabel, close])
+    zoomButton = ChopStyle.iconButton(
+      "arrow.up.left.and.arrow.down.right", label: "칸 확대", target: self,
+      action: #selector(toggleZoom))
+    let row = NSStackView(views: [titleLabel, pathLabel, zoomButton, close])
     row.orientation = .horizontal
     row.distribution = .fill
     row.spacing = 12
@@ -208,9 +237,21 @@ final class TerminalPaneView: NSView {
 
   private func updateHeader() {
     titleLabel.stringValue = name
+    titleLabel.toolTip = "\(name) — 이름 바꾸기: ⌘⇧R"
     pathLabel.stringValue = (workingDirectory as NSString).abbreviatingWithTildeInPath
     pathLabel.toolTip = workingDirectory
     terminal?.setAccessibilityLabel("\(name) 터미널")
-    closeButton.isEnabled = isRunning
+    closeButton.isEnabled = isRunning || canRemove
+    let closeLabel = isRunning ? "터미널 닫기" : "빈 칸 제거"
+    closeButton.setAccessibilityLabel(closeLabel)
+    closeButton.toolTip = closeLabel
+    let zoomLabel = isZoomed ? "전체 레이아웃으로 돌아가기" : "칸 확대"
+    zoomButton.setAccessibilityLabel(zoomLabel)
+    zoomButton.isEnabled = canZoom
+    zoomButton.toolTip = zoomLabel
+    zoomButton.image = NSImage(
+      systemSymbolName: isZoomed
+        ? "arrow.down.right.and.arrow.up.left" : "arrow.up.left.and.arrow.down.right",
+      accessibilityDescription: zoomLabel)
   }
 }

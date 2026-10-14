@@ -6,6 +6,10 @@ public enum SplitAxis: String, Codable, Sendable {
   case vertical
 }
 
+public enum FocusDirection: Sendable {
+  case left, right, up, down
+}
+
 public enum LayoutPreset: Int, CaseIterable, Sendable {
   case single, columns, rows, grid
   public var capacity: Int { self == .single ? 1 : self == .grid ? 4 : 2 }
@@ -110,5 +114,26 @@ public indirect enum LayoutNode: Codable, Equatable, Sendable {
         height: horizontal ? bounds.height : max(0, total - length))
       return first.frames(in: a).merging(second.frames(in: b)) { a, _ in a }
     }
+  }
+
+  public func neighbor(of id: UUID, toward direction: FocusDirection, in bounds: CGRect) -> UUID? {
+    let frames = frames(in: bounds)
+    guard let origin = frames[id] else { return nil }
+    let horizontal = direction == .left || direction == .right
+    let positive = direction == .right || direction == .down
+    let axisCenter = horizontal ? origin.midX : origin.midY
+    let otherCenter = horizontal ? origin.midY : origin.midX
+    let candidates = paneIDs.compactMap { candidate -> (UUID, Int, CGFloat)? in
+      guard candidate != id, let frame = frames[candidate] else { return nil }
+      let delta = (horizontal ? frame.midX : frame.midY) - axisCenter
+      guard positive ? delta > 0 : delta < 0 else { return nil }
+      let overlap =
+        horizontal
+        ? min(origin.maxY, frame.maxY) > max(origin.minY, frame.minY)
+        : min(origin.maxX, frame.maxX) > max(origin.minX, frame.minX)
+      let perpendicular = abs((horizontal ? frame.midY : frame.midX) - otherCenter)
+      return (candidate, overlap ? 0 : 1, abs(delta) + perpendicular * 2)
+    }
+    return candidates.min { a, b in a.1 == b.1 ? a.2 < b.2 : a.1 < b.1 }?.0
   }
 }
