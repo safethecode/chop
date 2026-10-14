@@ -90,6 +90,24 @@ ln -sf "$project_directory/scripts/ghostty-xcrun.sh" .cache/bin/xcrun
 ln -sf "$project_directory/scripts/ghostty-libtool.sh" .cache/bin/chop-libtool
 export PATH="$project_directory/.cache/bin:$PATH"
 export ZIG_GLOBAL_CACHE_DIR="$project_directory/.cache/zig"
+
+# These pinned transitive dependencies use Zig's Git transport upstream.
+# Fetch equivalent archives with curl and verify Zig's exact content hash;
+# this avoids Codeberg capability negotiation failures on hosted runners.
+fetch_package() {
+  local url="$1" archive="$2" expected="$3" actual
+  [[ -d "$ZIG_GLOBAL_CACHE_DIR/p/$expected" ]] && return
+  curl --fail --location --retry 3 --silent --show-error "$url" -o "$archive"
+  actual="$("$zig_directory/zig" fetch "$archive")"
+  if [[ "$actual" != "$expected" ]]; then
+    echo "Unexpected Zig package hash for $archive" >&2
+    exit 1
+  fi
+}
+fetch_package https://codeberg.org/atman/zg/archive/4a002763419a34d61dcbb1f415821b83b9bf8ddc.tar.gz \
+  "$project_directory/.cache/downloads/zg.tar.gz" zg-0.13.4-AAAAAGiZ7QLz4pvECFa_wG4O4TP4FLABHHbemH2KakWM
+fetch_package https://codeload.github.com/TUSF/zigimg/tar.gz/31268548fe3276c0e95f318a6c0d2ab10565b58d \
+  "$project_directory/.cache/downloads/zigimg.tar.gz" zigimg-0.1.0-lly-O6N2EABOxke8dqyzCwhtUCAafqP35zC7wsZ4Ddxj
 (
   cd .cache/ghostty
   "$zig_directory/zig" build -Doptimize=ReleaseFast -Demit-macos-app=false \

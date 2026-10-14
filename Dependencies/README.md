@@ -25,3 +25,5 @@ Xcode 26의 일부 arm64 SDK에서는 Zig 0.14 링크가 실패합니다.
 시스템 SDK 파일이나 `xcode-select` 설정을 변경하지 않습니다.
 직접 준비한 SDK 오버레이가 있으면 `CHOP_GHOSTTY_SDKROOT`로 지정할 수 있습니다.
 Metal 도구가 빠져 있으면 Xcode의 공식 `MetalToolchain` 구성 요소를 내려받습니다.
+Git 전송을 사용하는 `zg`와 `zigimg`는 같은 커밋의 아카이브를 미리 받아 업스트림에 고정된 Zig 콘텐츠 해시를 검증합니다.
+Codeberg의 Git capability 조회가 실패하는 CI 환경에서도 패키지 버전을 바꾸지 않고 빌드하기 위한 처리입니다.
