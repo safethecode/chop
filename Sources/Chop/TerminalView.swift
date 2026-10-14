@@ -58,7 +58,14 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
 
   override func viewDidMoveToWindow() {
     super.viewDidMoveToWindow()
+    setVisible(window != nil)
     updateSize()
+  }
+
+  func setVisible(_ visible: Bool) {
+    guard let surface else { return }
+    ghostty_surface_set_occlusion(surface, visible)
+    if visible { ghostty_surface_refresh(surface) }
   }
 
   override func layout() {
