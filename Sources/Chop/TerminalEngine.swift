@@ -23,9 +23,11 @@ final class TerminalEngine: NSObject {
   private(set) var app: ghostty_app_t?
   private var config: ghostty_config_t?
   private let clipboard: NSPasteboard
+  let command: String?
 
-  init(clipboard: NSPasteboard = .general) {
+  init(clipboard: NSPasteboard = .general, command: String? = nil) {
     self.clipboard = clipboard
+    self.command = command
     super.init()
   }
 

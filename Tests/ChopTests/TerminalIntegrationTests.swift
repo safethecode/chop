@@ -15,7 +15,7 @@ import Testing
   try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
   defer { try? FileManager.default.removeItem(at: directory) }
   let clipboard = NSPasteboard.withUniqueName()
-  let engine = TerminalEngine(clipboard: clipboard)
+  let engine = TerminalEngine(clipboard: clipboard, command: "/bin/zsh -l")
   try engine.start(resources: resources)
   let pane = TerminalPaneView(engine: engine, workingDirectory: directory.path)
   let window = NSWindow(
@@ -34,7 +34,12 @@ import Testing
   let terminal = try #require(pane.terminal)
   pane.openTerminal()
   #expect(pane.terminal === terminal, "Repeated open must not launch a second shell")
-  try await waitFor { !terminal.needsConfirmClose }
+  do {
+    try await waitFor { !terminal.needsConfirmClose }
+  } catch {
+    Issue.record("Initial screen: \(terminal.accessibilityValue() as? String ?? "")")
+    throw error
+  }
   terminal.insertText(
     "printf 'CHOP_SHELL_OK\\n'; pwd", replacementRange: NSRange(location: NSNotFound, length: 0))
   try pressReturn(on: terminal, window: window)

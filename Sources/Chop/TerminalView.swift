@@ -31,6 +31,12 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
     config.scale_factor = Double(NSScreen.main?.backingScaleFactor ?? 2)
     surface = workingDirectory.withCString {
       config.working_directory = $0
+      if let command = engine.command {
+        return command.withCString {
+          config.command = $0
+          return ghostty_surface_new(app, &config)
+        }
+      }
       return ghostty_surface_new(app, &config)
     }
     guard let surface else { throw TerminalError.surface }
