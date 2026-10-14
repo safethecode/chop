@@ -8,6 +8,7 @@ final class LayoutSplitView: NSSplitView, NSSplitViewDelegate {
   private let firstMinimum: CGSize
   private let secondMinimum: CGSize
   private var applying = false
+  private var userResizing = false
   var onRatioChange: ((UUID, Double) -> Void)?
 
   override var isFlipped: Bool { true }
@@ -66,7 +67,19 @@ final class LayoutSplitView: NSSplitView, NSSplitViewDelegate {
   }
 
   func splitViewDidResizeSubviews(_ notification: Notification) {
-    guard !applying, subviews.count == 2 else { return }
+    guard userResizing, !applying else { return }
+    recordUserRatio()
+  }
+
+  override func mouseDown(with event: NSEvent) {
+    userResizing = true
+    super.mouseDown(with: event)
+    userResizing = false
+    recordUserRatio()
+  }
+
+  private func recordUserRatio() {
+    guard subviews.count == 2 else { return }
     let total = (isVertical ? bounds.width : bounds.height) - dividerThickness
     guard total > 0 else { return }
     ratio = (isVertical ? subviews[0].frame.width : subviews[0].frame.height) / total
