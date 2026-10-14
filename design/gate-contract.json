@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "catalog_version": 5,
-  "scope_notes": "Native macOS Chop v0.1, user task and DESIGN comparison. macOS26.5.2/CI15; macOS14 physical, full VoiceOver/all IMEs and hardware wheel are explicitly outside verified combinations. Shell/TUI VT styling and standard OS chrome are distinguished from app-owned labels. cmux is technical/feature inspiration, not a visual pixel reference. User correction 2026-10-14 adds R-DEFAULT canvas screenshot as a visual/state reference; first shell + three empty plus panes is mandatory at default entry. Previous main gate lacked that condition; its historical ledger is retained. PR #8: user-requested light/dark modes; preserve default grid in both modes, apply to native chrome and all terminals without PTY replacement, persist selection. Evidence is self review, with actual CUA observations recorded as Markdown. PR #10: user-requested icon-only mode toggle and layout presets. Preserve R-DEFAULT canvas and R-TOOLBAR location/options/selection; icons are an intentional user-requested change from text, not an exact crop clone. PR #11: editing-only same-workspace pane exchange with whole-pane/GPU drag preview and placement motion, requested and directly accepted by user. Preserve live PTY and split geometry. CUA before/after observations are separate from user motion feedback; no mid-drag frame capture or physical Reduce Motion execution is claimed. PR #12: user-requested uniform header background distinct from body in both modes, not per-terminal colors. Actual five-pane light/dark, editing, zoom and hidden-pane mode update rechecked without changing geometry. PR #13: explicit user request removes the blue pane outline on input focus; preserve real terminal cursor, first responder, focus navigation/storage and native button/menu focus. Drag-target outline is a separate transient state. Actual two-mode four-pane mouse/keyboard input, zoom and swap-back rechecked. PR #14: user-requested right file tree is a peer of terminal canvas below the full-width global toolbar. User hierarchy/stray-divider corrections and internal long-path/reopen issues were fixed and rechecked. New lazy file navigation, native picker/shortcuts, async stale-result protection and separate settings preserve terminal surfaces. OS open wait on final restart was observed; native folder reselection recovered it without UI blocking. Two-mode default/minimum UI and final drag/keyboard restoration are scoped separately from prior evidence. PR #14 review follow-up: isolate child metadata failures with a literal-name/leaf fallback, keep root errors.16 tests and latest normal folder expansion rechecked; no layout change. CodeRabbit covered5101fb1, follow-up self-reviewed; docstring coverage warning is disclosed separately. Path focus PR: user-requested path field focus-ring removal only. Native caret/selection/editing remain; other requested refinements are separate. Header seam PR: reuse the same header row and foreground; fill only the functional file divider header segment. Actual two-mode/resize/hide/editing consumers rechecked; PTY unchanged. Location icons PR: user Finder crop adapted to three native full-row icon/name shortcuts, fixed aspect-fit16pt column and14pt labels. Actual three locations, two modes/minimum window and empty/long outline rechecked. File drop work in progress: native file URL writer and existing-terminal input with literal argument quoting;19 tests pass. Actual CUA NSCoreDrag remains awaiting mouse-up with no destination entry observed. Do not mark product/merge complete until native endpoint is verified.  Native endpoint subsequently observed in the same clean app after user interaction: the exact fixture file path appeared as a quoted shell argument in terminal11. Earlier CUA failure remains historical.  Shortcut navigation group now has a neutral surface separate from file contents; actual two-mode/minimum-size/empty/long/three-destination checks.  Single-view tabs preserve all pane identities and shells; actual four-running-shell/native tab flows, long/overflow/minimum/two-mode/restore verified. Uniform split changes remain subsequent PRs.  All-pane columns and grid with scrollable canvas, actual four/five PTYs and two-mode/minimum/native focus/zoom/roundtrips verified; rows follow separately.  All-pane rows complete mode switching without per-preset maximum/deletion; actual four/five-shell two-mode/minimum/vertical focus/manual scroll/restore verified.",
+  "scope_notes": "Native macOS Chop v0.1, user task and DESIGN comparison. macOS26.5.2/CI15; macOS14 physical, full VoiceOver/all IMEs and hardware wheel are explicitly outside verified combinations. Shell/TUI VT styling and standard OS chrome are distinguished from app-owned labels. cmux is technical/feature inspiration, not a visual pixel reference. User correction 2026-10-14 adds R-DEFAULT canvas screenshot as a visual/state reference; first shell + three empty plus panes is mandatory at default entry. Previous main gate lacked that condition; its historical ledger is retained. PR #8: user-requested light/dark modes; preserve default grid in both modes, apply to native chrome and all terminals without PTY replacement, persist selection. Evidence is self review, with actual CUA observations recorded as Markdown. PR #10: user-requested icon-only mode toggle and layout presets. Preserve R-DEFAULT canvas and R-TOOLBAR location/options/selection; icons are an intentional user-requested change from text, not an exact crop clone. PR #11: editing-only same-workspace pane exchange with whole-pane/GPU drag preview and placement motion, requested and directly accepted by user. Preserve live PTY and split geometry. CUA before/after observations are separate from user motion feedback; no mid-drag frame capture or physical Reduce Motion execution is claimed. PR #12: user-requested uniform header background distinct from body in both modes, not per-terminal colors. Actual five-pane light/dark, editing, zoom and hidden-pane mode update rechecked without changing geometry. PR #13: explicit user request removes the blue pane outline on input focus; preserve real terminal cursor, first responder, focus navigation/storage and native button/menu focus. Drag-target outline is a separate transient state. Actual two-mode four-pane mouse/keyboard input, zoom and swap-back rechecked. PR #14: user-requested right file tree is a peer of terminal canvas below the full-width global toolbar. User hierarchy/stray-divider corrections and internal long-path/reopen issues were fixed and rechecked. New lazy file navigation, native picker/shortcuts, async stale-result protection and separate settings preserve terminal surfaces. OS open wait on final restart was observed; native folder reselection recovered it without UI blocking. Two-mode default/minimum UI and final drag/keyboard restoration are scoped separately from prior evidence. PR #14 review follow-up: isolate child metadata failures with a literal-name/leaf fallback, keep root errors.16 tests and latest normal folder expansion rechecked; no layout change. CodeRabbit covered5101fb1, follow-up self-reviewed; docstring coverage warning is disclosed separately. Path focus PR: user-requested path field focus-ring removal only. Native caret/selection/editing remain; other requested refinements are separate. Header seam PR: reuse the same header row and foreground; fill only the functional file divider header segment. Actual two-mode/resize/hide/editing consumers rechecked; PTY unchanged. Location icons PR: user Finder crop adapted to three native full-row icon/name shortcuts, fixed aspect-fit16pt column and14pt labels. Actual three locations, two modes/minimum window and empty/long outline rechecked. File drop work in progress: native file URL writer and existing-terminal input with literal argument quoting;19 tests pass. Actual CUA NSCoreDrag remains awaiting mouse-up with no destination entry observed. Do not mark product/merge complete until native endpoint is verified.  Native endpoint subsequently observed in the same clean app after user interaction: the exact fixture file path appeared as a quoted shell argument in terminal11. Earlier CUA failure remains historical.  Shortcut navigation group now has a neutral surface separate from file contents; actual two-mode/minimum-size/empty/long/three-destination checks.  Single-view tabs preserve all pane identities and shells; actual four-running-shell/native tab flows, long/overflow/minimum/two-mode/restore verified. Uniform split changes remain subsequent PRs.  All-pane columns and grid with scrollable canvas, actual four/five PTYs and two-mode/minimum/native focus/zoom/roundtrips verified; rows follow separately.  All-pane rows complete mode switching without per-preset maximum/deletion; actual four/five-shell two-mode/minimum/vertical focus/manual scroll/restore verified.  Supplied brand image preserved and packaged as continuous rounded ICNS with transparent margins; actual About light/dark and Finder plus ten representation checks verified.",
   "targets": [
     "Sources",
     "Resources/terminal.conf",
@@ -19,7 +19,11 @@
     "Resources/terminal-dark.conf",
     "design/references/layout-controls-user.png",
     "AGENTS.md",
-    "design/references/finder-shortcuts-user.png"
+    "design/references/finder-shortcuts-user.png",
+    "Resources/AppIcon-source.png",
+    "Resources/AppIcon.png",
+    "Resources/AppIcon.icns",
+    "Resources/AppIcon.md"
   ],
   "rules": [
     {
@@ -714,7 +718,7 @@
       "id": "RUI-02",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "기존 ChopStyle14pt와 동적 labelColor를 실제 바로가기 label/icon에 적용한다. 고정 icon box는 원본 비율을 보존하며 terminal/header 토큰은 바꾸지 않는다.",
+      "reason": "기존 ChopStyle14pt와 동적 labelColor를 실제 바로가기 label/icon에 적용한다. 고정 icon box는 원본 비율을 보존하며 terminal/header 토큰은 바꾸지 않는다. 앱 아이콘은 이후 제공된 원본 색을 그대로 쓰고 UI/header/native accent 토큰을 확장하거나 바꾸지 않았다.",
       "checks": [
         "code"
       ],
@@ -777,7 +781,7 @@
       "id": "RUI-08",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "이름 Chop은 사용자 제공이며 창 제목으로 쓴다. 별도 로고/워드마크/캐릭터/슬로건을 만들지 않았다. SF 기호는 기능 버튼이다.",
+      "reason": "이름 Chop은 사용자 제공이며 창 제목으로 쓴다. 별도 로고/워드마크/캐릭터/슬로건을 만들지 않았다. SF 기호는 기능 버튼이다. 이후 사용자가 직접 제공한 열매 로고를 앱 아이콘에만 적용했다. 원본 SHA/cmp를 보존하고 임의 캐릭터/슬로건을 새로 만들지 않았다.",
       "checks": [
         "spec",
         "code",
@@ -828,7 +832,7 @@
       "id": "RUI-12",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "사용자 Finder crop와 SF Symbols 출처를 기록했다. 홈=house/다운로드=arrow.down.circle/문서=doc 의미·방향과 실제 목적지 행동을 대조했고 image를 비율 유지해 표시한다.",
+      "reason": "사용자 Finder crop와 SF Symbols 출처를 기록했다. 홈=house/다운로드=arrow.down.circle/문서=doc 의미·방향과 실제 목적지 행동을 대조했고 image를 비율 유지해 표시한다. 앱 아이콘은 기능 SF 기호와 구분해 사용자 원본/관찰한 macOS crop/Apple HIG 근거 및 실제 bundle/정보 창/Finder 소비를 기록했다. 기존 native SF 예외는 그대로다.",
       "checks": [
         "code",
         "visual"
@@ -908,7 +912,7 @@
       "id": "RUI-18",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "새 사용자 Finder crop의 관찰과 Chop 각색 결정을 별도 기록하고 실제 파일 탐색 소비 화면을 검증했다. 기존 engine/cmux/canvas 출처와 toolbar/body 계층을 유지한다.",
+      "reason": "새 사용자 Finder crop의 관찰과 Chop 각색 결정을 별도 기록하고 실제 파일 탐색 소비 화면을 검증했다. 기존 engine/cmux/canvas 출처와 toolbar/body 계층을 유지한다. 앱 브랜딩의 사용자 원본/둥근 crop 관찰과 Apple HIG를 연결하고 chosen mask 수치와 원본 보존을 구분해 실제 정보 창/Finder에서 확인했다.",
       "checks": [
         "spec",
         "visual"
@@ -1102,7 +1106,7 @@
       "id": "PROJECT-TRUTH",
       "applicable": true,
       "scope": "User-authorized Chop v0.1 behavior; PROJECT-TRUTH",
-      "reason": "사용자 crop 원본 관찰·선택한 pt/각색·초기 정렬 실패/수정·실제 세 목적지 클릭을 구분했다.16개 검사와 실제 화면을 구별하며 새 파일 drag를 완료했다고 표시하지 않는다. 파일 드롭은 최초 CUA 놓기 대기와 후속 사용자 조작 후 실제 endpoint 관찰을 구분해 기록한다.",
+      "reason": "사용자 crop 원본 관찰·선택한 pt/각색·초기 정렬 실패/수정·실제 세 목적지 클릭을 구분했다.16개 검사와 실제 화면을 구별하며 새 파일 drag를 완료했다고 표시하지 않는다. 파일 드롭은 최초 CUA 놓기 대기와 후속 사용자 조작 후 실제 endpoint 관찰을 구분해 기록한다. 아이콘 원본 SHA/cmp, 폐기한 imagegen 후보, 선택한 native mask/작은 shadow 수정, 실제 About/Finder 표시와 자동 패키지 검사를 구분한다.",
       "checks": [
         "spec",
         "code",
@@ -1298,6 +1302,19 @@
       "applicable": true,
       "scope": "모든 pane 상하 배치/세로 overflow/모드 전환·focus/빈 슬롯/복원",
       "reason": "실제4/5셸 모든 모드와 ENV/두 모드·최소 창·세로 탐색/상하 복원 및22개 검사를 확인했다. 마지막 표시 모드별 cap/삭제 경로를 제거했다.",
+      "checks": [
+        "spec",
+        "code",
+        "visual",
+        "interaction"
+      ],
+      "exceptions": []
+    },
+    {
+      "id": "PROJECT-APP-ICON",
+      "applicable": true,
+      "scope": "제공 원본 보존/둥근 macOS 외곽·여백/10크기 ICNS/번들 연결/실제 표시",
+      "reason": "원본 cmp/SHA 보존과10개 디코딩의 투명 모서리·본문 alpha를 확인했고 실제 두 모드 정보 창/Finder 표시 및22개 검사/번들 패키지 검사를 통과했다.",
       "checks": [
         "spec",
         "code",
