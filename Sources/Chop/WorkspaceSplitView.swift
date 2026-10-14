@@ -135,7 +135,6 @@ final class WorkspaceSplitView: NSSplitView, NSSplitViewDelegate {
   private func applyVisibility() {
     fileBrowser.isHidden = !isFileTreeVisible
     workspace?.setFileTreeVisible(isFileTreeVisible)
-    workspace?.sidePanelMinimumWidth = isFileTreeVisible ? Self.fileTreeMinimumWidth + 1 : 0
     refreshMinimumSize()
     needsDisplay = true
   }
