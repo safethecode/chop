@@ -13,13 +13,21 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
   var workingDirectory: String { didSet { onMetadataChange?() } }
   private var markedText = ""
   private var textAccumulator: [String]?
+  private var lastPixelSize: CGSize = .zero
+  private var lastScale: CGFloat = 0
 
   override var acceptsFirstResponder: Bool { true }
 
-  init(engine: TerminalEngine, workingDirectory: String) throws {
+  init(
+    engine: TerminalEngine, workingDirectory: String,
+    frame: NSRect = NSRect(x: 0, y: 0, width: 800, height: 600)
+  ) throws {
     self.workingDirectory = workingDirectory
-    super.init(frame: NSRect(x: 0, y: 0, width: 800, height: 600))
-    wantsLayer = true
+    super.init(
+      frame: NSRect(
+        origin: .zero, size: NSSize(width: max(1, frame.width), height: max(1, frame.height))))
+    // Ghostty installs its IOSurface layer before enabling wantsLayer.
+    // Enabling layer backing here would prevent that layer-hosting setup.
     setAccessibilityElement(true)
     setAccessibilityRole(.textArea)
     setAccessibilityLabel("터미널")
@@ -81,9 +89,17 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
   private func updateSize() {
     guard let surface, bounds.width > 0, bounds.height > 0 else { return }
     let scale = window?.backingScaleFactor ?? NSScreen.main?.backingScaleFactor ?? 2
+    let pixels = CGSize(width: bounds.width * scale, height: bounds.height * scale)
+    guard pixels != lastPixelSize || scale != lastScale else { return }
+    lastPixelSize = pixels
+    lastScale = scale
+    CATransaction.begin()
+    CATransaction.setDisableActions(true)
     layer?.contentsScale = scale
+    CATransaction.commit()
     ghostty_surface_set_content_scale(surface, scale, scale)
     ghostty_surface_set_size(surface, UInt32(bounds.width * scale), UInt32(bounds.height * scale))
+    ghostty_surface_refresh(surface)
   }
 
   override func becomeFirstResponder() -> Bool {

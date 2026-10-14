@@ -19,6 +19,7 @@ final class TerminalPaneView: NSView {
   var canSplit: ((SplitAxis) -> Bool)?
   var onRemoveRequested: (() -> Void)?
   var onZoomRequested: (() -> Void)?
+  var onDirectoryFallback: ((String) -> Void)?
   var canRemove = false { didSet { updateHeader() } }
   var canZoom = false { didSet { updateHeader() } }
   var isZoomed = false { didSet { updateHeader() } }
@@ -67,7 +68,10 @@ final class TerminalPaneView: NSView {
       return
     }
     do {
-      let view = try TerminalView(engine: engine, workingDirectory: workingDirectory)
+      if let missing = resolveWorkingDirectory() { onDirectoryFallback?(missing) }
+      layoutSubtreeIfNeeded()
+      let view = try TerminalView(
+        engine: engine, workingDirectory: workingDirectory, frame: body.bounds)
       terminal = view
       view.onExit = { [weak self, weak view] in
         guard let self, let view, self.terminal === view else { return }
@@ -115,6 +119,21 @@ final class TerminalPaneView: NSView {
     updateHeader()
     focus()
     onChange?()
+  }
+
+  /// Resolve every saved path before restore; no path is interpreted as a command.
+  func resolveWorkingDirectory() -> String? {
+    var isDirectory: ObjCBool = false
+    guard
+      !FileManager.default.fileExists(atPath: workingDirectory, isDirectory: &isDirectory)
+        || !isDirectory.boolValue || !FileManager.default.isReadableFile(atPath: workingDirectory)
+        || !FileManager.default.isExecutableFile(atPath: workingDirectory)
+    else { return nil }
+    let missing = workingDirectory
+    workingDirectory = FileManager.default.homeDirectoryForCurrentUser.path
+    updateHeader()
+    onChange?()
+    return missing
   }
 
   func focus() {

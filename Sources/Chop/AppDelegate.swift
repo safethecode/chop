@@ -1,9 +1,16 @@
 import AppKit
+import ChopCore
 
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
   private var workspaceWindow: WorkspaceWindowController?
   private let engine = TerminalEngine()
+  private let session = SessionCoordinator(
+    store: SessionStore(
+      fileURL:
+        FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+        .appendingPathComponent("Chop/session.json")))
+  private var initialSnapshot: WorkspaceSnapshot?
 
   func applicationDidFinishLaunching(_ notification: Notification) {
     NSApp.setActivationPolicy(.regular)
@@ -18,6 +25,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
       return
     }
     configureMainMenu()
+    initialSnapshot = session.load()
     showWorkspace()
     NSApp.activate(ignoringOtherApps: true)
   }
@@ -34,10 +42,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
 
   private func showWorkspace() {
     if workspaceWindow == nil {
-      workspaceWindow = WorkspaceWindowController(engine: engine)
+      workspaceWindow = WorkspaceWindowController(engine: engine, snapshot: initialSnapshot)
+      initialSnapshot = nil
     }
     workspaceWindow?.showWindow(nil)
     workspaceWindow?.window?.makeKeyAndOrderFront(nil)
+    if let workspace = workspaceWindow?.workspace {
+      workspace.layoutSubtreeIfNeeded()
+      workspace.startRestoredTerminals()
+      session.attach(workspace)
+      session.saveNow()
+    }
   }
 
   func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
@@ -49,10 +64,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
       alert.addButton(withTitle: "종료")
       if alert.runModal() != .alertSecondButtonReturn { return .terminateCancel }
     }
-    return .terminateNow
+    return session.confirmTerminationIfUnsaved() ? .terminateNow : .terminateCancel
   }
 
   func applicationWillTerminate(_ notification: Notification) {
+    session.prepareToTerminate()
     workspaceWindow?.workspace.closeAll()
     engine.shutdown()
   }
@@ -68,6 +84,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
   @objc private func focusDown() { workspaceWindow?.workspace.moveFocus(.down) }
   @objc private func toggleZoom() { workspaceWindow?.workspace.toggleZoom() }
   @objc private func renamePane() { workspaceWindow?.workspace.requestRename() }
+  @objc private func retrySave() { session.retrySave() }
 
   func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
     guard let workspace = workspaceWindow?.workspace, workspaceWindow?.window?.isVisible == true
@@ -123,6 +140,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
       ("레이아웃 편집", #selector(toggleLayoutEditing), "l", [.command, .shift]),
       ("칸 확대·복귀", #selector(toggleZoom), "\r", [.command, .shift]),
       ("칸 이름 바꾸기…", #selector(renamePane), "r", [.command, .shift]),
+      ("레이아웃 다시 저장", #selector(retrySave), "", []),
       (
         "왼쪽 칸으로 이동", #selector(focusLeft), String(UnicodeScalar(NSLeftArrowFunctionKey)!),
         [.command, .option]
