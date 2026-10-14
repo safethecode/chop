@@ -26,7 +26,7 @@ final class TerminalPaneView: NSView {
   var isFocused = false {
     didSet {
       layer?.borderWidth = isFocused ? 1 : 0
-      layer?.borderColor = NSColor.keyboardFocusIndicatorColor.cgColor
+      updateFocusColor()
     }
   }
   var isEditing = false { didSet { updateAddButton() } }
@@ -48,11 +48,10 @@ final class TerminalPaneView: NSView {
     self.name = name
     self.workingDirectory = workingDirectory
     super.init(frame: .zero)
-    appearance = NSAppearance(named: .aqua)
     wantsLayer = true
-    layer?.backgroundColor = ChopStyle.background.cgColor
     setAccessibilityIdentifier("pane-\(id.uuidString)")
     configureViews()
+    applyAppearance()
     updateHeader()
   }
 
@@ -61,6 +60,22 @@ final class TerminalPaneView: NSView {
 
   var isRunning: Bool { terminal != nil }
   var needsConfirmClose: Bool { terminal?.needsConfirmClose ?? false }
+
+  func applyAppearance() {
+    let mode = engine.appearanceMode
+    appearance = mode.appearance
+    layer?.backgroundColor = mode.background.cgColor
+    titleLabel.textColor = mode.foreground
+    pathLabel.textColor = mode.secondaryForeground
+    errorLabel.textColor = mode.secondaryForeground
+    updateFocusColor()
+  }
+
+  private func updateFocusColor() {
+    effectiveAppearance.performAsCurrentDrawingAppearance {
+      layer?.borderColor = NSColor.keyboardFocusIndicatorColor.cgColor
+    }
+  }
 
   @objc func openTerminal() {
     guard terminal == nil else {
@@ -196,11 +211,9 @@ final class TerminalPaneView: NSView {
       view.translatesAutoresizingMaskIntoConstraints = false
     }
     titleLabel.font = ChopStyle.font
-    titleLabel.textColor = ChopStyle.foreground
     titleLabel.lineBreakMode = .byTruncatingTail
     titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     pathLabel.font = ChopStyle.font
-    pathLabel.textColor = .secondaryLabelColor
     pathLabel.lineBreakMode = .byTruncatingMiddle
     pathLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     pathLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
@@ -227,7 +240,6 @@ final class TerminalPaneView: NSView {
     openButton.translatesAutoresizingMaskIntoConstraints = false
     body.addSubview(openButton)
     errorLabel.font = ChopStyle.font
-    errorLabel.textColor = .secondaryLabelColor
     errorLabel.alignment = .center
     errorLabel.isHidden = true
     errorLabel.translatesAutoresizingMaskIntoConstraints = false

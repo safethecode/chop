@@ -2,8 +2,6 @@ import AppKit
 
 @MainActor
 enum ChopStyle {
-  static let background = NSColor.white
-  static let foreground = NSColor(srgbRed: 36 / 255, green: 38 / 255, blue: 43 / 255, alpha: 1)
   static let font = NSFont.systemFont(ofSize: 14, weight: .medium)
   static let headerHeight: CGFloat = 40
   static let inset: CGFloat = 12

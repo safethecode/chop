@@ -1,0 +1,38 @@
+import AppKit
+import GhosttyKit
+
+enum AppearanceMode: String, CaseIterable {
+  case light, dark
+
+  static func load(from defaults: UserDefaults = .standard) -> Self {
+    defaults.string(forKey: "appearanceMode").flatMap(Self.init(rawValue:)) ?? .light
+  }
+
+  func save(to defaults: UserDefaults = .standard) {
+    defaults.set(rawValue, forKey: "appearanceMode")
+  }
+
+  var title: String { self == .light ? "라이트 모드" : "다크 모드" }
+
+  var ghosttyScheme: ghostty_color_scheme_e {
+    self == .light ? GHOSTTY_COLOR_SCHEME_LIGHT : GHOSTTY_COLOR_SCHEME_DARK
+  }
+
+  @MainActor var appearance: NSAppearance {
+    NSAppearance(named: self == .light ? .aqua : .darkAqua)!
+  }
+
+  var background: NSColor {
+    self == .light ? .white : NSColor(srgbRed: 30 / 255, green: 32 / 255, blue: 38 / 255, alpha: 1)
+  }
+
+  var foreground: NSColor {
+    self == .light ? NSColor(srgbRed: 36 / 255, green: 38 / 255, blue: 43 / 255, alpha: 1) : .white
+  }
+
+  var secondaryForeground: NSColor {
+    self == .light
+      ? NSColor(srgbRed: 98 / 255, green: 105 / 255, blue: 117 / 255, alpha: 1)
+      : NSColor(srgbRed: 209 / 255, green: 213 / 255, blue: 219 / 255, alpha: 1)
+  }
+}

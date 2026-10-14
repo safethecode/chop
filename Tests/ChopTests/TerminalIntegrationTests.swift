@@ -169,6 +169,14 @@ import Testing
   workspace.toggleZoom()
   #expect(workspace.maximizedID == workspace.focusedID)
   #expect(workspace.layout == originalLayout)
+  let firstSurface = first.surface
+  let focusedBeforeTheme = workspace.focusedID
+  workspace.applyAppearance(.dark)
+  #expect(engine.appearanceMode == .dark)
+  #expect(first.surface == firstSurface)
+  #expect(first.effectiveAppearance.name == .darkAqua, "Detached surfaces also change mode")
+  #expect(workspace.panes.values.allSatisfy { $0.effectiveAppearance.name == .darkAqua })
+  #expect(workspace.layout == originalLayout && workspace.focusedID == focusedBeforeTheme)
   try await waitFor {
     (first.accessibilityValue() as? String ?? "").components(separatedBy: "HIDDEN_TASK_DONE").count
       >= 3 && !first.needsConfirmClose
@@ -176,6 +184,9 @@ import Testing
   workspace.toggleZoom()
   #expect(workspace.maximizedID == nil)
   #expect(workspace.panes[firstID]?.terminal === first)
+  workspace.applyAppearance(.light)
+  workspace.applyAppearance(.dark)
+  #expect(first.surface == firstSurface, "Repeated theme changes must retain the PTY")
   workspace.removeEmptyPane(firstID)
   #expect(workspace.layout == originalLayout, "Removing a running pane is never allowed")
   first.insertText(
@@ -216,6 +227,7 @@ import Testing
   beforeRestore.workingDirectory = directory.path
   beforeRestore.openTerminal()
   let oldShell = try #require(beforeRestore.terminal)
+  #expect(oldShell.effectiveAppearance.name == .darkAqua, "New shells inherit the selected mode")
   try await waitFor { !oldShell.needsConfirmClose }
   oldShell.insertText(
     "export CHOP_RESTORE_SECRET=old_process; printf 'OLD_PROCESS_READY\\n'",
@@ -242,6 +254,7 @@ import Testing
   #expect(restored.panes[restoredIDs[1]]?.terminal == nil, "Empty slots stay empty on restore")
   let newShell = try #require(restored.focusedPane.terminal)
   #expect(newShell !== oldShell)
+  #expect(newShell.effectiveAppearance.name == .darkAqua, "Restored shells inherit the mode")
   try await waitFor { !newShell.needsConfirmClose }
   newShell.insertText(
     "printf 'RESTORE=%s\\n' \"${CHOP_RESTORE_SECRET-fresh}\"; pwd",
@@ -289,6 +302,8 @@ import Testing
   #expect(emptyRestored.panes.values.filter { $0.isRunning }.count == 1)
   #expect(emptyRestored.panes[emptyGrid.layout.paneIDs[0]]?.isRunning == true)
   #expect(emptyRestored.focusedID == emptyGrid.layout.paneIDs[0])
+  emptyRestored.applyAppearance(.light)
+  #expect(emptyRestored.focusedPane.terminal?.effectiveAppearance.name == .aqua)
 }
 
 @MainActor
