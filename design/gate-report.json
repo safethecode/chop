@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "reviewer": "Codex self-review; actual code/test/CUA observations, not independent approval",
-  "reviewed_at": "2026-10-14T17:26:56.516329+00:00",
-  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics. PR #8: changed appearance scopes rechecked against actual light/dark screenshots and E-A1–A6; unchanged structure/native exceptions retain earlier evidence; local 10-test suite rerun. No independent approval or exported PNG claimed. PR #10: toolbar icon roles, copy, geometry and actions rechecked in actual CUA images/AX, four layouts, both modes, minimum window and restart. Existing scopes outside changed toolbar retain prior observations and rerun PTY checks. PR #11: changed handle, preview, movement, keyboard, same live PTY and persisted order rechecked; direct user acceptance covers requested motion. CUA cannot capture transient drag frames; Reduce Motion physical settings were not changed. Unchanged exclusions/native exceptions retain prior evidence; 11-test checks rerun. PR #12: actual CUA light/dark header/body contrast, five-pane editing/zoom/hidden-pane updates rechecked; no new text/geometry. Existing exceptions and unrelated observations retained. 11-test check passed. Final PR #12 review follow-up adds only three doc comments in response to CodeRabbit coverage warning. Strict format/diff checks passed; no executable behavior or visual contract changed, so E-H1–5 remains applicable. External review coverage is explicitly fccec, follow-up comments self-reviewed. PR #13: pane focus outline removed by explicit user request. Real mouse/keyboard shell input and AX focus, light/dark, zoom and drag swap-back were rechecked in current CUA renders. Previous focus-border appearance is historical; RUI-23 declares the user-requested terminal-only exception, native control focus remains. No transient drag screenshot or full VoiceOver claim. Unchanged scopes retain prior evidence. PR #14: changed toolbar/body/file-panel consumers rechecked in actual CUA, including user hierarchy and stray-line corrections, long path, reopen, two-mode minimum, native folder picker, literal paths, folder expansion, copy/Finder and live shell preservation.15 tests passed. Final restart OS open wait and picker recovery are documented; no permission root cause claimed. Final pointer swap succeeded with2× image coordinates, keyboard restored original order. No drag implementation change or transient-frame claim. Unchanged native exclusions retain prior evidence. PR #14 follow-up: CodeRabbit actual review5101fb1/19files found one valid child metadata failure propagation. Minimal fallback plus deterministic injected-I/O regression test passed with all16 tests3.737s. Latest app restored project root and expanded Sources. Unchanged layout/appearance observations remain applicable; no external re-review of this follow-up is claimed. Path field actual dark/light click/selection/caret/edit+Enter rechecked;16 tests3.597s passed. Other native/layout/terminal consumers are unchanged. Header seam scope rechecked in actual light/dark,300→340→300pt file width,hide/reopen and editing headers.16 tests3.606s passed; no new input/drag/icon behavior. Location shortcut actual CUA icon click/three destinations, two modes,842×442 minimum and empty/long folder states rechecked;16 tests4.907s passed. Initial native glyph-width alignment failure is retained. File drop19 tests6.307s pass, typed pasteboard/argv/PTY/focus/no-Enter/lifecycle verified. Actual OS source writer observed but drop completion not verified; RUI-04/PROJECT-FILE-DROP unknown. No native endpoint or independent approval claimed.  Actual user-operated native file endpoint observed via CUA AX; no-Enter is established separately by the real PTY test, not inferred from subsequent shell output.  CUA shortcut section actual checks and19 tests4.852s passed; no external approval claimed.  Twenty tests4.923s plus native CUA endpoint checks; initial resize-hidden selection fixed and rechecked.  Twenty-two tests4.734s; unwanted scroll axis and native display-cycle crash found/fixed, native repeated switches and final zoom checks completed.",
+  "reviewed_at": "2026-10-14T17:34:02.024218+00:00",
+  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics. PR #8: changed appearance scopes rechecked against actual light/dark screenshots and E-A1–A6; unchanged structure/native exceptions retain earlier evidence; local 10-test suite rerun. No independent approval or exported PNG claimed. PR #10: toolbar icon roles, copy, geometry and actions rechecked in actual CUA images/AX, four layouts, both modes, minimum window and restart. Existing scopes outside changed toolbar retain prior observations and rerun PTY checks. PR #11: changed handle, preview, movement, keyboard, same live PTY and persisted order rechecked; direct user acceptance covers requested motion. CUA cannot capture transient drag frames; Reduce Motion physical settings were not changed. Unchanged exclusions/native exceptions retain prior evidence; 11-test checks rerun. PR #12: actual CUA light/dark header/body contrast, five-pane editing/zoom/hidden-pane updates rechecked; no new text/geometry. Existing exceptions and unrelated observations retained. 11-test check passed. Final PR #12 review follow-up adds only three doc comments in response to CodeRabbit coverage warning. Strict format/diff checks passed; no executable behavior or visual contract changed, so E-H1–5 remains applicable. External review coverage is explicitly fccec, follow-up comments self-reviewed. PR #13: pane focus outline removed by explicit user request. Real mouse/keyboard shell input and AX focus, light/dark, zoom and drag swap-back were rechecked in current CUA renders. Previous focus-border appearance is historical; RUI-23 declares the user-requested terminal-only exception, native control focus remains. No transient drag screenshot or full VoiceOver claim. Unchanged scopes retain prior evidence. PR #14: changed toolbar/body/file-panel consumers rechecked in actual CUA, including user hierarchy and stray-line corrections, long path, reopen, two-mode minimum, native folder picker, literal paths, folder expansion, copy/Finder and live shell preservation.15 tests passed. Final restart OS open wait and picker recovery are documented; no permission root cause claimed. Final pointer swap succeeded with2× image coordinates, keyboard restored original order. No drag implementation change or transient-frame claim. Unchanged native exclusions retain prior evidence. PR #14 follow-up: CodeRabbit actual review5101fb1/19files found one valid child metadata failure propagation. Minimal fallback plus deterministic injected-I/O regression test passed with all16 tests3.737s. Latest app restored project root and expanded Sources. Unchanged layout/appearance observations remain applicable; no external re-review of this follow-up is claimed. Path field actual dark/light click/selection/caret/edit+Enter rechecked;16 tests3.597s passed. Other native/layout/terminal consumers are unchanged. Header seam scope rechecked in actual light/dark,300→340→300pt file width,hide/reopen and editing headers.16 tests3.606s passed; no new input/drag/icon behavior. Location shortcut actual CUA icon click/three destinations, two modes,842×442 minimum and empty/long folder states rechecked;16 tests4.907s passed. Initial native glyph-width alignment failure is retained. File drop19 tests6.307s pass, typed pasteboard/argv/PTY/focus/no-Enter/lifecycle verified. Actual OS source writer observed but drop completion not verified; RUI-04/PROJECT-FILE-DROP unknown. No native endpoint or independent approval claimed.  Actual user-operated native file endpoint observed via CUA AX; no-Enter is established separately by the real PTY test, not inferred from subsequent shell output.  CUA shortcut section actual checks and19 tests4.852s passed; no external approval claimed.  Twenty tests4.923s plus native CUA endpoint checks; initial resize-hidden selection fixed and rechecked.  Twenty-two tests4.734s; unwanted scroll axis and native display-cycle crash found/fixed, native repeated switches and final zoom checks completed.  Twenty-two tests5.388s; actual four/five PTYs, ENV, native rows restore and minimum681x442 both modes passed.",
   "catalog_sha256": "9af51eedfbd6625fdcae46aa6a55e6206c447fe43b23fb1d0ff61f8ac800114f",
-  "contract_sha256": "2c6d18d45189f58b2aa8c5b7263a3d94dcc40188ec03b00c5ad0afa37ccccb89",
-  "target_sha256": "12c60c6f889701366679796887b6e5659a6a1d172ece1f1cadde98190228d7c2",
+  "contract_sha256": "794180f18d931f21552b1a43abefee212411e6fe40de23e504a7bf5fca2ca888",
+  "target_sha256": "adc62263b51ed73347cf038835d70cbc526731b72133e3d378756b35f1cffb90",
   "results": [
     {
       "id": "ORC-F01",
@@ -2267,7 +2267,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "spec",
@@ -2341,7 +2341,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "spec",
@@ -2373,12 +2373,12 @@
     {
       "id": "RUI-04",
       "status": "pass",
-      "reason": "홈 아이콘 포인터 클릭과 문서/다운로드 실제 클릭으로 각 목적지 경로가 바뀌는 것을 확인했다. native full-row hit/AX 버튼 역할과16개 기존 경로/PTY 검사를 보존한다. 파일 드롭의 실제 사용자 조작 후 endpoint를 AX로 확인했으며 Enter 미전송은 실제 PTY 검사로 별도 확인했다. 이번 단일 탭 보기는 실제4셸 전환/ENV 보존/추가·닫기/가로 탐색/복원을 확인했다. 실제4/5셸 좌우/격자/탭 전환과 keyboard/manual scroll, ENV 보존 및 확대를 확인했다.",
+      "reason": "홈 아이콘 포인터 클릭과 문서/다운로드 실제 클릭으로 각 목적지 경로가 바뀌는 것을 확인했다. native full-row hit/AX 버튼 역할과16개 기존 경로/PTY 검사를 보존한다. 파일 드롭의 실제 사용자 조작 후 endpoint를 AX로 확인했으며 Enter 미전송은 실제 PTY 검사로 별도 확인했다. 이번 단일 탭 보기는 실제4셸 전환/ENV 보존/추가·닫기/가로 탐색/복원을 확인했다. 실제4/5셸 좌우/격자/탭 전환과 keyboard/manual scroll, ENV 보존 및 확대를 확인했다. 상하4/5셸 전환과 모든 모드 연속 전환/ENV 유지/Scroll Up·keyboard focus/재실행을 실제 확인했다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "interaction",
@@ -2489,6 +2489,16 @@
           "kind": "interaction",
           "path": "design/evidence/all-terminal-columns.md",
           "sha256": "612d8326785d8e697963793a9678b4292c096f4f8dd2f08d94d4992f6f50554f"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/all-terminal-rows.md",
+          "sha256": "5f6bd02d50eaec59879e1d4ea99bc58571fc5c5d2b898a998e8fca8347edd21c"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/all-terminal-rows.md",
+          "sha256": "5f6bd02d50eaec59879e1d4ea99bc58571fc5c5d2b898a998e8fca8347edd21c"
         }
       ]
     },
@@ -2500,7 +2510,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "visual",
@@ -2589,7 +2599,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "visual",
@@ -2696,7 +2706,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "code",
@@ -2816,7 +2826,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "visual",
@@ -2873,7 +2883,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "visual",
@@ -2998,7 +3008,7 @@
     {
       "id": "RUI-13",
       "status": "pass",
-      "reason": "세로 행으로 바꾼 뒤 최소842×442pt에서 header/path/세 바로가기와 파일 목록이 가려지지 않는 것을 두 모드로 확인했다. 빈 상태는 scrollbar 없이, 긴 파일 목록은 기존 native scroll로 표시한다. 108pt 묶음과 기존 header/path/목록이 두 모드 최소842×442에서도 가려지지 않았다. 탭 overflow와 긴 이름/681×432 최소 창을 두 모드에서 확인했고 크기 변경 후 선택 탭을 드러내도록 수정했다. 실제 두 모드/최소842×442에서 모든 칸에 가로 탐색/키보드 focus로 접근하며 창을 화면 밖으로 강제 확대하지 않는다.",
+      "reason": "세로 행으로 바꾼 뒤 최소842×442pt에서 header/path/세 바로가기와 파일 목록이 가려지지 않는 것을 두 모드로 확인했다. 빈 상태는 scrollbar 없이, 긴 파일 목록은 기존 native scroll로 표시한다. 108pt 묶음과 기존 header/path/목록이 두 모드 최소842×442에서도 가려지지 않았다. 탭 overflow와 긴 이름/681×432 최소 창을 두 모드에서 확인했고 크기 변경 후 선택 탭을 드러내도록 수정했다. 실제 두 모드/최소842×442에서 모든 칸에 가로 탐색/키보드 focus로 접근하며 창을 화면 밖으로 강제 확대하지 않는다. 상하 모든 pane을 유지하며 두 모드1100×752/최소681×442에서 세로 scroll로 접근하고 불필요한 가로 scroller는 생기지 않았다.",
       "evidence": [
         {
           "kind": "code",
@@ -3109,6 +3119,21 @@
           "kind": "interaction",
           "path": "design/evidence/all-terminal-columns.md",
           "sha256": "612d8326785d8e697963793a9678b4292c096f4f8dd2f08d94d4992f6f50554f"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/all-terminal-rows.md",
+          "sha256": "5f6bd02d50eaec59879e1d4ea99bc58571fc5c5d2b898a998e8fca8347edd21c"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/all-terminal-rows.md",
+          "sha256": "5f6bd02d50eaec59879e1d4ea99bc58571fc5c5d2b898a998e8fca8347edd21c"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/all-terminal-rows.md",
+          "sha256": "5f6bd02d50eaec59879e1d4ea99bc58571fc5c5d2b898a998e8fca8347edd21c"
         }
       ]
     },
@@ -3219,7 +3244,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "visual",
@@ -3316,7 +3341,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "visual",
@@ -3398,7 +3423,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "visual",
@@ -3586,7 +3611,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "code",
@@ -3724,7 +3749,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "visual",
@@ -3766,7 +3791,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "visual",
@@ -3848,7 +3873,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "code",
@@ -3965,12 +3990,12 @@
     {
       "id": "PROJECT-LAYOUT",
       "status": "pass",
-      "reason": "새 body split은 global toolbar 아래에만 설치하며 terminal canvas 내부 geometry/model을 유지한다. panel min280과 layout min을 합산하고 화면에 들어가지 않는 추가/열기를 거절한다. 최소 창·개폐·geometry 테스트와 실제 교환을 확인했다. 이번 PR은 단일 보기의1칸 제한만 해제하고 layout/surface를 모두 보존하는 presentation을 추가했다. 좌우/상하의 기존 제한은 후속 PR이다. 이후 좌우/격자의 모든 pane 보존 요구에 맞춰 실제 문서 최소/viewport 최소를 분리하고 화면 공간에 따른 추가 거절을 native overflow로 대체했다. 상하는 다음 PR이다.",
+      "reason": "새 body split은 global toolbar 아래에만 설치하며 terminal canvas 내부 geometry/model을 유지한다. panel min280과 layout min을 합산하고 화면에 들어가지 않는 추가/열기를 거절한다. 최소 창·개폐·geometry 테스트와 실제 교환을 확인했다. 이번 PR은 단일 보기의1칸 제한만 해제하고 layout/surface를 모두 보존하는 presentation을 추가했다. 좌우/상하의 기존 제한은 후속 PR이다. 이후 좌우/격자의 모든 pane 보존 요구에 맞춰 실제 문서 최소/viewport 최소를 분리하고 화면 공간에 따른 추가 거절을 native overflow로 대체했다. 상하는 다음 PR이다. 이후 상하 전환도 같은 모든-pane 보존 경로로 통일해 마지막 fixed-capacity 축소/빈 칸 삭제를 제거했다. 모든 표시 모드가 기존 터미널 수로 전환을 막지 않는다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "code",
@@ -4141,18 +4166,38 @@
           "kind": "interaction",
           "path": "design/evidence/all-terminal-columns.md",
           "sha256": "612d8326785d8e697963793a9678b4292c096f4f8dd2f08d94d4992f6f50554f"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/all-terminal-rows.md",
+          "sha256": "5f6bd02d50eaec59879e1d4ea99bc58571fc5c5d2b898a998e8fca8347edd21c"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/all-terminal-rows.md",
+          "sha256": "5f6bd02d50eaec59879e1d4ea99bc58571fc5c5d2b898a998e8fca8347edd21c"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/all-terminal-rows.md",
+          "sha256": "5f6bd02d50eaec59879e1d4ea99bc58571fc5c5d2b898a998e8fca8347edd21c"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/all-terminal-rows.md",
+          "sha256": "5f6bd02d50eaec59879e1d4ea99bc58571fc5c5d2b898a998e8fca8347edd21c"
         }
       ]
     },
     {
       "id": "PROJECT-MANAGE",
       "status": "pass",
-      "reason": "새 파일 탐색과 panel 개폐는 기존 canvas/view/surface를 재사용한다. 실제 PID/변수 보존, terminal zoom과11→16 교환/원위치 복원, 자동 surface/focus 검사로 확인했다. 경로 탐색은 셸 cwd를 바꾸지 않는다. 파일 드롭 시 기존 target focus/surface·다른 셸 유지와 닫힌 대상 거절을 PTY로 확인했다. 실제 단일 탭 전환 전후 같은 ENV를 출력했고 자동 검사에서4개 surface/포커스 유지와5번째 추가·닫기를 확인했다. 4/5셸의 surface/포커스/ENV·순서를 유지하고 실제 keyboard scroll/five roundtrips/zoom 복귀를 확인했다.",
+      "reason": "새 파일 탐색과 panel 개폐는 기존 canvas/view/surface를 재사용한다. 실제 PID/변수 보존, terminal zoom과11→16 교환/원위치 복원, 자동 surface/focus 검사로 확인했다. 경로 탐색은 셸 cwd를 바꾸지 않는다. 파일 드롭 시 기존 target focus/surface·다른 셸 유지와 닫힌 대상 거절을 PTY로 확인했다. 실제 단일 탭 전환 전후 같은 ENV를 출력했고 자동 검사에서4개 surface/포커스 유지와5번째 추가·닫기를 확인했다. 4/5셸의 surface/포커스/ENV·순서를 유지하고 실제 keyboard scroll/five roundtrips/zoom 복귀를 확인했다. 상하4/5셸의 실제 ENV 보존과 자동 surface/UUID/viewport focus를 확인했다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "code",
@@ -4353,6 +4398,26 @@
           "kind": "interaction",
           "path": "design/evidence/all-terminal-columns.md",
           "sha256": "612d8326785d8e697963793a9678b4292c096f4f8dd2f08d94d4992f6f50554f"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/all-terminal-rows.md",
+          "sha256": "5f6bd02d50eaec59879e1d4ea99bc58571fc5c5d2b898a998e8fca8347edd21c"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/all-terminal-rows.md",
+          "sha256": "5f6bd02d50eaec59879e1d4ea99bc58571fc5c5d2b898a998e8fca8347edd21c"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/all-terminal-rows.md",
+          "sha256": "5f6bd02d50eaec59879e1d4ea99bc58571fc5c5d2b898a998e8fca8347edd21c"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/all-terminal-rows.md",
+          "sha256": "5f6bd02d50eaec59879e1d4ea99bc58571fc5c5d2b898a998e8fca8347edd21c"
         }
       ]
     },
@@ -4364,7 +4429,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "code",
@@ -4431,12 +4496,12 @@
     {
       "id": "PROJECT-RESTORE",
       "status": "pass",
-      "reason": "기존 session snapshot은 바꾸지 않고 file root/표시/폭만 별도 UserDefaults에 저장한다. 실제 사용자4칸 복원, 마지막 성공 루트만 저장하는 격리 테스트를 확인했다. 최종 재실행 OS open 대기와 선택기 복구는 E-T10 후속 기록에 명시한다. 이후 단일 탭 보기 요구에 따라 v1 snapshot에 optional tabbed 필드를 추가했다. 구 저장 decode/새 flag roundtrip과 실제 네 셸·선택 복원을 확인했다. 임의 개수 balanced split tree는 기존 Codable schema로 저장하고 실제4열 복원 및22개 roundtrip 검사를 확인했다.",
+      "reason": "기존 session snapshot은 바꾸지 않고 file root/표시/폭만 별도 UserDefaults에 저장한다. 실제 사용자4칸 복원, 마지막 성공 루트만 저장하는 격리 테스트를 확인했다. 최종 재실행 OS open 대기와 선택기 복구는 E-T10 후속 기록에 명시한다. 이후 단일 탭 보기 요구에 따라 v1 snapshot에 optional tabbed 필드를 추가했다. 구 저장 decode/새 flag roundtrip과 실제 네 셸·선택 복원을 확인했다. 임의 개수 balanced split tree는 기존 Codable schema로 저장하고 실제4열 복원 및22개 roundtrip 검사를 확인했다. 실제 앱을 종료/재실행해 상하4행·6번 선택·네 셸 복원을 확인했다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "code",
@@ -4577,6 +4642,26 @@
           "kind": "interaction",
           "path": "design/evidence/all-terminal-columns.md",
           "sha256": "612d8326785d8e697963793a9678b4292c096f4f8dd2f08d94d4992f6f50554f"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/all-terminal-rows.md",
+          "sha256": "5f6bd02d50eaec59879e1d4ea99bc58571fc5c5d2b898a998e8fca8347edd21c"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/all-terminal-rows.md",
+          "sha256": "5f6bd02d50eaec59879e1d4ea99bc58571fc5c5d2b898a998e8fca8347edd21c"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/all-terminal-rows.md",
+          "sha256": "5f6bd02d50eaec59879e1d4ea99bc58571fc5c5d2b898a998e8fca8347edd21c"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/all-terminal-rows.md",
+          "sha256": "5f6bd02d50eaec59879e1d4ea99bc58571fc5c5d2b898a998e8fca8347edd21c"
         }
       ]
     },
@@ -4588,7 +4673,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "code",
@@ -4660,7 +4745,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "code",
@@ -4772,7 +4857,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "code",
@@ -5024,7 +5109,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "code",
@@ -5061,7 +5146,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "code",
@@ -5278,7 +5363,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "70897c96c25ea32ca1a5b0626decfb2b0286d4cf66a24fce49650e16c148d3ae"
+          "sha256": "949759a64559297d1b529790896d3bb724f2b3b8df9a5ad474d65cf76311c8fa"
         },
         {
           "kind": "code",
@@ -5911,6 +5996,33 @@
           "kind": "interaction",
           "path": "design/evidence/all-terminal-columns.md",
           "sha256": "612d8326785d8e697963793a9678b4292c096f4f8dd2f08d94d4992f6f50554f"
+        }
+      ]
+    },
+    {
+      "id": "PROJECT-ALL-ROWS",
+      "status": "pass",
+      "reason": "실제4/5셸 모든 모드와 ENV/두 모드·최소 창·세로 탐색/상하 복원 및22개 검사를 확인했다. 마지막 표시 모드별 cap/삭제 경로를 제거했다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "design/evidence/all-terminal-rows.md",
+          "sha256": "5f6bd02d50eaec59879e1d4ea99bc58571fc5c5d2b898a998e8fca8347edd21c"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/all-terminal-rows.md",
+          "sha256": "5f6bd02d50eaec59879e1d4ea99bc58571fc5c5d2b898a998e8fca8347edd21c"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/all-terminal-rows.md",
+          "sha256": "5f6bd02d50eaec59879e1d4ea99bc58571fc5c5d2b898a998e8fca8347edd21c"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/all-terminal-rows.md",
+          "sha256": "5f6bd02d50eaec59879e1d4ea99bc58571fc5c5d2b898a998e8fca8347edd21c"
         }
       ]
     }

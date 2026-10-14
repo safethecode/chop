@@ -62,3 +62,5 @@ V-31 / F-COLUMNS-COUNT: 좌우2개/격자4개 전환 제한을 없애고 모든 
 V-32 / F-CANVAS-SCROLL-AXIS: 가로 넘침 뒤 불필요한 세로 scroller를 실제 발견해 clip 크기에 맞추고 legacy 축 회귀를 추가했다. fixed-and-verified.
 
 V-33 / F-CANVAS-DISPLAY-CYCLE: 첫 scroller 수정의 layout 내 재타일링으로 native 전환 중 충돌했다. main queue 다음 갱신에서 수렴시키도록 수정해 실제5회 왕복·5셸 모드·최종 확대/복귀와22개 검사를 확인했다. fixed-and-verified; 최초 crash를 기록에 보존한다.
+
+V-34 / F-ROWS-COUNT: 마지막 상하2개 전환 제한과 empty 슬롯 삭제 경로를 없앴다. 실제4/5셸 모든 모드/ENV/두 모드·최소 창·세로 탐색/재실행 복원과22개 검사를 확인했다. fixed-and-verified. [관찰](evidence/all-terminal-rows.md).
