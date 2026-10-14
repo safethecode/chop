@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "reviewer": "Codex self-review; actual code/test/CUA observations, not independent approval",
-  "reviewed_at": "2026-10-14T14:02:33.067658+00:00",
-  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics. PR #8: changed appearance scopes rechecked against actual light/dark screenshots and E-A1–A6; unchanged structure/native exceptions retain earlier evidence; local 10-test suite rerun. No independent approval or exported PNG claimed. PR #10: toolbar icon roles, copy, geometry and actions rechecked in actual CUA images/AX, four layouts, both modes, minimum window and restart. Existing scopes outside changed toolbar retain prior observations and rerun PTY checks. PR #11: changed handle, preview, movement, keyboard, same live PTY and persisted order rechecked; direct user acceptance covers requested motion. CUA cannot capture transient drag frames; Reduce Motion physical settings were not changed. Unchanged exclusions/native exceptions retain prior evidence; 11-test checks rerun. PR #12: actual CUA light/dark header/body contrast, five-pane editing/zoom/hidden-pane updates rechecked; no new text/geometry. Existing exceptions and unrelated observations retained. 11-test check passed. Final PR #12 review follow-up adds only three doc comments in response to CodeRabbit coverage warning. Strict format/diff checks passed; no executable behavior or visual contract changed, so E-H1–5 remains applicable. External review coverage is explicitly fccec, follow-up comments self-reviewed.",
+  "reviewed_at": "2026-10-14T14:09:26.552828+00:00",
+  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics. PR #8: changed appearance scopes rechecked against actual light/dark screenshots and E-A1–A6; unchanged structure/native exceptions retain earlier evidence; local 10-test suite rerun. No independent approval or exported PNG claimed. PR #10: toolbar icon roles, copy, geometry and actions rechecked in actual CUA images/AX, four layouts, both modes, minimum window and restart. Existing scopes outside changed toolbar retain prior observations and rerun PTY checks. PR #11: changed handle, preview, movement, keyboard, same live PTY and persisted order rechecked; direct user acceptance covers requested motion. CUA cannot capture transient drag frames; Reduce Motion physical settings were not changed. Unchanged exclusions/native exceptions retain prior evidence; 11-test checks rerun. PR #12: actual CUA light/dark header/body contrast, five-pane editing/zoom/hidden-pane updates rechecked; no new text/geometry. Existing exceptions and unrelated observations retained. 11-test check passed. Final PR #12 review follow-up adds only three doc comments in response to CodeRabbit coverage warning. Strict format/diff checks passed; no executable behavior or visual contract changed, so E-H1–5 remains applicable. External review coverage is explicitly fccec, follow-up comments self-reviewed. PR #13: pane focus outline removed by explicit user request. Real mouse/keyboard shell input and AX focus, light/dark, zoom and drag swap-back were rechecked in current CUA renders. Previous focus-border appearance is historical; RUI-23 declares the user-requested terminal-only exception, native control focus remains. No transient drag screenshot or full VoiceOver claim. Unchanged scopes retain prior evidence.",
   "catalog_sha256": "9af51eedfbd6625fdcae46aa6a55e6206c447fe43b23fb1d0ff61f8ac800114f",
-  "contract_sha256": "c42a601d5af782793cf813b7a53f251cf5786d5910fa2bd1a5002efebbffa974",
-  "target_sha256": "01698610df7efe19a8aff5e6d7f308ffaa4b59e50be66057bd4530b2f5207403",
+  "contract_sha256": "989d429bb6d1397e9fb40b6e468b1e2e3147fd26889f616cb29e97ea9c7d1eb3",
+  "target_sha256": "e04ebeeddbbece65db61c32976c13723dffdfef4133c6148d3bed0e46bc14f6b",
   "results": [
     {
       "id": "ORC-F01",
@@ -22,12 +22,12 @@
     {
       "id": "ORC-F03",
       "status": "exception",
-      "reason": "헤더 배경을 본문과 다른 중립색으로 두 모드 모두 적용했다. 다크5칸의 이름/경로/아이콘과 포커스가 읽히며 light에서도 대조했다.",
+      "reason": "두 모드의 텍스트/헤더 대비를 유지한다. pane 포커스 경계는 사용자 요청으로 없애고 실제 terminal 입력 커서/AX 초점을 보존한다. E-F1–5에서 실제 입력과 함께 확인했다.",
       "evidence": [
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -68,6 +68,16 @@
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
           "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
         }
       ],
       "exception_id": "CHOP-ORC-F03"
@@ -80,7 +90,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -119,7 +129,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -171,7 +181,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -198,7 +208,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -213,7 +223,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "4baa363b237f2cf6dc78c481cc3eff17e6c2aae94e2a1bd91358b5ac5d2ebf03"
+          "sha256": "a1ba251853cfbcabf242c75fafc79481f5b70d026136f29368fcf65673316151"
         },
         {
           "kind": "code",
@@ -272,7 +282,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -356,7 +366,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -408,7 +418,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -423,7 +433,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "4baa363b237f2cf6dc78c481cc3eff17e6c2aae94e2a1bd91358b5ac5d2ebf03"
+          "sha256": "a1ba251853cfbcabf242c75fafc79481f5b70d026136f29368fcf65673316151"
         },
         {
           "kind": "code",
@@ -472,7 +482,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -487,7 +497,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "4baa363b237f2cf6dc78c481cc3eff17e6c2aae94e2a1bd91358b5ac5d2ebf03"
+          "sha256": "a1ba251853cfbcabf242c75fafc79481f5b70d026136f29368fcf65673316151"
         },
         {
           "kind": "code",
@@ -509,12 +519,12 @@
     {
       "id": "ORC-F15",
       "status": "pass",
-      "reason": "반복 엔티티 아이콘/배지에 서로 다른 색을 배정하지 않는다. 기본 콘텐츠는 중립색이며 포커스와 선택만 시스템 accent를 사용한다.",
+      "reason": "반복 칸에 서로 다른 임의 색을 배정하지 않는다. 사용자 요청으로 pane 입력 포커스 테두리는 제거하고 native 선택·버튼/메뉴와 유효 드롭 대상의 system accent만 유지한다.",
       "evidence": [
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -535,6 +545,16 @@
           "kind": "visual",
           "path": "design/evidence/pr8-appearance.md",
           "sha256": "cc766d28956ed9f75c836c06bccefda289349d7aeb77fcb2313a1e13dc2e2538"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
         }
       ]
     },
@@ -546,7 +566,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -578,7 +598,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -611,7 +631,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -644,7 +664,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -686,7 +706,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -701,7 +721,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "4baa363b237f2cf6dc78c481cc3eff17e6c2aae94e2a1bd91358b5ac5d2ebf03"
+          "sha256": "a1ba251853cfbcabf242c75fafc79481f5b70d026136f29368fcf65673316151"
         },
         {
           "kind": "code",
@@ -754,7 +774,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -787,7 +807,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -839,7 +859,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -866,7 +886,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -893,7 +913,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -950,7 +970,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -1003,7 +1023,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -1042,7 +1062,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -1074,7 +1094,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -1101,7 +1121,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -1116,7 +1136,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "4baa363b237f2cf6dc78c481cc3eff17e6c2aae94e2a1bd91358b5ac5d2ebf03"
+          "sha256": "a1ba251853cfbcabf242c75fafc79481f5b70d026136f29368fcf65673316151"
         },
         {
           "kind": "code",
@@ -1175,7 +1195,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -1254,7 +1274,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -1306,7 +1326,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -1321,7 +1341,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "4baa363b237f2cf6dc78c481cc3eff17e6c2aae94e2a1bd91358b5ac5d2ebf03"
+          "sha256": "a1ba251853cfbcabf242c75fafc79481f5b70d026136f29368fcf65673316151"
         },
         {
           "kind": "code",
@@ -1380,7 +1400,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -1395,7 +1415,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "4baa363b237f2cf6dc78c481cc3eff17e6c2aae94e2a1bd91358b5ac5d2ebf03"
+          "sha256": "a1ba251853cfbcabf242c75fafc79481f5b70d026136f29368fcf65673316151"
         },
         {
           "kind": "code",
@@ -1428,7 +1448,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -1460,7 +1480,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -1503,7 +1523,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -1531,12 +1551,12 @@
     {
       "id": "ORC-A04",
       "status": "exception",
-      "reason": "Tailwind blue-500을 선택하지 않았다. 네이티브 앱의 선택/포커스는 사용자 시스템 accent를 유지한다. 요청 없는 브랜드 팔레트 3안을 UI에 임의 도입하지 않는다.",
+      "reason": "Tailwind blue-500을 새로 선택하지 않았다. 사용자 요청으로 pane 입력 포커스 테두리를 없애되 native 컨트롤 선택/키보드 초점과 별도 드롭 대상의 system accent는 유지한다.",
       "evidence": [
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -1562,6 +1582,16 @@
           "kind": "visual",
           "path": "design/evidence/pr10-toolbar-icons.md",
           "sha256": "25ef4efd56e0b8648e621fe416f32662f98da6c4be157a1b70d6cb80dec6b02d"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
         }
       ],
       "exception_id": "CHOP-ORC-A04"
@@ -1574,7 +1604,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -1602,7 +1632,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -1630,7 +1660,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -1679,7 +1709,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -1707,7 +1737,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -1722,7 +1752,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "4baa363b237f2cf6dc78c481cc3eff17e6c2aae94e2a1bd91358b5ac5d2ebf03"
+          "sha256": "a1ba251853cfbcabf242c75fafc79481f5b70d026136f29368fcf65673316151"
         },
         {
           "kind": "code",
@@ -1770,7 +1800,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "spec",
@@ -1787,7 +1817,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "code",
@@ -1803,6 +1833,11 @@
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
           "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
         }
       ]
     },
@@ -1814,7 +1849,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "spec",
@@ -1825,18 +1860,23 @@
           "kind": "spec",
           "path": "design/evidence/pr11-pane-reordering.md",
           "sha256": "9a7b8cd6f9da2a5eed6b514564661a8e7e9dbce0862b244b6503d22aefcb604b"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
         }
       ]
     },
     {
       "id": "RUI-04",
       "status": "pass",
-      "reason": "실제 비대칭 5칸의 드래그·취소·키보드 좌우 교환과 동일 PID/변수를 확인했다. PTY identity·preview·geometry·snapshot roundtrip은 11개 테스트에서 검증했다.",
+      "reason": "테두리 없이 클릭/⌘⌥방향키로 실제 두 셸에 각각 다른 출력을 실행했고 AX 초점이 입력 대상과 일치했다. 기존11개 PTY/모드/레이아웃/복원 검사를 재실행했다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "interaction",
@@ -1846,7 +1886,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "4baa363b237f2cf6dc78c481cc3eff17e6c2aae94e2a1bd91358b5ac5d2ebf03"
+          "sha256": "a1ba251853cfbcabf242c75fafc79481f5b70d026136f29368fcf65673316151"
         },
         {
           "kind": "spec",
@@ -1887,6 +1927,16 @@
           "kind": "interaction",
           "path": "design/evidence/pr12-header-background.md",
           "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
         }
       ]
     },
@@ -1898,7 +1948,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "visual",
@@ -1945,7 +1995,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "code",
@@ -1962,7 +2012,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "visual",
@@ -2019,12 +2069,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -2061,7 +2111,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -2119,7 +2169,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "visual",
@@ -2156,7 +2206,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "visual",
@@ -2203,7 +2253,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -2246,7 +2296,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -2261,7 +2311,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "4baa363b237f2cf6dc78c481cc3eff17e6c2aae94e2a1bd91358b5ac5d2ebf03"
+          "sha256": "a1ba251853cfbcabf242c75fafc79481f5b70d026136f29368fcf65673316151"
         },
         {
           "kind": "code",
@@ -2283,12 +2333,12 @@
     {
       "id": "RUI-14",
       "status": "exception",
-      "reason": "기존 native splitter/포커스를 유지한다. 추가한40pt 헤더 배경은 이름/경로/조작의 실제 소속 영역이며 별도의 장식 구분 바나 밑줄을 만들지 않는다.",
+      "reason": "native splitter와 실제 입력 커서/컨트롤 초점을 유지하며 사용자 요청으로 pane 전체의 파란 경계를 제거했다.40pt 헤더는 이름/조작의 소속 영역이고 장식 바나 선택 밑줄을 추가하지 않는다.",
       "evidence": [
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -2324,6 +2374,16 @@
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
           "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
         }
       ],
       "exception_id": "CHOP-RUI-14"
@@ -2337,7 +2397,7 @@
     {
       "id": "RUI-16",
       "status": "pass",
-      "reason": "사용자 기본 canvas의 넓은 본문·헤더·중앙+ 관계를 유지한다. 추가 요청에 따라 헤더 배경만 본문과 구분했다. 기존4칸 진입 검사는 재실행하고 사용 중5칸을 보존해 실제 화면을 대조했다.",
+      "reason": "원본 기본 canvas의 넓은 본문/칸/중앙+ 관계를 유지한다. 원본에 보인 파란 입력 경계는 사용자의 후속 명시 요청으로 제거한 차이다. 실제4칸·두 모드·입력/확대/교환을 대조했다.",
       "evidence": [
         {
           "kind": "spec",
@@ -2357,7 +2417,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "visual",
@@ -2388,13 +2448,23 @@
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
           "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
         }
       ]
     },
     {
       "id": "RUI-17",
       "status": "pass",
-      "reason": "5칸 전체에서 헤더 메타데이터와 실제 터미널 영역을 구분해 요청을 반영한다. 본문 영역/toolbar/중앙+·조작 위계가 유지되며 새로운 장식/문구를 추가하지 않았다.",
+      "reason": "파란 pane 입력 경계를 제거하면서 실제 shell 입력 커서·키보드 선택/저장·칸 헤더·중앙+ 관계를 유지한다. 두 모드 실제 입력과 확대/재배치 뒤 같은 작업 위계를 확인했다.",
       "evidence": [
         {
           "kind": "spec",
@@ -2414,7 +2484,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "visual",
@@ -2445,6 +2515,16 @@
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
           "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
         }
       ]
     },
@@ -2456,7 +2536,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "visual",
@@ -2489,7 +2569,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -2527,7 +2607,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -2573,23 +2653,33 @@
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
           "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
         }
       ]
     },
     {
       "id": "RUI-23",
-      "status": "pass",
-      "reason": "실행/빈/편집/확대·숨긴 칸의 headerBackground 역할과 치수를 공유한다. 두 모드와 확대 중 전환 후 전체5칸에서 같은 톤으로 적용됨을 확인했다.",
+      "status": "exception",
+      "reason": "사용자 명시 요청에 따라 terminal pane 전체의 입력 포커스 테두리는 표시하지 않는다. 실제 입력 커서·AX first responder·키보드 이동은 보존한다. native 버튼/메뉴의 키보드 초점은 유지한다. 두 모드와 일반/편집/확대/교환 뒤 실제 입력을 확인했다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -2650,8 +2740,24 @@
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
           "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
         }
-      ]
+      ],
+      "exception_id": "CHOP-RUI-23-FOCUS"
     },
     {
       "id": "RUI-24",
@@ -2661,7 +2767,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "visual",
@@ -2693,7 +2799,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "visual",
@@ -2745,12 +2851,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -2765,7 +2871,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "4baa363b237f2cf6dc78c481cc3eff17e6c2aae94e2a1bd91358b5ac5d2ebf03"
+          "sha256": "a1ba251853cfbcabf242c75fafc79481f5b70d026136f29368fcf65673316151"
         },
         {
           "kind": "interaction",
@@ -2867,12 +2973,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -2887,7 +2993,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "4baa363b237f2cf6dc78c481cc3eff17e6c2aae94e2a1bd91358b5ac5d2ebf03"
+          "sha256": "a1ba251853cfbcabf242c75fafc79481f5b70d026136f29368fcf65673316151"
         },
         {
           "kind": "interaction",
@@ -2984,17 +3090,17 @@
     {
       "id": "PROJECT-MANAGE",
       "status": "pass",
-      "reason": "자리 교환에서도 기존 pane/terminal/surface를 재사용하고 source로 포커스를 유지한다. 실제 셸 PID88966·변수 보존과 PTY 통합 테스트로 확인했다.",
+      "reason": "실제 선택은 Workspace focusedID와 first responder/Ghostty focus를 유지한다. 표현용 isFocused 경계만 제거했다. 두 모드에서 클릭/키보드로 각각의 shell에 입력했고 확대·칸 교환 후에도 같은 화면과 초점이 유지됐다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -3009,7 +3115,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "4baa363b237f2cf6dc78c481cc3eff17e6c2aae94e2a1bd91358b5ac5d2ebf03"
+          "sha256": "a1ba251853cfbcabf242c75fafc79481f5b70d026136f29368fcf65673316151"
         },
         {
           "kind": "interaction",
@@ -3090,6 +3196,26 @@
           "kind": "interaction",
           "path": "design/evidence/pr12-header-background.md",
           "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
         }
       ]
     },
@@ -3101,12 +3227,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -3121,7 +3247,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "4baa363b237f2cf6dc78c481cc3eff17e6c2aae94e2a1bd91358b5ac5d2ebf03"
+          "sha256": "a1ba251853cfbcabf242c75fafc79481f5b70d026136f29368fcf65673316151"
         },
         {
           "kind": "interaction",
@@ -3173,12 +3299,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -3193,7 +3319,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "4baa363b237f2cf6dc78c481cc3eff17e6c2aae94e2a1bd91358b5ac5d2ebf03"
+          "sha256": "a1ba251853cfbcabf242c75fafc79481f5b70d026136f29368fcf65673316151"
         },
         {
           "kind": "interaction",
@@ -3265,12 +3391,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -3285,7 +3411,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "4baa363b237f2cf6dc78c481cc3eff17e6c2aae94e2a1bd91358b5ac5d2ebf03"
+          "sha256": "a1ba251853cfbcabf242c75fafc79481f5b70d026136f29368fcf65673316151"
         },
         {
           "kind": "interaction",
@@ -3337,12 +3463,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -3357,7 +3483,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "4baa363b237f2cf6dc78c481cc3eff17e6c2aae94e2a1bd91358b5ac5d2ebf03"
+          "sha256": "a1ba251853cfbcabf242c75fafc79481f5b70d026136f29368fcf65673316151"
         },
         {
           "kind": "interaction",
@@ -3449,12 +3575,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -3469,7 +3595,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "4baa363b237f2cf6dc78c481cc3eff17e6c2aae94e2a1bd91358b5ac5d2ebf03"
+          "sha256": "a1ba251853cfbcabf242c75fafc79481f5b70d026136f29368fcf65673316151"
         },
         {
           "kind": "interaction",
@@ -3596,17 +3722,17 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "4baa363b237f2cf6dc78c481cc3eff17e6c2aae94e2a1bd91358b5ac5d2ebf03"
+          "sha256": "a1ba251853cfbcabf242c75fafc79481f5b70d026136f29368fcf65673316151"
         },
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -3638,12 +3764,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -3704,6 +3830,26 @@
           "kind": "interaction",
           "path": "design/evidence/pr12-header-background.md",
           "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
         }
       ]
     },
@@ -3715,12 +3861,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "7f11c7dd2304d5d1cb1a7b4a23471437cdb8066e9beb9233423bd4eab96cf1a2"
+          "sha256": "b81f607c84569193c5aa8fce37fd63d56ed987aaf62720f9f0db2910f4bfd06d"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "c1a8a053e2a284b83df946784d09a390fa5a732641fac6285a27ea816c5b3302"
+          "sha256": "f3a8fde125b63926f7b0467e167d10ca585613fc94de1cf652b0e7b9e31edecf"
         },
         {
           "kind": "visual",
@@ -3798,6 +3944,26 @@
           "kind": "interaction",
           "path": "design/evidence/pr12-header-background.md",
           "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
         }
       ]
     },
@@ -3825,6 +3991,53 @@
           "kind": "interaction",
           "path": "design/evidence/pr12-header-background.md",
           "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        }
+      ]
+    },
+    {
+      "id": "PROJECT-NO-FOCUS-BORDER",
+      "status": "pass",
+      "reason": "E-F1–5에서 실제 두 모드/4칸의 클릭·⌘⌥방향키 입력 대상과 AX 초점·커서를 대조했고 확대·드래그 교환/역교환/편집 종료 뒤 파란 경계가 없었다. 표현 상태 삭제와 실제 focus/storage 유지 경로를 리뷰했고 기존11개 테스트가 통과했다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr13-no-focus-border.md",
+          "sha256": "a87187553f82b1f121ac2b3990c952bff43401a580947c0568200fe1aa751962"
         }
       ]
     }

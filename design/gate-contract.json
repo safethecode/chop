@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "catalog_version": 5,
-  "scope_notes": "Native macOS Chop v0.1, user task and DESIGN comparison. macOS26.5.2/CI15; macOS14 physical, full VoiceOver/all IMEs and hardware wheel are explicitly outside verified combinations. Shell/TUI VT styling and standard OS chrome are distinguished from app-owned labels. cmux is technical/feature inspiration, not a visual pixel reference. User correction 2026-10-14 adds R-DEFAULT canvas screenshot as a visual/state reference; first shell + three empty plus panes is mandatory at default entry. Previous main gate lacked that condition; its historical ledger is retained. PR #8: user-requested light/dark modes; preserve default grid in both modes, apply to native chrome and all terminals without PTY replacement, persist selection. Evidence is self review, with actual CUA observations recorded as Markdown. PR #10: user-requested icon-only mode toggle and layout presets. Preserve R-DEFAULT canvas and R-TOOLBAR location/options/selection; icons are an intentional user-requested change from text, not an exact crop clone. PR #11: editing-only same-workspace pane exchange with whole-pane/GPU drag preview and placement motion, requested and directly accepted by user. Preserve live PTY and split geometry. CUA before/after observations are separate from user motion feedback; no mid-drag frame capture or physical Reduce Motion execution is claimed. PR #12: user-requested uniform header background distinct from body in both modes, not per-terminal colors. Actual five-pane light/dark, editing, zoom and hidden-pane mode update rechecked without changing geometry.",
+  "scope_notes": "Native macOS Chop v0.1, user task and DESIGN comparison. macOS26.5.2/CI15; macOS14 physical, full VoiceOver/all IMEs and hardware wheel are explicitly outside verified combinations. Shell/TUI VT styling and standard OS chrome are distinguished from app-owned labels. cmux is technical/feature inspiration, not a visual pixel reference. User correction 2026-10-14 adds R-DEFAULT canvas screenshot as a visual/state reference; first shell + three empty plus panes is mandatory at default entry. Previous main gate lacked that condition; its historical ledger is retained. PR #8: user-requested light/dark modes; preserve default grid in both modes, apply to native chrome and all terminals without PTY replacement, persist selection. Evidence is self review, with actual CUA observations recorded as Markdown. PR #10: user-requested icon-only mode toggle and layout presets. Preserve R-DEFAULT canvas and R-TOOLBAR location/options/selection; icons are an intentional user-requested change from text, not an exact crop clone. PR #11: editing-only same-workspace pane exchange with whole-pane/GPU drag preview and placement motion, requested and directly accepted by user. Preserve live PTY and split geometry. CUA before/after observations are separate from user motion feedback; no mid-drag frame capture or physical Reduce Motion execution is claimed. PR #12: user-requested uniform header background distinct from body in both modes, not per-terminal colors. Actual five-pane light/dark, editing, zoom and hidden-pane mode update rechecked without changing geometry. PR #13: explicit user request removes the blue pane outline on input focus; preserve real terminal cursor, first responder, focus navigation/storage and native button/menu focus. Drag-target outline is a separate transient state. Actual two-mode four-pane mouse/keyboard input, zoom and swap-back rechecked.",
   "targets": [
     "Sources",
     "Resources/terminal.conf",
@@ -46,7 +46,7 @@
       "id": "ORC-F03",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "헤더 배경을 본문과 다른 중립색으로 두 모드 모두 적용했다. 다크5칸의 이름/경로/아이콘과 포커스가 읽히며 light에서도 대조했다.",
+      "reason": "두 모드의 텍스트/헤더 대비를 유지한다. pane 포커스 경계는 사용자 요청으로 없애고 실제 terminal 입력 커서/AX 초점을 보존한다. E-F1–5에서 실제 입력과 함께 확인했다.",
       "checks": [
         "code",
         "visual"
@@ -54,8 +54,8 @@
       "exceptions": [
         {
           "id": "CHOP-ORC-F03",
-          "reason": "헤더 배경을 본문과 다른 중립색으로 두 모드 모두 적용했다. 다크5칸의 이름/경로/아이콘과 포커스가 읽히며 light에서도 대조했다.",
-          "basis": "DESIGN.md; user-requested uniform header/body distinction and E-H1–5"
+          "reason": "두 모드의 텍스트/헤더 대비를 유지한다. pane 포커스 경계는 사용자 요청으로 없애고 실제 terminal 입력 커서/AX 초점을 보존한다. E-F1–5에서 실제 입력과 함께 확인했다.",
+          "basis": "DESIGN.md; explicit user request to remove blue pane focus border, E-F1–5"
         }
       ]
     },
@@ -216,7 +216,7 @@
       "id": "ORC-F15",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "반복 엔티티 아이콘/배지에 서로 다른 색을 배정하지 않는다. 기본 콘텐츠는 중립색이며 포커스와 선택만 시스템 accent를 사용한다.",
+      "reason": "반복 칸에 서로 다른 임의 색을 배정하지 않는다. 사용자 요청으로 pane 입력 포커스 테두리는 제거하고 native 선택·버튼/메뉴와 유효 드롭 대상의 system accent만 유지한다.",
       "checks": [
         "code",
         "visual"
@@ -588,7 +588,7 @@
       "id": "ORC-A04",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "Tailwind blue-500을 선택하지 않았다. 네이티브 앱의 선택/포커스는 사용자 시스템 accent를 유지한다. 요청 없는 브랜드 팔레트 3안을 UI에 임의 도입하지 않는다.",
+      "reason": "Tailwind blue-500을 새로 선택하지 않았다. 사용자 요청으로 pane 입력 포커스 테두리를 없애되 native 컨트롤 선택/키보드 초점과 별도 드롭 대상의 system accent는 유지한다.",
       "checks": [
         "code",
         "visual"
@@ -596,8 +596,8 @@
       "exceptions": [
         {
           "id": "CHOP-ORC-A04",
-          "reason": "Tailwind blue-500을 선택하지 않았다. 네이티브 앱의 선택/포커스는 사용자 시스템 accent를 유지한다. 요청 없는 브랜드 팔레트 3안을 UI에 임의 도입하지 않는다.",
-          "basis": "DESIGN.md: native platform and user-requested central plus / 1-2-4 layout contract"
+          "reason": "Tailwind blue-500을 새로 선택하지 않았다. 사용자 요청으로 pane 입력 포커스 테두리를 없애되 native 컨트롤 선택/키보드 초점과 별도 드롭 대상의 system accent는 유지한다.",
+          "basis": "DESIGN.md; explicit user request to remove blue pane focus border, E-F1–5"
         }
       ]
     },
@@ -732,7 +732,7 @@
       "id": "RUI-04",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "실제 비대칭 5칸의 드래그·취소·키보드 좌우 교환과 동일 PID/변수를 확인했다. PTY identity·preview·geometry·snapshot roundtrip은 11개 테스트에서 검증했다.",
+      "reason": "테두리 없이 클릭/⌘⌥방향키로 실제 두 셸에 각각 다른 출력을 실행했고 AX 초점이 입력 대상과 일치했다. 기존11개 PTY/모드/레이아웃/복원 검사를 재실행했다.",
       "checks": [
         "spec",
         "interaction"
@@ -855,7 +855,7 @@
       "id": "RUI-14",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "기존 native splitter/포커스를 유지한다. 추가한40pt 헤더 배경은 이름/경로/조작의 실제 소속 영역이며 별도의 장식 구분 바나 밑줄을 만들지 않는다.",
+      "reason": "native splitter와 실제 입력 커서/컨트롤 초점을 유지하며 사용자 요청으로 pane 전체의 파란 경계를 제거했다.40pt 헤더는 이름/조작의 소속 영역이고 장식 바나 선택 밑줄을 추가하지 않는다.",
       "checks": [
         "code",
         "visual"
@@ -863,8 +863,8 @@
       "exceptions": [
         {
           "id": "CHOP-RUI-14",
-          "reason": "기존 native splitter/포커스를 유지한다. 추가한40pt 헤더 배경은 이름/경로/조작의 실제 소속 영역이며 별도의 장식 구분 바나 밑줄을 만들지 않는다.",
-          "basis": "DESIGN.md; user-requested uniform header/body distinction and E-H1–5"
+          "reason": "native splitter와 실제 입력 커서/컨트롤 초점을 유지하며 사용자 요청으로 pane 전체의 파란 경계를 제거했다.40pt 헤더는 이름/조작의 소속 영역이고 장식 바나 선택 밑줄을 추가하지 않는다.",
+          "basis": "DESIGN.md; explicit user request to remove blue pane focus border, E-F1–5"
         }
       ]
     },
@@ -884,7 +884,7 @@
       "id": "RUI-16",
       "applicable": true,
       "scope": "R-DEFAULT 사용자 canvas crop와 Chop 기본 진입 화면의 구조/상태/컴포넌트 관계",
-      "reason": "사용자 기본 canvas의 넓은 본문·헤더·중앙+ 관계를 유지한다. 추가 요청에 따라 헤더 배경만 본문과 구분했다. 기존4칸 진입 검사는 재실행하고 사용 중5칸을 보존해 실제 화면을 대조했다.",
+      "reason": "원본 기본 canvas의 넓은 본문/칸/중앙+ 관계를 유지한다. 원본에 보인 파란 입력 경계는 사용자의 후속 명시 요청으로 제거한 차이다. 실제4칸·두 모드·입력/확대/교환을 대조했다.",
       "checks": [
         "spec",
         "visual"
@@ -895,7 +895,7 @@
       "id": "RUI-17",
       "applicable": true,
       "scope": "R-DEFAULT 사용자 canvas crop와 Chop 기본 진입 화면의 구조/상태/컴포넌트 관계",
-      "reason": "5칸 전체에서 헤더 메타데이터와 실제 터미널 영역을 구분해 요청을 반영한다. 본문 영역/toolbar/중앙+·조작 위계가 유지되며 새로운 장식/문구를 추가하지 않았다.",
+      "reason": "파란 pane 입력 경계를 제거하면서 실제 shell 입력 커서·키보드 선택/저장·칸 헤더·중앙+ 관계를 유지한다. 두 모드 실제 입력과 확대/재배치 뒤 같은 작업 위계를 확인했다.",
       "checks": [
         "spec",
         "visual"
@@ -964,13 +964,19 @@
       "id": "RUI-23",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "실행/빈/편집/확대·숨긴 칸의 headerBackground 역할과 치수를 공유한다. 두 모드와 확대 중 전환 후 전체5칸에서 같은 톤으로 적용됨을 확인했다.",
+      "reason": "사용자 명시 요청에 따라 terminal pane 전체의 입력 포커스 테두리는 표시하지 않는다. 실제 입력 커서·AX first responder·키보드 이동은 보존한다. native 버튼/메뉴의 키보드 초점은 유지한다. 두 모드와 일반/편집/확대/교환 뒤 실제 입력을 확인했다.",
       "checks": [
         "spec",
         "code",
         "visual"
       ],
-      "exceptions": []
+      "exceptions": [
+        {
+          "id": "CHOP-RUI-23-FOCUS",
+          "reason": "사용자 명시 요청에 따라 terminal pane 전체의 입력 포커스 테두리는 표시하지 않는다. 실제 입력 커서·AX first responder·키보드 이동은 보존한다. native 버튼/메뉴의 키보드 초점은 유지한다. 두 모드와 일반/편집/확대/교환 뒤 실제 입력을 확인했다.",
+          "basis": "User: 포커스가 되어도 파란색 border가 안 나오면 좋겠어; terminal-only visual exception, not a removal of actual keyboard focus"
+        }
+      ]
     },
     {
       "id": "RUI-24",
@@ -1024,7 +1030,7 @@
       "id": "PROJECT-MANAGE",
       "applicable": true,
       "scope": "User-authorized Chop v0.1 behavior; PROJECT-MANAGE",
-      "reason": "자리 교환에서도 기존 pane/terminal/surface를 재사용하고 source로 포커스를 유지한다. 실제 셸 PID88966·변수 보존과 PTY 통합 테스트로 확인했다.",
+      "reason": "실제 선택은 Workspace focusedID와 first responder/Ghostty focus를 유지한다. 표현용 isFocused 경계만 제거했다. 두 모드에서 클릭/키보드로 각각의 shell에 입력했고 확대·칸 교환 후에도 같은 화면과 초점이 유지됐다.",
       "checks": [
         "spec",
         "code",
@@ -1155,6 +1161,19 @@
       "applicable": true,
       "scope": "모든 칸의 이름/경로/조작 헤더, 두 모드·빈/실행/편집/확대/숨긴 칸",
       "reason": "사용자가 요청한 본문과 다른 배경색을 mode별 동일 헤더 역할로 적용한다. 기존 본문/치수/상태 동작을 보존하고 실제 화면에서 읽기·모드 갱신을 검증한다.",
+      "checks": [
+        "spec",
+        "code",
+        "visual",
+        "interaction"
+      ],
+      "exceptions": []
+    },
+    {
+      "id": "PROJECT-NO-FOCUS-BORDER",
+      "applicable": true,
+      "scope": "terminal pane 입력 포커스, 두 모드·일반/편집/확대/교환 뒤 상태",
+      "reason": "파란 pane 입력 경계를 표시하지 않으며 실제 입력 커서/AX 초점·클릭/키보드 대상 선택·저장 focus를 유지한다. native 컨트롤과 별도 유효 드롭 상태는 보존한다.",
       "checks": [
         "spec",
         "code",

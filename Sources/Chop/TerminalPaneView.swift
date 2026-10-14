@@ -27,9 +27,6 @@ final class TerminalPaneView: NSView {
   var canRemove = false { didSet { updateHeader() } }
   var canZoom = false { didSet { updateHeader() } }
   var isZoomed = false { didSet { updateHeader() } }
-  var isFocused = false {
-    didSet { updateBorder() }
-  }
   var isEditing = false {
     didSet {
       updateAddButton()
@@ -40,7 +37,7 @@ final class TerminalPaneView: NSView {
       }
     }
   }
-  private var isDropTarget = false { didSet { updateBorder() } }
+  private var isDropTarget = false { didSet { updateDropHighlight() } }
   private lazy var moveHandle = PaneDragHandleView(paneID: id, workspaceID: workspaceID)
   private let header = NSView()
   private let body = NSView()
@@ -85,11 +82,11 @@ final class TerminalPaneView: NSView {
     titleLabel.textColor = mode.foreground
     pathLabel.textColor = mode.secondaryForeground
     errorLabel.textColor = mode.secondaryForeground
-    updateBorder()
+    updateDropHighlight()
   }
 
-  private func updateBorder() {
-    layer?.borderWidth = isDropTarget ? 2 : isFocused ? 1 : 0
+  private func updateDropHighlight() {
+    layer?.borderWidth = isDropTarget ? 2 : 0
     effectiveAppearance.performAsCurrentDrawingAppearance {
       layer?.borderColor = NSColor.keyboardFocusIndicatorColor.cgColor
     }
