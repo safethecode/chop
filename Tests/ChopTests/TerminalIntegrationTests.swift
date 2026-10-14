@@ -210,6 +210,35 @@ import Testing
   #expect(workspaceSplit.fileBrowser.frame.maxX == workspaceSplit.bounds.maxX)
   #expect(workspace.layout == originalLayout && workspace.focusedPane.terminal === first)
   #expect(first.surface == liveSurface, "File tree visibility must not restart a terminal")
+  let dropPasteboard = NSPasteboard.withUniqueName()
+  defer { dropPasteboard.releaseGlobally() }
+  let droppedFile = directory.appendingPathComponent("DROP_ARG_한글 'a' $.txt")
+  try Data().write(to: droppedFile)
+  #expect(dropPasteboard.writeObjects([droppedFile as NSURL]))
+  let dropResult = directory.appendingPathComponent("drop-result")
+  let resultArgument = try #require(TerminalFileDrop.text(for: [dropResult]))
+  let dropSurface = swapTargetTerminal.surface
+  let clipboardBeforeDrop = clipboard.string(forType: .string)
+  swapTargetTerminal.insertText(
+    "printf '%s' > " + resultArgument,
+    replacementRange: NSRange(location: NSNotFound, length: 0))
+  #expect(swapTargetTerminal.insertDroppedFiles(from: dropPasteboard))
+  try await waitFor {
+    window.firstResponder === swapTargetTerminal
+      && viewport(of: swapTargetTerminal).replacingOccurrences(of: "\n", with: "").contains(
+        "DROP_ARG")
+  }
+  #expect(!FileManager.default.fileExists(atPath: dropResult.path), "A drop must not send Enter")
+  #expect(workspace.focusedID == swapTarget)
+  #expect(swapTargetTerminal.surface == dropSurface && first.surface == liveSurface)
+  #expect(clipboard.string(forType: .string) == clipboardBeforeDrop)
+  try pressReturn(on: swapTargetTerminal, window: window)
+  try await waitFor {
+    FileManager.default.fileExists(atPath: dropResult.path) && !swapTargetTerminal.needsConfirmClose
+  }
+  #expect(try Data(contentsOf: dropResult) == Data(droppedFile.path.utf8))
+  #expect(!terminal.insertDroppedFiles(from: dropPasteboard), "Closed surfaces reject a drop")
+  workspace.panes[firstID]?.focus()
   workspaceSplit.toggleFileTree()
   workspace.moveFocus(.right)
   #expect(workspace.focusedID == workspace.layout.paneIDs[1])

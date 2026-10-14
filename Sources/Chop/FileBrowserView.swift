@@ -261,6 +261,13 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
     (item as? FileBrowserNode)?.entry != nil
   }
 
+  func outlineView(_ outlineView: NSOutlineView, pasteboardWriterForItem item: Any)
+    -> (any NSPasteboardWriting)?
+  {
+    guard let entry = (item as? FileBrowserNode)?.entry else { return nil }
+    return entry.url as NSURL
+  }
+
   func outlineViewItemDidExpand(_ notification: Notification) {
     guard let node = notification.userInfo?["NSObject"] as? FileBrowserNode,
       let entry = node.entry, node.children == nil, node.task == nil
@@ -367,6 +374,8 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
     outline.setAccessibilityLabel("파일 트리")
     outline.dataSource = self
     outline.delegate = self
+    outline.setDraggingSourceOperationMask(.copy, forLocal: true)
+    outline.setDraggingSourceOperationMask(.copy, forLocal: false)
     outline.target = self
     outline.doubleAction = #selector(activateItem)
     outline.onCopyPath = { [weak self] in self?.copyPath() }
