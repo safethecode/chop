@@ -153,7 +153,52 @@ import Testing
   }
   try await waitFor { !workspace.needsConfirmClose }
   #expect(workspace.panes.values.filter { $0.isRunning }.count == 4)
-  #expect(!workspace.applyPreset(.columns), "A smaller preset must never kill running shells")
+  let tabIDs = workspace.layout.paneIDs
+  let tabSurfaces = tabIDs.map { workspace.panes[$0]?.terminal?.surface }
+  #expect(workspace.applyPreset(.single), "All running terminals remain reachable as tabs")
+  #expect(workspace.isTabbed && workspace.layout.paneIDs == tabIDs)
+  #expect(workspace.panes.count == 4)
+  for (index, id) in tabIDs.enumerated() {
+    workspace.selectTab(id)
+    #expect(workspace.focusedID == id)
+    #expect(window.firstResponder === workspace.panes[id]?.terminal)
+    #expect(workspace.panes[id]?.terminal?.surface == tabSurfaces[index])
+    #expect(workspace.panes[id]?.showsHeader == false)
+    #expect(workspace.panes[id]?.superview != nil)
+    #expect(tabIDs.filter { workspace.panes[$0]?.superview != nil } == [id])
+  }
+  let tabbedSnapshot = workspace.snapshot()
+  let tabbedRestore = WorkspaceView(engine: engine, snapshot: tabbedSnapshot)
+  #expect(tabbedRestore.isTabbed && tabbedRestore.focusedID == workspace.focusedID)
+  #expect(tabbedRestore.layout == workspace.layout)
+  window.contentView = tabbedRestore
+  window.layoutIfNeeded()
+  tabbedRestore.startRestoredTerminals()
+  #expect(tabbedRestore.panes.values.filter { $0.isRunning }.count == 4)
+  #expect(tabbedRestore.focusedID == tabbedSnapshot.focusedID)
+  #expect(window.firstResponder === tabbedRestore.focusedPane.terminal)
+  for id in tabIDs {
+    tabbedRestore.selectTab(id)
+    #expect(tabbedRestore.panes[id]?.terminal?.window === window)
+  }
+  tabbedRestore.closeAll()
+  window.contentView = workspace
+  window.layoutIfNeeded()
+  workspace.addTab()
+  let addedTabID = workspace.focusedID
+  #expect(!tabIDs.contains(addedTabID) && workspace.panes.count == 5)
+  #expect(workspace.focusedPane.isRunning)
+  try await waitFor { !workspace.focusedPane.needsConfirmClose }
+  workspace.requestCloseFocused()
+  #expect(workspace.layout.paneIDs == tabIDs && workspace.panes[addedTabID] == nil)
+  #expect(
+    tabIDs.enumerated().allSatisfy {
+      workspace.panes[$0.element]?.terminal?.surface == tabSurfaces[$0.offset]
+    })
+  #expect(workspace.applyPreset(.grid))
+  #expect(!workspace.isTabbed && workspace.layout.paneIDs == tabIDs)
+  #expect(tabIDs.allSatisfy { workspace.panes[$0]?.showsHeader == true })
+  #expect(!workspace.applyPreset(.columns), "Columns are changed in a separate PR")
   workspace.panes[firstID]?.focus()
   let beforeSwap = workspace.layout
   let swapTarget = try #require(workspace.layout.paneIDs.last)
@@ -294,10 +339,10 @@ import Testing
   let keep = try #require(workspace.panes[keepID]?.terminal)
   for id in workspace.layout.paneIDs where id != keepID { workspace.panes[id]?.closeTerminal() }
   #expect(workspace.applyPreset(.single))
-  #expect(
-    workspace.layout.paneIDs == [keepID],
-    "Shrinking keeps a running pane even when it was the last slot")
+  #expect(workspace.layout.paneIDs.count == 4, "Single view preserves empty slots too")
+  workspace.selectTab(keepID)
   #expect(workspace.focusedPane.terminal === keep)
+  for id in workspace.layout.paneIDs where id != keepID { workspace.removeEmptyPane(id) }
   workspace.focusedPane.closeTerminal()
   workspace.removeEmptyPane(keepID)
   #expect(workspace.layout.paneIDs == [keepID], "Keep the final empty slot")

@@ -39,6 +39,13 @@ final class TerminalPaneView: NSView {
   }
   private var isDropTarget = false { didSet { updateDropHighlight() } }
   private lazy var moveHandle = PaneDragHandleView(paneID: id, workspaceID: workspaceID)
+  var showsHeader = true {
+    didSet {
+      header.isHidden = !showsHeader
+      headerHeight?.constant = showsHeader ? ChopStyle.headerHeight : 0
+    }
+  }
+  private var headerHeight: NSLayoutConstraint?
   private let header = NSView()
   private let body = NSView()
   private let titleLabel = NSTextField(labelWithString: "")
@@ -338,11 +345,14 @@ final class TerminalPaneView: NSView {
     errorLabel.isHidden = true
     errorLabel.translatesAutoresizingMaskIntoConstraints = false
     body.addSubview(errorLabel)
+    let headerHeightConstraint = header.heightAnchor.constraint(
+      equalToConstant: ChopStyle.headerHeight)
+    headerHeight = headerHeightConstraint
     NSLayoutConstraint.activate([
       header.leadingAnchor.constraint(equalTo: leadingAnchor),
       header.trailingAnchor.constraint(equalTo: trailingAnchor),
       header.topAnchor.constraint(equalTo: topAnchor),
-      header.heightAnchor.constraint(equalToConstant: ChopStyle.headerHeight),
+      headerHeightConstraint,
       row.leadingAnchor.constraint(equalTo: header.leadingAnchor, constant: ChopStyle.inset),
       row.trailingAnchor.constraint(equalTo: header.trailingAnchor, constant: -ChopStyle.inset),
       row.centerYAnchor.constraint(equalTo: header.centerYAnchor),

@@ -79,7 +79,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
   }
 
   @objc private func openTerminal() { workspaceWindow?.pane.openTerminal() }
-  @objc private func closeTerminal() { workspaceWindow?.pane.requestClose() }
+  @objc private func closeTerminal() { workspaceWindow?.workspace.requestCloseFocused() }
   @objc private func splitRight() { workspaceWindow?.workspace.splitRight() }
   @objc private func splitDown() { workspaceWindow?.workspace.splitDown() }
   @objc private func toggleLayoutEditing() { workspaceWindow?.workspace.toggleEditing() }
@@ -131,13 +131,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
       return true
     case #selector(splitRight): return workspace.canSplit(workspace.focusedID, axis: .horizontal)
     case #selector(splitDown): return workspace.canSplit(workspace.focusedID, axis: .vertical)
-    case #selector(toggleZoom): return workspace.layout.paneIDs.count > 1
+    case #selector(toggleZoom): return workspace.focusedPane.canZoom
     case #selector(swapLeft): return workspace.canSwapFocusedPane(.left)
     case #selector(swapRight): return workspace.canSwapFocusedPane(.right)
     case #selector(swapUp): return workspace.canSwapFocusedPane(.up)
     case #selector(swapDown): return workspace.canSwapFocusedPane(.down)
     case #selector(closeTerminal):
-      menuItem.title = workspace.focusedPane.isRunning ? "터미널 닫기" : "빈 칸 제거"
+      menuItem.title =
+        workspace.isTabbed ? "탭 닫기" : workspace.focusedPane.isRunning ? "터미널 닫기" : "빈 칸 제거"
       return workspace.focusedPane.isRunning || workspace.layout.paneIDs.count > 1
     default: return true
     }

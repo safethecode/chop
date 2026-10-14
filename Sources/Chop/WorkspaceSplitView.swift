@@ -33,7 +33,7 @@ final class WorkspaceSplitView: NSSplitView, NSSplitViewDelegate {
     self.workspace = workspace
     self.canvas = canvas
     self.defaults = defaults
-    workspaceMinimum = workspace.layout.minimumSize
+    workspaceMinimum = workspace.displayMinimumSize
     let savedWidth = defaults.double(forKey: "fileTreeWidth")
     browserWidth =
       savedWidth.isFinite && savedWidth >= Self.fileTreeMinimumWidth
