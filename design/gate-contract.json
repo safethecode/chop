@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "catalog_version": 5,
-  "scope_notes": "Native macOS Chop v0.1, user task and DESIGN comparison. macOS26.5.2/CI15; macOS14 physical, full VoiceOver/all IMEs and hardware wheel are explicitly outside verified combinations. Shell/TUI VT styling and standard OS chrome are distinguished from app-owned labels. cmux is technical/feature inspiration, not a visual pixel reference. User correction 2026-10-14 adds R-DEFAULT canvas screenshot as a visual/state reference; first shell + three empty plus panes is mandatory at default entry. Previous main gate lacked that condition; its historical ledger is retained. PR #8: user-requested light/dark modes; preserve default grid in both modes, apply to native chrome and all terminals without PTY replacement, persist selection. Evidence is self review, with actual CUA observations recorded as Markdown. PR #10: user-requested icon-only mode toggle and layout presets. Preserve R-DEFAULT canvas and R-TOOLBAR location/options/selection; icons are an intentional user-requested change from text, not an exact crop clone. PR #11: editing-only same-workspace pane exchange with whole-pane/GPU drag preview and placement motion, requested and directly accepted by user. Preserve live PTY and split geometry. CUA before/after observations are separate from user motion feedback; no mid-drag frame capture or physical Reduce Motion execution is claimed. PR #12: user-requested uniform header background distinct from body in both modes, not per-terminal colors. Actual five-pane light/dark, editing, zoom and hidden-pane mode update rechecked without changing geometry. PR #13: explicit user request removes the blue pane outline on input focus; preserve real terminal cursor, first responder, focus navigation/storage and native button/menu focus. Drag-target outline is a separate transient state. Actual two-mode four-pane mouse/keyboard input, zoom and swap-back rechecked. PR #14: user-requested right file tree is a peer of terminal canvas below the full-width global toolbar. User hierarchy/stray-divider corrections and internal long-path/reopen issues were fixed and rechecked. New lazy file navigation, native picker/shortcuts, async stale-result protection and separate settings preserve terminal surfaces. OS open wait on final restart was observed; native folder reselection recovered it without UI blocking. Two-mode default/minimum UI and final drag/keyboard restoration are scoped separately from prior evidence. PR #14 review follow-up: isolate child metadata failures with a literal-name/leaf fallback, keep root errors.16 tests and latest normal folder expansion rechecked; no layout change. CodeRabbit covered5101fb1, follow-up self-reviewed; docstring coverage warning is disclosed separately. Path focus PR: user-requested path field focus-ring removal only. Native caret/selection/editing remain; other requested refinements are separate. Header seam PR: reuse the same header row and foreground; fill only the functional file divider header segment. Actual two-mode/resize/hide/editing consumers rechecked; PTY unchanged. Location icons PR: user Finder crop adapted to three native full-row icon/name shortcuts, fixed aspect-fit16pt column and14pt labels. Actual three locations, two modes/minimum window and empty/long outline rechecked.",
+  "scope_notes": "Native macOS Chop v0.1, user task and DESIGN comparison. macOS26.5.2/CI15; macOS14 physical, full VoiceOver/all IMEs and hardware wheel are explicitly outside verified combinations. Shell/TUI VT styling and standard OS chrome are distinguished from app-owned labels. cmux is technical/feature inspiration, not a visual pixel reference. User correction 2026-10-14 adds R-DEFAULT canvas screenshot as a visual/state reference; first shell + three empty plus panes is mandatory at default entry. Previous main gate lacked that condition; its historical ledger is retained. PR #8: user-requested light/dark modes; preserve default grid in both modes, apply to native chrome and all terminals without PTY replacement, persist selection. Evidence is self review, with actual CUA observations recorded as Markdown. PR #10: user-requested icon-only mode toggle and layout presets. Preserve R-DEFAULT canvas and R-TOOLBAR location/options/selection; icons are an intentional user-requested change from text, not an exact crop clone. PR #11: editing-only same-workspace pane exchange with whole-pane/GPU drag preview and placement motion, requested and directly accepted by user. Preserve live PTY and split geometry. CUA before/after observations are separate from user motion feedback; no mid-drag frame capture or physical Reduce Motion execution is claimed. PR #12: user-requested uniform header background distinct from body in both modes, not per-terminal colors. Actual five-pane light/dark, editing, zoom and hidden-pane mode update rechecked without changing geometry. PR #13: explicit user request removes the blue pane outline on input focus; preserve real terminal cursor, first responder, focus navigation/storage and native button/menu focus. Drag-target outline is a separate transient state. Actual two-mode four-pane mouse/keyboard input, zoom and swap-back rechecked. PR #14: user-requested right file tree is a peer of terminal canvas below the full-width global toolbar. User hierarchy/stray-divider corrections and internal long-path/reopen issues were fixed and rechecked. New lazy file navigation, native picker/shortcuts, async stale-result protection and separate settings preserve terminal surfaces. OS open wait on final restart was observed; native folder reselection recovered it without UI blocking. Two-mode default/minimum UI and final drag/keyboard restoration are scoped separately from prior evidence. PR #14 review follow-up: isolate child metadata failures with a literal-name/leaf fallback, keep root errors.16 tests and latest normal folder expansion rechecked; no layout change. CodeRabbit covered5101fb1, follow-up self-reviewed; docstring coverage warning is disclosed separately. Path focus PR: user-requested path field focus-ring removal only. Native caret/selection/editing remain; other requested refinements are separate. Header seam PR: reuse the same header row and foreground; fill only the functional file divider header segment. Actual two-mode/resize/hide/editing consumers rechecked; PTY unchanged. Location icons PR: user Finder crop adapted to three native full-row icon/name shortcuts, fixed aspect-fit16pt column and14pt labels. Actual three locations, two modes/minimum window and empty/long outline rechecked. File drop work in progress: native file URL writer and existing-terminal input with literal argument quoting;19 tests pass. Actual CUA NSCoreDrag remains awaiting mouse-up with no destination entry observed. Do not mark product/merge complete until native endpoint is verified.",
   "targets": [
     "Sources",
     "Resources/terminal.conf",
@@ -734,7 +734,7 @@
       "id": "RUI-04",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "홈 아이콘 포인터 클릭과 문서/다운로드 실제 클릭으로 각 목적지 경로가 바뀌는 것을 확인했다. native full-row hit/AX 버튼 역할과16개 기존 경로/PTY 검사를 보존한다.",
+      "reason": "파일/폴더 URL의 셸 인자 입력·Enter 미전송·다른 칸 focus/surface 유지와 닫힌 target 거절은 실제 PTY 자동 검사로 확인했다. 실제 OS source→destination 포인터 drop 완료는 아직 확인하지 못해 unknown이다.",
       "checks": [
         "spec",
         "interaction"
@@ -756,7 +756,7 @@
       "id": "RUI-06",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "바로가기 native button 구성·hitTest/AX 의미를 셀프 리뷰했다. strict format/build/signature와 전체16개 테스트4.907초 및 실제 목적지 입력을 확인했다.",
+      "reason": "추가 file URL source/destination·인용·main queue lifecycle guard를 셀프 리뷰하고 strict 검사/실제 PTY 포함19개 테스트6.307초를 통과했다. 실제 포인터 drop 완료는 별도 미검증으로 유지한다.",
       "checks": [
         "code"
       ],
@@ -828,7 +828,7 @@
       "id": "RUI-12",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "사용자 Finder crop와 SF Symbols 출처를 기록했다. 홈=house/다운로드=arrow.down.circle/문서=doc 의미·방향과 실제 목적지 행동을 대조했고 image를 비율 유지해 표시한다.",
+      "reason": "파일 source는 기존 SF folder/doc와 실제 이름의 native row preview를 사용한다. source writer는 관찰됐으나 실제 drop cursor/놓기 성공을 검증했다고 주장하지 않는다.",
       "checks": [
         "code",
         "visual"
@@ -1037,7 +1037,7 @@
       "id": "PROJECT-MANAGE",
       "applicable": true,
       "scope": "User-authorized Chop v0.1 behavior; PROJECT-MANAGE",
-      "reason": "새 파일 탐색과 panel 개폐는 기존 canvas/view/surface를 재사용한다. 실제 PID/변수 보존, terminal zoom과11→16 교환/원위치 복원, 자동 surface/focus 검사로 확인했다. 경로 탐색은 셸 cwd를 바꾸지 않는다.",
+      "reason": "drop 처리 경로의 target focus/같은 surface·다른 셸 유지·닫힌 target 거절을 실제 PTY 자동 검사에 추가해19개가 통과했다. 실제 native drop 종료는 미검증이며 이전 pane 관리 관찰과 구분한다.",
       "checks": [
         "spec",
         "code",
@@ -1102,7 +1102,7 @@
       "id": "PROJECT-TRUTH",
       "applicable": true,
       "scope": "User-authorized Chop v0.1 behavior; PROJECT-TRUTH",
-      "reason": "사용자 crop 원본 관찰·선택한 pt/각색·초기 정렬 실패/수정·실제 세 목적지 클릭을 구분했다.16개 검사와 실제 화면을 구별하며 새 파일 drag를 완료했다고 표시하지 않는다.",
+      "reason": "19개 자동 검사·실제 URL writer 호출·NSCoreDrag 놓기 대기와 사용자 질문을 구분한다. 실제 포인터 drop 종료를 관찰하지 못한 상태에서 완료/외부 승인으로 표시하지 않는다.",
       "checks": [
         "spec",
         "code",
@@ -1193,7 +1193,7 @@
       "id": "PROJECT-FILETREE",
       "applicable": true,
       "scope": "오른쪽 native outline의 경로 입력/폴더 선택기/홈·다운로드·문서·하위 lazy read/상태 복구/Finder·복사/설정 저장",
-      "reason": "새 아이콘/이름 행에서 기존 홈·다운로드·문서 URL과 target-action을 그대로 쓴다. 실제 세 경로 이동·빈 폴더와 긴 목록을 확인했고 탐색/비동기/PTY는 바꾸지 않았다.",
+      "reason": "기존 root/lazy 읽기·선택기·바로가기를 유지하고 실제 entry만 native file URL writer로 내보낸다. source 호출/파일 선택은 확인했으며 end-to-end drop은 별도 PROJECT-FILE-DROP에서 unknown으로 남긴다.",
       "checks": [
         "spec",
         "code",
@@ -1233,6 +1233,19 @@
       "applicable": true,
       "scope": "홈·다운로드·문서 세로 바로가기의 icon/name/hit/AX와 두 모드·최소 창",
       "reason": "사용자 Finder crop의 icon+이름 관계를16pt 열/8pt 간격으로 적용하고 세 목적지 실제 동작·빈/긴 목록·두 모드 최소 창을 확인했다.",
+      "checks": [
+        "spec",
+        "code",
+        "visual",
+        "interaction"
+      ],
+      "exceptions": []
+    },
+    {
+      "id": "PROJECT-FILE-DROP",
+      "applicable": true,
+      "scope": "실제 파일/폴더 row → 실행 중인 terminal body의 경로 입력·Enter 미전송·focus/같은 surface·기존 pane 이동 공존",
+      "reason": "인용/거절과 기존 PTY에 입력하는 자동 검사는 완료했다. 실제 포인터로 OS drag를 끝내어 터미널에 입력되는 관찰은 아직 없어 unknown이다.",
       "checks": [
         "spec",
         "code",
