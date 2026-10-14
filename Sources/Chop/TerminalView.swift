@@ -1,6 +1,7 @@
 // Input integration follows Ghostty's MIT-licensed AppKit embedder.
 // See Resources/Ghostty-LICENSE and Dependencies/README.md.
 import AppKit
+import ChopCore
 import GhosttyKit
 
 @MainActor
@@ -49,6 +50,7 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
     }
     guard surface != nil else { throw TerminalError.surface }
     engine.register(self)
+    registerForDraggedTypes([.fileURL])
     updateTrackingAreas()
   }
 
@@ -213,6 +215,46 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
   }
 
   override func mouseDragged(with event: NSEvent) { mouseMoved(with: event) }
+
+  static func fileDropText(from pasteboard: NSPasteboard) -> String? {
+    guard
+      let urls = pasteboard.readObjects(
+        forClasses: [NSURL.self], options: [.urlReadingFileURLsOnly: true]) as? [URL]
+    else { return nil }
+    return TerminalFileDrop.text(for: urls)
+  }
+
+  override func draggingEntered(_ sender: any NSDraggingInfo) -> NSDragOperation {
+    return surface != nil && window != nil
+      && Self.fileDropText(from: sender.draggingPasteboard) != nil
+      ? .copy : []
+  }
+
+  override func draggingUpdated(_ sender: any NSDraggingInfo) -> NSDragOperation {
+    draggingEntered(sender)
+  }
+
+  override func prepareForDragOperation(_ sender: any NSDraggingInfo) -> Bool {
+    draggingEntered(sender) == .copy
+  }
+
+  override func performDragOperation(_ sender: any NSDraggingInfo) -> Bool {
+    insertDroppedFiles(from: sender.draggingPasteboard)
+  }
+
+  /// Insert into the existing target surface after AppKit finishes its native drag tracking.
+  @discardableResult
+  func insertDroppedFiles(from pasteboard: NSPasteboard) -> Bool {
+    guard surface != nil, window != nil, let text = Self.fileDropText(from: pasteboard) else {
+      return false
+    }
+    DispatchQueue.main.async { [weak self] in
+      guard let self, self.surface != nil, let window = self.window else { return }
+      window.makeFirstResponder(self)
+      self.insertText(text, replacementRange: NSRange(location: NSNotFound, length: 0))
+    }
+    return true
+  }
 
   override func scrollWheel(with event: NSEvent) {
     guard let surface else { return }
