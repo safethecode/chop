@@ -23,6 +23,7 @@ cp "$binary_directory/Chop" "$app_path/Contents/MacOS/Chop"
 cp "$project_directory/Resources/Info.plist" "$app_path/Contents/Info.plist"
 mkdir -p "$app_path/Contents/Resources"
 cp "$project_directory/Resources/terminal.conf" "$app_path/Contents/Resources/terminal.conf"
+cp "$project_directory/Resources/terminal-light.conf" "$project_directory/Resources/terminal-dark.conf" "$app_path/Contents/Resources/"
 cp -R "$project_directory/Dependencies/ghostty-resources/." "$app_path/Contents/Resources/"
 
 # Local development signature; release distribution will need Developer ID signing.

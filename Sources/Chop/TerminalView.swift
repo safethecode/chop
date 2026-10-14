@@ -47,13 +47,20 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
       }
       return ghostty_surface_new(app, &config)
     }
-    guard let surface else { throw TerminalError.surface }
-    ghostty_surface_set_color_scheme(surface, GHOSTTY_COLOR_SCHEME_LIGHT)
+    guard surface != nil else { throw TerminalError.surface }
+    engine.register(self)
     updateTrackingAreas()
   }
 
   @available(*, unavailable)
   required init?(coder: NSCoder) { fatalError("Use init(engine:workingDirectory:).") }
+
+  func applyAppearance(_ mode: AppearanceMode) {
+    appearance = mode.appearance
+    guard let surface else { return }
+    ghostty_surface_set_color_scheme(surface, mode.ghosttyScheme)
+    ghostty_surface_refresh(surface)
+  }
 
   func close() {
     if let surface { ghostty_surface_free(surface) }

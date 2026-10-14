@@ -21,7 +21,9 @@ enum TerminalError: LocalizedError {
 final class TerminalEngine: NSObject {
   private static weak var shared: TerminalEngine?
   private(set) var app: ghostty_app_t?
-  private var config: ghostty_config_t?
+  private var configs: [AppearanceMode: ghostty_config_t] = [:]
+  private let terminals = NSHashTable<TerminalView>.weakObjects()
+  private(set) var appearanceMode: AppearanceMode = .light
   private let clipboard: NSPasteboard
   let command: String?
 
@@ -31,25 +33,37 @@ final class TerminalEngine: NSObject {
     super.init()
   }
 
-  func start(resources: URL? = Bundle.main.resourceURL) throws {
+  func start(resources: URL? = Bundle.main.resourceURL, appearanceMode: AppearanceMode = .light)
+    throws
+  {
     guard app == nil else { return }
     guard let resources else { throw TerminalError.configuration }
-    let configPath = resources.appendingPathComponent("terminal.conf").path
     setenv("GHOSTTY_RESOURCES_DIR", resources.appendingPathComponent("ghostty").path, 1)
     guard ghostty_init(UInt(CommandLine.argc), CommandLine.unsafeArgv) == GHOSTTY_SUCCESS else {
       throw TerminalError.initialization
     }
-    guard let config = ghostty_config_new() else { throw TerminalError.configuration }
-    self.config = config
-    guard configPath.withCString({ chop_ghostty_config_load_file(config, $0) }) else {
+    do {
+      // Validate both bundled modes before starting any shell. Switching later
+      // only updates existing surfaces; it never creates a replacement PTY.
+      for mode in AppearanceMode.allCases {
+        guard let config = ghostty_config_new() else { throw TerminalError.configuration }
+        configs[mode] = config
+        for filename in ["terminal.conf", "terminal-\(mode.rawValue).conf"] {
+          let path = resources.appendingPathComponent(filename).path
+          guard path.withCString({ chop_ghostty_config_load_file(config, $0) }) else {
+            throw TerminalError.configuration
+          }
+        }
+        ghostty_config_finalize(config)
+        guard ghostty_config_diagnostics_count(config) == 0 else {
+          throw TerminalError.configuration
+        }
+      }
+    } catch {
       shutdown()
-      throw TerminalError.configuration
+      throw error
     }
-    ghostty_config_finalize(config)
-    guard ghostty_config_diagnostics_count(config) == 0 else {
-      shutdown()
-      throw TerminalError.configuration
-    }
+    self.appearanceMode = appearanceMode
 
     Self.shared = self
     // The embedder calls actions and clipboard callbacks on the app thread.
@@ -90,12 +104,12 @@ final class TerminalEngine: NSObject {
         }
       }
     )
-    guard let app = ghostty_app_new(&runtime, config) else {
+    guard let app = ghostty_app_new(&runtime, configs[appearanceMode]) else {
       shutdown()
       throw TerminalError.initialization
     }
     self.app = app
-    ghostty_app_set_color_scheme(app, GHOSTTY_COLOR_SCHEME_LIGHT)
+    ghostty_app_set_color_scheme(app, appearanceMode.ghosttyScheme)
     let center = NotificationCenter.default
     center.addObserver(
       self, selector: #selector(focusChanged), name: NSApplication.didBecomeActiveNotification,
@@ -113,9 +127,25 @@ final class TerminalEngine: NSObject {
     NotificationCenter.default.removeObserver(self)
     if let app { ghostty_app_free(app) }
     app = nil
-    if let config { ghostty_config_free(config) }
-    config = nil
+    for config in configs.values { ghostty_config_free(config) }
+    configs.removeAll()
+    terminals.removeAllObjects()
     Self.shared = nil
+  }
+
+  func applyAppearance(_ mode: AppearanceMode) {
+    guard let app, let config = configs[mode], mode != appearanceMode else { return }
+    appearanceMode = mode
+    ghostty_app_set_color_scheme(app, mode.ghosttyScheme)
+    // The pinned embedder clones this config and propagates it to every
+    // surface, including panes detached from the view tree while zoomed.
+    ghostty_app_update_config(app, config)
+    for terminal in terminals.allObjects { terminal.applyAppearance(mode) }
+  }
+
+  func register(_ terminal: TerminalView) {
+    terminals.add(terminal)
+    terminal.applyAppearance(appearanceMode)
   }
 
   private func tick() {
