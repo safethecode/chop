@@ -12,10 +12,15 @@ final class WorkspaceView: NSView {
   private(set) var isTabbed = false
   private var tabBar: TerminalTabBar?
   var displayMinimumSize: CGSize {
-    isTabbed
-      ? CGSize(
+    if isTabbed {
+      return CGSize(
         width: LayoutNode.paneMinimum.width,
-        height: LayoutNode.paneMinimum.height + ChopStyle.headerHeight) : layout.minimumSize
+        height: LayoutNode.paneMinimum.height + ChopStyle.headerHeight)
+    }
+    let minimum = layout.minimumSize
+    return CGSize(
+      width: min(minimum.width, LayoutNode.paneMinimum.width * 2 + LayoutNode.divider),
+      height: min(minimum.height, LayoutNode.paneMinimum.height * 2 + LayoutNode.divider))
   }
   var focusedPane: TerminalPaneView { panes[focusedID]! }
   var needsConfirmClose: Bool { panes.values.contains { $0.needsConfirmClose } }
@@ -24,9 +29,9 @@ final class WorkspaceView: NSView {
   var onMissingDirectories: (([String]) -> Void)?
   var onAppearanceChangeRequested: ((AppearanceMode) -> Void)?
   var onFileTreeToggleRequested: (() -> Void)?
-  var sidePanelMinimumWidth: CGFloat = 0
   private var nextName = 1
-  private let canvas = NSView()
+  private let canvas = TerminalCanvasView()
+  private lazy var canvasScroll = TerminalCanvasScrollView(canvas: canvas)
   private let bodyHost = NSView()
   private(set) var fileSplit: WorkspaceSplitView?
   private var root: NSView?
@@ -109,8 +114,8 @@ final class WorkspaceView: NSView {
   @discardableResult
   func installFileBrowser(defaults: UserDefaults = .standard) -> WorkspaceSplitView {
     if let fileSplit { return fileSplit }
-    canvas.removeFromSuperview()
-    let split = WorkspaceSplitView(workspace: self, canvas: canvas, defaults: defaults)
+    canvasScroll.removeFromSuperview()
+    let split = WorkspaceSplitView(workspace: self, canvas: canvasScroll, defaults: defaults)
     fileSplit = split
     bodyHost.addSubview(split)
     split.frame = bodyHost.bounds
@@ -157,18 +162,31 @@ final class WorkspaceView: NSView {
       rebuild()
       return true
     }
+    if preset == .columns || preset == .grid {
+      isTabbed = false
+      maximizedID = nil
+      var ids = layout.paneIDs
+      while ids.count < preset.defaultPaneCount {
+        let id = UUID()
+        ids.append(id)
+        addPane(id)
+      }
+      layout = .preset(preset, ids: ids)
+      rebuild()
+      return true
+    }
     let existing = layout.paneIDs
     let running = existing.filter { panes[$0]?.isRunning == true }
-    guard running.count <= preset.capacity else {
+    guard running.count <= preset.defaultPaneCount else {
       refreshControls()
       return false
     }
     isTabbed = false
     maximizedID = nil
     var retained = Set(running)
-    for id in existing where retained.count < preset.capacity { retained.insert(id) }
+    for id in existing where retained.count < preset.defaultPaneCount { retained.insert(id) }
     var ids = existing.filter { retained.contains($0) }
-    while ids.count < preset.capacity {
+    while ids.count < preset.defaultPaneCount {
       let id = UUID()
       ids.append(id)
       addPane(id)
@@ -196,12 +214,8 @@ final class WorkspaceView: NSView {
     panes[newID]?.openTerminal()
   }
 
-  func canSplit(_ id: UUID, axis: SplitAxis) -> Bool {
-    guard panes[id] != nil, layout.paneIDs.count < 16 else { return false }
-    let minimum = layout.splitting(id, axis: axis, adding: UUID()).minimumSize
-    guard let screen = window?.screen else { return true }
-    return minimum.width + sidePanelMinimumWidth <= screen.visibleFrame.width
-      && minimum.height + 80 <= screen.visibleFrame.height
+  func canSplit(_ id: UUID, axis _: SplitAxis) -> Bool {
+    panes[id] != nil && layout.paneIDs.count < 16
   }
 
   @objc func splitRight() { split(focusedID, axis: .horizontal) }
@@ -328,7 +342,15 @@ final class WorkspaceView: NSView {
       return
     }
     focusedID = id
+    revealFocusedPane()
     onChange?()
+  }
+
+  private func revealFocusedPane() {
+    guard !isTabbed, focusedPane.superview != nil else { return }
+    canvasScroll.updateDocumentSize()
+    canvasScroll.layoutSubtreeIfNeeded()
+    canvas.scrollToVisible(focusedPane.convert(focusedPane.bounds, to: canvas))
   }
 
   func moveFocus(_ direction: FocusDirection) {
@@ -461,6 +483,9 @@ final class WorkspaceView: NSView {
     view.frame = canvas.bounds
     view.autoresizingMask = [.width, .height]
     root = view
+    canvasScroll.minimumDocumentSize =
+      isTabbed
+      ? displayMinimumSize : maximizedID != nil ? LayoutNode.paneMinimum : layout.minimumSize
     onMinimumSizeChange?(displayMinimumSize)
     layoutSubtreeIfNeeded()
     focusedPane.focus()
@@ -505,9 +530,9 @@ final class WorkspaceView: NSView {
     presets.segmentCount = LayoutPreset.allCases.count
     for (preset, symbol, label) in [
       (LayoutPreset.single, "rectangle", "탭으로 보기"),
-      (.columns, "rectangle.split.2x1", "좌우 2칸"),
+      (.columns, "rectangle.split.2x1", "좌우로 나란히"),
       (.rows, "rectangle.split.1x2", "상하 2칸"),
-      (.grid, "rectangle.split.2x2", "4칸"),
+      (.grid, "rectangle.split.2x2", "격자로 보기"),
     ] {
       let image = NSImage(systemSymbolName: symbol, accessibilityDescription: label)!
         .withSymbolConfiguration(.init(pointSize: 14, weight: .medium))!
@@ -533,9 +558,9 @@ final class WorkspaceView: NSView {
       addSubview(view)
       view.translatesAutoresizingMaskIntoConstraints = false
     }
-    bodyHost.addSubview(canvas)
-    canvas.frame = bodyHost.bounds
-    canvas.autoresizingMask = [.width, .height]
+    bodyHost.addSubview(canvasScroll)
+    canvasScroll.frame = bodyHost.bounds
+    canvasScroll.autoresizingMask = [.width, .height]
     NSLayoutConstraint.activate([
       toolbar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
       toolbar.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
@@ -557,7 +582,7 @@ final class WorkspaceView: NSView {
     let running = panes.values.filter { $0.isRunning }.count
     for preset in LayoutPreset.allCases {
       presets.setEnabled(
-        preset == .single || running <= preset.capacity, forSegment: preset.rawValue)
+        preset != .rows || running <= preset.defaultPaneCount, forSegment: preset.rawValue)
     }
     presets.selectedSegment = -1
     // Selection is derived from structure, not just pane count (free splits can have any shape).
@@ -577,7 +602,11 @@ final class WorkspaceView: NSView {
       case .split(_, let axis, _, let a, let b): return "\(axis.rawValue)(\(shape(a)),\(shape(b)))"
       }
     }
-    guard layout.paneIDs.count == preset.capacity else { return false }
+    let count = layout.paneIDs.count
+    guard
+      preset == .single || preset == .rows
+        ? count == preset.defaultPaneCount : count >= preset.defaultPaneCount
+    else { return false }
     return shape(layout) == shape(.preset(preset, ids: layout.paneIDs))
   }
 }
