@@ -4,7 +4,7 @@
 
 | 영역 | 소스와 실제 계약 |
 |---|---|
-| 색/글꼴/조작 크기 | ChopStyle: white, #24262B, system14 medium, header40, inset12, 아이콘 버튼28; terminal.conf: white/24262b/font14/padding12 |
+| 색/글꼴/조작 크기 | AppearanceMode: light white/24262B/626975, dark 1E2026/white/D1D5DB; ChopStyle: system14 medium/header40/inset12/아이콘28; terminal.conf: font14/padding12와 두 terminal-light/dark.conf 팔레트 |
 | 공간과 토큰 사용 | Pane header/toolbar labels use ChopStyle.font; header row fill/centerY/12pt symmetric inset; terminal body has no extra content padding; toolbar48/12pt inset |
 | 핵심 행동 | Pane.openTerminal creates TerminalView/ghostty_surface, open guard avoids duplicates; explicit close frees it; stale onExit identity guard |
 | 레이아웃 | ChopCore.LayoutNode: stable UUID leaves, recursive splits, minimum280×180, one-point native draggable separator; preset shrink keeps all running identities |
@@ -21,3 +21,5 @@
 단위는 macOS pt다. 웹 CSS px를 계측했다고 쓰지 않는다. 네이티브 표준 시트/메뉴의 내부 여백·글꼴과 셸/TUI가 출력하는 VT 서식은 앱이 소유한 라벨 토큰과 구분한다. VoiceOver 전체를 검증했다는 주장은 하지 않는다.
 
 PR #7 기본 상태 재검토: WorkspaceView.init은 fresh/이전 단일 빈 저장을 grid로 구성한다. window 배치 후 startRestoredTerminals가 저장 실행 칸 또는 실행 칸이 없을 때 첫 칸만 연다. 다음 빈 칸은 기존 openTerminal guard와 중앙 +를 사용한다. LayoutSplitView는 window minimum 적용 전 0-size 배치도 부모 영역 안으로 제한한다.
+
+PR #8 화면 모드 재검토: 양쪽 번들 설정을 시작 시 검증하고 app_update_config로 기존/숨긴 surface와 이후 새 surface 설정을 갱신한다. weak TerminalView registry가 각 scheme을 전달한다. Workspace의 pane 사전을 순회해 숨긴 헤더까지 갱신하며 AppDelegate가 NSApp.appearance와 UserDefaults를 변경한다. 포커스 CGColor는 선택 appearance 안에서 다시 계산한다. start 시 저장 모드를 먼저 적용하고, 메뉴 검증은 창이 닫힌 상태에서도 모드 선택을 허용한다. 셸을 닫거나 레이아웃·포커스를 바꾸는 호출은 전환 경로에 없다. 실제 두 모드와 native 이름 변경 대화상자, 반복 전환/숨긴 칸/새 셸/재실행을 대조했다.

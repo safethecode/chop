@@ -17,3 +17,5 @@
 테스트 성공은 UI 시각 판독이나 마우스 휠 실기 검증을 대신하지 않는다. 실제 화면 관찰은 별도 `pr*-ui.md`에 있다.
 
 PR #7 재검증: `./scripts/check.sh` 종료 0, 9개 테스트 약 3~4초 통과. 기본 grid의 최초 shell 1개/다음 셸 2·3·4개, 중복 시작 방지, 이전 단일 빈 저장 전환을 기존 실제 PTY flow에 추가했다. 초기 0-size split frame 경고도 수정 후 재실행에서 사라졌다. 원본 로그는 `.cache/check-default-grid.log`다.
+
+PR #8 화면 모드: `./scripts/check.sh` 성공 (`.cache/check-appearance.log`): Swift strict format, bash syntax, plist, release build/adhoc codesign verification, 10 tests passed in 3.252s. 실제 PTY에서 repeated light/dark + hidden task completion + same surface/shell variable/layout/focus, new/restored surface appearance를 확인했다. 격리된 UserDefaults suite에서 light/dark 재로딩과 invalid 값 fallback을 확인했다. 실제 CUA 검증은 `pr8-appearance.md` E-A1–A6. 사용자 shell integration/외부 TUI의 색상은 자체 서식을 따르며 시스템 자동 추종은 이 두 수동 모드 범위 밖이다.

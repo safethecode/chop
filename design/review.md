@@ -19,4 +19,6 @@
 
 | V-12 / F-DEFAULT-01 | 사용자 교정: 처음부터 1번 셸과 2·3·4번 +가 있어야 한다. 이전 완료 기준에 기본 실행 상태가 빠졌다. 기본 grid·첫 셸 자동 실행과 단일 빈 저장 전환을 구현했다. | fixed-and-verified | [사용자 화면/재검증](evidence/pr7-default-grid.md), PROJECT-DEFAULT 규칙 추가 |
 
+| V-13 | 사용자 요청으로 라이트·다크 선택을 추가했다. 이전 흰 콘텐츠 고정은 두 팔레트와 선택한 Aqua/Dark Aqua로 확장했다. 구조·치수를 유지하고 기존/숨긴/새 셸과 앱 재실행에 일관되게 적용한다. | accepted-difference (사용자 요청), 행동 검증 완료 | [화면 모드 관찰](evidence/pr8-appearance.md), 10개 테스트 및 두 모드 재실행 |
+
 현재 총괄은 실제 관찰한 v0.1 범위에서 aligned다. 스크롤백 키보드 경로도 실제 앱과 PTY 테스트로 검증했다. 최종 디자인 게이트는 `gate-report.json`과 `failure-events.jsonl`에 기록한다. 빌드 통과가 시각 검증을 대신하지 않으며, VoiceOver 전체 탐색과 macOS 14 실기기까지 검증했다고 주장하지 않는다.
