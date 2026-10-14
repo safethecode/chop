@@ -19,11 +19,13 @@ public struct WorkspaceSnapshot: Codable, Equatable, Sendable {
   public let layout: LayoutNode
   public let panes: [PaneSnapshot]
   public let focusedID: UUID
+  public let tabbed: Bool?
 
-  public init(layout: LayoutNode, panes: [PaneSnapshot], focusedID: UUID) {
+  public init(layout: LayoutNode, panes: [PaneSnapshot], focusedID: UUID, tabbed: Bool? = nil) {
     self.layout = layout
     self.panes = panes
     self.focusedID = focusedID
+    self.tabbed = tabbed
   }
 
   public func validate() throws {
