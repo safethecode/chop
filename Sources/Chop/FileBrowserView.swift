@@ -46,6 +46,7 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
   private var rootTask: Task<Void, Never>?
   private var roots: [FileBrowserNode] = []
   private let header = NSView()
+  private let titleLabel = NSTextField(labelWithString: "파일")
   private let pathField = NSTextField()
   private let statusLabel = NSTextField(wrappingLabelWithString: "")
   private let outline = FileOutlineView()
@@ -82,6 +83,7 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
     appearance = mode.appearance
     layer?.backgroundColor = mode.background.cgColor
     header.layer?.backgroundColor = mode.headerBackground.cgColor
+    titleLabel.textColor = mode.foreground
     statusLabel.textColor = mode.secondaryForeground
     outline.reloadData()
   }
@@ -274,15 +276,12 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
 
   private func configureViews() {
     header.wantsLayer = true
-    let title = NSTextField(labelWithString: "파일")
-    title.font = ChopStyle.font
+    titleLabel.font = ChopStyle.font
     let refreshButton = ChopStyle.iconButton(
       "arrow.clockwise", label: "새로고침", target: self, action: #selector(refresh))
     let folderButton = ChopStyle.iconButton(
       "folder", label: "폴더 선택…", target: self, action: #selector(chooseFolder))
-    let headerRow = NSStackView(views: [title, NSView(), refreshButton, folderButton])
-    headerRow.spacing = 8
-    headerRow.alignment = .centerY
+    let headerRow = ChopStyle.headerRow(views: [titleLabel, NSView(), refreshButton, folderButton])
     header.addSubview(headerRow)
     pathField.font = ChopStyle.font
     pathField.maximumNumberOfLines = 1
