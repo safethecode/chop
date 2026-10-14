@@ -9,6 +9,20 @@ let package = Package(
     .executable(name: "Chop", targets: ["Chop"])
   ],
   targets: [
-    .executableTarget(name: "Chop")
+    .binaryTarget(name: "GhosttyKit", path: "Dependencies/GhosttyKit.xcframework"),
+    .executableTarget(
+      name: "Chop",
+      dependencies: ["GhosttyKit"],
+      linkerSettings: [
+        .linkedLibrary("c++"),
+        .linkedFramework("Carbon"),
+        .linkedFramework("CoreText"),
+        .linkedFramework("CoreVideo"),
+        .linkedFramework("Metal"),
+        .linkedFramework("QuartzCore"),
+        .linkedFramework("IOSurface"),
+      ]
+    ),
+    .testTarget(name: "ChopTests", dependencies: ["Chop"]),
   ]
 )

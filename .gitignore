@@ -1,4 +1,8 @@
 .build/
+.cache/
+Dependencies/GhosttyKit.xcframework/
+Dependencies/ghostty-resources/
+Dependencies/.ghostty-build
 .swiftpm/
 build/
 .DS_Store

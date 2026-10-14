@@ -1,0 +1,2 @@
+# Unified patches intentionally contain a space on empty context lines.
+Dependencies/*.patch -whitespace

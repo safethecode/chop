@@ -16,14 +16,43 @@ jobs:
   macos:
     name: macOS build and lint
     runs-on: macos-15
-    timeout-minutes: 15
+    timeout-minutes: 30
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
+      CHOP_BUILD_JOBS: 2
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           persist-credentials: false
+      - name: Cache libghostty
+        id: ghostty-cache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25 # v5
+        with:
+          path: |
+            Dependencies/GhosttyKit.xcframework
+            Dependencies/ghostty-resources
+            Dependencies/.ghostty-build
+            .cache/downloads
+            .cache/toolchains
+            .cache/zig
+          key: ${{ runner.os }}-${{ runner.arch }}-ghostty-${{ hashFiles('scripts/prepare-ghostty.sh', 'scripts/ghostty-xcrun.sh', 'scripts/ghostty-libtool.sh', 'Dependencies/ghostty-config.patch') }}
       - name: Show toolchain
         run: |
           xcodebuild -version
           swift --version
+      - name: Prepare libghostty
+        run: ./scripts/prepare-ghostty.sh
+      - name: Save libghostty cache
+        if: steps.ghostty-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25 # v5
+        with:
+          path: |
+            Dependencies/GhosttyKit.xcframework
+            Dependencies/ghostty-resources
+            Dependencies/.ghostty-build
+            .cache/downloads
+            .cache/toolchains
+            .cache/zig
+          key: ${{ runner.os }}-${{ runner.arch }}-ghostty-${{ hashFiles('scripts/prepare-ghostty.sh', 'scripts/ghostty-xcrun.sh', 'scripts/ghostty-libtool.sh', 'Dependencies/ghostty-config.patch') }}
       - name: Check and package app
         run: ./scripts/check.sh

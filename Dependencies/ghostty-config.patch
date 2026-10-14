@@ -1,0 +1,34 @@
+diff --git a/include/ghostty.h b/include/ghostty.h
+--- a/include/ghostty.h
++++ b/include/ghostty.h
+@@ -887,6 +887,7 @@
+ void ghostty_config_load_default_files(ghostty_config_t);
+ void ghostty_config_load_recursive_files(ghostty_config_t);
+ void ghostty_config_finalize(ghostty_config_t);
++bool chop_ghostty_config_load_file(ghostty_config_t, const char*);
+ bool ghostty_config_get(ghostty_config_t, void*, const char*, uintptr_t);
+ ghostty_input_trigger_s ghostty_config_trigger(ghostty_config_t,
+                                                const char*,
+diff --git a/src/config/CAPI.zig b/src/config/CAPI.zig
+--- a/src/config/CAPI.zig
++++ b/src/config/CAPI.zig
+@@ -12,6 +12,13 @@
+ 
+ const log = std.log.scoped(.config);
+ 
++// Chop's sole extension: load its bundled defaults without changing the
++// user's Ghostty config location or the host process's command-line args.
++export fn chop_ghostty_config_load_file(self: *Config, path: [*:0]const u8) bool {
++    self.loadFile(state.alloc, std.mem.span(path)) catch return false;
++    return true;
++}
++
+ /// Create a new configuration filled with the initial default values.
+ export fn ghostty_config_new() ?*Config {
+     const result = state.alloc.create(Config) catch |err| {
+diff --git a/src/build/LibtoolStep.zig b/src/build/LibtoolStep.zig
+--- a/src/build/LibtoolStep.zig
++++ b/src/build/LibtoolStep.zig
+@@ -44 +44 @@
+-    run_step.addArgs(&.{ "libtool", "-static", "-o" });
++    run_step.addArgs(&.{ "chop-libtool", "-static", "-o" });
