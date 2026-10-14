@@ -12,6 +12,7 @@ final class WorkspaceView: NSView {
   var needsConfirmClose: Bool { panes.values.contains { $0.needsConfirmClose } }
   var onChange: (() -> Void)?
   var onMinimumSizeChange: ((CGSize) -> Void)?
+  var onMissingDirectories: (([String]) -> Void)?
   private var nextName = 1
   private let canvas = NSView()
   private var root: NSView?
@@ -20,27 +21,37 @@ final class WorkspaceView: NSView {
     trackingMode: .selectOne, target: nil, action: nil)
   private let editButton = NSButton(title: "레이아웃 편집", target: nil, action: nil)
   private(set) var isEditing = false
+  private var restoredRunningIDs: [UUID] = []
 
-  init(engine: TerminalEngine) {
+  init(engine: TerminalEngine, snapshot: WorkspaceSnapshot? = nil) {
     self.engine = engine
+    let valid = snapshot.flatMap { (try? $0.validate()) != nil ? $0 : nil }
     let id = UUID()
-    layout = .pane(id)
-    focusedID = id
+    layout = valid?.layout ?? .pane(id)
+    focusedID = valid?.focusedID ?? id
     super.init(frame: .zero)
     appearance = NSAppearance(named: .aqua)
     wantsLayer = true
     layer?.backgroundColor = ChopStyle.background.cgColor
     configureToolbar()
-    addPane(id)
+    if let valid {
+      for saved in valid.panes {
+        addPane(saved.id, directory: saved.workingDirectory, name: saved.name)
+        if saved.wasRunning { restoredRunningIDs.append(saved.id) }
+      }
+    } else {
+      addPane(id)
+    }
     rebuild()
   }
 
   @available(*, unavailable)
   required init?(coder: NSCoder) { fatalError("Use init(engine:).") }
 
-  private func addPane(_ id: UUID, directory: String? = nil) {
+  private func addPane(_ id: UUID, directory: String? = nil, name: String? = nil) {
+    while panes.values.contains(where: { $0.name == "터미널 \(nextName)" }) { nextName += 1 }
     let pane = TerminalPaneView(
-      engine: engine, id: id, name: "터미널 \(nextName)",
+      engine: engine, id: id, name: name ?? "터미널 \(nextName)",
       workingDirectory: directory ?? FileManager.default.homeDirectoryForCurrentUser.path)
     nextName += 1
     pane.onFocus = { [weak self] in self?.didFocus(id) }
@@ -52,6 +63,7 @@ final class WorkspaceView: NSView {
     pane.canSplit = { [weak self] axis in self?.canSplit(id, axis: axis) ?? false }
     pane.onRemoveRequested = { [weak self] in self?.removeEmptyPane(id) }
     pane.onZoomRequested = { [weak self] in self?.toggleZoom(id) }
+    pane.onDirectoryFallback = { [weak self] path in self?.reportMissingDirectories([path]) }
     pane.isEditing = isEditing
     panes[id] = pane
   }
@@ -119,6 +131,42 @@ final class WorkspaceView: NSView {
   func closeAll() {
     for pane in panes.values { pane.closeTerminal() }
   }
+
+  func snapshot() -> WorkspaceSnapshot {
+    WorkspaceSnapshot(
+      layout: layout,
+      panes: layout.paneIDs.compactMap { id in
+        guard let pane = panes[id] else { return nil }
+        return PaneSnapshot(
+          id: id, name: pane.name, workingDirectory: pane.workingDirectory,
+          wasRunning: pane.isRunning)
+      }, focusedID: focusedID)
+  }
+
+  func startRestoredTerminals() {
+    let ids = restoredRunningIDs
+    restoredRunningIDs.removeAll()
+    let selected = focusedID
+    let missing = layout.paneIDs.compactMap { panes[$0]?.resolveWorkingDirectory() }
+    if !missing.isEmpty { reportMissingDirectories(missing) }
+    for id in ids { panes[id]?.openTerminal() }
+    panes[selected]?.focus()
+  }
+
+  private func reportMissingDirectories(_ paths: [String]) {
+    if let onMissingDirectories {
+      onMissingDirectories(paths)
+      return
+    }
+    let alert = NSAlert()
+    alert.messageText = "이전 작업 폴더를 열 수 없어요"
+    alert.informativeText =
+      "해당 칸은 홈 폴더에서 엽니다.\n\n" + Array(Set(paths)).sorted().joined(separator: "\n")
+    alert.addButton(withTitle: "확인")
+    alert.runModal()
+  }
+
+  func refreshMinimumSize() { onMinimumSizeChange?(layout.minimumSize) }
 
   private func didFocus(_ id: UUID) {
     guard panes[id] != nil else { return }

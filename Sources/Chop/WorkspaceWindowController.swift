@@ -1,12 +1,13 @@
 import AppKit
+import ChopCore
 
 @MainActor
 final class WorkspaceWindowController: NSWindowController, NSWindowDelegate {
   let workspace: WorkspaceView
   var pane: TerminalPaneView { workspace.focusedPane }
 
-  init(engine: TerminalEngine) {
-    workspace = WorkspaceView(engine: engine)
+  init(engine: TerminalEngine, snapshot: WorkspaceSnapshot? = nil) {
+    workspace = WorkspaceView(engine: engine, snapshot: snapshot)
     let window = NSWindow(
       contentRect: NSRect(x: 0, y: 0, width: 1100, height: 720),
       styleMask: [.titled, .closable, .miniaturizable, .resizable],
@@ -34,6 +35,7 @@ final class WorkspaceWindowController: NSWindowController, NSWindowDelegate {
             width: max(current.width, minimum.width), height: max(current.height, minimum.height)))
       }
     }
+    workspace.refreshMinimumSize()
   }
 
   func windowShouldClose(_ sender: NSWindow) -> Bool {
