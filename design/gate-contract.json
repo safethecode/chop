@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "catalog_version": 5,
-  "scope_notes": "Native macOS Chop v0.1, user task and DESIGN comparison. macOS26.5.2/CI15; macOS14 physical, full VoiceOver/all IMEs and hardware wheel are explicitly outside verified combinations. Shell/TUI VT styling and standard OS chrome are distinguished from app-owned labels. cmux is technical/feature inspiration, not a visual pixel reference. User correction 2026-10-14 adds R-DEFAULT canvas screenshot as a visual/state reference; first shell + three empty plus panes is mandatory at default entry. Previous main gate lacked that condition; its historical ledger is retained. PR #8: user-requested light/dark modes; preserve default grid in both modes, apply to native chrome and all terminals without PTY replacement, persist selection. Evidence is self review, with actual CUA observations recorded as Markdown. PR #10: user-requested icon-only mode toggle and layout presets. Preserve R-DEFAULT canvas and R-TOOLBAR location/options/selection; icons are an intentional user-requested change from text, not an exact crop clone. PR #11: editing-only same-workspace pane exchange with whole-pane/GPU drag preview and placement motion, requested and directly accepted by user. Preserve live PTY and split geometry. CUA before/after observations are separate from user motion feedback; no mid-drag frame capture or physical Reduce Motion execution is claimed. PR #12: user-requested uniform header background distinct from body in both modes, not per-terminal colors. Actual five-pane light/dark, editing, zoom and hidden-pane mode update rechecked without changing geometry. PR #13: explicit user request removes the blue pane outline on input focus; preserve real terminal cursor, first responder, focus navigation/storage and native button/menu focus. Drag-target outline is a separate transient state. Actual two-mode four-pane mouse/keyboard input, zoom and swap-back rechecked. PR #14: user-requested right file tree is a peer of terminal canvas below the full-width global toolbar. User hierarchy/stray-divider corrections and internal long-path/reopen issues were fixed and rechecked. New lazy file navigation, native picker/shortcuts, async stale-result protection and separate settings preserve terminal surfaces. OS open wait on final restart was observed; native folder reselection recovered it without UI blocking. Two-mode default/minimum UI and final drag/keyboard restoration are scoped separately from prior evidence.",
+  "scope_notes": "Native macOS Chop v0.1, user task and DESIGN comparison. macOS26.5.2/CI15; macOS14 physical, full VoiceOver/all IMEs and hardware wheel are explicitly outside verified combinations. Shell/TUI VT styling and standard OS chrome are distinguished from app-owned labels. cmux is technical/feature inspiration, not a visual pixel reference. User correction 2026-10-14 adds R-DEFAULT canvas screenshot as a visual/state reference; first shell + three empty plus panes is mandatory at default entry. Previous main gate lacked that condition; its historical ledger is retained. PR #8: user-requested light/dark modes; preserve default grid in both modes, apply to native chrome and all terminals without PTY replacement, persist selection. Evidence is self review, with actual CUA observations recorded as Markdown. PR #10: user-requested icon-only mode toggle and layout presets. Preserve R-DEFAULT canvas and R-TOOLBAR location/options/selection; icons are an intentional user-requested change from text, not an exact crop clone. PR #11: editing-only same-workspace pane exchange with whole-pane/GPU drag preview and placement motion, requested and directly accepted by user. Preserve live PTY and split geometry. CUA before/after observations are separate from user motion feedback; no mid-drag frame capture or physical Reduce Motion execution is claimed. PR #12: user-requested uniform header background distinct from body in both modes, not per-terminal colors. Actual five-pane light/dark, editing, zoom and hidden-pane mode update rechecked without changing geometry. PR #13: explicit user request removes the blue pane outline on input focus; preserve real terminal cursor, first responder, focus navigation/storage and native button/menu focus. Drag-target outline is a separate transient state. Actual two-mode four-pane mouse/keyboard input, zoom and swap-back rechecked. PR #14: user-requested right file tree is a peer of terminal canvas below the full-width global toolbar. User hierarchy/stray-divider corrections and internal long-path/reopen issues were fixed and rechecked. New lazy file navigation, native picker/shortcuts, async stale-result protection and separate settings preserve terminal surfaces. OS open wait on final restart was observed; native folder reselection recovered it without UI blocking. Two-mode default/minimum UI and final drag/keyboard restoration are scoped separately from prior evidence. PR #14 review follow-up: isolate child metadata failures with a literal-name/leaf fallback, keep root errors.16 tests and latest normal folder expansion rechecked; no layout change. CodeRabbit covered5101fb1, follow-up self-reviewed; docstring coverage warning is disclosed separately.",
   "targets": [
     "Sources",
     "Resources/terminal.conf",
@@ -685,7 +685,7 @@
       "id": "ORC-A10",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "실제 async loading/빈 폴더/없는 경로 오류/복구/늦은 응답 거절을 확인했다. OS open 대기 조합은 별도 관찰로 남기고 다른 경로/폴더 선택기로 복구했다. 상태 문구가 실제 읽기 상태와 일치한다.",
+      "reason": "실제 async loading/빈 폴더/없는 경로 오류/복구/늦은 응답 거절을 확인했다. OS open 대기 조합은 별도 관찰로 남기고 다른 경로/폴더 선택기로 복구했다. 상태 문구가 실제 읽기 상태와 일치한다. CodeRabbit의 개별 metadata 실패 전파를 확인해 이름/leaf fallback으로 수정했다. 오류 주입 회귀 검사와 최신 앱의 일반 폴더 표시/펼치기로 재검증했다.",
       "checks": [
         "code",
         "visual",
@@ -755,7 +755,7 @@
       "id": "RUI-06",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "strict Swift format/셸 syntax/plist/release build/signature/15개 테스트를 통과했다. FileTree literal path/비동기 late response와 실제 PTY wrapper geometry를 검증했다.",
+      "reason": "strict Swift format/셸 syntax/plist/release build/signature/15개 테스트를 통과했다. FileTree literal path/비동기 late response와 실제 PTY wrapper geometry를 검증했다. CodeRabbit 후속 metadata 오류 처리를 셀프 리뷰하고 strict 검사/전체16개 테스트3.737초를 통과했다.",
       "checks": [
         "code"
       ],
@@ -1096,7 +1096,7 @@
       "id": "PROJECT-TRUTH",
       "applicable": true,
       "scope": "User-authorized Chop v0.1 behavior; PROJECT-TRUTH",
-      "reason": "실제 CUA 관찰·sample OS open 대기·자동 검사·스크린샷 좌표 오류를 구분했다. 가짜 파일/terminal 출력은 만들지 않으며 테스트 fixture와 사용자 실제 프로젝트 목록을 구별한다. 독립 승인/중간 drag 프레임/전 플랫폼 검증을 주장하지 않는다.",
+      "reason": "실제 CUA 관찰·sample OS open 대기·자동 검사·스크린샷 좌표 오류를 구분했다. 가짜 파일/terminal 출력은 만들지 않으며 테스트 fixture와 사용자 실제 프로젝트 목록을 구별한다. 독립 승인/중간 drag 프레임/전 플랫폼 검증을 주장하지 않는다. 실제 CodeRabbit 리뷰는5101fb1까지19개 파일·지적1건이다. 후속 수정/16개 검사와 최신 앱 관찰은 셀프 리뷰이며 외부 재승인으로 표시하지 않는다.",
       "checks": [
         "spec",
         "code",
@@ -1187,7 +1187,7 @@
       "id": "PROJECT-FILETREE",
       "applicable": true,
       "scope": "오른쪽 native outline의 경로 입력/폴더 선택기/홈·다운로드·문서·하위 lazy read/상태 복구/Finder·복사/설정 저장",
-      "reason": "문자 그대로의 경로/one-level 정렬/async generation·성공 루트 저장을 테스트했다. E-T2–7/10의 실제 동작과 OS open 대기 후 선택기 복구를 구분하고 기존 PTY를 보존한다.",
+      "reason": "문자 그대로의 경로/one-level 정렬/async generation·성공 루트 저장을 테스트했다. E-T2–7/10의 실제 동작과 OS open 대기 후 선택기 복구를 구분하고 기존 PTY를 보존한다. 자식 metadata 읽기 하나가 실패해도 이름/비폴더 leaf와 다른 항목을 보존한다. 루트 오류는 유지하고 결정적인 오류 주입 검사/최신 앱 복원·펼치기를 확인했다.",
       "checks": [
         "spec",
         "code",

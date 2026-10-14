@@ -39,3 +39,20 @@ import Testing
   #expect(throws: FileTreeError.self) { try FileTree.directoryURL(for: "", relativeTo: root) }
   #expect(throws: FileTreeError.self) { try FileTree.directoryURL(for: "a\0b", relativeTo: root) }
 }
+
+@Test func fileTreeKeepsOtherEntriesWhenChildMetadataBecomesUnavailable() throws {
+  let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+  try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+  defer { try? FileManager.default.removeItem(at: root) }
+  for name in ["readable", "unavailable"] {
+    try FileManager.default.createDirectory(
+      at: root.appendingPathComponent(name), withIntermediateDirectories: true)
+  }
+  try Data().write(to: root.appendingPathComponent("file.txt"))
+  let entries = try FileTree.entries(at: root) { url, keys in
+    if url.lastPathComponent == "unavailable" { throw CocoaError(.fileReadNoSuchFile) }
+    return try url.resourceValues(forKeys: keys)
+  }
+  #expect(entries.map(\.name) == ["readable", "file.txt", "unavailable"])
+  #expect(entries.filter(\.isDirectory).map(\.name) == ["readable"])
+}

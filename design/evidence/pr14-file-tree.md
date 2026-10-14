@@ -56,3 +56,11 @@ Workspace는 기존 toolbar 아래 bodyHost에 terminal canvas와 file split을 
 파일 제목은 탐색 영역 이름이고 다른 설명을 반복하지 않는다. `홈/다운로드/문서`는 바로 이동하는 목적지 이름, `폴더 선택…`은 모달, `새로고침`은 현재 경로 재읽기, `Finder에서 보기/경로 복사`는 선택 항목의 실제 동작이다. `파일 트리 보기/숨기기`는 다음 전환 대상과 toggle/메뉴 상태가 일치한다. 읽기 실패는 확인된 사실과 가능한 복구만 안내하고 원인·시간을 추측하지 않는다. 한국어8원칙의 즉시 행동·핵심 정보·쉬운 말·중복·선택권을 대조했다. 기존 terminal14pt medium/header40/inset12/아이콘28, toolbar48을 사용하고 새 내부 gap8/행28/들여쓰기16/패널300(최소280)은 chosen macOS pt다. NSOpenPanel·표준 버튼/필드·행 선택은 native 예외다.
 
 범위 밖: macOS14 실기기, 전체 VoiceOver 탐색, 모든 TUI/입력기, 하드웨어 휠의 기존 실기 미검증은 유지한다. 숨김 파일 전환·자동 폴더 감시·파일 편집/삭제·터미널 cwd 자동 동기화는 이번 요청 범위에 추가하지 않았다. 긴 목록의 native 스크롤은 유지하고 빈/소수 폴더에 별도 canvas 스크롤을 만들지 않는다.
+
+## CodeRabbit 후속 수정
+
+[실제 리뷰](https://github.com/safethecode/chop/pull/14#pullrequestreview-5520572482)는5101fb1까지19개 파일을 검토했다(run09de0bfb-70dc-4987-a3c3-32d92ffad52d). 유효 지적1건: 열거한 하위 항목의 resourceValues가 실패하면 읽을 수 있는 폴더 전체가 실패했다. 코드를 확인해 개별 항목은 lastPathComponent 이름/비폴더 leaf로 남기도록 수정했다. 루트 디렉터리의 실제 읽기 실패는 계속 전파한다.
+
+새 테스트는 실제 임시 폴더에서 한 자식의 메타데이터 읽기만 결정적으로 실패시킨다. 다른 폴더/파일과 실패 항목 이름이 남고 실패한 자식은 펼치지 않으며 정렬도 유지되는지 확인한다. 수정 후 `./scripts/check.sh` 전체16개 테스트3.737초 PASS, 로그 `.cache/check-file-tree-review.log`. 다시 실행한 최신 앱에서 프로젝트 루트가 선택기 없이 즉시 복원되고 Sources를 펼쳐 Chop/ChopCore 하위 폴더를 실제 표시했다. 이전 OS open 대기 기록은 보존하며 이 fallback 수정이 그 원인을 해결했다고 단정하지 않는다. 배치/그리기/드래그 코드는 바꾸지 않았다.
+
+후속 수정은 셀프 리뷰와 새 CI로 확인한다. CodeRabbit이 수정 커밋까지 다시 검토했다고 주장하지 않는다. CodeRabbit의 docstring6.35%/기준80% 경고는 별도 문서화 제안이며,63개 함수에 반복 설명을 추가하지 않았다. 저장소 필수 CI나 보호 규칙을 해제하지 않는다.

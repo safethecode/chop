@@ -35,6 +35,13 @@ public enum FileTree {
 
   /// Read one level only. Symbolic links and app packages are leaves, avoiding recursive cycles.
   public static func entries(at directory: URL) throws -> [FileTreeEntry] {
+    try entries(at: directory) { url, keys in try url.resourceValues(forKeys: keys) }
+  }
+
+  static func entries(
+    at directory: URL,
+    readResourceValues: (URL, Set<URLResourceKey>) throws -> URLResourceValues
+  ) throws -> [FileTreeEntry] {
     var isDirectory: ObjCBool = false
     guard directory.isFileURL,
       FileManager.default.fileExists(atPath: directory.path, isDirectory: &isDirectory),
@@ -46,7 +53,8 @@ public enum FileTree {
     return try FileManager.default.contentsOfDirectory(
       at: directory, includingPropertiesForKeys: Array(keys), options: .skipsHiddenFiles
     ).map { url in
-      let values = try url.resourceValues(forKeys: keys)
+      // A child may disappear after enumeration; preserve the rest of the readable folder.
+      let values = (try? readResourceValues(url, keys)) ?? URLResourceValues()
       return FileTreeEntry(
         url: url, name: values.localizedName ?? url.lastPathComponent,
         isDirectory: values.isDirectory == true && values.isSymbolicLink != true

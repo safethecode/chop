@@ -29,3 +29,4 @@ PR #12 header background: `.cache/check-header-background.log` check.sh 성공, 
 PR #13 no focus border: `.cache/check-no-focus-border.log`의 check.sh 성공,11 tests in3.641s. 실제4칸/두 모드에서 클릭·⌘⌥방향키로 선택한 각각의 셸에 서로 다른 명령을 출력했고 파란 pane 경계가 없었다. 확대/드래그 교환·복귀/편집 종료 뒤에도 경계가 남지 않았다.
 
 PR #14 file tree: `.cache/check-file-tree.log` check.sh 성공,15 tests in3.445s. 새 파일 탐색 모델/경로/비동기 stale 결과/실패 후 복구/환경설정 테스트와 기존 실제 PTY의 패널 개폐 identity·툴바48pt 아래 배치·재열기 폭 검사를 수행했다. 실제 두 모드/전체·최소 창/폴더 picker 선택·취소/경로·바로가기/오류 복구/중첩 파일·복사·Finder/개폐·폭 조절을 관찰했다. 사용자 지적의 툴바 침범과 검은 선, 내부 긴 경로 잘림·0폭 회귀는 수정 뒤 다시 확인했다.
+PR #14 CodeRabbit 후속: 하위 항목 메타데이터 실패를 전체 폴더 오류로 전파하던 문제를 수정했다. 전체16개 테스트3.737초 PASS, 최신 앱의 프로젝트 자동 복원/하위 펼치기를 확인했다. 외부 리뷰는5101fb1까지이며 후속 수정은 셀프 리뷰/CI 범위다.

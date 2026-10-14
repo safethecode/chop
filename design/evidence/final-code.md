@@ -33,3 +33,4 @@ PR #12 헤더 배경: AppearanceMode.headerBackground(light F3F4F6/dark292D35)�
 PR #13 입력 포커스 경계 제거: 표현에만 쓰던 pane.isFocused와 Workspace의 배포를 제거했다. focusedID/didFocus 저장 알림·first responder/Ghostty focus·키보드 공간 이동은 유지한다. updateDropHighlight는 유효 드롭에서만2pt, 나머지는0이다. 실제 두 모드·클릭/키보드 입력·확대·칸 교환 뒤 경계 미표시를 E-F1–5에서 재검증했다. 네이티브 버튼/메뉴 포커스는 변경하지 않는다.
 
 PR #14 파일 트리: FileTree의 한 단계 메타데이터/문자 그대로 경로·자연 정렬, FileBrowserView의 generation 기반 비동기 탐색/복구·NSOpenPanel·native outline·바로가기/선택 동작을 대조했다. Workspace 공통 toolbar 아래 bodyHost에 canvas와 file split을 나란히 두고 minimum·reserved width·clip/재그리기/개폐 프레임을 연결했다. canvas와 surface는 재사용한다. 테스트15개와 실제 E-T1–10을 확인했고 사용자 교정 V-19/20과 내부 회귀 V-21/22를 기록했다. 기본4칸/아이콘/헤더/포커스 경계 제거 계약은 유지한다.
+PR #14 후속: FileTree의 개별 metadata 읽기 실패는 URL 이름/비폴더 leaf로 fallback하며 root enumeration 오류는 유지한다. 주입한 자식 읽기 오류와 실제 폴더 열거를 조합한 회귀 검사를 포함해16개 테스트가 통과했다.

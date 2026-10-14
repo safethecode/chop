@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "reviewer": "Codex self-review; actual code/test/CUA observations, not independent approval",
-  "reviewed_at": "2026-10-14T15:34:50.451109+00:00",
-  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics. PR #8: changed appearance scopes rechecked against actual light/dark screenshots and E-A1–A6; unchanged structure/native exceptions retain earlier evidence; local 10-test suite rerun. No independent approval or exported PNG claimed. PR #10: toolbar icon roles, copy, geometry and actions rechecked in actual CUA images/AX, four layouts, both modes, minimum window and restart. Existing scopes outside changed toolbar retain prior observations and rerun PTY checks. PR #11: changed handle, preview, movement, keyboard, same live PTY and persisted order rechecked; direct user acceptance covers requested motion. CUA cannot capture transient drag frames; Reduce Motion physical settings were not changed. Unchanged exclusions/native exceptions retain prior evidence; 11-test checks rerun. PR #12: actual CUA light/dark header/body contrast, five-pane editing/zoom/hidden-pane updates rechecked; no new text/geometry. Existing exceptions and unrelated observations retained. 11-test check passed. Final PR #12 review follow-up adds only three doc comments in response to CodeRabbit coverage warning. Strict format/diff checks passed; no executable behavior or visual contract changed, so E-H1–5 remains applicable. External review coverage is explicitly fccec, follow-up comments self-reviewed. PR #13: pane focus outline removed by explicit user request. Real mouse/keyboard shell input and AX focus, light/dark, zoom and drag swap-back were rechecked in current CUA renders. Previous focus-border appearance is historical; RUI-23 declares the user-requested terminal-only exception, native control focus remains. No transient drag screenshot or full VoiceOver claim. Unchanged scopes retain prior evidence. PR #14: changed toolbar/body/file-panel consumers rechecked in actual CUA, including user hierarchy and stray-line corrections, long path, reopen, two-mode minimum, native folder picker, literal paths, folder expansion, copy/Finder and live shell preservation.15 tests passed. Final restart OS open wait and picker recovery are documented; no permission root cause claimed. Final pointer swap succeeded with2× image coordinates, keyboard restored original order. No drag implementation change or transient-frame claim. Unchanged native exclusions retain prior evidence.",
+  "reviewed_at": "2026-10-14T15:42:53.996534+00:00",
+  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics. PR #8: changed appearance scopes rechecked against actual light/dark screenshots and E-A1–A6; unchanged structure/native exceptions retain earlier evidence; local 10-test suite rerun. No independent approval or exported PNG claimed. PR #10: toolbar icon roles, copy, geometry and actions rechecked in actual CUA images/AX, four layouts, both modes, minimum window and restart. Existing scopes outside changed toolbar retain prior observations and rerun PTY checks. PR #11: changed handle, preview, movement, keyboard, same live PTY and persisted order rechecked; direct user acceptance covers requested motion. CUA cannot capture transient drag frames; Reduce Motion physical settings were not changed. Unchanged exclusions/native exceptions retain prior evidence; 11-test checks rerun. PR #12: actual CUA light/dark header/body contrast, five-pane editing/zoom/hidden-pane updates rechecked; no new text/geometry. Existing exceptions and unrelated observations retained. 11-test check passed. Final PR #12 review follow-up adds only three doc comments in response to CodeRabbit coverage warning. Strict format/diff checks passed; no executable behavior or visual contract changed, so E-H1–5 remains applicable. External review coverage is explicitly fccec, follow-up comments self-reviewed. PR #13: pane focus outline removed by explicit user request. Real mouse/keyboard shell input and AX focus, light/dark, zoom and drag swap-back were rechecked in current CUA renders. Previous focus-border appearance is historical; RUI-23 declares the user-requested terminal-only exception, native control focus remains. No transient drag screenshot or full VoiceOver claim. Unchanged scopes retain prior evidence. PR #14: changed toolbar/body/file-panel consumers rechecked in actual CUA, including user hierarchy and stray-line corrections, long path, reopen, two-mode minimum, native folder picker, literal paths, folder expansion, copy/Finder and live shell preservation.15 tests passed. Final restart OS open wait and picker recovery are documented; no permission root cause claimed. Final pointer swap succeeded with2× image coordinates, keyboard restored original order. No drag implementation change or transient-frame claim. Unchanged native exclusions retain prior evidence. PR #14 follow-up: CodeRabbit actual review5101fb1/19files found one valid child metadata failure propagation. Minimal fallback plus deterministic injected-I/O regression test passed with all16 tests3.737s. Latest app restored project root and expanded Sources. Unchanged layout/appearance observations remain applicable; no external re-review of this follow-up is claimed.",
   "catalog_sha256": "9af51eedfbd6625fdcae46aa6a55e6206c447fe43b23fb1d0ff61f8ac800114f",
-  "contract_sha256": "bc9f0d26d5e07b8d991f1f29d97e81f6bf16567bd6c82e833d306c02ce710f88",
-  "target_sha256": "e56eb91417f6aad9989852e764fd7cd599f7a0a0cbd93bc92b200d03fc77a7cf",
+  "contract_sha256": "0e28b919f61ba3301238d883b0d0759592be236d3161483120e54628b31d514b",
+  "target_sha256": "45ef1e50e10e3da3fbf67bbb8cd85ba8563af0313be4a7cdd3fd1d09cc4052f0",
   "results": [
     {
       "id": "ORC-F01",
@@ -15,12 +15,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -32,12 +32,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -49,7 +49,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -112,7 +112,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -151,7 +151,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -196,12 +196,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -213,7 +213,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -240,7 +240,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -255,7 +255,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "66048860b18fcdcd66ff36bfea837cc2c65e49634d209628794eb1a6690c8346"
+          "sha256": "47ab3b5074914859eaf8dc09a7f6c93fced41664a17c10f6ba568a3941c4778f"
         },
         {
           "kind": "code",
@@ -300,17 +300,17 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ],
       "exception_id": "CHOP-ORC-F08"
@@ -329,7 +329,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -379,12 +379,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -423,7 +423,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -468,12 +468,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -485,7 +485,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -500,7 +500,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "66048860b18fcdcd66ff36bfea837cc2c65e49634d209628794eb1a6690c8346"
+          "sha256": "47ab3b5074914859eaf8dc09a7f6c93fced41664a17c10f6ba568a3941c4778f"
         },
         {
           "kind": "code",
@@ -549,7 +549,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -564,7 +564,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "66048860b18fcdcd66ff36bfea837cc2c65e49634d209628794eb1a6690c8346"
+          "sha256": "47ab3b5074914859eaf8dc09a7f6c93fced41664a17c10f6ba568a3941c4778f"
         },
         {
           "kind": "code",
@@ -584,17 +584,17 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -606,7 +606,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -648,7 +648,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -680,7 +680,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -713,7 +713,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -746,7 +746,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -781,12 +781,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -798,7 +798,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -813,7 +813,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "66048860b18fcdcd66ff36bfea837cc2c65e49634d209628794eb1a6690c8346"
+          "sha256": "47ab3b5074914859eaf8dc09a7f6c93fced41664a17c10f6ba568a3941c4778f"
         },
         {
           "kind": "code",
@@ -866,7 +866,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -891,12 +891,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ],
       "exception_id": "CHOP-ORC-G06"
@@ -909,7 +909,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -954,12 +954,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -971,7 +971,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -991,12 +991,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -1008,7 +1008,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -1028,12 +1028,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -1045,7 +1045,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -1095,12 +1095,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -1112,7 +1112,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -1157,12 +1157,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ],
       "exception_id": "CHOP-ORC-G11"
@@ -1175,7 +1175,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -1214,7 +1214,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -1246,7 +1246,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -1273,7 +1273,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -1288,7 +1288,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "66048860b18fcdcd66ff36bfea837cc2c65e49634d209628794eb1a6690c8346"
+          "sha256": "47ab3b5074914859eaf8dc09a7f6c93fced41664a17c10f6ba568a3941c4778f"
         },
         {
           "kind": "code",
@@ -1333,17 +1333,17 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ],
       "exception_id": "CHOP-ORC-G16"
@@ -1362,7 +1362,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -1407,12 +1407,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -1451,7 +1451,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -1496,12 +1496,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -1513,7 +1513,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -1528,7 +1528,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "66048860b18fcdcd66ff36bfea837cc2c65e49634d209628794eb1a6690c8346"
+          "sha256": "47ab3b5074914859eaf8dc09a7f6c93fced41664a17c10f6ba568a3941c4778f"
         },
         {
           "kind": "code",
@@ -1587,7 +1587,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -1602,7 +1602,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "66048860b18fcdcd66ff36bfea837cc2c65e49634d209628794eb1a6690c8346"
+          "sha256": "47ab3b5074914859eaf8dc09a7f6c93fced41664a17c10f6ba568a3941c4778f"
         },
         {
           "kind": "code",
@@ -1622,17 +1622,17 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -1650,7 +1650,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -1682,7 +1682,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -1725,7 +1725,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -1758,7 +1758,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -1806,7 +1806,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -1834,7 +1834,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -1862,7 +1862,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -1897,12 +1897,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ],
       "exception_id": "CHOP-ORC-A07"
@@ -1921,7 +1921,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -1944,12 +1944,12 @@
     {
       "id": "ORC-A10",
       "status": "exception",
-      "reason": "실제 async loading/빈 폴더/없는 경로 오류/복구/늦은 응답 거절을 확인했다. OS open 대기 조합은 별도 관찰로 남기고 다른 경로/폴더 선택기로 복구했다. 상태 문구가 실제 읽기 상태와 일치한다.",
+      "reason": "실제 async loading/빈 폴더/없는 경로 오류/복구/늦은 응답 거절을 확인했다. OS open 대기 조합은 별도 관찰로 남기고 다른 경로/폴더 선택기로 복구했다. 상태 문구가 실제 읽기 상태와 일치한다. CodeRabbit의 개별 metadata 실패 전파를 확인해 이름/leaf fallback으로 수정했다. 오류 주입 회귀 검사와 최신 앱의 일반 폴더 표시/펼치기로 재검증했다.",
       "evidence": [
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -1964,7 +1964,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "66048860b18fcdcd66ff36bfea837cc2c65e49634d209628794eb1a6690c8346"
+          "sha256": "47ab3b5074914859eaf8dc09a7f6c93fced41664a17c10f6ba568a3941c4778f"
         },
         {
           "kind": "code",
@@ -2004,17 +2004,17 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ],
       "exception_id": "CHOP-ORC-A10"
@@ -2027,7 +2027,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "spec",
@@ -2037,7 +2037,7 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -2049,7 +2049,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "code",
@@ -2074,7 +2074,7 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -2086,7 +2086,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "spec",
@@ -2106,7 +2106,7 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -2118,7 +2118,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "interaction",
@@ -2128,7 +2128,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "66048860b18fcdcd66ff36bfea837cc2c65e49634d209628794eb1a6690c8346"
+          "sha256": "47ab3b5074914859eaf8dc09a7f6c93fced41664a17c10f6ba568a3941c4778f"
         },
         {
           "kind": "spec",
@@ -2183,12 +2183,12 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -2200,7 +2200,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "visual",
@@ -2242,12 +2242,12 @@
     {
       "id": "RUI-06",
       "status": "pass",
-      "reason": "strict Swift format/셸 syntax/plist/release build/signature/15개 테스트를 통과했다. FileTree literal path/비동기 late response와 실제 PTY wrapper geometry를 검증했다.",
+      "reason": "strict Swift format/셸 syntax/plist/release build/signature/15개 테스트를 통과했다. FileTree literal path/비동기 late response와 실제 PTY wrapper geometry를 검증했다. CodeRabbit 후속 metadata 오류 처리를 셀프 리뷰하고 strict 검사/전체16개 테스트3.737초를 통과했다.",
       "evidence": [
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "code",
@@ -2257,7 +2257,7 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -2269,7 +2269,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "visual",
@@ -2319,12 +2319,12 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -2336,12 +2336,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -2378,7 +2378,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -2428,12 +2428,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ],
       "exception_id": "CHOP-RUI-09"
@@ -2446,7 +2446,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "visual",
@@ -2476,12 +2476,12 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -2493,7 +2493,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "visual",
@@ -2533,12 +2533,12 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -2550,7 +2550,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -2585,12 +2585,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ],
       "exception_id": "CHOP-RUI-12"
@@ -2603,7 +2603,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -2618,7 +2618,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "66048860b18fcdcd66ff36bfea837cc2c65e49634d209628794eb1a6690c8346"
+          "sha256": "47ab3b5074914859eaf8dc09a7f6c93fced41664a17c10f6ba568a3941c4778f"
         },
         {
           "kind": "code",
@@ -2638,17 +2638,17 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -2660,7 +2660,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -2710,12 +2710,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ],
       "exception_id": "CHOP-RUI-14"
@@ -2749,7 +2749,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "visual",
@@ -2794,12 +2794,12 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -2826,7 +2826,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "visual",
@@ -2871,12 +2871,12 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -2888,7 +2888,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "visual",
@@ -2908,12 +2908,12 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -2931,7 +2931,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -2969,7 +2969,7 @@
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -3029,12 +3029,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -3046,12 +3046,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -3131,17 +3131,17 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ],
       "exception_id": "CHOP-RUI-23-FOCUS"
@@ -3154,7 +3154,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "visual",
@@ -3179,12 +3179,12 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -3196,7 +3196,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "visual",
@@ -3241,12 +3241,12 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -3258,12 +3258,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -3278,7 +3278,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "66048860b18fcdcd66ff36bfea837cc2c65e49634d209628794eb1a6690c8346"
+          "sha256": "47ab3b5074914859eaf8dc09a7f6c93fced41664a17c10f6ba568a3941c4778f"
         },
         {
           "kind": "interaction",
@@ -3380,12 +3380,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -3400,7 +3400,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "66048860b18fcdcd66ff36bfea837cc2c65e49634d209628794eb1a6690c8346"
+          "sha256": "47ab3b5074914859eaf8dc09a7f6c93fced41664a17c10f6ba568a3941c4778f"
         },
         {
           "kind": "interaction",
@@ -3495,22 +3495,22 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -3522,12 +3522,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -3542,7 +3542,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "66048860b18fcdcd66ff36bfea837cc2c65e49634d209628794eb1a6690c8346"
+          "sha256": "47ab3b5074914859eaf8dc09a7f6c93fced41664a17c10f6ba568a3941c4778f"
         },
         {
           "kind": "interaction",
@@ -3647,22 +3647,22 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -3674,12 +3674,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -3694,7 +3694,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "66048860b18fcdcd66ff36bfea837cc2c65e49634d209628794eb1a6690c8346"
+          "sha256": "47ab3b5074914859eaf8dc09a7f6c93fced41664a17c10f6ba568a3941c4778f"
         },
         {
           "kind": "interaction",
@@ -3746,12 +3746,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -3766,7 +3766,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "66048860b18fcdcd66ff36bfea837cc2c65e49634d209628794eb1a6690c8346"
+          "sha256": "47ab3b5074914859eaf8dc09a7f6c93fced41664a17c10f6ba568a3941c4778f"
         },
         {
           "kind": "interaction",
@@ -3831,22 +3831,22 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -3858,12 +3858,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -3878,7 +3878,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "66048860b18fcdcd66ff36bfea837cc2c65e49634d209628794eb1a6690c8346"
+          "sha256": "47ab3b5074914859eaf8dc09a7f6c93fced41664a17c10f6ba568a3941c4778f"
         },
         {
           "kind": "interaction",
@@ -3930,12 +3930,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -3950,7 +3950,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "66048860b18fcdcd66ff36bfea837cc2c65e49634d209628794eb1a6690c8346"
+          "sha256": "47ab3b5074914859eaf8dc09a7f6c93fced41664a17c10f6ba568a3941c4778f"
         },
         {
           "kind": "interaction",
@@ -4037,17 +4037,17 @@
     {
       "id": "PROJECT-TRUTH",
       "status": "pass",
-      "reason": "실제 CUA 관찰·sample OS open 대기·자동 검사·스크린샷 좌표 오류를 구분했다. 가짜 파일/terminal 출력은 만들지 않으며 테스트 fixture와 사용자 실제 프로젝트 목록을 구별한다. 독립 승인/중간 drag 프레임/전 플랫폼 검증을 주장하지 않는다.",
+      "reason": "실제 CUA 관찰·sample OS open 대기·자동 검사·스크린샷 좌표 오류를 구분했다. 가짜 파일/terminal 출력은 만들지 않으며 테스트 fixture와 사용자 실제 프로젝트 목록을 구별한다. 독립 승인/중간 drag 프레임/전 플랫폼 검증을 주장하지 않는다. 실제 CodeRabbit 리뷰는5101fb1까지19개 파일·지적1건이다. 후속 수정/16개 검사와 최신 앱 관찰은 셀프 리뷰이며 외부 재승인으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -4062,7 +4062,7 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "66048860b18fcdcd66ff36bfea837cc2c65e49634d209628794eb1a6690c8346"
+          "sha256": "47ab3b5074914859eaf8dc09a7f6c93fced41664a17c10f6ba568a3941c4778f"
         },
         {
           "kind": "interaction",
@@ -4157,22 +4157,22 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -4209,17 +4209,17 @@
         {
           "kind": "interaction",
           "path": "design/evidence/final-check.md",
-          "sha256": "66048860b18fcdcd66ff36bfea837cc2c65e49634d209628794eb1a6690c8346"
+          "sha256": "47ab3b5074914859eaf8dc09a7f6c93fced41664a17c10f6ba568a3941c4778f"
         },
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -4251,12 +4251,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -4341,22 +4341,22 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -4368,12 +4368,12 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "f96f77ecf94ccd9264805e256dac84d66ffa913d18058519b83573f31e456c92"
+          "sha256": "5ce73e496210581644a69c64d4ab8698850fabcb00e55833d19f7026e5e65d00"
         },
         {
           "kind": "code",
           "path": "design/evidence/final-code.md",
-          "sha256": "b9bc209e2ef1821fae8c71a8cc4f78eda812fbd990bedbe728800ff21563faec"
+          "sha256": "68c12764a07025a8b19b559445e9ff8c3417be14fcae7a6eb9271096d14bda2c"
         },
         {
           "kind": "visual",
@@ -4408,22 +4408,22 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -4495,22 +4495,22 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -4562,22 +4562,22 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -4609,49 +4609,49 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
     {
       "id": "PROJECT-FILETREE",
       "status": "pass",
-      "reason": "문자 그대로의 경로/one-level 정렬/async generation·성공 루트 저장을 테스트했다. E-T2–7/10의 실제 동작과 OS open 대기 후 선택기 복구를 구분하고 기존 PTY를 보존한다.",
+      "reason": "문자 그대로의 경로/one-level 정렬/async generation·성공 루트 저장을 테스트했다. E-T2–7/10의 실제 동작과 OS open 대기 후 선택기 복구를 구분하고 기존 PTY를 보존한다. 자식 metadata 읽기 하나가 실패해도 이름/비폴더 leaf와 다른 항목을 보존한다. 루트 오류는 유지하고 결정적인 오류 주입 검사/최신 앱 복원·펼치기를 확인했다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     },
@@ -4663,22 +4663,22 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "code",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr14-file-tree.md",
-          "sha256": "ec76099237b923769c165e842fb600cbee4e192457c21d61ee592d26bd30b3eb"
+          "sha256": "1981076e0642539fa0e072fd8396d9a44197be8cf1da3496ab81decb7d5e8bce"
         }
       ]
     }
