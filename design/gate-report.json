@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "reviewer": "Codex self-review; actual code/test/CUA observations, not independent approval",
-  "reviewed_at": "2026-10-14T16:34:52.440215+00:00",
-  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics. PR #8: changed appearance scopes rechecked against actual light/dark screenshots and E-A1–A6; unchanged structure/native exceptions retain earlier evidence; local 10-test suite rerun. No independent approval or exported PNG claimed. PR #10: toolbar icon roles, copy, geometry and actions rechecked in actual CUA images/AX, four layouts, both modes, minimum window and restart. Existing scopes outside changed toolbar retain prior observations and rerun PTY checks. PR #11: changed handle, preview, movement, keyboard, same live PTY and persisted order rechecked; direct user acceptance covers requested motion. CUA cannot capture transient drag frames; Reduce Motion physical settings were not changed. Unchanged exclusions/native exceptions retain prior evidence; 11-test checks rerun. PR #12: actual CUA light/dark header/body contrast, five-pane editing/zoom/hidden-pane updates rechecked; no new text/geometry. Existing exceptions and unrelated observations retained. 11-test check passed. Final PR #12 review follow-up adds only three doc comments in response to CodeRabbit coverage warning. Strict format/diff checks passed; no executable behavior or visual contract changed, so E-H1–5 remains applicable. External review coverage is explicitly fccec, follow-up comments self-reviewed. PR #13: pane focus outline removed by explicit user request. Real mouse/keyboard shell input and AX focus, light/dark, zoom and drag swap-back were rechecked in current CUA renders. Previous focus-border appearance is historical; RUI-23 declares the user-requested terminal-only exception, native control focus remains. No transient drag screenshot or full VoiceOver claim. Unchanged scopes retain prior evidence. PR #14: changed toolbar/body/file-panel consumers rechecked in actual CUA, including user hierarchy and stray-line corrections, long path, reopen, two-mode minimum, native folder picker, literal paths, folder expansion, copy/Finder and live shell preservation.15 tests passed. Final restart OS open wait and picker recovery are documented; no permission root cause claimed. Final pointer swap succeeded with2× image coordinates, keyboard restored original order. No drag implementation change or transient-frame claim. Unchanged native exclusions retain prior evidence. PR #14 follow-up: CodeRabbit actual review5101fb1/19files found one valid child metadata failure propagation. Minimal fallback plus deterministic injected-I/O regression test passed with all16 tests3.737s. Latest app restored project root and expanded Sources. Unchanged layout/appearance observations remain applicable; no external re-review of this follow-up is claimed. Path field actual dark/light click/selection/caret/edit+Enter rechecked;16 tests3.597s passed. Other native/layout/terminal consumers are unchanged. Header seam scope rechecked in actual light/dark,300→340→300pt file width,hide/reopen and editing headers.16 tests3.606s passed; no new input/drag/icon behavior. Location shortcut actual CUA icon click/three destinations, two modes,842×442 minimum and empty/long folder states rechecked;16 tests4.907s passed. Initial native glyph-width alignment failure is retained. File drop19 tests6.307s pass, typed pasteboard/argv/PTY/focus/no-Enter/lifecycle verified. Actual OS source writer observed but drop completion not verified; RUI-04/PROJECT-FILE-DROP unknown. No native endpoint or independent approval claimed.",
+  "reviewed_at": "2026-10-14T16:41:54.124763+00:00",
+  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics. PR #8: changed appearance scopes rechecked against actual light/dark screenshots and E-A1–A6; unchanged structure/native exceptions retain earlier evidence; local 10-test suite rerun. No independent approval or exported PNG claimed. PR #10: toolbar icon roles, copy, geometry and actions rechecked in actual CUA images/AX, four layouts, both modes, minimum window and restart. Existing scopes outside changed toolbar retain prior observations and rerun PTY checks. PR #11: changed handle, preview, movement, keyboard, same live PTY and persisted order rechecked; direct user acceptance covers requested motion. CUA cannot capture transient drag frames; Reduce Motion physical settings were not changed. Unchanged exclusions/native exceptions retain prior evidence; 11-test checks rerun. PR #12: actual CUA light/dark header/body contrast, five-pane editing/zoom/hidden-pane updates rechecked; no new text/geometry. Existing exceptions and unrelated observations retained. 11-test check passed. Final PR #12 review follow-up adds only three doc comments in response to CodeRabbit coverage warning. Strict format/diff checks passed; no executable behavior or visual contract changed, so E-H1–5 remains applicable. External review coverage is explicitly fccec, follow-up comments self-reviewed. PR #13: pane focus outline removed by explicit user request. Real mouse/keyboard shell input and AX focus, light/dark, zoom and drag swap-back were rechecked in current CUA renders. Previous focus-border appearance is historical; RUI-23 declares the user-requested terminal-only exception, native control focus remains. No transient drag screenshot or full VoiceOver claim. Unchanged scopes retain prior evidence. PR #14: changed toolbar/body/file-panel consumers rechecked in actual CUA, including user hierarchy and stray-line corrections, long path, reopen, two-mode minimum, native folder picker, literal paths, folder expansion, copy/Finder and live shell preservation.15 tests passed. Final restart OS open wait and picker recovery are documented; no permission root cause claimed. Final pointer swap succeeded with2× image coordinates, keyboard restored original order. No drag implementation change or transient-frame claim. Unchanged native exclusions retain prior evidence. PR #14 follow-up: CodeRabbit actual review5101fb1/19files found one valid child metadata failure propagation. Minimal fallback plus deterministic injected-I/O regression test passed with all16 tests3.737s. Latest app restored project root and expanded Sources. Unchanged layout/appearance observations remain applicable; no external re-review of this follow-up is claimed. Path field actual dark/light click/selection/caret/edit+Enter rechecked;16 tests3.597s passed. Other native/layout/terminal consumers are unchanged. Header seam scope rechecked in actual light/dark,300→340→300pt file width,hide/reopen and editing headers.16 tests3.606s passed; no new input/drag/icon behavior. Location shortcut actual CUA icon click/three destinations, two modes,842×442 minimum and empty/long folder states rechecked;16 tests4.907s passed. Initial native glyph-width alignment failure is retained. File drop19 tests6.307s pass, typed pasteboard/argv/PTY/focus/no-Enter/lifecycle verified. Actual OS source writer observed but drop completion not verified; RUI-04/PROJECT-FILE-DROP unknown. No native endpoint or independent approval claimed.  Actual user-operated native file endpoint observed via CUA AX; no-Enter is established separately by the real PTY test, not inferred from subsequent shell output.",
   "catalog_sha256": "9af51eedfbd6625fdcae46aa6a55e6206c447fe43b23fb1d0ff61f8ac800114f",
-  "contract_sha256": "6645867d8198660cf514098b8591115e119311d032c55c0bc0ad62c657933b98",
+  "contract_sha256": "a2a20d451fc933abd1842a93bb4ffa4298dd1f70ccece5bdff367c802f7aa41f",
   "target_sha256": "f3740ffad60a4af5f9441037f43288b3852d081d987967c6b7acad977a4b03ec",
   "results": [
     {
@@ -2347,8 +2347,8 @@
     },
     {
       "id": "RUI-04",
-      "status": "unknown",
-      "reason": "파일/폴더 URL의 셸 인자 입력·Enter 미전송·다른 칸 focus/surface 유지와 닫힌 target 거절은 실제 PTY 자동 검사로 확인했다. 실제 OS source→destination 포인터 drop 완료는 아직 확인하지 못해 unknown이다.",
+      "status": "pass",
+      "reason": "실제 사용자 조작 후 clean 앱의 터미널11에서 fixture 파일 경로의 인용 입력을 AX로 확인했다. 최초 CUA 놓기 대기와 후속 endpoint 관찰을 구분한다. Enter 미전송·다른 칸/surface·닫힌 target·인용/거절은19개 자동 검사와 코드로 검증하며 물리 변형 전체를 실행했다고 주장하지 않는다.",
       "evidence": [
         {
           "kind": "spec",
@@ -2438,12 +2438,22 @@
         {
           "kind": "spec",
           "path": "design/evidence/file-path-drag-drop.md",
-          "sha256": "4b78f13baf19e0c8e7b0142cb706a4e9f807f62cf91b6ba5e5983c88bc0b88ed"
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/file-path-drag-drop.md",
-          "sha256": "4b78f13baf19e0c8e7b0142cb706a4e9f807f62cf91b6ba5e5983c88bc0b88ed"
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/file-path-drag-drop.md",
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/file-path-drag-drop.md",
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
         }
       ]
     },
@@ -2497,7 +2507,7 @@
     {
       "id": "RUI-06",
       "status": "pass",
-      "reason": "추가 file URL source/destination·인용·main queue lifecycle guard를 셀프 리뷰하고 strict 검사/실제 PTY 포함19개 테스트6.307초를 통과했다. 실제 포인터 drop 완료는 별도 미검증으로 유지한다.",
+      "reason": "실제 사용자 조작 후 clean 앱의 터미널11에서 fixture 파일 경로의 인용 입력을 AX로 확인했다. 최초 CUA 놓기 대기와 후속 endpoint 관찰을 구분한다. Enter 미전송·다른 칸/surface·닫힌 target·인용/거절은19개 자동 검사와 코드로 검증하며 물리 변형 전체를 실행했다고 주장하지 않는다.",
       "evidence": [
         {
           "kind": "code",
@@ -2527,7 +2537,12 @@
         {
           "kind": "code",
           "path": "design/evidence/file-path-drag-drop.md",
-          "sha256": "4b78f13baf19e0c8e7b0142cb706a4e9f807f62cf91b6ba5e5983c88bc0b88ed"
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/file-path-drag-drop.md",
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
         }
       ]
     },
@@ -2854,8 +2869,8 @@
     },
     {
       "id": "RUI-12",
-      "status": "exception",
-      "reason": "파일 source는 기존 SF folder/doc와 실제 이름의 native row preview를 사용한다. source writer는 관찰됐으나 실제 drop cursor/놓기 성공을 검증했다고 주장하지 않는다.",
+      "status": "pass",
+      "reason": "실제 사용자 조작 후 clean 앱의 터미널11에서 fixture 파일 경로의 인용 입력을 AX로 확인했다. 최초 CUA 놓기 대기와 후속 endpoint 관찰을 구분한다. Enter 미전송·다른 칸/surface·닫힌 target·인용/거절은19개 자동 검사와 코드로 검증하며 물리 변형 전체를 실행했다고 주장하지 않는다.",
       "evidence": [
         {
           "kind": "code",
@@ -2915,12 +2930,22 @@
         {
           "kind": "code",
           "path": "design/evidence/file-path-drag-drop.md",
-          "sha256": "4b78f13baf19e0c8e7b0142cb706a4e9f807f62cf91b6ba5e5983c88bc0b88ed"
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
         },
         {
           "kind": "visual",
           "path": "design/evidence/file-path-drag-drop.md",
-          "sha256": "4b78f13baf19e0c8e7b0142cb706a4e9f807f62cf91b6ba5e5983c88bc0b88ed"
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/file-path-drag-drop.md",
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/file-path-drag-drop.md",
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
         }
       ],
       "exception_id": "CHOP-RUI-12"
@@ -3992,7 +4017,7 @@
     {
       "id": "PROJECT-MANAGE",
       "status": "pass",
-      "reason": "drop 처리 경로의 target focus/같은 surface·다른 셸 유지·닫힌 target 거절을 실제 PTY 자동 검사에 추가해19개가 통과했다. 실제 native drop 종료는 미검증이며 이전 pane 관리 관찰과 구분한다.",
+      "reason": "실제 사용자 조작 후 clean 앱의 터미널11에서 fixture 파일 경로의 인용 입력을 AX로 확인했다. 최초 CUA 놓기 대기와 후속 endpoint 관찰을 구분한다. Enter 미전송·다른 칸/surface·닫힌 target·인용/거절은19개 자동 검사와 코드로 검증하며 물리 변형 전체를 실행했다고 주장하지 않는다.",
       "evidence": [
         {
           "kind": "spec",
@@ -4142,22 +4167,42 @@
         {
           "kind": "spec",
           "path": "design/evidence/file-path-drag-drop.md",
-          "sha256": "4b78f13baf19e0c8e7b0142cb706a4e9f807f62cf91b6ba5e5983c88bc0b88ed"
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
         },
         {
           "kind": "code",
           "path": "design/evidence/file-path-drag-drop.md",
-          "sha256": "4b78f13baf19e0c8e7b0142cb706a4e9f807f62cf91b6ba5e5983c88bc0b88ed"
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
         },
         {
           "kind": "visual",
           "path": "design/evidence/file-path-drag-drop.md",
-          "sha256": "4b78f13baf19e0c8e7b0142cb706a4e9f807f62cf91b6ba5e5983c88bc0b88ed"
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/file-path-drag-drop.md",
-          "sha256": "4b78f13baf19e0c8e7b0142cb706a4e9f807f62cf91b6ba5e5983c88bc0b88ed"
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/file-path-drag-drop.md",
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/file-path-drag-drop.md",
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/file-path-drag-drop.md",
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/file-path-drag-drop.md",
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
         }
       ]
     },
@@ -4532,7 +4577,7 @@
     {
       "id": "PROJECT-TRUTH",
       "status": "pass",
-      "reason": "19개 자동 검사·실제 URL writer 호출·NSCoreDrag 놓기 대기와 사용자 질문을 구분한다. 실제 포인터 drop 종료를 관찰하지 못한 상태에서 완료/외부 승인으로 표시하지 않는다.",
+      "reason": "실제 사용자 조작 후 clean 앱의 터미널11에서 fixture 파일 경로의 인용 입력을 AX로 확인했다. 최초 CUA 놓기 대기와 후속 endpoint 관찰을 구분한다. Enter 미전송·다른 칸/surface·닫힌 target·인용/거절은19개 자동 검사와 코드로 검증하며 물리 변형 전체를 실행했다고 주장하지 않는다.",
       "evidence": [
         {
           "kind": "spec",
@@ -4732,22 +4777,42 @@
         {
           "kind": "spec",
           "path": "design/evidence/file-path-drag-drop.md",
-          "sha256": "4b78f13baf19e0c8e7b0142cb706a4e9f807f62cf91b6ba5e5983c88bc0b88ed"
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
         },
         {
           "kind": "code",
           "path": "design/evidence/file-path-drag-drop.md",
-          "sha256": "4b78f13baf19e0c8e7b0142cb706a4e9f807f62cf91b6ba5e5983c88bc0b88ed"
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
         },
         {
           "kind": "visual",
           "path": "design/evidence/file-path-drag-drop.md",
-          "sha256": "4b78f13baf19e0c8e7b0142cb706a4e9f807f62cf91b6ba5e5983c88bc0b88ed"
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/file-path-drag-drop.md",
-          "sha256": "4b78f13baf19e0c8e7b0142cb706a4e9f807f62cf91b6ba5e5983c88bc0b88ed"
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/file-path-drag-drop.md",
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/file-path-drag-drop.md",
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/file-path-drag-drop.md",
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/file-path-drag-drop.md",
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
         }
       ]
     },
@@ -5266,7 +5331,7 @@
     {
       "id": "PROJECT-FILETREE",
       "status": "pass",
-      "reason": "기존 root/lazy 읽기·선택기·바로가기를 유지하고 실제 entry만 native file URL writer로 내보낸다. source 호출/파일 선택은 확인했으며 end-to-end drop은 별도 PROJECT-FILE-DROP에서 unknown으로 남긴다.",
+      "reason": "실제 사용자 조작 후 clean 앱의 터미널11에서 fixture 파일 경로의 인용 입력을 AX로 확인했다. 최초 CUA 놓기 대기와 후속 endpoint 관찰을 구분한다. Enter 미전송·다른 칸/surface·닫힌 target·인용/거절은19개 자동 검사와 코드로 검증하며 물리 변형 전체를 실행했다고 주장하지 않는다.",
       "evidence": [
         {
           "kind": "spec",
@@ -5331,22 +5396,42 @@
         {
           "kind": "spec",
           "path": "design/evidence/file-path-drag-drop.md",
-          "sha256": "4b78f13baf19e0c8e7b0142cb706a4e9f807f62cf91b6ba5e5983c88bc0b88ed"
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
         },
         {
           "kind": "code",
           "path": "design/evidence/file-path-drag-drop.md",
-          "sha256": "4b78f13baf19e0c8e7b0142cb706a4e9f807f62cf91b6ba5e5983c88bc0b88ed"
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
         },
         {
           "kind": "visual",
           "path": "design/evidence/file-path-drag-drop.md",
-          "sha256": "4b78f13baf19e0c8e7b0142cb706a4e9f807f62cf91b6ba5e5983c88bc0b88ed"
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/file-path-drag-drop.md",
-          "sha256": "4b78f13baf19e0c8e7b0142cb706a4e9f807f62cf91b6ba5e5983c88bc0b88ed"
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/file-path-drag-drop.md",
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/file-path-drag-drop.md",
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/file-path-drag-drop.md",
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/file-path-drag-drop.md",
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
         }
       ]
     },
@@ -5453,28 +5538,48 @@
     },
     {
       "id": "PROJECT-FILE-DROP",
-      "status": "unknown",
-      "reason": "인용/거절과 기존 PTY에 입력하는 자동 검사는 완료했다. 실제 포인터로 OS drag를 끝내어 터미널에 입력되는 관찰은 아직 없어 unknown이다.",
+      "status": "pass",
+      "reason": "실제 사용자 조작 후 clean 앱의 터미널11에서 fixture 파일 경로의 인용 입력을 AX로 확인했다. 최초 CUA 놓기 대기와 후속 endpoint 관찰을 구분한다. Enter 미전송·다른 칸/surface·닫힌 target·인용/거절은19개 자동 검사와 코드로 검증하며 물리 변형 전체를 실행했다고 주장하지 않는다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "design/evidence/file-path-drag-drop.md",
-          "sha256": "4b78f13baf19e0c8e7b0142cb706a4e9f807f62cf91b6ba5e5983c88bc0b88ed"
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
         },
         {
           "kind": "code",
           "path": "design/evidence/file-path-drag-drop.md",
-          "sha256": "4b78f13baf19e0c8e7b0142cb706a4e9f807f62cf91b6ba5e5983c88bc0b88ed"
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
         },
         {
           "kind": "visual",
           "path": "design/evidence/file-path-drag-drop.md",
-          "sha256": "4b78f13baf19e0c8e7b0142cb706a4e9f807f62cf91b6ba5e5983c88bc0b88ed"
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/file-path-drag-drop.md",
-          "sha256": "4b78f13baf19e0c8e7b0142cb706a4e9f807f62cf91b6ba5e5983c88bc0b88ed"
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/file-path-drag-drop.md",
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/file-path-drag-drop.md",
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/file-path-drag-drop.md",
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/file-path-drag-drop.md",
+          "sha256": "118cdd28791ef1318a4528ccfe617e17076535a32b50df8557289ba3ef6f6be5"
         }
       ]
     }
