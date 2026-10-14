@@ -1,4 +1,5 @@
 import AppKit
+import ChopCore
 
 @MainActor
 final class TerminalPaneView: NSView {
@@ -9,6 +10,9 @@ final class TerminalPaneView: NSView {
   var name: String { didSet { updateHeader() } }
   var onChange: (() -> Void)?
   var onFocus: (() -> Void)?
+  var onSplitRequested: ((SplitAxis) -> Void)?
+  var canSplit: ((SplitAxis) -> Bool)?
+  var isEditing = false { didSet { updateAddButton() } }
   private let header = NSView()
   private let body = NSView()
   private let titleLabel = NSTextField(labelWithString: "")
@@ -67,7 +71,8 @@ final class TerminalPaneView: NSView {
         view.topAnchor.constraint(equalTo: body.topAnchor),
         view.bottomAnchor.constraint(equalTo: body.bottomAnchor),
       ])
-      openButton.isHidden = true
+      body.addSubview(openButton, positioned: .above, relativeTo: view)
+      updateAddButton()
       errorLabel.isHidden = true
       updateHeader()
       focus()
@@ -113,6 +118,35 @@ final class TerminalPaneView: NSView {
     closeTerminal()
   }
 
+  @objc private func addFromCenter() {
+    guard isRunning else {
+      openTerminal()
+      return
+    }
+    let menu = NSMenu()
+    menu.autoenablesItems = false
+    for (title, action, axis) in [
+      ("오른쪽에 추가", #selector(addRight), SplitAxis.horizontal),
+      ("아래에 추가", #selector(addDown), .vertical),
+    ] {
+      let item = menu.addItem(withTitle: title, action: action, keyEquivalent: "")
+      item.target = self
+      item.isEnabled = canSplit?(axis) ?? false
+    }
+    menu.popUp(
+      positioning: nil, at: NSPoint(x: openButton.frame.minX, y: openButton.frame.minY), in: body)
+  }
+
+  @objc private func addRight() { onSplitRequested?(.horizontal) }
+  @objc private func addDown() { onSplitRequested?(.vertical) }
+
+  private func updateAddButton() {
+    openButton.isHidden = isRunning && !isEditing
+    let label = isRunning ? "터미널 추가" : "터미널 열기"
+    openButton.setAccessibilityLabel(label)
+    openButton.toolTip = label
+  }
+
   private func configureViews() {
     for view in [header, body] {
       addSubview(view)
@@ -137,7 +171,7 @@ final class TerminalPaneView: NSView {
     header.addSubview(row)
     openButton = NSButton(
       image: NSImage(systemSymbolName: "plus", accessibilityDescription: "터미널 열기")!, target: self,
-      action: #selector(openTerminal))
+      action: #selector(addFromCenter))
     openButton.bezelStyle = .circular
     openButton.controlSize = .large
     openButton.toolTip = "터미널 열기"

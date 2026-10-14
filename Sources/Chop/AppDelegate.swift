@@ -41,7 +41,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
-    if workspaceWindow?.pane.needsConfirmClose == true {
+    if workspaceWindow?.workspace.needsConfirmClose == true {
       let alert = NSAlert()
       alert.messageText = "Chop을 종료할까요?"
       alert.informativeText = "실행 중인 터미널 작업이 종료됩니다."
@@ -53,12 +53,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func applicationWillTerminate(_ notification: Notification) {
-    workspaceWindow?.pane.closeTerminal()
+    workspaceWindow?.workspace.closeAll()
     engine.shutdown()
   }
 
   @objc private func openTerminal() { workspaceWindow?.pane.openTerminal() }
   @objc private func closeTerminal() { workspaceWindow?.pane.requestClose() }
+  @objc private func splitRight() { workspaceWindow?.workspace.splitRight() }
+  @objc private func splitDown() { workspaceWindow?.workspace.splitDown() }
+  @objc private func toggleLayoutEditing() { workspaceWindow?.workspace.toggleEditing() }
 
   private func configureMainMenu() {
     let mainMenu = NSMenu()
@@ -93,6 +96,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     let close = terminalMenu.addItem(
       withTitle: "터미널 닫기", action: #selector(closeTerminal), keyEquivalent: "w")
     close.target = self
+    terminalMenu.addItem(.separator())
+    for (title, action, key, modifiers) in [
+      ("오른쪽으로 나누기", #selector(splitRight), "d", NSEvent.ModifierFlags.command),
+      ("아래로 나누기", #selector(splitDown), "d", [.command, .shift]),
+      ("레이아웃 편집", #selector(toggleLayoutEditing), "l", [.command, .shift]),
+    ] {
+      let item = terminalMenu.addItem(withTitle: title, action: action, keyEquivalent: key)
+      item.target = self
+      item.keyEquivalentModifierMask = modifiers
+    }
     terminalItem.submenu = terminalMenu
     mainMenu.addItem(terminalItem)
 

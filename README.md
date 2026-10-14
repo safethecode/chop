@@ -4,9 +4,21 @@
 Swift와 AppKit, [libghostty](https://github.com/ghostty-org/ghostty)의 Metal 터미널 엔진을 사용합니다.
 [cmux](https://github.com/manaflow-ai/cmux)의 작업 공간과 알림 기능을 참고하되, Chop은 중앙 `+`와 레이아웃 중심의 조작 방식을 사용합니다.
 
-현재는 단일 터미널 단계입니다. 빈 칸 중앙의 `+`로 실제 셸을 열고, 입력·선택·스크롤·복사·붙여넣기를 사용할 수 있습니다.
-셸이 종료되면 빈 칸으로 돌아갑니다. 실행 중인 작업을 닫거나 앱을 종료할 때는 확인합니다.
-분할과 레이아웃 복원은 다음 기능 PR에서 추가합니다.
+빈 칸 중앙의 `+`로 실제 셸을 열고, 입력·한글·선택·스크롤·복사·붙여넣기를 사용할 수 있습니다.
+상단에서 1칸·좌우·상하·4칸 프리셋을 고르거나, 레이아웃 편집 중 각 실행 칸의 중앙 `+`로 오른쪽/아래에 터미널을 추가합니다.
+분할 경계를 드래그해 크기를 조절해도 기존 셸은 유지됩니다. 실행 중인 터미널이 사라지는 프리셋 축소는 비활성화됩니다.
+셸이 종료되면 빈 칸으로 돌아갑니다. 실행 중인 작업을 닫거나 창·앱을 종료할 때는 확인합니다.
+포커스 이동·확대와 저장/복원은 다음 기능 PR에서 추가합니다.
+
+| 동작 | 단축키 |
+|---|---|
+| 현재 칸에서 터미널 열기 / 닫기 | `⌘T` / `⌘W` |
+| 오른쪽 / 아래로 나누기 | `⌘D` / `⌘⇧D` |
+| 레이아웃 편집 | `⌘⇧L` |
+| 윈도우 닫기 | `⌘⇧W` |
+
+칸은 최소 280×180pt이며 화면에 들어가는 범위에서 최대 16개까지 자유 분할할 수 있습니다.
+필요하면 창이 최소 크기까지 늘어나며, 더 들어가지 않는 방향의 추가 메뉴는 비활성화됩니다.
 
 ## 개발 환경
 
@@ -64,7 +76,9 @@ xcrun swift-format format --in-place --recursive Package.swift Sources Tests
 ```text
 Package.swift          Swift Package Manager 설정
 Sources/Chop/          앱 수명 주기, 창, 터미널 엔진과 입력 어댑터
-Tests/ChopTests/       실제 셸 통합 테스트
+Sources/ChopCore/      프로세스와 독립적인 분할 트리 모델
+Tests/ChopCoreTests/   분할·프리셋·크기·직렬화 테스트
+Tests/ChopTests/       실제 셸과 다중 터미널 통합 테스트
 Dependencies/         Ghostty 버전·어댑터 패치와 생성된 XCFramework
 Resources/Info.plist   macOS 앱 메타데이터
 scripts/              빌드, 실행, 검증
