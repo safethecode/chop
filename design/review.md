@@ -50,3 +50,5 @@ V-25 / F-HEADER-SEAM: 파일/터미널 header 사이 native 경계의 색 틈과
 V-26 / F-SHORTCUT-ALIGNMENT: 구현 중 glyph 고유 폭 때문에 바로가기 이름 시작선이 어긋났다.16pt aspect-fit icon box와8pt 뒤 이름을 갖는 native 버튼으로 수정해 실제 두 모드·최소 창·세 목적지 클릭·빈/긴 목록을 확인했다. fixed-and-verified. [관찰](evidence/location-icons.md).
 
 V-27 / FILE-DROP-NATIVE:19개 검사와 native URL writer 시작은 확인했다. CUA의 OS drag가 놓기 이벤트를 기다려 실제 terminal 입력 종료를 확인하지 못했다. 후속 사용자 조작 뒤 같은 clean 앱의 터미널11에서 정확한 fixture 경로의 인용 입력과 셸 결과를 실제 AX로 확인했다. 핵심 native endpoint는 verified; 최초 자동화 한계와 물리 변형/자동 검사의 범위는 증거에 따로 유지한다. [범위](evidence/file-path-drag-drop.md).
+
+V-28 / F-SHORTCUT-SECTION: 사용자 교정으로 세 바로가기를 중립 배경 묶음으로 분리했다. 실제 두 모드·기본/최소 창·세 목적지·빈/긴 목록을 확인해 fixed-and-verified. [관찰](evidence/shortcut-section.md).

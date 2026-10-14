@@ -93,6 +93,7 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
   private let statusLabel = NSTextField(wrappingLabelWithString: "")
   private let outline = FileOutlineView()
   private let scrollView = NSScrollView()
+  private let shortcutSection = NSView()
   private let quickLocations: [URL] = [
     FileManager.default.homeDirectoryForCurrentUser,
     FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask)[0],
@@ -125,6 +126,7 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
     appearance = mode.appearance
     layer?.backgroundColor = mode.background.cgColor
     header.layer?.backgroundColor = mode.headerBackground.cgColor
+    shortcutSection.layer?.backgroundColor = mode.headerBackground.cgColor
     titleLabel.textColor = mode.foreground
     statusLabel.textColor = mode.secondaryForeground
     outline.reloadData()
@@ -347,6 +349,9 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
     shortcuts.orientation = .vertical
     shortcuts.alignment = .leading
     shortcuts.spacing = 4
+    shortcutSection.wantsLayer = true
+    shortcutSection.layer?.cornerRadius = 8
+    shortcutSection.addSubview(shortcuts)
     let locations = [("홈", "house"), ("다운로드", "arrow.down.circle"), ("문서", "doc")]
     for (index, location) in locations.enumerated() {
       let (name, symbol) = location
@@ -391,11 +396,13 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
     scrollView.hasVerticalScroller = true
     scrollView.autohidesScrollers = true
     scrollView.drawsBackground = false
-    let content = NSStackView(views: [pathField, shortcuts, statusLabel, scrollView])
+    let content = NSStackView(views: [pathField, shortcutSection, statusLabel, scrollView])
     content.orientation = .vertical
     content.alignment = .leading
     content.spacing = 8
-    for view in [header, headerRow, content, pathField, shortcuts, statusLabel, scrollView] {
+    for view in [
+      header, headerRow, content, pathField, shortcutSection, shortcuts, statusLabel, scrollView,
+    ] {
       view.translatesAutoresizingMaskIntoConstraints = false
     }
     addSubview(header)
@@ -415,7 +422,11 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
       content.bottomAnchor.constraint(equalTo: bottomAnchor),
       pathField.widthAnchor.constraint(equalTo: content.widthAnchor),
       pathField.heightAnchor.constraint(equalToConstant: 28),
-      shortcuts.widthAnchor.constraint(equalTo: content.widthAnchor),
+      shortcutSection.widthAnchor.constraint(equalTo: content.widthAnchor),
+      shortcuts.leadingAnchor.constraint(equalTo: shortcutSection.leadingAnchor, constant: 8),
+      shortcuts.trailingAnchor.constraint(equalTo: shortcutSection.trailingAnchor, constant: -8),
+      shortcuts.topAnchor.constraint(equalTo: shortcutSection.topAnchor, constant: 8),
+      shortcuts.bottomAnchor.constraint(equalTo: shortcutSection.bottomAnchor, constant: -8),
       statusLabel.widthAnchor.constraint(equalTo: content.widthAnchor),
       scrollView.widthAnchor.constraint(equalTo: content.widthAnchor),
       scrollView.heightAnchor.constraint(greaterThanOrEqualToConstant: 0),
