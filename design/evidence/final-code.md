@@ -9,7 +9,7 @@
 | 핵심 행동 | Pane.openTerminal creates TerminalView/ghostty_surface, open guard avoids duplicates; explicit close frees it; stale onExit identity guard |
 | 레이아웃 | ChopCore.LayoutNode: stable UUID leaves, recursive splits, minimum280×180, one-point native draggable separator; preset shrink keeps all running identities |
 | 입력과 수명 | TerminalView NSTextInputClient, keyboard, mouse selection, scrollWheel forwarding, clipboard binding, resize/occlusion; Ghostty installs own layer before wantsLayer |
-| 포커스/확대 | canonical tree + stable pane dictionary; spatial neighbor, one focus boundary, maximize reparents rather than restarting; all panes checked on quit/window close |
+| 포커스/확대 | canonical tree + stable pane dictionary; spatial neighbor, terminal cursor and first responder without pane focus outlines, maximize reparents rather than restarting; all panes checked on quit/window close |
 | 중앙 + | empty opens existing slot; editing running slot opens directional native menu; no persistent overlay during ordinary terminal use |
 | 세션 | snapshot stores only version/layout/pane id/name/cwd/wasRunning/focus; validates references/depth/count/finite ratio/path; atomic write/private modes; unreadable original quarantined |
 | 오류 | native alerts for missing directories, corrupt file/save failure; retry save; failed initial read blocks automatic overwrite; unflushed quit may be canceled |
@@ -29,3 +29,5 @@ PR #10 toolbar 재검토: Workspace의 모드 버튼은 onAppearanceChangeReques
 PR #11 칸 이동 재검토: LayoutNode는 split geometry를 보존하며 leaf UUID만 교환한다. Workspace의 작업 공간별 dragGroup과 편집 상태/실제 source/pasteboard 일치를 검사한다. 기존 pane/TerminalView/surface를 재사용하고 rebuild의 기존 저장 경로를 사용한다. 전체 칸 bitmap chrome + 실제 IOSurface drag components를 제공하며, source 흐림과 target 경계는 종료/취소에서 정리한다. 배치 transform0.18초는 모델/입력을 지연하지 않고 Reduce Motion이면 생략한다. 실제 PTY identity/preview 크기/저장 roundtrip, 실제 드래그·취소·키보드·두 모드와 사용자의 모션 확인은 pr11-pane-reordering.md에 구분해 기록했다. 외부/다른 workspace drop·자기 자신/없는 칸·일반 모드 이동은 거절하는 경로를 검토했다.
 
 PR #12 헤더 배경: AppearanceMode.headerBackground(light F3F4F6/dark292D35)를 기존 applyAppearance에서 header.layer.backgroundColor로 소비한다. configureViews에서 헤더 layer만 준비하며 Ghostty TerminalView의 layer 생성 순서를 변경하지 않는다. 새/복원/가려진 칸 모두 기존 초기화·전체 모드 갱신 경로를 사용한다. 전체 칸 미리보기는 실제 헤더 bitmap을 포함한다. 치수·포커스·터미널 팔레트·조작/저장 로직은 같은 경로를 유지한다. 실제 두 모드/실행·빈 칸/편집·확대와 숨긴 칸 복귀에서 대조했다.
+
+PR #13 입력 포커스 경계 제거: 표현에만 쓰던 pane.isFocused와 Workspace의 배포를 제거했다. focusedID/didFocus 저장 알림·first responder/Ghostty focus·키보드 공간 이동은 유지한다. updateDropHighlight는 유효 드롭에서만2pt, 나머지는0이다. 실제 두 모드·클릭/키보드 입력·확대·칸 교환 뒤 경계 미표시를 E-F1–5에서 재검증했다. 네이티브 버튼/메뉴 포커스는 변경하지 않는다.

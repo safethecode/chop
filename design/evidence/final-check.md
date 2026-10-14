@@ -25,3 +25,5 @@ PR #10 toolbar icons: `.cache/check-toolbar-icons.log`의 check.sh 성공, 10 te
 PR #11 pane reordering: `.cache/check-pane-motion.log`의 check.sh 성공, 11 tests passed in 3.463s, 경고·오류 없음. 전체 칸 preview/GPU component·same live surface/NSView·geometry·무효 ID/편집 밖 거절·교환/역교환·snapshot roundtrip 검증. 실제 앱에서는 비대칭 5칸 드래그/toolbar 취소/키보드 좌우 이동/동일 PID와 변수/두 모드 헤더를 확인했다. 미리보기 중간 프레임 자동 캡처는 지원되지 않아 사용자의 최신 빌드 모션 확인을 별도 근거로 기록했다. 동작 줄이기는 코드 분기 확인이며 시스템 설정을 바꾼 실기는 아니다.
 
 PR #12 header background: `.cache/check-header-background.log` check.sh 성공, 11 tests in4.321s. 실제5칸의 light/dark 헤더 대비·편집 손잡이·좁은 칸·확대 중 모드 변경과 숨긴 칸 복귀를 확인했다. 정적 색상 값을 되풀이하는 테스트는 추가하지 않고 기존 PTY/appearance/reorder/restore 검사를 실행했다.
+
+PR #13 no focus border: `.cache/check-no-focus-border.log`의 check.sh 성공,11 tests in3.641s. 실제4칸/두 모드에서 클릭·⌘⌥방향키로 선택한 각각의 셸에 서로 다른 명령을 출력했고 파란 pane 경계가 없었다. 확대/드래그 교환·복귀/편집 종료 뒤에도 경계가 남지 않았다.

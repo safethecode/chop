@@ -29,4 +29,6 @@
 
 | V-17 | 사용자 요청으로 헤더를 본문과 다른 중립 배경으로 구분한다. 라이트F3F4F6/다크292D35를 모든 칸의 같은 역할에 적용했다. | accepted-difference (사용자 요청), 실제 확인 완료 | [헤더 배경 관찰](evidence/pr12-header-background.md) E-H1–5; 실행/빈/편집/확대/숨긴 칸 모드 갱신 |
 
+| V-18 | 사용자 요청으로 칸 전체의 파란 입력 포커스 경계를 제거했다. 실제 입력 커서·first responder·저장된 선택과 네이티브 컨트롤 포커스는 유지한다. | accepted-difference (사용자 요청), 실제 확인 완료 | [포커스 경계 관찰](evidence/pr13-no-focus-border.md) E-F1–5; 두 모드·클릭/키보드 입력·확대·드래그 교환 뒤 미표시 |
+
 현재 총괄은 실제 관찰한 v0.1 범위에서 aligned다. 스크롤백 키보드 경로도 실제 앱과 PTY 테스트로 검증했다. 최종 디자인 게이트는 `gate-report.json`과 `failure-events.jsonl`에 기록한다. 빌드 통과가 시각 검증을 대신하지 않으며, VoiceOver 전체 탐색과 macOS 14 실기기까지 검증했다고 주장하지 않는다.
