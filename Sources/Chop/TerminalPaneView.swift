@@ -120,7 +120,7 @@ final class TerminalPaneView: NSView {
     }
     titleLabel.font = ChopStyle.font
     titleLabel.textColor = ChopStyle.foreground
-    pathLabel.font = .systemFont(ofSize: 14)
+    pathLabel.font = ChopStyle.font
     pathLabel.textColor = .secondaryLabelColor
     pathLabel.lineBreakMode = .byTruncatingMiddle
     pathLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
@@ -144,7 +144,7 @@ final class TerminalPaneView: NSView {
     openButton.setAccessibilityLabel("터미널 열기")
     openButton.translatesAutoresizingMaskIntoConstraints = false
     body.addSubview(openButton)
-    errorLabel.font = .systemFont(ofSize: 14)
+    errorLabel.font = ChopStyle.font
     errorLabel.textColor = .secondaryLabelColor
     errorLabel.alignment = .center
     errorLabel.isHidden = true
