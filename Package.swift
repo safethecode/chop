@@ -23,5 +23,6 @@ let package = Package(
         .linkedFramework("IOSurface"),
       ]
     ),
+    .testTarget(name: "ChopTests", dependencies: ["Chop"]),
   ]
 )
