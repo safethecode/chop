@@ -102,6 +102,52 @@ import Testing
   pane.openTerminal()
   #expect(pane.terminal != nil)
   #expect(pane.terminal !== terminal)
+  pane.closeTerminal()
+
+  let workspace = WorkspaceView(engine: engine)
+  window.setContentSize(NSSize(width: 1100, height: 720))
+  window.contentView = workspace
+  window.layoutIfNeeded()
+  defer { workspace.closeAll() }
+  workspace.focusedPane.openTerminal()
+  let firstID = workspace.focusedID
+  let first = try #require(workspace.focusedPane.terminal)
+  try await waitFor { !first.needsConfirmClose }
+  first.insertText(
+    "export CHOP_PANE_VALUE=preserved", replacementRange: NSRange(location: NSNotFound, length: 0))
+  try pressReturn(on: first, window: window)
+  try await waitFor { !first.needsConfirmClose }
+  #expect(workspace.applyPreset(.grid))
+  #expect(workspace.panes[firstID]?.terminal === first)
+  for id in workspace.layout.paneIDs where id != firstID { workspace.panes[id]?.openTerminal() }
+  try await waitFor { !workspace.needsConfirmClose }
+  #expect(workspace.panes.values.filter { $0.isRunning }.count == 4)
+  #expect(!workspace.applyPreset(.columns), "A smaller preset must never kill running shells")
+  first.insertText(
+    "printf 'VALUE=%s\\n' \"$CHOP_PANE_VALUE\"",
+    replacementRange: NSRange(location: NSNotFound, length: 0))
+  try pressReturn(on: first, window: window)
+  try await waitFor {
+    (first.accessibilityValue() as? String ?? "").contains("VALUE=preserved")
+      && !first.needsConfirmClose
+  }
+  let other = try #require(workspace.panes[workspace.layout.paneIDs[1]]?.terminal)
+  other.insertText(
+    "printf 'OTHER=%s\\n' \"${CHOP_PANE_VALUE-unset}\"",
+    replacementRange: NSRange(location: NSNotFound, length: 0))
+  try pressReturn(on: other, window: window)
+  try await waitFor {
+    (other.accessibilityValue() as? String ?? "").contains("OTHER=unset")
+      && !other.needsConfirmClose
+  }
+  let keepID = try #require(workspace.layout.paneIDs.last)
+  let keep = try #require(workspace.panes[keepID]?.terminal)
+  for id in workspace.layout.paneIDs where id != keepID { workspace.panes[id]?.closeTerminal() }
+  #expect(workspace.applyPreset(.single))
+  #expect(
+    workspace.layout.paneIDs == [keepID],
+    "Shrinking keeps a running pane even when it was the last slot")
+  #expect(workspace.focusedPane.terminal === keep)
 }
 
 @MainActor
