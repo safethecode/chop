@@ -5,6 +5,7 @@ import ChopCore
 final class TerminalPaneView: NSView {
   let id: UUID
   let engine: TerminalEngine
+  let workspaceID: UUID
   private(set) var terminal: TerminalView?
   var workingDirectory: String
   var name: String {
@@ -20,16 +21,27 @@ final class TerminalPaneView: NSView {
   var onRemoveRequested: (() -> Void)?
   var onZoomRequested: (() -> Void)?
   var onDirectoryFallback: ((String) -> Void)?
+  var canMovePane: ((UUID) -> Bool)?
+  var onMoveRequested: ((UUID, NSRect) -> Bool)?
+  var onDragEnded: (() -> Void)?
   var canRemove = false { didSet { updateHeader() } }
   var canZoom = false { didSet { updateHeader() } }
   var isZoomed = false { didSet { updateHeader() } }
   var isFocused = false {
+    didSet { updateBorder() }
+  }
+  var isEditing = false {
     didSet {
-      layer?.borderWidth = isFocused ? 1 : 0
-      updateFocusColor()
+      updateAddButton()
+      updateMoveHandle()
+      if !isEditing {
+        clearDropHighlight()
+        alphaValue = 1
+      }
     }
   }
-  var isEditing = false { didSet { updateAddButton() } }
+  private var isDropTarget = false { didSet { updateBorder() } }
+  private lazy var moveHandle = PaneDragHandleView(paneID: id, workspaceID: workspaceID)
   private let header = NSView()
   private let body = NSView()
   private let titleLabel = NSTextField(labelWithString: "")
@@ -41,15 +53,18 @@ final class TerminalPaneView: NSView {
 
   init(
     engine: TerminalEngine, id: UUID = UUID(), name: String = "터미널 1",
+    workspaceID: UUID = UUID(),
     workingDirectory: String = FileManager.default.homeDirectoryForCurrentUser.path
   ) {
     self.engine = engine
+    self.workspaceID = workspaceID
     self.id = id
     self.name = name
     self.workingDirectory = workingDirectory
     super.init(frame: .zero)
     wantsLayer = true
     setAccessibilityIdentifier("pane-\(id.uuidString)")
+    registerForDraggedTypes([PaneDragHandleView.pasteboardType])
     configureViews()
     applyAppearance()
     updateHeader()
@@ -68,13 +83,88 @@ final class TerminalPaneView: NSView {
     titleLabel.textColor = mode.foreground
     pathLabel.textColor = mode.secondaryForeground
     errorLabel.textColor = mode.secondaryForeground
-    updateFocusColor()
+    updateBorder()
   }
 
-  private func updateFocusColor() {
+  private func updateBorder() {
+    layer?.borderWidth = isDropTarget ? 2 : isFocused ? 1 : 0
     effectiveAppearance.performAsCurrentDrawingAppearance {
       layer?.borderColor = NSColor.keyboardFocusIndicatorColor.cgColor
     }
+  }
+
+  func clearDropHighlight() { isDropTarget = false }
+
+  func dragPreview(in source: NSView) -> PaneDragPreview? {
+    layoutSubtreeIfNeeded()
+    guard bounds.width > 0, bounds.height > 0,
+      let bitmap = bitmapImageRepForCachingDisplay(in: bounds)
+    else { return nil }
+    cacheDisplay(in: bounds, to: bitmap)
+    let snapshot = NSImage(size: bounds.size)
+    snapshot.addRepresentation(bitmap)
+    let background = engine.appearanceMode.background
+    let chrome = NSDraggingImageComponent(key: .icon)
+    chrome.frame = NSRect(origin: .zero, size: bounds.size)
+    chrome.contents = NSImage(size: bounds.size, flipped: false) { rect in
+      background.setFill()
+      rect.fill()
+      snapshot.draw(in: rect)
+      return true
+    }
+    var components = [chrome]
+    // AppKit's bitmap cache does not reliably include a layer-hosted GPU view.
+    // Drag components accept CALayer contents, so retain the current IOSurface
+    // directly instead of substituting text or moving/recreating the PTY view.
+    if let terminal, let contents = terminal.layer?.contents {
+      let rendered = NSDraggingImageComponent(key: .init(rawValue: "chop.terminal"))
+      rendered.contents = contents
+      rendered.frame = convert(terminal.bounds, from: terminal)
+      components.append(rendered)
+    }
+    return PaneDragPreview(frame: source.convert(bounds, from: self), components: components)
+  }
+
+  private func draggedPane(_ sender: any NSDraggingInfo) -> UUID? {
+    guard isEditing, let source = sender.draggingSource as? PaneDragHandleView,
+      source.workspaceID == workspaceID, source.paneID != id,
+      sender.draggingPasteboard.string(forType: PaneDragHandleView.pasteboardType)
+        == source.paneID.uuidString,
+      canMovePane?(source.paneID) == true
+    else { return nil }
+    return source.paneID
+  }
+
+  override func draggingEntered(_ sender: any NSDraggingInfo) -> NSDragOperation {
+    isDropTarget = draggedPane(sender) != nil
+    return isDropTarget ? .move : []
+  }
+
+  override func draggingUpdated(_ sender: any NSDraggingInfo) -> NSDragOperation {
+    draggingEntered(sender)
+  }
+
+  override func draggingExited(_ sender: (any NSDraggingInfo)?) { clearDropHighlight() }
+
+  override func prepareForDragOperation(_ sender: any NSDraggingInfo) -> Bool {
+    draggedPane(sender) != nil
+  }
+
+  override func performDragOperation(_ sender: any NSDraggingInfo) -> Bool {
+    clearDropHighlight()
+    guard let source = draggedPane(sender),
+      let handle = sender.draggingSource as? PaneDragHandleView,
+      let size = handle.previewSize
+    else { return false }
+    let previewFrame = NSRect(origin: sender.draggedImageLocation, size: size)
+    return onMoveRequested?(source, previewFrame) ?? false
+  }
+
+  override func concludeDragOperation(_ sender: (any NSDraggingInfo)?) { clearDropHighlight() }
+
+  private func updateMoveHandle() {
+    moveHandle.isHidden = !isEditing || !canZoom
+    window?.invalidateCursorRects(for: moveHandle)
   }
 
   @objc func openTerminal() {
@@ -223,7 +313,15 @@ final class TerminalPaneView: NSView {
     zoomButton = ChopStyle.iconButton(
       "arrow.up.left.and.arrow.down.right", label: "칸 확대", target: self,
       action: #selector(toggleZoom))
-    let row = NSStackView(views: [titleLabel, pathLabel, zoomButton, close])
+    moveHandle.onFocus = { [weak self] in self?.focus() }
+    moveHandle.onPrepareDrag = { [weak self] source in self?.dragPreview(in: source) }
+    moveHandle.onDragBegan = { [weak self] in self?.alphaValue = 0.35 }
+    moveHandle.onDragEnded = { [weak self] in
+      self?.alphaValue = 1
+      self?.onDragEnded?()
+    }
+    moveHandle.isHidden = true
+    let row = NSStackView(views: [moveHandle, titleLabel, pathLabel, zoomButton, close])
     row.orientation = .horizontal
     row.distribution = .fill
     row.spacing = 12
@@ -267,6 +365,8 @@ final class TerminalPaneView: NSView {
   }
 
   private func updateHeader() {
+    updateMoveHandle()
+    moveHandle.setAccessibilityLabel("\(name) 이동")
     titleLabel.stringValue = name
     titleLabel.toolTip = "\(name) — 이름 바꾸기: ⌘⇧R"
     pathLabel.stringValue = (workingDirectory as NSString).abbreviatingWithTildeInPath
