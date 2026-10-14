@@ -86,6 +86,22 @@ import Testing
       $0.trimmingCharacters(in: .whitespacesAndNewlines) == "CHOP_한글_IME_OK"
     } && !terminal.needsConfirmClose
   }
+  terminal.insertText(
+    "for i in {1..120}; do printf 'SCROLL_%03d\\n' \"$i\"; done",
+    replacementRange: NSRange(location: NSNotFound, length: 0))
+  try pressReturn(on: terminal, window: window)
+  try await waitFor { viewport(of: terminal).contains("SCROLL_120") && !terminal.needsConfirmClose }
+  let bottom = viewport(of: terminal)
+  terminal.scrollToTop(nil)
+  try await waitFor { viewport(of: terminal).contains("CHOP_SHELL_OK") }
+  let top = viewport(of: terminal)
+  #expect(!top.contains("SCROLL_120"))
+  terminal.scrollPageDown(nil)
+  try await waitFor { viewport(of: terminal) != top }
+  terminal.scrollPageUp(nil)
+  try await waitFor { viewport(of: terminal) == top }
+  terminal.scrollToBottom(nil)
+  try await waitFor { viewport(of: terminal) == bottom }
   terminal.insertText("exit", replacementRange: NSRange(location: NSNotFound, length: 0))
   try pressReturn(on: terminal, window: window)
   do {
@@ -247,6 +263,23 @@ private func pressReturn(on terminal: TerminalView, window: NSWindow) throws {
       windowNumber: window.windowNumber, context: nil, characters: "\r",
       charactersIgnoringModifiers: "\r", isARepeat: false, keyCode: 36))
   terminal.keyUp(with: release)
+}
+
+@MainActor
+private func viewport(of terminal: TerminalView) -> String {
+  guard let surface = terminal.surface else { return "" }
+  let selection = ghostty_selection_s(
+    top_left: ghostty_point_s(
+      tag: GHOSTTY_POINT_VIEWPORT, coord: GHOSTTY_POINT_COORD_TOP_LEFT, x: 0, y: 0),
+    bottom_right: ghostty_point_s(
+      tag: GHOSTTY_POINT_VIEWPORT, coord: GHOSTTY_POINT_COORD_BOTTOM_RIGHT, x: 0, y: 0),
+    rectangle: false)
+  var text = ghostty_text_s()
+  guard ghostty_surface_read_text(surface, selection, &text), let contents = text.text else {
+    return ""
+  }
+  defer { ghostty_surface_free_text(surface, &text) }
+  return String(cString: contents)
 }
 
 @MainActor
