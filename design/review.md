@@ -11,9 +11,10 @@
 | V-05 | 경로·오류·프리셋 글꼴이 동일 기준을 소비하는지 검사했다. ChopStyle의 14pt medium을 참조한다. | fixed-and-verified | 코드 검사와 최종 빈 화면 렌더 |
 | V-06 | 확대/닫기 묶음을 추가하며 오른쪽 정렬이 회귀했다. 중첩 스택을 평탄화했다. | fixed-and-verified | [칸 관리 관찰](evidence/pr4-ui.md), 새 빌드의 기본/최소 창 |
 | V-07 | 확대 중 가려진 셸이 유지되는지 확인했다. visible API와 surface 재사용을 연결했다. | fixed-and-verified | 실제 지연 명령 완료와 변수 유지, 통합 테스트 |
-
 | V-08 | 복원 시 초기 배치 알림을 사용자 리사이즈로 해석해 비율이 0.5에서 약 0.745로 바뀌었다. 실제 드래그 중에만 비율을 기록하도록 수정했다. | fixed-and-verified | 실제 저장 0.618744 비율과 680pt 경계 재실행 유지, 복원 통합 테스트 |
 | V-09 | 동시 복원 시 일부 첫 줄 글리프가 가려졌다. Ghostty의 layer-hosting 순서를 소스에서 확인하고 조기 wantsLayer를 제거했다. 실제 body 크기/픽셀 갱신도 연결했다. | fixed-and-verified | 새 빌드에서 세 셸의 Last login/프롬프트가 모두 처음부터 렌더링됨 |
 | V-10 | 저장 실패/손상 파일/사라진 경로의 복구가 필요했다. 보존·홈 대체·재시도·종료 취소를 연결했다. | fixed-and-verified | [복원 관찰](evidence/pr5-ui.md), 권한 실패 후 저장 재시도 |
 
-현재 총괄은 실제 관찰한 v0.1 범위에서 aligned다. 최종 디자인 게이트와 스크롤백 키보드 경로 검증은 후속 검증 PR에서 기록한다. 빌드 통과가 시각 검증을 대신하지 않으며, VoiceOver 전체 탐색과 macOS 14 실기기까지 검증했다고 주장하지 않는다.
+| V-11 | 마우스 휠 자동화 도구가 noWindowsAvailable을 반환해 실행 확인을 할 수 없었다. 별도의 키보드/메뉴 스크롤 경로를 추가했다. | fixed-and-verified (키보드 경로 한정) | [최종 관찰](evidence/pr6-ui.md), 마우스 휠의 실기 검증은 남음 |
+
+현재 총괄은 실제 관찰한 v0.1 범위에서 aligned다. 스크롤백 키보드 경로도 실제 앱과 PTY 테스트로 검증했다. 최종 디자인 게이트는 `gate-report.json`과 `failure-events.jsonl`에 기록한다. 빌드 통과가 시각 검증을 대신하지 않으며, VoiceOver 전체 탐색과 macOS 14 실기기까지 검증했다고 주장하지 않는다.

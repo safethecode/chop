@@ -1,0 +1,1543 @@
+{
+  "schema_version": 1,
+  "reviewer": "Codex self-review; actual code/test/CUA observations, not independent approval",
+  "reviewed_at": "2026-10-14",
+  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics.",
+  "catalog_sha256": "9af51eedfbd6625fdcae46aa6a55e6206c447fe43b23fb1d0ff61f8ac800114f",
+  "contract_sha256": "5528a4723a7827c4cbe5a85673ff2d2bbe6ec2513775f087e8b92d0b8c850802",
+  "target_sha256": "b1d4cb8c14c5497e667e5fc801ba7c0495cfa7dd1c5cd3a08a62be57a171030e",
+  "results": [
+    {
+      "id": "ORC-F01",
+      "status": "not-applicable",
+      "reason": "사용자가 사이드바 없는 칸 중심 제품을 요청했다. 실제 화면과 WorkspaceView에 사이드바가 없다.",
+      "evidence": []
+    },
+    {
+      "id": "ORC-F02",
+      "status": "not-applicable",
+      "reason": "사이드바와 콘텐츠 사이의 accent 분배 조건은 사이드바가 없는 이 제품에 해당하지 않는다.",
+      "evidence": []
+    },
+    {
+      "id": "ORC-F03",
+      "status": "exception",
+      "reason": "앱 소유 콘텐츠는 흰색과 14pt medium 어두운 라벨이다. 어두운 제목 막대/NSAlert의 글꼴·색은 AppKit 표준을 유지하며 네이티브 예외로 선언한다. 실제 경고창의 글자가 읽혔다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ],
+      "exception_id": "CHOP-ORC-F03"
+    },
+    {
+      "id": "ORC-F04",
+      "status": "exception",
+      "reason": "각 중앙 +는 서로 다른 칸을 대상으로 한다. 같은 동작의 macOS 메뉴/단축키는 키보드 접근을 위해 유지한다. 콘텐츠에 전역 CTA를 반복하지 않는다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ],
+      "exception_id": "CHOP-ORC-F04"
+    },
+    {
+      "id": "ORC-F05",
+      "status": "not-applicable",
+      "reason": "20개 이상 엔티티나 3속성 비교 표가 없다. 터미널 칸은 독립 PTY의 공간이며 데이터 카드를 표로 바꾸는 조건에 해당하지 않는다.",
+      "evidence": []
+    },
+    {
+      "id": "ORC-F06",
+      "status": "pass",
+      "reason": "앱 상태 표현은 중립색과 네이티브 선택 accent다. 진행 상태를 빨간 badge로 표시하지 않는다. 셸의 ANSI 색은 외부 프로그램 출력이다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "ORC-F07",
+      "status": "pass",
+      "reason": "페이지 hero/대제목이 없다. 네이티브 창 제목과 14pt 칸 라벨이 터미널의 작업 공간을 밀어내지 않는다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "ORC-F08",
+      "status": "exception",
+      "reason": "요청된 확대·닫기는 각 칸 헤더에 상시 둬 조작을 찾을 수 있게 한다. hover 전용으로 숨기지 않는 네이티브 접근성 예외다. 중앙 실행 칸 +는 편집 모드에서만 표시한다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/final-check.md",
+          "sha256": "16586ff5816edbb346f27dbcfa478007ea2b6e680d770e5a9aa36fb4c8f2e877"
+        }
+      ],
+      "exception_id": "CHOP-ORC-F08"
+    },
+    {
+      "id": "ORC-F09",
+      "status": "not-applicable",
+      "reason": "dashboard widget 열과 그 아래 full-width section 조합이 없다. 전체 canvas를 재귀 분할하는 작업 공간이며 각 칸이 가용 영역을 채운다.",
+      "evidence": []
+    },
+    {
+      "id": "ORC-F10",
+      "status": "pass",
+      "reason": "헤더 row centerY와 NSButton 이미지 중앙 정렬을 사용한다. 중앙 +는 텍스트 문자가 아닌 SF Symbol이며 실제 버튼 중앙/가장자리 동작을 확인했다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "ORC-F11",
+      "status": "not-applicable",
+      "reason": "색이 지정된 텍스트와 따로 색이 남는 인접 의미 아이콘 조합이 없다. 아이콘은 네이티브 단색 컨트롤이다.",
+      "evidence": []
+    },
+    {
+      "id": "ORC-F12",
+      "status": "pass",
+      "reason": "소유한 간격은 row12, inset12, error16, header40, toolbar48이다. 좌우가 같다. 1pt splitter는 간격이 아닌 기능 조작부이며 비율 배분 거리는 고정 spacing이 아니다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "ORC-F13",
+      "status": "exception",
+      "reason": "HTML onClick 요소가 아닌 NSButton/NSSegmentedControl/NSSplitView다. AppKit 기본 화살표/분할/터미널 I-beam 커서를 유지하는 네이티브 예외다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/final-check.md",
+          "sha256": "16586ff5816edbb346f27dbcfa478007ea2b6e680d770e5a9aa36fb4c8f2e877"
+        }
+      ],
+      "exception_id": "CHOP-ORC-F13"
+    },
+    {
+      "id": "ORC-F14",
+      "status": "not-applicable",
+      "reason": "Swift/AppKit 소스에 HTML div/span/nav 구조가 없다. 네이티브 의미·AX 이름과 실제 행동은 RUI-06/PROJECT 규칙으로 검사한다.",
+      "evidence": []
+    },
+    {
+      "id": "ORC-F16",
+      "status": "pass",
+      "reason": "빈 칸/헤더/toolbar에 추가 scroller가 없다. 유일한 스크롤은 가변 길이 터미널 로그이며 키보드로 이전/현재 출력 이동을 실제 실행했다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/final-check.md",
+          "sha256": "16586ff5816edbb346f27dbcfa478007ea2b6e680d770e5a9aa36fb4c8f2e877"
+        }
+      ]
+    },
+    {
+      "id": "ORC-F15",
+      "status": "pass",
+      "reason": "반복 엔티티 아이콘/배지에 서로 다른 색을 배정하지 않는다. 기본 콘텐츠는 중립색이며 포커스와 선택만 시스템 accent를 사용한다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "ORC-G01",
+      "status": "pass",
+      "reason": "Sources/terminal.conf 검색에 사용자 정의 gradient가 없고 실제 main canvas가 평면 흰색이다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "ORC-G02",
+      "status": "exception",
+      "reason": "앱 자체 shadow를 만들지 않는다. macOS 창/메뉴/표준 컨트롤의 시스템 그림자는 플랫폼 예외로 유지한다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ],
+      "exception_id": "CHOP-ORC-G02"
+    },
+    {
+      "id": "ORC-G03",
+      "status": "exception",
+      "reason": "56pt 원형 중앙 +와 네이티브 컨트롤/윈도우 곡률은 사용자 핵심 조작 및 플랫폼 예외다. CSS px 곡률을 macOS pt로 측정했다고 주장하지 않는다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ],
+      "exception_id": "CHOP-ORC-G03"
+    },
+    {
+      "id": "ORC-G04",
+      "status": "pass",
+      "reason": "앱은 흰색/중립 글자/시스템 선택 accent를 쓴다. 두 개를 넘는 장식 accent가 없다. 외부 셸 VT 출력은 UI palette가 아니다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "ORC-G05",
+      "status": "exception",
+      "reason": "사용자 정의 hover transform/scale/shadow/opacity 코드가 없다. 표준 AppKit 버튼의 pressed/hover 표현은 플랫폼 동작으로 유지하며 실제 클릭·선택 전환을 관찰했다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/final-check.md",
+          "sha256": "16586ff5816edbb346f27dbcfa478007ea2b6e680d770e5a9aa36fb4c8f2e877"
+        }
+      ],
+      "exception_id": "CHOP-ORC-G05"
+    },
+    {
+      "id": "ORC-G06",
+      "status": "exception",
+      "reason": "앱 소유 라벨은 ChopStyle 14pt medium, 터미널 기본14pt다. 네이티브 제목 막대/메뉴/NSAlert의 OS 글꼴과 외부 TUI 서식은 예외다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ],
+      "exception_id": "CHOP-ORC-G06"
+    },
+    {
+      "id": "ORC-G07",
+      "status": "pass",
+      "reason": "소유한 간격 값은 4pt 배수 스케일이고 실제 헤더/본문 기준선이 일치한다. native 내부 geometry와 비율/반 픽셀 분배는 고정 spacing 값으로 오인하지 않는다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "ORC-G08",
+      "status": "pass",
+      "reason": "48pt 조작 줄과 40pt 칸 헤더를 제외한 공간은 실제 터미널이다. 소개 hero/홍보 카드가 없으며 빈 +는 사용자가 셸을 둘 자리다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "ORC-G09",
+      "status": "pass",
+      "reason": "장식 일러스트·패턴·무관한 통계가 없다. 아이콘은 열기/확대/닫기 동작을 수행한다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "ORC-G10",
+      "status": "pass",
+      "reason": "모든 작업 칸과 toolbar는 동일한 밝은 콘텐츠 appearance다. 시스템 제목 막대/표준 시트만 OS 표현을 따른다는 범위를 선언했다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "ORC-G11",
+      "status": "exception",
+      "reason": "소유 콘텐츠에는 어두운 바탕의 가는 UI 문구가 없다. 어두운 시스템 시트/타이틀은 AppKit 기본 글꼴·색을 유지하며 실제 읽기와 버튼 배치를 확인했다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ],
+      "exception_id": "CHOP-ORC-G11"
+    },
+    {
+      "id": "ORC-G12",
+      "status": "exception",
+      "reason": "칸마다 대상이 다른 +를 제공하고 콘텐츠 전역 CTA는 반복하지 않는다. 메뉴/단축키 동등 경로는 macOS 키보드 접근성 예외다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ],
+      "exception_id": "CHOP-ORC-G12"
+    },
+    {
+      "id": "ORC-G13",
+      "status": "not-applicable",
+      "reason": "20개 이상 행 데이터의 카드 grid가 없다. 독립 터미널 viewport를 분할하는 제품이다.",
+      "evidence": []
+    },
+    {
+      "id": "ORC-G14",
+      "status": "pass",
+      "reason": "앱이 임의 빨강/초록 상태를 만들지 않는다. 창 닫기와 확인은 macOS 표준이며 셸의 사용자 프로그램 색은 별도다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "ORC-G15",
+      "status": "pass",
+      "reason": "24px를 넘는 웹 page title에 해당하는 자체 대제목이 없다. 제품명은 네이티브 창 제목으로만 표시한다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "ORC-G16",
+      "status": "exception",
+      "reason": "핵심 칸 관리 확대/닫기의 상시 표시를 의도적으로 유지한다. hover-only 제한 대신 네이티브 버튼과 tooltip/AX/키보드 경로를 제공한다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/final-check.md",
+          "sha256": "16586ff5816edbb346f27dbcfa478007ea2b6e680d770e5a9aa36fb4c8f2e877"
+        }
+      ],
+      "exception_id": "CHOP-ORC-G16"
+    },
+    {
+      "id": "ORC-G17",
+      "status": "not-applicable",
+      "reason": "widget 높이 차이가 dashboard의 full-width section 소속을 흐리는 구성이 없다. 사용자가 분할 경계를 조절하는 전체 작업 공간이다.",
+      "evidence": []
+    },
+    {
+      "id": "ORC-G18",
+      "status": "pass",
+      "reason": "SF Symbols plus/xmark/확대·복귀를 NSButton 슬롯에 배치했다. 이미지/클릭 영역/포커스를 구별하고 실제 가장자리 클릭에서 한 동작만 실행됐다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "ORC-G19",
+      "status": "not-applicable",
+      "reason": "색이 있는 라벨과 다른 색의 인접 아이콘을 함께 렌더링하는 상태/CTA 조합이 없다.",
+      "evidence": []
+    },
+    {
+      "id": "ORC-G20",
+      "status": "pass",
+      "reason": "헤더 row의 단일 spacing12와 좌우 inset12, terminal padding12를 대조했다. 조작부 오른쪽 정렬 회귀는 평탄화 후 기본/최소 창에서 재검증했다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "ORC-G21",
+      "status": "exception",
+      "reason": "웹 cursor:pointer/not-allowed 대신 AppKit의 NSButton/NSSplitView/텍스트 기본 커서를 유지한다. 클릭 영역과 비활성 상태는 네이티브 컨트롤에서 확인했다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/final-check.md",
+          "sha256": "16586ff5816edbb346f27dbcfa478007ea2b6e680d770e5a9aa36fb4c8f2e877"
+        }
+      ],
+      "exception_id": "CHOP-ORC-G21"
+    },
+    {
+      "id": "ORC-G22",
+      "status": "not-applicable",
+      "reason": "badge/tag/status palette가 없으며 상태마다 색을 배정하는 기능을 만들지 않았다.",
+      "evidence": []
+    },
+    {
+      "id": "ORC-G23",
+      "status": "pass",
+      "reason": "toolbar/header/빈 칸의 소수 요소에 강제 스크롤이 없다. 독립 terminal log만 스크롤하며 외부 canvas scroller를 중첩하지 않는다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/final-check.md",
+          "sha256": "16586ff5816edbb346f27dbcfa478007ea2b6e680d770e5a9aa36fb4c8f2e877"
+        }
+      ]
+    },
+    {
+      "id": "ORC-G24",
+      "status": "not-applicable",
+      "reason": "HTML semantic markup 검사는 AppKit 소스에 해당하지 않는다. 네이티브 버튼/메뉴/텍스트 입력 의미는 별도로 검사했다.",
+      "evidence": []
+    },
+    {
+      "id": "ORC-A01",
+      "status": "pass",
+      "reason": "모든 요소에 같은 rounded 스타일을 적용하지 않았다. 네이티브 원형 추가, 작은 버튼, 사각 terminal canvas가 역할별로 다르다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "ORC-A02",
+      "status": "exception",
+      "reason": "사용자 과제는 빈 공간에 터미널을 놓는 것이고 기본 흰색은 DESIGN 계약이다. G01과 충돌하는 micro-gradient/texture는 추가하지 않는 예외를 선언한다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ],
+      "exception_id": "CHOP-ORC-A02"
+    },
+    {
+      "id": "ORC-A03",
+      "status": "exception",
+      "reason": "앱 소유 shadow 코드는 없다. NSAlert/메뉴/창과 버튼의 표준 시스템 깊이는 AppKit 예외다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ],
+      "exception_id": "CHOP-ORC-A03"
+    },
+    {
+      "id": "ORC-A04",
+      "status": "exception",
+      "reason": "Tailwind blue-500을 선택하지 않았다. 네이티브 앱의 선택/포커스는 사용자 시스템 accent를 유지한다. 요청 없는 브랜드 팔레트 3안을 UI에 임의 도입하지 않는다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ],
+      "exception_id": "CHOP-ORC-A04"
+    },
+    {
+      "id": "ORC-A05",
+      "status": "exception",
+      "reason": "균등 1/2/4 배치는 사용자가 요청한 핵심 프리셋이다. 고정 대칭을 강요하지 않으며 실제 680pt 드래그와 재귀 분할로 비대칭이 가능하다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ],
+      "exception_id": "CHOP-ORC-A05"
+    },
+    {
+      "id": "ORC-A06",
+      "status": "exception",
+      "reason": "한국어 제품이지만 쇼핑 정보 공간이 아니다. 빈 칸 중앙 +와 나머지 입력 공간은 사용자가 요청한 터미널 배치 과제다. 정보 없는 가격/배지를 채우지 않는다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ],
+      "exception_id": "CHOP-ORC-A06"
+    },
+    {
+      "id": "ORC-A07",
+      "status": "exception",
+      "reason": "사용자가 요청한 중앙 + 및 네이티브 헤더 아이콘은 시각 텍스트 대신 tooltip/AX 이름/메뉴·단축키를 제공한다. 기능 아이콘의 의미와 조작을 실제 실행했다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ],
+      "exception_id": "CHOP-ORC-A07"
+    },
+    {
+      "id": "ORC-A08",
+      "status": "not-applicable",
+      "reason": "사진·제품 이미지·이미지 placeholder를 사용하는 화면이 없다.",
+      "evidence": []
+    },
+    {
+      "id": "ORC-A09",
+      "status": "exception",
+      "reason": "동일 역할 terminal 칸은 사용자 요청 grid이며 상품 카드가 아니다. 한 칸을 임의 featured 카드로 만드는 대신 사용자가 확대/분할 크기를 선택한다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ],
+      "exception_id": "CHOP-ORC-A09"
+    },
+    {
+      "id": "ORC-A10",
+      "status": "exception",
+      "reason": "실제 빈 +, 실행 셸, 종료 복귀, 오류 복구/재시도를 확인했다. 동기적인 네이티브 surface 생성에 skeleton/빈 일러스트를 강제하지 않는다. 미실행 휠/모든 IME를 검증 완료라고 쓰지 않는다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/final-check.md",
+          "sha256": "16586ff5816edbb346f27dbcfa478007ea2b6e680d770e5a9aa36fb4c8f2e877"
+        }
+      ],
+      "exception_id": "CHOP-ORC-A10"
+    },
+    {
+      "id": "RUI-01",
+      "status": "pass",
+      "reason": "계약 값은 선택한 macOS pt이며 cmux 이미지의 픽셀을 실측했다고 쓰지 않았다. screenshot 관찰/코드/테스트 근거를 분리했다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "DESIGN.md",
+          "sha256": "786319040fd451b4a00e2aa732880196a49238c3746f89cda7227efe0eb759d5"
+        }
+      ]
+    },
+    {
+      "id": "RUI-02",
+      "status": "pass",
+      "reason": "ChopStyle의 font/color/inset/header와 terminal.conf의 대응 값을 실제 소비 소스에서 확인했다. OS 표준 시트와 VT 출력은 명시된 예외 범위다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        }
+      ]
+    },
+    {
+      "id": "RUI-03",
+      "status": "pass",
+      "reason": "모든 active catalog ID와 사용자 제외 목록을 유지한다. 사이드바/가짜 출력/요청 없는 자산을 배제하고 실제 미검증 범위를 명시했다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "DESIGN.md",
+          "sha256": "786319040fd451b4a00e2aa732880196a49238c3746f89cda7227efe0eb759d5"
+        }
+      ]
+    },
+    {
+      "id": "RUI-04",
+      "status": "pass",
+      "reason": "중앙 추가→독립 셸→분할/리사이즈→포커스/확대/닫기→정상 종료/새 셸 복원 흐름을 실제 앱과 PTY 테스트로 실행했다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "DESIGN.md",
+          "sha256": "786319040fd451b4a00e2aa732880196a49238c3746f89cda7227efe0eb759d5"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/final-check.md",
+          "sha256": "16586ff5816edbb346f27dbcfa478007ea2b6e680d770e5a9aa36fb4c8f2e877"
+        }
+      ]
+    },
+    {
+      "id": "RUI-05",
+      "status": "pass",
+      "reason": "Ghostty 엔진과 cmux 기능 아이디어를 Chop의 중앙 칸 추가에 연결했다. 사이드바 표면 복제로 대체하지 않았고 실제 다섯 번째 터미널을 열었다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "DESIGN.md",
+          "sha256": "786319040fd451b4a00e2aa732880196a49238c3746f89cda7227efe0eb759d5"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "RUI-06",
+      "status": "pass",
+      "reason": "Swift/AppKit 언어 계약에 맞춰 strict format/build/Swift 6 actor 경계/코드 서명/실제 PTY 검사를 수행했다. TS/JS 검사 실행으로 오인하지 않는다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        }
+      ]
+    },
+    {
+      "id": "RUI-07",
+      "status": "pass",
+      "reason": "전역 배치는 toolbar, 칸의 추가/확대/닫기는 해당 공간에 속한다. 실제 터미널을 최대 영역에 두고 빈 공간을 장식으로 채우지 않는다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "DESIGN.md",
+          "sha256": "786319040fd451b4a00e2aa732880196a49238c3746f89cda7227efe0eb759d5"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "RUI-08",
+      "status": "pass",
+      "reason": "이름 Chop은 사용자 제공이며 창 제목으로 쓴다. 별도 로고/워드마크/캐릭터/슬로건을 만들지 않았다. SF 기호는 기능 버튼이다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "DESIGN.md",
+          "sha256": "786319040fd451b4a00e2aa732880196a49238c3746f89cda7227efe0eb759d5"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "RUI-09",
+      "status": "exception",
+      "reason": "앱 소유 라벨은 system14pt medium이다. CSS px를 macOS pt로 등치하지 않으며 네이티브 OS chrome/시트 글꼴과 사용자 VT 서식은 플랫폼 예외다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ],
+      "exception_id": "CHOP-RUI-09"
+    },
+    {
+      "id": "RUI-10",
+      "status": "pass",
+      "reason": "레이아웃 선택은 native segmented control, 편집은 push-on/off 버튼, 빈 칸 열기는 원형 plus다. 기본/선택/비활성 모양과 실제 동작이 구분됐다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "DESIGN.md",
+          "sha256": "786319040fd451b4a00e2aa732880196a49238c3746f89cda7227efe0eb759d5"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "RUI-11",
+      "status": "pass",
+      "reason": "무관한 슬로건/힌트를 두지 않았다. cwd는 해당 칸 헤더, 오류 영향/재시도는 해당 alert에만 제공한다. rename 길이 안내는 입력과 같은 시트에 있다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "DESIGN.md",
+          "sha256": "786319040fd451b4a00e2aa732880196a49238c3746f89cda7227efe0eb759d5"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "RUI-12",
+      "status": "exception",
+      "reason": "기존 macOS 시스템인 SF Symbols/NSButton을 사용한다. DESIGN에 네이티브 예외를 선언했고 plus/xmark/zoom/restore의 출처·의미·AX 이름을 확인했다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ],
+      "exception_id": "CHOP-RUI-12"
+    },
+    {
+      "id": "RUI-13",
+      "status": "pass",
+      "reason": "빈/소수 칸은 canvas를 채우며 header/toolbar만 고정 높이다. 긴 terminal log의 keyboard scroll과 원래 viewport 복귀를 실제 실행했다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/final-check.md",
+          "sha256": "16586ff5816edbb346f27dbcfa478007ea2b6e680d770e5a9aa36fb4c8f2e877"
+        }
+      ]
+    },
+    {
+      "id": "RUI-14",
+      "status": "exception",
+      "reason": "장식 hr/탭 밑줄은 없다. 1pt NSSplitView 경계는 실제 크기 조절 입력이며 사용자 요청 동작이다. 기능 경계와 단일 포커스 표시는 명시된 별도 역할로 유지한다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ],
+      "exception_id": "CHOP-RUI-14"
+    },
+    {
+      "id": "RUI-15",
+      "status": "not-applicable",
+      "reason": "목록/채팅/메시지 전송 제품이 아니므로 목록과 대화 공간 경쟁 조건에 해당하지 않는다.",
+      "evidence": []
+    },
+    {
+      "id": "RUI-16",
+      "status": "not-applicable",
+      "reason": "제공된 GitHub 링크는 기술/기능 참고이며 채택된 화면 캡처/시각 영역/픽셀 재현 계약이 없다. cmux 외형을 재현했다고 주장하지 않는다. 고유 요구 결합은 RUI-05로 검사했다.",
+      "evidence": []
+    },
+    {
+      "id": "RUI-17",
+      "status": "not-applicable",
+      "reason": "여러 시각 reference 화면을 조합하는 작업이 아니다. 사용자의 중앙 +/배치 과제와 DESIGN을 실제 화면에 대조하며 cmux 동급 시각 재현 완료 주장을 하지 않는다.",
+      "evidence": []
+    },
+    {
+      "id": "RUI-18",
+      "status": "pass",
+      "reason": "엔진(Ghostty), 작업 공간 아이디어(cmux), 고유 중앙 추가를 분리해 출처와 구현을 기록했다. v0.1 터미널/분할/관리/복원은 구현했고 알림/Git/CLI는 후속 범위로 명시했다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "DESIGN.md",
+          "sha256": "786319040fd451b4a00e2aa732880196a49238c3746f89cda7227efe0eb759d5"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "RUI-19",
+      "status": "not-applicable",
+      "reason": "macOS 데스크톱 제품이며 모바일 destination tab/safe area/하단 navigation이 없다.",
+      "evidence": []
+    },
+    {
+      "id": "RUI-20",
+      "status": "pass",
+      "reason": "이름 변경/오류/닫기 목적 제목은 native NSAlert heading이며 입력/설명보다 위계가 높다. 실제 폴더/작업 닫기 경고 화면에서 제목·본문·버튼이 읽혔다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "RUI-21",
+      "status": "not-applicable",
+      "reason": "날짜·시간 선택형 입력이 없다.",
+      "evidence": []
+    },
+    {
+      "id": "RUI-22",
+      "status": "pass",
+      "reason": "canvas 외부 추가 padding 없이 pane header12/terminal12를 각각 소유한다. 중복 margin이 없고 최종 4/5칸·확대 및 최소 창에서 이름/버튼 가림을 확인했다.",
+      "evidence": [
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "RUI-23",
+      "status": "pass",
+      "reason": "빈 칸/실행/편집/확대/복원에서 동일 pane 컴포넌트와 tokens를 쓴다. 기본 폭의 실제 화면 묶음과 최소 창 상태를 대조했다. 시트는 모두 AppKit을 유지한다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "DESIGN.md",
+          "sha256": "786319040fd451b4a00e2aa732880196a49238c3746f89cda7227efe0eb759d5"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "RUI-24",
+      "status": "pass",
+      "reason": "날짜/수량/상태를 제목·배지·설명으로 반복하지 않는다. 프리셋의 1/4는 선택 대상 구조이며 칸 이름/경로는 서로 다른 정보다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "DESIGN.md",
+          "sha256": "786319040fd451b4a00e2aa732880196a49238c3746f89cda7227efe0eb759d5"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "RUI-25",
+      "status": "pass",
+      "reason": "전체 배치 toolbar와 칸별 이름/경로/조작의 소속이 분리됐다. 상호 독립 PTY는 실제 드래그 경계로 구별하고 모든 내용을 장식 카드로 감싸지 않았다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "DESIGN.md",
+          "sha256": "786319040fd451b4a00e2aa732880196a49238c3746f89cda7227efe0eb759d5"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        }
+      ]
+    },
+    {
+      "id": "PROJECT-CENTER",
+      "status": "pass",
+      "reason": "빈 칸은 중앙 +로 하나의 실제 셸을 열고, 편집 모드의 실행 칸 중앙 +는 방향 선택 후 독립 새 셸을 만든다. 실제 4→5칸과 cwd 상속을 실행했다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "DESIGN.md",
+          "sha256": "786319040fd451b4a00e2aa732880196a49238c3746f89cda7227efe0eb759d5"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/final-check.md",
+          "sha256": "16586ff5816edbb346f27dbcfa478007ea2b6e680d770e5a9aa36fb4c8f2e877"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr5-ui.md",
+          "sha256": "11b429044c47f3481d63de0ebda80053110b99d59dec6cf5cea808f7404a2102"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr4-ui.md",
+          "sha256": "c8c87cda55a2ace2c774c2c9f4bee29bbf47b0d73ab68f64472cd1b2cb7c5919"
+        }
+      ]
+    },
+    {
+      "id": "PROJECT-LAYOUT",
+      "status": "pass",
+      "reason": "1/좌우/상하/4와 재귀 분할, 최소 크기, 드래그, 실행 셸 보존을 구현했다. 실제 680pt 드래그와 재실행 비율을 확인했고 unsafe 축소는 테스트/실제 UI에서 거절했다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "DESIGN.md",
+          "sha256": "786319040fd451b4a00e2aa732880196a49238c3746f89cda7227efe0eb759d5"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/final-check.md",
+          "sha256": "16586ff5816edbb346f27dbcfa478007ea2b6e680d770e5a9aa36fb4c8f2e877"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr5-ui.md",
+          "sha256": "11b429044c47f3481d63de0ebda80053110b99d59dec6cf5cea808f7404a2102"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr4-ui.md",
+          "sha256": "c8c87cda55a2ace2c774c2c9f4bee29bbf47b0d73ab68f64472cd1b2cb7c5919"
+        }
+      ]
+    },
+    {
+      "id": "PROJECT-MANAGE",
+      "status": "pass",
+      "reason": "공간 포커스/확대/복귀/이름 변경/빈 칸 제거와 마지막 칸 보존을 실행했다. 숨긴 셸의 작업 완료와 기존 변수/identity를 PTY에서 확인했다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "DESIGN.md",
+          "sha256": "786319040fd451b4a00e2aa732880196a49238c3746f89cda7227efe0eb759d5"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/final-check.md",
+          "sha256": "16586ff5816edbb346f27dbcfa478007ea2b6e680d770e5a9aa36fb4c8f2e877"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr5-ui.md",
+          "sha256": "11b429044c47f3481d63de0ebda80053110b99d59dec6cf5cea808f7404a2102"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr4-ui.md",
+          "sha256": "c8c87cda55a2ace2c774c2c9f4bee29bbf47b0d73ab68f64472cd1b2cb7c5919"
+        }
+      ]
+    },
+    {
+      "id": "PROJECT-CLOSE",
+      "status": "pass",
+      "reason": "실행 중 foreground 작업은 닫기/창 닫기/quit 전에 확인한다. 실제 sleep 닫기 취소와 Ctrl+C, 다중 셸 종료 취소를 실행했다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "DESIGN.md",
+          "sha256": "786319040fd451b4a00e2aa732880196a49238c3746f89cda7227efe0eb759d5"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/final-check.md",
+          "sha256": "16586ff5816edbb346f27dbcfa478007ea2b6e680d770e5a9aa36fb4c8f2e877"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr5-ui.md",
+          "sha256": "11b429044c47f3481d63de0ebda80053110b99d59dec6cf5cea808f7404a2102"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr4-ui.md",
+          "sha256": "c8c87cda55a2ace2c774c2c9f4bee29bbf47b0d73ab68f64472cd1b2cb7c5919"
+        }
+      ]
+    },
+    {
+      "id": "PROJECT-RESTORE",
+      "status": "pass",
+      "reason": "레이아웃/비율/이름/cwd/열림 상태/포커스를 저장하고 새 셸로 복원한다. 실제 RESTORED=fresh와 /tmp, 빈 칸 보존, 손상 바이트 보존, 폴더 대체/쓰기 재시도를 확인했다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "DESIGN.md",
+          "sha256": "786319040fd451b4a00e2aa732880196a49238c3746f89cda7227efe0eb759d5"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/final-check.md",
+          "sha256": "16586ff5816edbb346f27dbcfa478007ea2b6e680d770e5a9aa36fb4c8f2e877"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr5-ui.md",
+          "sha256": "11b429044c47f3481d63de0ebda80053110b99d59dec6cf5cea808f7404a2102"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr4-ui.md",
+          "sha256": "c8c87cda55a2ace2c774c2c9f4bee29bbf47b0d73ab68f64472cd1b2cb7c5919"
+        }
+      ]
+    },
+    {
+      "id": "PROJECT-SCROLL",
+      "status": "pass",
+      "reason": "keyboard/menu 스크롤백을 실제 viewport와 UI로 확인하고 mouse selection을 실행했다. 휠 입력 코드는 연결돼 있으나 휠 실기는 도구 오류로 미검증이며 이 판정 범위에 포함했다고 주장하지 않는다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "DESIGN.md",
+          "sha256": "786319040fd451b4a00e2aa732880196a49238c3746f89cda7227efe0eb759d5"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/final-check.md",
+          "sha256": "16586ff5816edbb346f27dbcfa478007ea2b6e680d770e5a9aa36fb4c8f2e877"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr5-ui.md",
+          "sha256": "11b429044c47f3481d63de0ebda80053110b99d59dec6cf5cea808f7404a2102"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr4-ui.md",
+          "sha256": "c8c87cda55a2ace2c774c2c9f4bee29bbf47b0d73ab68f64472cd1b2cb7c5919"
+        }
+      ]
+    },
+    {
+      "id": "PROJECT-RENDER",
+      "status": "pass",
+      "reason": "Ghostty 소유 layer-hosting 순서와 실제 칸 크기를 적용해 동시 복원 glyph 누락을 수정했다. 최종 빌드 3개 셸 및 5번째 추가에서 정상 첫 줄/프롬프트를 직접 관찰했다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "DESIGN.md",
+          "sha256": "786319040fd451b4a00e2aa732880196a49238c3746f89cda7227efe0eb759d5"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/final-check.md",
+          "sha256": "16586ff5816edbb346f27dbcfa478007ea2b6e680d770e5a9aa36fb4c8f2e877"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr5-ui.md",
+          "sha256": "11b429044c47f3481d63de0ebda80053110b99d59dec6cf5cea808f7404a2102"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr4-ui.md",
+          "sha256": "c8c87cda55a2ace2c774c2c9f4bee29bbf47b0d73ab68f64472cd1b2cb7c5919"
+        }
+      ]
+    },
+    {
+      "id": "PROJECT-TRUTH",
+      "status": "pass",
+      "reason": "가짜 terminal text/불필요한 logo/sidebar를 만들지 않았다. 실제 PTY 출력·상태를 사용하며 관찰 문서를 PNG나 독립적 리뷰 승인으로 표시하지 않는다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "DESIGN.md",
+          "sha256": "786319040fd451b4a00e2aa732880196a49238c3746f89cda7227efe0eb759d5"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/final-code.md",
+          "sha256": "3ee9cda17518cb2d0c239b058fb74432defc36c0be29c53c57a0f8d76db2d18f"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr6-ui.md",
+          "sha256": "00e61f4c3cc04564c681ba2078247fe1cd2496409c08a5110eb792957880cd65"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/final-check.md",
+          "sha256": "16586ff5816edbb346f27dbcfa478007ea2b6e680d770e5a9aa36fb4c8f2e877"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/pr5-ui.md",
+          "sha256": "11b429044c47f3481d63de0ebda80053110b99d59dec6cf5cea808f7404a2102"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/pr4-ui.md",
+          "sha256": "c8c87cda55a2ace2c774c2c9f4bee29bbf47b0d73ab68f64472cd1b2cb7c5919"
+        }
+      ]
+    }
+  ]
+}

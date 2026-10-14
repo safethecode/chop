@@ -226,6 +226,10 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
   @objc func copy(_ sender: Any?) { performBinding("copy_to_clipboard") }
   @objc func paste(_ sender: Any?) { performBinding("paste_from_clipboard") }
   override func selectAll(_ sender: Any?) { performBinding("select_all") }
+  override func scrollPageUp(_ sender: Any?) { performBinding("scroll_page_up") }
+  override func scrollPageDown(_ sender: Any?) { performBinding("scroll_page_down") }
+  @objc func scrollToTop(_ sender: Any?) { performBinding("scroll_to_top") }
+  @objc func scrollToBottom(_ sender: Any?) { performBinding("scroll_to_bottom") }
 
   private func performBinding(_ action: String) {
     if let surface {
