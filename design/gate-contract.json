@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "catalog_version": 5,
-  "scope_notes": "Native macOS Chop v0.1, user task and DESIGN comparison. macOS26.5.2/CI15; macOS14 physical, full VoiceOver/all IMEs and hardware wheel are explicitly outside verified combinations. Shell/TUI VT styling and standard OS chrome are distinguished from app-owned labels. cmux is technical/feature inspiration, not a visual pixel reference.",
+  "scope_notes": "Native macOS Chop v0.1, user task and DESIGN comparison. macOS26.5.2/CI15; macOS14 physical, full VoiceOver/all IMEs and hardware wheel are explicitly outside verified combinations. Shell/TUI VT styling and standard OS chrome are distinguished from app-owned labels. cmux is technical/feature inspiration, not a visual pixel reference. User correction 2026-10-14 adds R-DEFAULT canvas screenshot as a visual/state reference; first shell + three empty plus panes is mandatory at default entry. Previous main gate lacked that condition; its historical ledger is retained.",
   "targets": [
     "Sources",
     "Resources/terminal.conf",
@@ -13,7 +13,8 @@
     "scripts",
     ".github/workflows/ci.yml",
     "Dependencies/ghostty-config.patch",
-    "Dependencies/README.md"
+    "Dependencies/README.md",
+    "design/references/default-grid-user.png"
   ],
   "rules": [
     {
@@ -878,9 +879,9 @@
     },
     {
       "id": "RUI-16",
-      "applicable": false,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "제공된 GitHub 링크는 기술/기능 참고이며 채택된 화면 캡처/시각 영역/픽셀 재현 계약이 없다. cmux 외형을 재현했다고 주장하지 않는다. 고유 요구 결합은 RUI-05로 검사했다.",
+      "applicable": true,
+      "scope": "R-DEFAULT 사용자 canvas crop와 Chop 기본 진입 화면의 구조/상태/컴포넌트 관계",
+      "reason": "사용자 R-DEFAULT screenshot의 canvas를 직접 보고 같은 2×2 배치, 좌상단 실행 셸/포커스와 나머지 세 중앙 +를 대조했다. 기존 헤더·아이콘·간격 관계를 유지한다. 외형 비교 범위는 제공 crop 내부이며 cmux pixel 복제를 주장하지 않는다.",
       "checks": [
         "spec",
         "visual"
@@ -889,9 +890,9 @@
     },
     {
       "id": "RUI-17",
-      "applicable": false,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "여러 시각 reference 화면을 조합하는 작업이 아니다. 사용자의 중앙 +/배치 과제와 DESIGN을 실제 화면에 대조하며 cmux 동급 시각 재현 완료 주장을 하지 않는다.",
+      "applicable": true,
+      "scope": "R-DEFAULT 사용자 canvas crop와 Chop 기본 진입 화면의 구조/상태/컴포넌트 관계",
+      "reason": "R-DEFAULT의 밝은 평면, 균등 4칸, 첫 칸 실행/나머지 대기라는 전체 조합을 최종 CUA 화면과 비교했다. 단일 빈 칸 기본값을 수정했고, 새 배경/장식으로 대체하지 않았다. capture 배율과 runtime Last login 내용은 동일 픽셀 재현 주장에 포함하지 않는다.",
       "checks": [
         "spec",
         "visual"
@@ -994,7 +995,7 @@
       "id": "PROJECT-CENTER",
       "applicable": true,
       "scope": "User-authorized Chop v0.1 behavior; PROJECT-CENTER",
-      "reason": "빈 칸은 중앙 +로 하나의 실제 셸을 열고, 편집 모드의 실행 칸 중앙 +는 방향 선택 후 독립 새 셸을 만든다. 실제 4→5칸과 cwd 상속을 실행했다.",
+      "reason": "기본은 첫 셸 1개와 세 개의 중앙 +다. 실제 2/3/4번 +를 차례로 눌러 PTY가 하나씩 열리고 첫 셸은 유지되는 것을 확인했다. 편집 중 실행 칸 +의 방향 추가 기능도 유지한다.",
       "checks": [
         "spec",
         "code",
@@ -1046,7 +1047,7 @@
       "id": "PROJECT-RESTORE",
       "applicable": true,
       "scope": "User-authorized Chop v0.1 behavior; PROJECT-RESTORE",
-      "reason": "레이아웃/비율/이름/cwd/열림 상태/포커스를 저장하고 새 셸로 복원한다. 실제 RESTORED=fresh와 /tmp, 빈 칸 보존, 손상 바이트 보존, 폴더 대체/쓰기 재시도를 확인했다.",
+      "reason": "사용 중이던 저장 layout/비율/이름/cwd/focus와 새 셸 복원을 유지한다. 실행 칸이 하나도 없으면 첫 칸만 열고, 이전 단일 빈 저장은 이름/cwd를 유지해 기본 grid로 전환한다. 실제 PTY로 각 상태를 확인했다.",
       "checks": [
         "spec",
         "code",
@@ -1086,6 +1087,19 @@
       "applicable": true,
       "scope": "User-authorized Chop v0.1 behavior; PROJECT-TRUTH",
       "reason": "가짜 terminal text/불필요한 logo/sidebar를 만들지 않았다. 실제 PTY 출력·상태를 사용하며 관찰 문서를 PNG나 독립적 리뷰 승인으로 표시하지 않는다.",
+      "checks": [
+        "spec",
+        "code",
+        "visual",
+        "interaction"
+      ],
+      "exceptions": []
+    },
+    {
+      "id": "PROJECT-DEFAULT",
+      "applicable": true,
+      "scope": "기본 진입, 이전 빈 단일 저장 migration, all-empty 복원과 새 셸 수",
+      "reason": "사용자 승인 기본값: 2×2로 시작해 좌상단 터미널 1을 즉시 실행하고 2·3·4번은 중앙 +로 연다. fresh/이전 단일 빈 저장/all-empty 저장/기존 사용 중 복원/중복 호출과 실제 순차 클릭을 검증했다. 실행 칸이 없는 저장에서는 이전 선택 위치와 무관하게 첫 칸에 포커스를 준다.",
       "checks": [
         "spec",
         "code",

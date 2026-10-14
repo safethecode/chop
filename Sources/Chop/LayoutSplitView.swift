@@ -37,16 +37,22 @@ final class LayoutSplitView: NSSplitView, NSSplitViewDelegate {
     guard subviews.count == 2 else { return }
     applying = true
     defer { applying = false }
-    let total = max(0, (isVertical ? bounds.width : bounds.height) - dividerThickness)
+    let span = max(0, isVertical ? bounds.width : bounds.height)
+    let gap = min(dividerThickness, span)
+    let total = span - gap
     let minA = isVertical ? firstMinimum.width : firstMinimum.height
     let minB = isVertical ? secondMinimum.width : secondMinimum.height
-    let length = min(max(total * ratio, minA), max(minA, total - minB))
+    // Initial attachment can resize nested splits through zero before the window
+    // applies its minimum. Keep those transient frames inside their parent.
+    let length =
+      total >= minA + minB
+      ? min(max(total * ratio, minA), total - minB) : total * ratio
     subviews[0].frame = NSRect(
       x: 0, y: 0, width: isVertical ? length : bounds.width,
       height: isVertical ? bounds.height : length)
     subviews[1].frame = NSRect(
-      x: isVertical ? length + dividerThickness : 0,
-      y: isVertical ? 0 : length + dividerThickness,
+      x: isVertical ? length + gap : 0,
+      y: isVertical ? 0 : length + gap,
       width: isVertical ? max(0, total - length) : bounds.width,
       height: isVertical ? bounds.height : max(0, total - length))
   }

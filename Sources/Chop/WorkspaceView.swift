@@ -26,21 +26,26 @@ final class WorkspaceView: NSView {
   init(engine: TerminalEngine, snapshot: WorkspaceSnapshot? = nil) {
     self.engine = engine
     let valid = snapshot.flatMap { (try? $0.validate()) != nil ? $0 : nil }
-    let id = UUID()
-    layout = valid?.layout ?? .pane(id)
-    focusedID = valid?.focusedID ?? id
+    var ids = valid?.layout.paneIDs ?? (0..<4).map { _ in UUID() }
+    // Upgrade the old blank single-pane start while retaining its name and cwd.
+    let useDefaultGrid =
+      valid == nil || (valid?.panes.count == 1 && valid?.panes.first?.wasRunning == false)
+    if useDefaultGrid {
+      while ids.count < 4 { ids.append(UUID()) }
+      layout = .preset(.grid, ids: ids)
+    } else {
+      layout = valid!.layout
+    }
+    focusedID = valid?.focusedID ?? ids[0]
     super.init(frame: .zero)
     appearance = NSAppearance(named: .aqua)
     wantsLayer = true
     layer?.backgroundColor = ChopStyle.background.cgColor
     configureToolbar()
-    if let valid {
-      for saved in valid.panes {
-        addPane(saved.id, directory: saved.workingDirectory, name: saved.name)
-        if saved.wasRunning { restoredRunningIDs.append(saved.id) }
-      }
-    } else {
-      addPane(id)
+    for id in ids {
+      let saved = valid?.panes.first { $0.id == id }
+      addPane(id, directory: saved?.workingDirectory, name: saved?.name)
+      if saved?.wasRunning == true { restoredRunningIDs.append(id) }
     }
     rebuild()
   }
@@ -144,9 +149,16 @@ final class WorkspaceView: NSView {
   }
 
   func startRestoredTerminals() {
-    let ids = restoredRunningIDs
+    var ids = restoredRunningIDs
     restoredRunningIDs.removeAll()
-    let selected = focusedID
+    var selected = focusedID
+    // A newly opened workspace is immediately usable, including an all-empty save.
+    if ids.isEmpty, !panes.values.contains(where: { $0.isRunning }),
+      let first = layout.paneIDs.first
+    {
+      ids = [first]
+      selected = first
+    }
     let missing = layout.paneIDs.compactMap { panes[$0]?.resolveWorkingDirectory() }
     if !missing.isEmpty { reportMissingDirectories(missing) }
     for id in ids { panes[id]?.openTerminal() }

@@ -18,7 +18,7 @@ final class SessionCoordinator {
       if let backup = result.recoveredFile {
         let alert = NSAlert()
         alert.messageText = "저장된 레이아웃을 열지 못했어요"
-        alert.informativeText = "빈 칸에서 다시 시작합니다. 기존 파일은 \(backup.lastPathComponent)에 보관했어요."
+        alert.informativeText = "기본 레이아웃에서 다시 시작합니다. 기존 파일은 \(backup.lastPathComponent)에 보관했어요."
         alert.addButton(withTitle: "확인")
         alert.runModal()
       }

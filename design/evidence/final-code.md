@@ -19,3 +19,5 @@
 배경과 UI 위계는 `DESIGN.md`, 범위/사용법은 `README.md`를 대조했다. 왼쪽 탭, fake terminal, 요청 없는 로고/슬로건, 카드/배지/hero, 장식 구분선과 불필요한 chrome scroll container가 없다. cmux의 GPL 코드를 복사하지 않았으며 Ghostty의 pinned MIT source/license는 Dependencies/README와 Resources에 남아 있다.
 
 단위는 macOS pt다. 웹 CSS px를 계측했다고 쓰지 않는다. 네이티브 표준 시트/메뉴의 내부 여백·글꼴과 셸/TUI가 출력하는 VT 서식은 앱이 소유한 라벨 토큰과 구분한다. VoiceOver 전체를 검증했다는 주장은 하지 않는다.
+
+PR #7 기본 상태 재검토: WorkspaceView.init은 fresh/이전 단일 빈 저장을 grid로 구성한다. window 배치 후 startRestoredTerminals가 저장 실행 칸 또는 실행 칸이 없을 때 첫 칸만 연다. 다음 빈 칸은 기존 openTerminal guard와 중앙 +를 사용한다. LayoutSplitView는 window minimum 적용 전 0-size 배치도 부모 영역 안으로 제한한다.
