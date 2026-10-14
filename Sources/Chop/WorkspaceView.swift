@@ -1,5 +1,6 @@
 import AppKit
 import ChopCore
+import QuartzCore
 
 @MainActor
 final class WorkspaceView: NSView {
@@ -23,6 +24,7 @@ final class WorkspaceView: NSView {
     "moon", label: "다크 모드로 전환", target: self, action: #selector(toggleAppearance))
   private(set) var isEditing = false
   private var restoredRunningIDs: [UUID] = []
+  private let dragGroupID = UUID()
 
   init(engine: TerminalEngine, snapshot: WorkspaceSnapshot? = nil) {
     self.engine = engine
@@ -78,7 +80,7 @@ final class WorkspaceView: NSView {
   private func addPane(_ id: UUID, directory: String? = nil, name: String? = nil) {
     while panes.values.contains(where: { $0.name == "터미널 \(nextName)" }) { nextName += 1 }
     let pane = TerminalPaneView(
-      engine: engine, id: id, name: name ?? "터미널 \(nextName)",
+      engine: engine, id: id, name: name ?? "터미널 \(nextName)", workspaceID: dragGroupID,
       workingDirectory: directory ?? FileManager.default.homeDirectoryForCurrentUser.path)
     nextName += 1
     pane.onFocus = { [weak self] in self?.didFocus(id) }
@@ -91,6 +93,17 @@ final class WorkspaceView: NSView {
     pane.onRemoveRequested = { [weak self] in self?.removeEmptyPane(id) }
     pane.onZoomRequested = { [weak self] in self?.toggleZoom(id) }
     pane.onDirectoryFallback = { [weak self] path in self?.reportMissingDirectories([path]) }
+    pane.canMovePane = { [weak self] source in self?.canSwapPanes(source, with: id) ?? false }
+    pane.onMoveRequested = { [weak self] source, previewFrame in
+      self?.swapPanes(source, with: id, previewFrame: previewFrame) ?? false
+    }
+    pane.onDragEnded = { [weak self] in
+      guard let self else { return }
+      for pane in panes.values {
+        pane.clearDropHighlight()
+        pane.alphaValue = 1
+      }
+    }
     pane.isEditing = isEditing
     panes[id] = pane
   }
@@ -144,6 +157,63 @@ final class WorkspaceView: NSView {
 
   @objc func splitRight() { split(focusedID, axis: .horizontal) }
   @objc func splitDown() { split(focusedID, axis: .vertical) }
+
+  func canSwapPanes(_ source: UUID, with destination: UUID) -> Bool {
+    isEditing && maximizedID == nil && source != destination
+      && panes[source] != nil && panes[destination] != nil
+  }
+
+  @discardableResult
+  func swapPanes(_ source: UUID, with destination: UUID, previewFrame: NSRect? = nil) -> Bool {
+    guard canSwapPanes(source, with: destination) else { return false }
+    var previousFrames: [UUID: NSRect] = [:]
+    for id in [source, destination] {
+      guard let pane = panes[id], let parent = pane.superview else { continue }
+      previousFrames[id] = parent.convert(pane.layer?.presentation()?.frame ?? pane.frame, to: nil)
+      pane.layer?.removeAnimation(forKey: "pane-reorder")
+      pane.alphaValue = 1
+    }
+    if let previewFrame { previousFrames[source] = previewFrame }
+    layout = layout.swapping(source, with: destination)
+    focusedID = source
+    rebuild()
+    animateReorder(from: previousFrames)
+    return true
+  }
+
+  private func animateReorder(from previousFrames: [UUID: NSRect]) {
+    guard !NSWorkspace.shared.accessibilityDisplayShouldReduceMotion else { return }
+    for (id, previous) in previousFrames {
+      guard let pane = panes[id], let parent = pane.superview,
+        pane.bounds.width > 0, pane.bounds.height > 0
+      else { continue }
+      let old = parent.convert(previous, from: nil)
+      let translation = CATransform3DMakeTranslation(
+        old.midX - pane.frame.midX, old.midY - pane.frame.midY, 0)
+      let animation = CABasicAnimation(keyPath: "transform")
+      animation.fromValue = NSValue(
+        caTransform3D: CATransform3DScale(
+          translation, old.width / pane.bounds.width, old.height / pane.bounds.height, 1))
+      animation.toValue = NSValue(caTransform3D: CATransform3DIdentity)
+      animation.duration = 0.18
+      animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+      pane.layer?.add(animation, forKey: "pane-reorder")
+    }
+  }
+
+  func canSwapFocusedPane(_ direction: FocusDirection) -> Bool {
+    guard let other = layout.neighbor(of: focusedID, toward: direction, in: canvas.bounds) else {
+      return false
+    }
+    return canSwapPanes(focusedID, with: other)
+  }
+
+  func swapFocusedPane(_ direction: FocusDirection) {
+    guard let other = layout.neighbor(of: focusedID, toward: direction, in: canvas.bounds) else {
+      return
+    }
+    swapPanes(focusedID, with: other)
+  }
 
   @objc func toggleEditing() {
     if maximizedID != nil {

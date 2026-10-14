@@ -87,6 +87,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
   @objc private func focusRight() { workspaceWindow?.workspace.moveFocus(.right) }
   @objc private func focusUp() { workspaceWindow?.workspace.moveFocus(.up) }
   @objc private func focusDown() { workspaceWindow?.workspace.moveFocus(.down) }
+  @objc private func swapLeft() { workspaceWindow?.workspace.swapFocusedPane(.left) }
+  @objc private func swapRight() { workspaceWindow?.workspace.swapFocusedPane(.right) }
+  @objc private func swapUp() { workspaceWindow?.workspace.swapFocusedPane(.up) }
+  @objc private func swapDown() { workspaceWindow?.workspace.swapFocusedPane(.down) }
   @objc private func toggleZoom() { workspaceWindow?.workspace.toggleZoom() }
   @objc private func renamePane() { workspaceWindow?.workspace.requestRename() }
   @objc private func retrySave() { session.retrySave() }
@@ -117,6 +121,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     case #selector(splitRight): return workspace.canSplit(workspace.focusedID, axis: .horizontal)
     case #selector(splitDown): return workspace.canSplit(workspace.focusedID, axis: .vertical)
     case #selector(toggleZoom): return workspace.layout.paneIDs.count > 1
+    case #selector(swapLeft): return workspace.canSwapFocusedPane(.left)
+    case #selector(swapRight): return workspace.canSwapFocusedPane(.right)
+    case #selector(swapUp): return workspace.canSwapFocusedPane(.up)
+    case #selector(swapDown): return workspace.canSwapFocusedPane(.down)
     case #selector(closeTerminal):
       menuItem.title = workspace.focusedPane.isRunning ? "터미널 닫기" : "빈 칸 제거"
       return workspace.focusedPane.isRunning || workspace.layout.paneIDs.count > 1
@@ -180,6 +188,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
       (
         "아래 칸으로 이동", #selector(focusDown), String(UnicodeScalar(NSDownArrowFunctionKey)!),
         [.command, .option]
+      ),
+      (
+        "왼쪽 칸과 자리 바꾸기", #selector(swapLeft), String(UnicodeScalar(NSLeftArrowFunctionKey)!),
+        [.command, .option, .shift]
+      ),
+      (
+        "오른쪽 칸과 자리 바꾸기", #selector(swapRight), String(UnicodeScalar(NSRightArrowFunctionKey)!),
+        [.command, .option, .shift]
+      ),
+      (
+        "위 칸과 자리 바꾸기", #selector(swapUp), String(UnicodeScalar(NSUpArrowFunctionKey)!),
+        [.command, .option, .shift]
+      ),
+      (
+        "아래 칸과 자리 바꾸기", #selector(swapDown), String(UnicodeScalar(NSDownArrowFunctionKey)!),
+        [.command, .option, .shift]
       ),
     ] {
       let item = terminalMenu.addItem(withTitle: title, action: action, keyEquivalent: key)
