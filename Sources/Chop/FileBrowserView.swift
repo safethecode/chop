@@ -290,6 +290,7 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
     pathField.cell?.isScrollable = true
     pathField.lineBreakMode = .byTruncatingMiddle
     pathField.bezelStyle = .roundedBezel
+    pathField.focusRingType = .none
     pathField.placeholderString = "폴더 경로"
     pathField.setAccessibilityLabel("파일 트리 폴더 경로")
     pathField.target = self

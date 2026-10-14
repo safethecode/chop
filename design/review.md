@@ -42,3 +42,5 @@
 | V-23 | CodeRabbit: 자식 하나의 메타데이터 실패가 전체 폴더 오류로 전파됐다. 개별 이름/leaf fallback으로 수정했다. | fixed-and-verified | 오류 주입+실제 열거 회귀 검사, 전체16개 테스트와 최신 앱 일반 폴더 표시/펼치기 |
 
 현재 총괄은 실제 관찰한 v0.1 범위에서 aligned다. 스크롤백 키보드 경로도 실제 앱과 PTY 테스트로 검증했다. 최종 디자인 게이트는 `gate-report.json`과 `failure-events.jsonl`에 기록한다. 빌드 통과가 시각 검증을 대신하지 않으며, VoiceOver 전체 탐색과 macOS 14 실기기까지 검증했다고 주장하지 않는다.
+
+V-24 / F-PATH-FOCUS: 사용자 요청의 경로 입력 외곽선을 제거했다. 두 모드 클릭/선택/커서/실제 편집과16개 검사를 확인했다. fixed-and-verified. [관찰](evidence/path-focus-ring.md).
