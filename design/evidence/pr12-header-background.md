@@ -21,3 +21,7 @@ AppearanceMode.headerBackground를 TerminalPaneView.applyAppearance에서 소비
 `./scripts/check.sh` 성공: 11개 테스트 4.321초, strict Swift format / shell syntax / plist / release build / 서명 검증 통과. 새 정적 색상 값을 그대로 반복하는 테스트는 만들지 않았다. 기존 실제 PTY/두 모드/칸 교환/전체 preview/복원 테스트를 재실행했고, 변경한 색 면·가독성·숨긴 칸 모드 전환은 위 실제 앱에서 확인했다. 로그는 로컬 `.cache/check-header-background.log`다.
 
 기존87개 규칙과 헤더 조건을 검토했다. 본문보다 다른 배경을 원하는 사용자 요청이 해당 색 역할의 근거다. 기본 canvas와 toolbar/중앙+ 관계를 유지하고, 현재 사용 중인5칸을 초기4칸으로 되돌리지 않는다. 바뀌지 않은 native 예외·미적용 사유·이전 실제 근거는 보존한다. macOS14 실기기·VoiceOver 전체 탐색·모든 입력기/TUI·하드웨어 휠의 검증 범위를 확대하지 않는다. 이번 변경은 읽는 문구를 추가하거나 수정하지 않는다.
+
+## CodeRabbit 리뷰 반영
+
+[CodeRabbit 실행 결과](https://github.com/safethecode/chop/pull/12#issuecomment-6170048087)는 head `fcceca95caabc1201e9ffa8ae06f8dcb75c948e8`의 변경11개 파일을 처리했고 동작 관련 actionable comment는 없었다. 문서 주석 비율이0%라는 pre-merge warning이 하나 있어 headerBackground/applyAppearance/configureViews의 역할·초기화 순서·surface 보존을 설명하는 doc comment3개를 추가했다. 동작 코드는 그대로이며 strict format과 diff check를 통과했다. 이 주석 변경을 이전 CodeRabbit이 검토했다고 주장하지 않으며 구현자 셀프 리뷰로 대조했다. 최신 head CI 결과는 PR에 별도로 기록한다.

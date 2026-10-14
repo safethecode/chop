@@ -26,6 +26,7 @@ enum AppearanceMode: String, CaseIterable {
     self == .light ? .white : NSColor(srgbRed: 30 / 255, green: 32 / 255, blue: 38 / 255, alpha: 1)
   }
 
+  /// Separates pane metadata and controls from the terminal surface in either mode.
   var headerBackground: NSColor {
     self == .light
       ? NSColor(srgbRed: 243 / 255, green: 244 / 255, blue: 246 / 255, alpha: 1)

@@ -76,6 +76,7 @@ final class TerminalPaneView: NSView {
   var isRunning: Bool { terminal != nil }
   var needsConfirmClose: Bool { terminal?.needsConfirmClose ?? false }
 
+  /// Refreshes pane chrome, including hidden panes, without recreating the terminal surface.
   func applyAppearance() {
     let mode = engine.appearanceMode
     appearance = mode.appearance
@@ -296,6 +297,7 @@ final class TerminalPaneView: NSView {
     openButton.toolTip = label
   }
 
+  /// Builds header and body controls before the initial appearance is applied.
   private func configureViews() {
     header.wantsLayer = true
     for view in [header, body] {

@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "reviewer": "Codex self-review; actual code/test/CUA observations, not independent approval",
-  "reviewed_at": "2026-10-14T13:55:39.048956+00:00",
-  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics. PR #8: changed appearance scopes rechecked against actual light/dark screenshots and E-A1–A6; unchanged structure/native exceptions retain earlier evidence; local 10-test suite rerun. No independent approval or exported PNG claimed. PR #10: toolbar icon roles, copy, geometry and actions rechecked in actual CUA images/AX, four layouts, both modes, minimum window and restart. Existing scopes outside changed toolbar retain prior observations and rerun PTY checks. PR #11: changed handle, preview, movement, keyboard, same live PTY and persisted order rechecked; direct user acceptance covers requested motion. CUA cannot capture transient drag frames; Reduce Motion physical settings were not changed. Unchanged exclusions/native exceptions retain prior evidence; 11-test checks rerun. PR #12: actual CUA light/dark header/body contrast, five-pane editing/zoom/hidden-pane updates rechecked; no new text/geometry. Existing exceptions and unrelated observations retained. 11-test check passed.",
+  "reviewed_at": "2026-10-14T14:02:33.067658+00:00",
+  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics. PR #8: changed appearance scopes rechecked against actual light/dark screenshots and E-A1–A6; unchanged structure/native exceptions retain earlier evidence; local 10-test suite rerun. No independent approval or exported PNG claimed. PR #10: toolbar icon roles, copy, geometry and actions rechecked in actual CUA images/AX, four layouts, both modes, minimum window and restart. Existing scopes outside changed toolbar retain prior observations and rerun PTY checks. PR #11: changed handle, preview, movement, keyboard, same live PTY and persisted order rechecked; direct user acceptance covers requested motion. CUA cannot capture transient drag frames; Reduce Motion physical settings were not changed. Unchanged exclusions/native exceptions retain prior evidence; 11-test checks rerun. PR #12: actual CUA light/dark header/body contrast, five-pane editing/zoom/hidden-pane updates rechecked; no new text/geometry. Existing exceptions and unrelated observations retained. 11-test check passed. Final PR #12 review follow-up adds only three doc comments in response to CodeRabbit coverage warning. Strict format/diff checks passed; no executable behavior or visual contract changed, so E-H1–5 remains applicable. External review coverage is explicitly fccec, follow-up comments self-reviewed.",
   "catalog_sha256": "9af51eedfbd6625fdcae46aa6a55e6206c447fe43b23fb1d0ff61f8ac800114f",
   "contract_sha256": "c42a601d5af782793cf813b7a53f251cf5786d5910fa2bd1a5002efebbffa974",
-  "target_sha256": "a37683992220f7a28bcfb0f159917791bc03dbefbbc89926cf2638a8801f7d55",
+  "target_sha256": "01698610df7efe19a8aff5e6d7f308ffaa4b59e50be66057bd4530b2f5207403",
   "results": [
     {
       "id": "ORC-F01",
@@ -62,12 +62,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ],
       "exception_id": "CHOP-ORC-F03"
@@ -154,12 +154,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -312,12 +312,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -339,12 +339,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -391,12 +391,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -669,12 +669,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -822,12 +822,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -933,12 +933,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -985,12 +985,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ],
       "exception_id": "CHOP-ORC-G11"
@@ -1210,12 +1210,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -1237,12 +1237,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -1289,12 +1289,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -1485,12 +1485,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ],
       "exception_id": "CHOP-ORC-A02"
@@ -1802,7 +1802,7 @@
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -1881,12 +1881,12 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -1928,12 +1928,12 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -2002,12 +2002,12 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -2101,12 +2101,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ],
       "exception_id": "CHOP-RUI-09"
@@ -2318,12 +2318,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ],
       "exception_id": "CHOP-RUI-14"
@@ -2382,12 +2382,12 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -2439,12 +2439,12 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -2567,12 +2567,12 @@
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -2639,17 +2639,17 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -2728,12 +2728,12 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -2840,22 +2840,22 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -2962,22 +2962,22 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -3074,22 +3074,22 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -3422,22 +3422,22 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -3544,22 +3544,22 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -3688,22 +3688,22 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -3782,22 +3782,22 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     },
@@ -3809,22 +3809,22 @@
         {
           "kind": "spec",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "code",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "visual",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         },
         {
           "kind": "interaction",
           "path": "design/evidence/pr12-header-background.md",
-          "sha256": "6ebb6790d10b4931aeaa0e413d95dc0874b52fcda007782b1efc46c4ea18d092"
+          "sha256": "c9a40b51c7101a99e6179f9abce1915a08364e2df4e50fbdcbbb2a98476251a8"
         }
       ]
     }
