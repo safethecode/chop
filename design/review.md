@@ -31,4 +31,14 @@
 
 | V-18 | 사용자 요청으로 칸 전체의 파란 입력 포커스 경계를 제거했다. 실제 입력 커서·first responder·저장된 선택과 네이티브 컨트롤 포커스는 유지한다. | accepted-difference (사용자 요청), 실제 확인 완료 | [포커스 경계 관찰](evidence/pr13-no-focus-border.md) E-F1–5; 두 모드·클릭/키보드 입력·확대·드래그 교환 뒤 미표시 |
 
+| V-19 / F-FILETREE-HIERARCHY | 사용자 교정: 파일 트리가 편집 툴바 영역을 차지했다. 공통 toolbar 아래 canvas와 트리를 나란히 두도록 수정했다. | fixed-and-verified | [파일 트리 관찰](evidence/pr14-file-tree.md) E-T1/E-T8–9,48pt 계층 회귀 검사 |
+
+| V-20 / F-FILETREE-DIVIDER | 사용자 교정: 숨긴 패널의 검은 구분선이 남았다. 숨긴 divider 생략·배경 재그리기·bounds clip을 적용했다. 수정 중 툴바 overdraw도 재검증했다. | fixed-and-verified | E-T8–9 실제 개폐/모드/폭 변화에서 잔상 없음 |
+
+| V-21 | 긴 경로가 두 줄로 잘렸다. 단일 행/가로 편집/중간 말줄임으로 수정했다. | fixed-and-verified | E-T3/E-T9 전체·최소 창 |
+
+| V-22 | 재열기 시 패널이0폭으로 남았다. 개폐 때 명시적으로 프레임을 배치한다. | fixed-and-verified | E-T8–9, 재열기 최소 폭/우측 배치 회귀 검사 |
+
+| V-23 | CodeRabbit: 자식 하나의 메타데이터 실패가 전체 폴더 오류로 전파됐다. 개별 이름/leaf fallback으로 수정했다. | fixed-and-verified | 오류 주입+실제 열거 회귀 검사, 전체16개 테스트와 최신 앱 일반 폴더 표시/펼치기 |
+
 현재 총괄은 실제 관찰한 v0.1 범위에서 aligned다. 스크롤백 키보드 경로도 실제 앱과 PTY 테스트로 검증했다. 최종 디자인 게이트는 `gate-report.json`과 `failure-events.jsonl`에 기록한다. 빌드 통과가 시각 검증을 대신하지 않으며, VoiceOver 전체 탐색과 macOS 14 실기기까지 검증했다고 주장하지 않는다.
