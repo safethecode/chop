@@ -1,4 +1,5 @@
 import AppKit
+import ChopCore
 import GhosttyKit
 import Testing
 
@@ -179,6 +180,55 @@ import Testing
   let emptyID = try #require(workspace.layout.paneIDs.last)
   workspace.removeEmptyPane(emptyID)
   #expect(workspace.layout.paneIDs == [keepID])
+  #expect(workspace.applyPreset(.columns))
+  let restoredIDs = workspace.layout.paneIDs
+  let beforeRestore = try #require(workspace.panes[restoredIDs[0]])
+  beforeRestore.workingDirectory = directory.path
+  beforeRestore.openTerminal()
+  let oldShell = try #require(beforeRestore.terminal)
+  try await waitFor { !oldShell.needsConfirmClose }
+  oldShell.insertText(
+    "export CHOP_RESTORE_SECRET=old_process; printf 'OLD_PROCESS_READY\\n'",
+    replacementRange: NSRange(location: NSNotFound, length: 0))
+  try pressReturn(on: oldShell, window: window)
+  try await waitFor {
+    (oldShell.accessibilityValue() as? String ?? "").components(separatedBy: "OLD_PROCESS_READY")
+      .count >= 3 && !oldShell.needsConfirmClose
+  }
+  beforeRestore.focus()
+  #expect(workspace.renameFocused(to: "복원 테스트"))
+  let saved = try JSONDecoder().decode(
+    WorkspaceSnapshot.self, from: JSONEncoder().encode(workspace.snapshot()))
+  try saved.validate()
+  workspace.closeAll()
+  let restored = WorkspaceView(engine: engine, snapshot: saved)
+  window.contentView = restored
+  window.layoutIfNeeded()
+  defer { restored.closeAll() }
+  restored.startRestoredTerminals()
+  #expect(restored.layout == saved.layout)
+  #expect(restored.focusedID == saved.focusedID)
+  #expect(restored.focusedPane.name == "복원 테스트")
+  #expect(restored.panes[restoredIDs[1]]?.terminal == nil, "Empty slots stay empty on restore")
+  let newShell = try #require(restored.focusedPane.terminal)
+  #expect(newShell !== oldShell)
+  try await waitFor { !newShell.needsConfirmClose }
+  newShell.insertText(
+    "printf 'RESTORE=%s\\n' \"${CHOP_RESTORE_SECRET-fresh}\"; pwd",
+    replacementRange: NSRange(location: NSNotFound, length: 0))
+  try pressReturn(on: newShell, window: window)
+  try await waitFor {
+    let text = newShell.accessibilityValue() as? String ?? ""
+    return text.contains("RESTORE=fresh") && text.contains(directory.lastPathComponent)
+      && !newShell.needsConfirmClose
+  }
+  let empty = try #require(restored.panes[restoredIDs[1]])
+  empty.workingDirectory = directory.appendingPathComponent("missing").path
+  var missingPaths: [String] = []
+  restored.onMissingDirectories = { missingPaths += $0 }
+  empty.openTerminal()
+  #expect(missingPaths.count == 1)
+  #expect(empty.workingDirectory == FileManager.default.homeDirectoryForCurrentUser.path)
 }
 
 @MainActor
