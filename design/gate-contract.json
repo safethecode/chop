@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "catalog_version": 5,
-  "scope_notes": "Native macOS Chop v0.1, user task and DESIGN comparison. macOS26.5.2/CI15; macOS14 physical, full VoiceOver/all IMEs and hardware wheel are explicitly outside verified combinations. Shell/TUI VT styling and standard OS chrome are distinguished from app-owned labels. cmux is technical/feature inspiration, not a visual pixel reference. User correction 2026-10-14 adds R-DEFAULT canvas screenshot as a visual/state reference; first shell + three empty plus panes is mandatory at default entry. Previous main gate lacked that condition; its historical ledger is retained. PR #8: user-requested light/dark modes; preserve default grid in both modes, apply to native chrome and all terminals without PTY replacement, persist selection. Evidence is self review, with actual CUA observations recorded as Markdown. PR #10: user-requested icon-only mode toggle and layout presets. Preserve R-DEFAULT canvas and R-TOOLBAR location/options/selection; icons are an intentional user-requested change from text, not an exact crop clone. PR #11: editing-only same-workspace pane exchange with whole-pane/GPU drag preview and placement motion, requested and directly accepted by user. Preserve live PTY and split geometry. CUA before/after observations are separate from user motion feedback; no mid-drag frame capture or physical Reduce Motion execution is claimed. PR #12: user-requested uniform header background distinct from body in both modes, not per-terminal colors. Actual five-pane light/dark, editing, zoom and hidden-pane mode update rechecked without changing geometry. PR #13: explicit user request removes the blue pane outline on input focus; preserve real terminal cursor, first responder, focus navigation/storage and native button/menu focus. Drag-target outline is a separate transient state. Actual two-mode four-pane mouse/keyboard input, zoom and swap-back rechecked.",
+  "scope_notes": "Native macOS Chop v0.1, user task and DESIGN comparison. macOS26.5.2/CI15; macOS14 physical, full VoiceOver/all IMEs and hardware wheel are explicitly outside verified combinations. Shell/TUI VT styling and standard OS chrome are distinguished from app-owned labels. cmux is technical/feature inspiration, not a visual pixel reference. User correction 2026-10-14 adds R-DEFAULT canvas screenshot as a visual/state reference; first shell + three empty plus panes is mandatory at default entry. Previous main gate lacked that condition; its historical ledger is retained. PR #8: user-requested light/dark modes; preserve default grid in both modes, apply to native chrome and all terminals without PTY replacement, persist selection. Evidence is self review, with actual CUA observations recorded as Markdown. PR #10: user-requested icon-only mode toggle and layout presets. Preserve R-DEFAULT canvas and R-TOOLBAR location/options/selection; icons are an intentional user-requested change from text, not an exact crop clone. PR #11: editing-only same-workspace pane exchange with whole-pane/GPU drag preview and placement motion, requested and directly accepted by user. Preserve live PTY and split geometry. CUA before/after observations are separate from user motion feedback; no mid-drag frame capture or physical Reduce Motion execution is claimed. PR #12: user-requested uniform header background distinct from body in both modes, not per-terminal colors. Actual five-pane light/dark, editing, zoom and hidden-pane mode update rechecked without changing geometry. PR #13: explicit user request removes the blue pane outline on input focus; preserve real terminal cursor, first responder, focus navigation/storage and native button/menu focus. Drag-target outline is a separate transient state. Actual two-mode four-pane mouse/keyboard input, zoom and swap-back rechecked. PR #14: user-requested right file tree is a peer of terminal canvas below the full-width global toolbar. User hierarchy/stray-divider corrections and internal long-path/reopen issues were fixed and rechecked. New lazy file navigation, native picker/shortcuts, async stale-result protection and separate settings preserve terminal surfaces. OS open wait on final restart was observed; native folder reselection recovered it without UI blocking. Two-mode default/minimum UI and final drag/keyboard restoration are scoped separately from prior evidence.",
   "targets": [
     "Sources",
     "Resources/terminal.conf",
@@ -17,14 +17,15 @@
     "design/references/default-grid-user.png",
     "Resources/terminal-light.conf",
     "Resources/terminal-dark.conf",
-    "design/references/layout-controls-user.png"
+    "design/references/layout-controls-user.png",
+    "AGENTS.md"
   ],
   "rules": [
     {
       "id": "ORC-F01",
-      "applicable": false,
+      "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "사용자가 사이드바 없는 칸 중심 제품을 요청했다. 실제 화면과 WorkspaceView에 사이드바가 없다.",
+      "reason": "오른쪽 파일 트리와 터미널 본문은 같은 mode.background를 사용하고 헤더도 동일 neutral 역할이다. E-T1/8/9의 두 모드·최소 창에서 밝기/톤 분리를 확인했다. 이 규칙은 새 사이드바 때문에 적용 대상으로 바꿨다.",
       "checks": [
         "code",
         "visual"
@@ -33,9 +34,9 @@
     },
     {
       "id": "ORC-F02",
-      "applicable": false,
+      "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "사이드바와 콘텐츠 사이의 accent 분배 조건은 사이드바가 없는 이 제품에 해당하지 않는다.",
+      "reason": "native accent는 파일 트리만의 색이 아니다. 공통 layout/edit 선택과 native 컨트롤 초점에도 사용하며 패널을 접어도 남는다. 사용자 요청의 terminal pane 포커스 경계 제거는 유지한다. 실제 패널 개폐/선택을 대조했다.",
       "checks": [
         "code",
         "visual"
@@ -80,7 +81,7 @@
       "id": "ORC-F05",
       "applicable": false,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "20개 이상 엔티티나 3속성 비교 표가 없다. 터미널 칸은 독립 PTY의 공간이며 데이터 카드를 표로 바꾸는 조건에 해당하지 않는다.",
+      "reason": "파일 트리는 단일 이름과 폴더 계층을 표시하는 native outline이며 3속성 비교나 다수 엔티티의 카드 grid가 아니다. 20개 이상 행에서도 표 대신 카드를 늘리는 조건에 해당하지 않는다.",
       "checks": [
         "code",
         "visual"
@@ -91,7 +92,7 @@
       "id": "ORC-F06",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "모든 헤더는 같은 의미의 mode별 neutral background를 쓴다. 칸별 임의 색이나 상태 의미를 만들지 않고 사용자의 본문 구분 요청을 따른다.",
+      "reason": "파일/터미널 헤더는 같은 neutral 배경 역할이다. 폴더/doc 기호와 이름은 항목 종류를 나타내고 임의 상태 색은 배정하지 않는다.",
       "checks": [
         "code",
         "visual"
@@ -113,7 +114,7 @@
       "id": "ORC-F08",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "헤더 확대·닫기는 유지하며 이동 손잡이만 편집 중 두 칸 이상에서 표시한다. 중앙 +와 중복하지 않고 이동은 헤더/메뉴·키보드로 제공한다.",
+      "reason": "파일 행마다 Finder/복사 버튼을 반복하지 않고 선택 항목의 우클릭/단축키/더블 클릭으로 제공한다. terminal 확대/닫기는 해당 칸 조작이며 편집 중 이동만 추가한다. E-T7/11에서 실제 실행했다.",
       "checks": [
         "code",
         "visual",
@@ -131,7 +132,7 @@
       "id": "ORC-F09",
       "applicable": false,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "dashboard widget 열과 그 아래 full-width section 조합이 없다. 전체 canvas를 재귀 분할하는 작업 공간이며 각 칸이 가용 영역을 채운다.",
+      "reason": "canvas와 파일 트리는 공통 toolbar 아래 같은 본문 높이를 채운다. dashboard widget 열과 아래 full-width section의 높이 불일치 조건은 없다.",
       "checks": [
         "code",
         "visual"
@@ -142,7 +143,7 @@
       "id": "ORC-F10",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "28pt 헤더 손잡이의 SF Symbol은 14pt medium으로 중앙 정렬한다. 두 모드의 비대칭 5칸, 약295pt 좁은 칸에서 제목·확대·닫기 정렬을 확인했다.",
+      "reason": "파일 header40/조작28과 terminal header40, row28의16pt 아이콘/14pt medium 이름을 실제 전체·최소 창/두 모드에서 대조했다. 이름과 아이콘의 수직 정렬/잘림을 확인했다.",
       "checks": [
         "code",
         "visual"
@@ -153,7 +154,7 @@
       "id": "ORC-F11",
       "applicable": false,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "headerBackground 역할을 light/dark에 모두 정의하고 새/복원/숨긴 칸까지 기존 applyAppearance로 갱신한다. 실제 확대 중 모드 변경 후 전체5칸에서 확인했다.",
+      "reason": "새 파일 트리에 빨강/초록 같은 의미 색을 텍스트에만 적용한 status icon+text 조합이 없다. neutral 종류 아이콘/이름의 위계와 OS 전체 행 선택은 semantic colored status pair가 아니다. 사용자 VT 색은 앱 UI 밖이다.",
       "checks": [
         "code",
         "visual"
@@ -164,7 +165,7 @@
       "id": "ORC-F12",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "소유한 간격은 row12, inset12, error16, header40, toolbar48이다. 좌우가 같다. 1pt splitter는 간격이 아닌 기능 조작부이며 비율 배분 거리는 고정 spacing이 아니다.",
+      "reason": "새 파일 탐색의 inset12/gap8/path28/row28/indent16과 기존 header40/toolbar48을 대조했다. 좌우 여백은 같고1pt 기능 divider/비율 분배는 spacing 값과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -204,7 +205,7 @@
       "id": "ORC-F16",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "빈 칸/헤더/toolbar에 추가 scroller가 없다. 유일한 스크롤은 가변 길이 터미널 로그이며 키보드로 이전/현재 출력 이동을 실제 실행했다.",
+      "reason": "새 파일 outline과 terminal log는 내용 길이에 따른 native scroll이다. 빈/소수 폴더에 추가 canvas scroller를 만들지 않고 E-T2/9의 소수 행과 실제 /tmp 긴 목록을 대조했다.",
       "checks": [
         "code",
         "visual",
@@ -272,7 +273,7 @@
       "id": "ORC-G04",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "추가 색은 사용자 요청의 실제 헤더 배경 역할 하나다. 라이트F3F4F6/다크292D35를 모든 칸에 일관되게 적용하며 임의 악센트/무지개 색을 늘리지 않는다.",
+      "reason": "기존 light white/dark1E2026 본문, header F3F4F6/292D35를 새 패널에서도 재사용한다. native accent/selection 외 임의 색을 추가하지 않았다.",
       "checks": [
         "code",
         "visual"
@@ -301,7 +302,7 @@
       "id": "ORC-G06",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "앱 소유 라벨은 ChopStyle 14pt medium, 터미널 기본14pt다. 네이티브 제목 막대/메뉴/NSAlert의 OS 글꼴과 외부 TUI 서식은 예외다.",
+      "reason": "새 파일 제목·행·상태 문구도 ChopStyle system14pt medium을 소비한다. native 버튼/필드/선택기 내부 글꼴은 기존 플랫폼 예외이며 CSS px와 macOS pt를 등치하지 않는다.",
       "checks": [
         "code",
         "visual"
@@ -318,7 +319,7 @@
       "id": "ORC-G07",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "소유한 간격 값은 4pt 배수 스케일이고 실제 헤더/본문 기준선이 일치한다. native 내부 geometry와 비율/반 픽셀 분배는 고정 spacing 값으로 오인하지 않는다.",
+      "reason": "새 panel inset12/gap8/row28/indent16은 기존4pt 배수 체계다. 사용자 조절 폭과 native divider1pt는 고정 spacing 규칙과 구별한다. 실제 최소/기본 창 정렬을 확인했다.",
       "checks": [
         "code",
         "visual"
@@ -329,7 +330,7 @@
       "id": "ORC-G08",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "48pt 조작 줄과 40pt 칸 헤더를 제외한 공간은 실제 터미널이다. 소개 hero/홍보 카드가 없으며 빈 +는 사용자가 셸을 둘 자리다.",
+      "reason": "전체 폭 toolbar48 아래 terminal canvas와 실제 파일 탐색을 배치한다. 파일 header40과 path/세 바로가기 외 나머지는 가변 길이 목록이다. 장식 hero/통계/빈 카드 없이 사용자 작업에 공간을 쓴다.",
       "checks": [
         "code",
         "visual"
@@ -340,7 +341,7 @@
       "id": "ORC-G09",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "장식 일러스트·패턴·무관한 통계가 없다. 아이콘은 열기/확대/닫기 동작을 수행한다.",
+      "reason": "새 SF 아이콘은 파일 종류·폴더 선택·갱신·패널 개폐에 대응한다. 장식 그림이나 무관한 지표를 추가하지 않았다.",
       "checks": [
         "code",
         "visual"
@@ -351,7 +352,7 @@
       "id": "ORC-G10",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "중립 헤더 면은 두 모드 본문/toolbar와 같은 톤이며 글꼴/조작 크기를 유지한다. E-H1–4 실제5칸을 대조했다.",
+      "reason": "새 파일 헤더와 terminal header의 같은 mode 색/40pt 높이, 본문 톤,14pt 글꼴/28pt 컨트롤을 E-T1/9에서 두 모드로 대조했다.",
       "checks": [
         "code",
         "visual"
@@ -362,7 +363,7 @@
       "id": "ORC-G11",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "두 모드의 실제 헤더 제목/경로/확대/닫기/이동손잡이를 확인했다. 약295pt 좁은 칸과 전폭 확대에서도 읽히고 겹치지 않았다.",
+      "reason": "전체/최소 창·두 모드에서 파일 제목/경로/바로가기/상태/행을 읽고 긴 경로가 한 줄 편집/중간 말줄임으로 유지됨을 확인했다. tooltip/AX에는 전체 경로가 남는다.",
       "checks": [
         "code",
         "visual"
@@ -396,7 +397,7 @@
       "id": "ORC-G13",
       "applicable": false,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "20개 이상 행 데이터의 카드 grid가 없다. 독립 터미널 viewport를 분할하는 제품이다.",
+      "reason": "새 파일 목록은 native hierarchy/한 이름 속성으로 표시하며20개 이상 비교 항목을 카드 grid로 만든 구성이 없다. terminal viewport는 독립 PTY다.",
       "checks": [
         "code",
         "visual"
@@ -429,7 +430,7 @@
       "id": "ORC-G16",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "이동은 편집 중 헤더에만 추가한다. 다른 칸의 실제 대상은 드롭 경계로 표시하며 종료 뒤 강조를 정리한다. 일반 터미널 본문에 상시 조작을 추가하지 않는다.",
+      "reason": "파일 행 조작은 선택/문맥 메뉴에 둔다. 폴더 선택/갱신은 파일 header, 전역 개폐는 toolbar, 칸 조작은 칸에 속한다. E-T7/11 실제 입력을 확인했다.",
       "checks": [
         "code",
         "visual",
@@ -447,7 +448,7 @@
       "id": "ORC-G17",
       "applicable": false,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "widget 높이 차이가 dashboard의 full-width section 소속을 흐리는 구성이 없다. 사용자가 분할 경계를 조절하는 전체 작업 공간이다.",
+      "reason": "파일 트리와 canvas가 body 전체 높이를 채운다. 아래 full-width dashboard section이 없어 widget 열 높이 불균형 규칙은 적용되지 않는다.",
       "checks": [
         "code",
         "visual"
@@ -458,7 +459,7 @@
       "id": "ORC-G18",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "네 방향 화살표는 실제 자리 교환을 나타낸다. SF Symbols 출처와 실제 헤더 위치·AX 이름·드래그 행동을 대조했다.",
+      "reason": "기존 SF Symbols 체계의 sidebar.right/folder/doc/arrow.clockwise를 목적에 맞게 쓴다. header/파일 row의 수직 중앙 정렬과 실제 아이콘 동작을 확인했다.",
       "checks": [
         "code",
         "visual"
@@ -469,7 +470,7 @@
       "id": "ORC-G19",
       "applicable": false,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "AppearanceMode의 동일 역할 색이 모든 header에 적용된다. 실행/빈/숨긴/편집·확대 상태에서 실제 모드 전환을 확인했다.",
+      "reason": "의미 색 글자와 다른 색 아이콘으로 구성한 status pair가 없다. 파일 종류의 neutral icon/name 위계는 semantic color 불일치 조건과 다르다. 전체 header mode 적용은 별도 appearance 규칙으로 검사한다.",
       "checks": [
         "code",
         "visual"
@@ -480,7 +481,7 @@
       "id": "ORC-G20",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "헤더 row의 단일 spacing12와 좌우 inset12, terminal padding12를 대조했다. 조작부 오른쪽 정렬 회귀는 평탄화 후 기본/최소 창에서 재검증했다.",
+      "reason": "panel 내부 여백12/행간8·header inset12/조작28을 중복 부모 padding 없이 적용했다. 실제 전체/최소 창과 path/바로가기/목록 소비 영역을 대조했다.",
       "checks": [
         "code",
         "visual"
@@ -520,7 +521,7 @@
       "id": "ORC-G23",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "toolbar/header/빈 칸의 소수 요소에 강제 스크롤이 없다. 독립 terminal log만 스크롤하며 외부 canvas scroller를 중첩하지 않는다.",
+      "reason": "가변 길이 파일 outline과 terminal log의 native scroll을 유지한다. 빈/소수 폴더·header·toolbar에 불필요한 추가 scroller가 없고 긴 /tmp 목록은 native 스크롤바를 표시했다.",
       "checks": [
         "code",
         "visual",
@@ -639,7 +640,7 @@
       "id": "ORC-A07",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "사용자가 중앙 +·header·상단 layout/mode를 아이콘으로 요청했다. 각 native 버튼/segment에 tooltip·AX 의미를 제공하고 실제 네 preset 방향 및 두 모드 상태를 실행했다.",
+      "reason": "기존 icon-only 선택/모드/칸 조작에 SF 패널/폴더/갱신 버튼을 추가했다. tooltip/AX 이름이 다음 동작과 일치하고 행에는 실제 파일 이름을 함께 표시한다. native desktop 예외 범위를 유지한다.",
       "checks": [
         "code",
         "visual"
@@ -684,7 +685,7 @@
       "id": "ORC-A10",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "실제 빈 +, 실행 셸, 종료 복귀, 오류 복구/재시도를 확인했다. 동기적인 네이티브 surface 생성에 skeleton/빈 일러스트를 강제하지 않는다. 미실행 휠/모든 IME를 검증 완료라고 쓰지 않는다.",
+      "reason": "실제 async loading/빈 폴더/없는 경로 오류/복구/늦은 응답 거절을 확인했다. OS open 대기 조합은 별도 관찰로 남기고 다른 경로/폴더 선택기로 복구했다. 상태 문구가 실제 읽기 상태와 일치한다.",
       "checks": [
         "code",
         "visual",
@@ -702,7 +703,7 @@
       "id": "RUI-01",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "계약 값은 선택한 macOS pt이며 cmux 이미지의 픽셀을 실측했다고 쓰지 않았다. screenshot 관찰/코드/테스트 근거를 분리했다.",
+      "reason": "패널300/최소280/header40/path28/inset12/gap8은 선택한 macOS pt다. 스크린샷2× 좌표와 pt 혼동을 교정했고 cmux/Finder 픽셀 실측이나 중간 drag 프레임 캡처를 주장하지 않는다.",
       "checks": [
         "spec"
       ],
@@ -712,7 +713,7 @@
       "id": "RUI-02",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "AppearanceMode.headerBackground가 TerminalPaneView.header.layer에서 실제 소비되며 light/dark 초기/전환·숨긴 칸에도 반영된다. TerminalView layer 순서를 유지한다.",
+      "reason": "새 FileBrowserView/WorkspaceSplitView가 AppearanceMode 본문/header 색과 ChopStyle14pt를 실제 소비한다. toolbar 아래 bodyHost를 clip하며 mode 변경은 숨긴 browser에도 적용한다.",
       "checks": [
         "code"
       ],
@@ -722,7 +723,7 @@
       "id": "RUI-03",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "모든 active catalog ID와 사용자 제외 목록을 유지한다. 사이드바/가짜 출력/요청 없는 자산을 배제하고 실제 미검증 범위를 명시했다.",
+      "reason": "사용자가 배제한 것은 왼쪽 terminal tab 사이드바다. 명시 요청한 오른쪽 파일 탐색은 toolbar 아래에 허용한다. active 규칙과 이전 피드백은 보존하고 OS open 대기/물리 환경 미확인은 근거 문서에 구분한다.",
       "checks": [
         "spec"
       ],
@@ -732,7 +733,7 @@
       "id": "RUI-04",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "테두리 없이 클릭/⌘⌥방향키로 실제 두 셸에 각각 다른 출력을 실행했고 AX 초점이 입력 대상과 일치했다. 기존11개 PTY/모드/레이아웃/복원 검사를 재실행했다.",
+      "reason": "중앙 +의 실제 PTY 동작을 유지하며 새 파일 탐색/선택기/직접 경로/바로가기를 실행했다. 패널 개폐에서 같은 shell PID/변수, 최종 드래그 교환/키보드 복원과15개 테스트를 확인했다.",
       "checks": [
         "spec",
         "interaction"
@@ -754,7 +755,7 @@
       "id": "RUI-06",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "Swift/AppKit 언어 계약에 맞춰 strict format/build/Swift 6 actor 경계/코드 서명/실제 PTY 검사를 수행했다. TS/JS 검사 실행으로 오인하지 않는다.",
+      "reason": "strict Swift format/셸 syntax/plist/release build/signature/15개 테스트를 통과했다. FileTree literal path/비동기 late response와 실제 PTY wrapper geometry를 검증했다.",
       "checks": [
         "code"
       ],
@@ -764,7 +765,7 @@
       "id": "RUI-07",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "전역 배치는 toolbar, 칸의 추가/확대/닫기는 해당 공간에 속한다. 실제 터미널을 최대 영역에 두고 빈 공간을 장식으로 채우지 않는다.",
+      "reason": "전역 toolbar를 전체 폭에 두고 그 아래 terminal canvas와 파일 탐색을 같은 위계로 배치한다. 파일 선택/경로/바로가기는 해당 panel 안에 둔다. 사용자 교정 E-T1/8/9로 실제 계층을 확인했다.",
       "checks": [
         "spec",
         "visual"
@@ -787,7 +788,7 @@
       "id": "RUI-09",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "앱 소유 라벨은 system14pt medium이다. CSS px를 macOS pt로 등치하지 않으며 네이티브 OS chrome/시트 글꼴과 사용자 VT 서식은 플랫폼 예외다.",
+      "reason": "파일 제목/이름/상태 문구도 system14pt medium이다. native field/button/NSOpenPanel 글꼴은 플랫폼 예외이며 작은 자체 보조 글자를 추가하지 않는다.",
       "checks": [
         "code",
         "visual"
@@ -804,7 +805,7 @@
       "id": "RUI-10",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "layout 선택은 icon-only NSSegmentedControl, 편집은 push-on/off, mode는 native icon button이다. 네 가지 선택/비활성 경로와 실제 두 mode/메뉴 상태가 일치하며 native 선택 강조를 유지한다.",
+      "reason": "toolbar panel 토글과 native 폴더/갱신 버튼, 목적지 이름인 홈/다운로드/문서를 역할에 맞게 쓴다. path는 한 줄 입력이며 파일 행은 native 선택이다. CTA 모양의 navigation 탭은 만들지 않았다.",
       "checks": [
         "spec",
         "visual"
@@ -815,7 +816,7 @@
       "id": "RUI-11",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "무관한 슬로건/힌트를 두지 않았다. cwd는 해당 칸 헤더, 오류 영향/재시도는 해당 alert에만 제공한다. rename 길이 안내는 입력과 같은 시트에 있다.",
+      "reason": "파일 제목과 직접 경로를 표시하고 매 행에 설명을 붙이지 않는다. loading/empty/error는 실제 해당 상태에서만 나타나며 실패 후 입력/선택/새로고침으로 복구한다.",
       "checks": [
         "spec",
         "visual"
@@ -826,7 +827,7 @@
       "id": "RUI-12",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "이동용 arrow.up.and.down.and.arrow.left.and.right를 기존 SF Symbols 예외로 추가했다. 14pt medium/28pt handle·대상 이름 AX·자리 바꾸기 tooltip/메뉴가 실제 행동과 일치한다.",
+      "reason": "SF Symbols의 sidebar.right/folder/doc/arrow.clockwise를 추가했다. 버튼은 tooltip/AX, 행은 실제 이름과 folder/doc 의미를 제공한다. 임의 SVG나 이모지 아이콘을 만들지 않았다.",
       "checks": [
         "code",
         "visual"
@@ -843,7 +844,7 @@
       "id": "RUI-13",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "빈/소수 칸은 canvas를 채우며 header/toolbar만 고정 높이다. 긴 terminal log의 keyboard scroll과 원래 viewport 복귀를 실제 실행했다.",
+      "reason": "파일 목록은 내용 길이에 따라 native scroll한다. 소수 행/빈 폴더는 여분 scrollbar/외부 canvas 스크롤 없이 표시하고 작은 창에서도 path/세 바로가기와 header가 겹치지 않는다. terminal log의 기존 scroll은 유지한다.",
       "checks": [
         "code",
         "visual",
@@ -855,7 +856,7 @@
       "id": "RUI-14",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "native splitter와 실제 입력 커서/컨트롤 초점을 유지하며 사용자 요청으로 pane 전체의 파란 경계를 제거했다.40pt 헤더는 이름/조작의 소속 영역이고 장식 바나 선택 밑줄을 추가하지 않는다.",
+      "reason": "새 native divider는 toolbar 아래 canvas/file 경계의 폭 조절 조작부다. 닫으면 경계도 없어진다. 양쪽40pt header는 실제 이름/조작 소속이며 장식 바·선택 밑줄을 추가하지 않았다.",
       "checks": [
         "code",
         "visual"
@@ -872,7 +873,7 @@
       "id": "RUI-15",
       "applicable": false,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "목록/채팅/메시지 전송 제품이 아니므로 목록과 대화 공간 경쟁 조건에 해당하지 않는다.",
+      "reason": "파일 계층 목록 옆은 독립 terminal canvas이며 제품 채팅/메시지 전송 공간이 아니다. 대화/채팅 목록의 공간 경쟁 규칙 조건은 없다.",
       "checks": [
         "spec",
         "visual",
@@ -884,7 +885,7 @@
       "id": "RUI-16",
       "applicable": true,
       "scope": "R-DEFAULT 사용자 canvas crop와 Chop 기본 진입 화면의 구조/상태/컴포넌트 관계",
-      "reason": "원본 기본 canvas의 넓은 본문/칸/중앙+ 관계를 유지한다. 원본에 보인 파란 입력 경계는 사용자의 후속 명시 요청으로 제거한 차이다. 실제4칸·두 모드·입력/확대/교환을 대조했다.",
+      "reason": "원본 사용자 canvas의 넓은 본문/빈 중앙+와 후속 header/no-focus-border 요구를 보존했다. 새 file panel은 후속 명시 요청이며 toolbar 아래 같은 위계라는 교정을 실제 화면/geometry 검사로 반영했다.",
       "checks": [
         "spec",
         "visual"
@@ -895,7 +896,7 @@
       "id": "RUI-17",
       "applicable": true,
       "scope": "R-DEFAULT 사용자 canvas crop와 Chop 기본 진입 화면의 구조/상태/컴포넌트 관계",
-      "reason": "파란 pane 입력 경계를 제거하면서 실제 shell 입력 커서·키보드 선택/저장·칸 헤더·중앙+ 관계를 유지한다. 두 모드 실제 입력과 확대/재배치 뒤 같은 작업 위계를 확인했다.",
+      "reason": "사용자 교정 전의 toolbar 침범/검은 선을 의도적 차이로 통과시키지 않았다. bodyHost와 clipping/숨긴 divider를 수정하고 E-T1/8/9에서 전체 조합을 재검증했다.",
       "checks": [
         "spec",
         "visual"
@@ -906,7 +907,7 @@
       "id": "RUI-18",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "엔진(Ghostty), 작업 공간 아이디어(cmux), 고유 중앙 추가를 분리해 출처와 구현을 기록했다. v0.1 터미널/분할/관리/복원은 구현했고 알림/Git/CLI는 후속 범위로 명시했다.",
+      "reason": "기존 Ghostty 기술/cmux 기능/사용자 canvas 출처에 새 파일 탐색 요구와 현재 AppKit/SF 체계를 연결했다. Finder 외형 복제를 주장하지 않고 native NSOpenPanel을 실행했다. B별 새 탐색/toolbar/terminal 소비 화면을 기록했다.",
       "checks": [
         "spec",
         "visual"
@@ -953,7 +954,7 @@
       "id": "RUI-22",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "헤더40/inset12/font14/조작28와 실제 본문 박스를 유지한다. 색 면 추가가 layout 제약을 바꾸지 않고 약295pt 칸·편집·확대의 실제 정렬을 대조했다.",
+      "reason": "부모 toolbar48와 bodyHost 아래 panel header40/단일 inset12/gap8을 쓴다. 경로/행에 추가 부모 패딩을 중첩하지 않는다. 최소/기본 창 두 모드와 개폐/폭 변경의 실제 화면을 확인했다.",
       "checks": [
         "code",
         "visual"
@@ -964,7 +965,7 @@
       "id": "RUI-23",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "사용자 명시 요청에 따라 terminal pane 전체의 입력 포커스 테두리는 표시하지 않는다. 실제 입력 커서·AX first responder·키보드 이동은 보존한다. native 버튼/메뉴의 키보드 초점은 유지한다. 두 모드와 일반/편집/확대/교환 뒤 실제 입력을 확인했다.",
+      "reason": "사용자가 제거한 terminal pane focus border는 추가하지 않는다. native 파일 입력 focus ring/row 선택은 유지하며 기존 toolbar/terminal과 같은 mode/14pt/28pt 체계다. E-T1/9/11에서 실제 표시/초점을 확인했다.",
       "checks": [
         "spec",
         "code",
@@ -982,7 +983,7 @@
       "id": "RUI-24",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "날짜/수량/상태를 제목·배지·설명으로 반복하지 않는다. 프리셋의 1/4는 선택 대상 구조이며 칸 이름/경로는 서로 다른 정보다.",
+      "reason": "파일 제목은 탐색 영역 이름이고 행 이름은 실제 항목이다. 경로를 매 행에 반복하거나 loading/empty 상태를 배지로 중복하지 않는다. tooltip/AX 전체 경로는 접근/긴 경로 보완이다.",
       "checks": [
         "spec",
         "visual"
@@ -993,7 +994,7 @@
       "id": "RUI-25",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "이름/경로/확대/닫기가 있는 실제 헤더에만 본문과 다른 색 면을 적용해 소속이 구분된다. 별도 섹션·설명·중복 액션은 만들지 않는다.",
+      "reason": "전체 폭 toolbar와 아래 두 peer 작업 영역을 명확히 나눈다. 파일 header는 terminal header와 같은 높이에서 시작하며 파일 path/바로가기/outline이 그 아래에 속한다. E-T1/8/9 실제 결과와 회귀 테스트를 연결했다.",
       "checks": [
         "spec",
         "visual"
@@ -1017,7 +1018,7 @@
       "id": "PROJECT-LAYOUT",
       "applicable": true,
       "scope": "User-authorized Chop v0.1 behavior; PROJECT-LAYOUT",
-      "reason": "기존 split geometry/unsafe 축소 거절을 유지하며 새 교환은 leaf 위치만 바꾼다. 비대칭 실제5칸/키보드/취소, 모델의 역교환과 geometry/직렬화를 확인했다.",
+      "reason": "새 body split은 global toolbar 아래에만 설치하며 terminal canvas 내부 geometry/model을 유지한다. panel min280과 layout min을 합산하고 화면에 들어가지 않는 추가/열기를 거절한다. 최소 창·개폐·geometry 테스트와 실제 교환을 확인했다.",
       "checks": [
         "spec",
         "code",
@@ -1030,7 +1031,7 @@
       "id": "PROJECT-MANAGE",
       "applicable": true,
       "scope": "User-authorized Chop v0.1 behavior; PROJECT-MANAGE",
-      "reason": "실제 선택은 Workspace focusedID와 first responder/Ghostty focus를 유지한다. 표현용 isFocused 경계만 제거했다. 두 모드에서 클릭/키보드로 각각의 shell에 입력했고 확대·칸 교환 후에도 같은 화면과 초점이 유지됐다.",
+      "reason": "새 파일 탐색과 panel 개폐는 기존 canvas/view/surface를 재사용한다. 실제 PID/변수 보존, terminal zoom과11→16 교환/원위치 복원, 자동 surface/focus 검사로 확인했다. 경로 탐색은 셸 cwd를 바꾸지 않는다.",
       "checks": [
         "spec",
         "code",
@@ -1056,7 +1057,7 @@
       "id": "PROJECT-RESTORE",
       "applicable": true,
       "scope": "User-authorized Chop v0.1 behavior; PROJECT-RESTORE",
-      "reason": "새 자리 순서는 기존 snapshot 저장 경로를 사용한다. 실제 화면과 저장 순서11·16·15·14·13/실행3개가 일치했다. 교환 snapshot roundtrip은 테스트했다. 이번 실제 앱은 사용자 작업을 유지해 재시작하지 않았다.",
+      "reason": "기존 session snapshot은 바꾸지 않고 file root/표시/폭만 별도 UserDefaults에 저장한다. 실제 사용자4칸 복원, 마지막 성공 루트만 저장하는 격리 테스트를 확인했다. 최종 재실행 OS open 대기와 선택기 복구는 E-T10 후속 기록에 명시한다.",
       "checks": [
         "spec",
         "code",
@@ -1095,7 +1096,7 @@
       "id": "PROJECT-TRUTH",
       "applicable": true,
       "scope": "User-authorized Chop v0.1 behavior; PROJECT-TRUTH",
-      "reason": "미리보기는 실제 AppKit chrome와 Ghostty IOSurface를 사용하며 가짜 터미널 텍스트를 만들지 않는다. 실제 화면·자동 테스트·중간 프레임 자동화 한계·사용자 모션 확인을 구분해 기록했다.",
+      "reason": "실제 CUA 관찰·sample OS open 대기·자동 검사·스크린샷 좌표 오류를 구분했다. 가짜 파일/terminal 출력은 만들지 않으며 테스트 fixture와 사용자 실제 프로젝트 목록을 구별한다. 독립 승인/중간 drag 프레임/전 플랫폼 검증을 주장하지 않는다.",
       "checks": [
         "spec",
         "code",
@@ -1121,7 +1122,7 @@
       "id": "PROJECT-APPEARANCE",
       "applicable": true,
       "scope": "상단 mode icon, 보기 메뉴, native chrome, 빈/실행/숨긴 칸, 새/복원 셸, 재실행 설정",
-      "reason": "기존 본문/글자/커서/컨트롤 모드 전환에 headerBackground 역할을 함께 적용한다. 실제 light/dark, 확대 중 전환과 숨긴4칸 복귀, 재실행된 PTY/theme 검사를 확인했다.",
+      "reason": "새 파일 header/body/controls에도 같은 mode를 적용하고 실제 두 모드/전체·최소 창/개폐를 확인했다. 터미널 surface 재생성 없이 기존 hidden pane theme 검사도 통과했다.",
       "checks": [
         "spec",
         "code",
@@ -1134,7 +1135,7 @@
       "id": "PROJECT-TOOLBAR-ICONS",
       "applicable": true,
       "scope": "상단 왼쪽 4개 layout 선택지와 오른쪽 mode 전환 버튼, 두 appearance/최소 창/재실행",
-      "reason": "사용자가 요청한 icon-only 조작. 레이아웃 그림과 실제 구조/선택이 일치하고 모드 아이콘이 다음 전환 대상을 뜻한다. tooltip/AX 의미를 유지하고 메뉴 동기화·셸 유지·저장·최소 창 접근을 실제 확인한다.",
+      "reason": "기존 네 preset/편집/mode 아이콘에 파일 트리 toggle을 같은 global toolbar에 추가했다. 실제 개폐/⌘⇧E/menu와 AX 다음 동작, 두 모드 최소 창에서 접근/겹침을 확인했다.",
       "checks": [
         "spec",
         "code",
@@ -1147,7 +1148,7 @@
       "id": "PROJECT-REORDER",
       "applicable": true,
       "scope": "편집 모드의 같은 작업 공간 칸 교환, 실제 전체 칸 drag preview와 배치 모션",
-      "reason": "작은 아이콘만 드래그하지 않는다. 사용자 요청과 수정 확인을 보존하며 분할 geometry/살아 있는 셸·포커스/저장 형식·취소 정리를 검증한다. 미실행 플랫폼 조합은 근거 문서에 구분한다.",
+      "reason": "새 body wrapper가 있는 최종 앱에서 포인터로11→16 교환했고 같은 출력/AX focus를 유지했다. 키보드 역교환 뒤 원래 사용자4칸 순서로 복구했다. preview/PTY identity 자동 검사를 통과했고 기존 drag 구현 자체는 바꾸지 않았다.",
       "checks": [
         "spec",
         "code",
@@ -1160,7 +1161,7 @@
       "id": "PROJECT-HEADER-BACKGROUND",
       "applicable": true,
       "scope": "모든 칸의 이름/경로/조작 헤더, 두 모드·빈/실행/편집/확대/숨긴 칸",
-      "reason": "사용자가 요청한 본문과 다른 배경색을 mode별 동일 헤더 역할로 적용한다. 기존 본문/치수/상태 동작을 보존하고 실제 화면에서 읽기·모드 갱신을 검증한다.",
+      "reason": "file header도 terminal과 같은40pt/mode.headerBackground를 소비한다. 실제 두 모드와 최소/전체 창에서 본문 대비/정렬을 대조했다. 기존 숨긴 pane mode 검사도 통과했다.",
       "checks": [
         "spec",
         "code",
@@ -1173,7 +1174,33 @@
       "id": "PROJECT-NO-FOCUS-BORDER",
       "applicable": true,
       "scope": "terminal pane 입력 포커스, 두 모드·일반/편집/확대/교환 뒤 상태",
-      "reason": "파란 pane 입력 경계를 표시하지 않으며 실제 입력 커서/AX 초점·클릭/키보드 대상 선택·저장 focus를 유지한다. native 컨트롤과 별도 유효 드롭 상태는 보존한다.",
+      "reason": "최종 파일 트리 표시/숨김/칸 이동 뒤 terminal pane 파란 border가 없고 실제 입력 cursor/AX 초점은 남는다. native file field/row 선택은 사용자 요청의 terminal-only 예외 밖이라 보존한다.",
+      "checks": [
+        "spec",
+        "code",
+        "visual",
+        "interaction"
+      ],
+      "exceptions": []
+    },
+    {
+      "id": "PROJECT-FILETREE",
+      "applicable": true,
+      "scope": "오른쪽 native outline의 경로 입력/폴더 선택기/홈·다운로드·문서·하위 lazy read/상태 복구/Finder·복사/설정 저장",
+      "reason": "문자 그대로의 경로/one-level 정렬/async generation·성공 루트 저장을 테스트했다. E-T2–7/10의 실제 동작과 OS open 대기 후 선택기 복구를 구분하고 기존 PTY를 보존한다.",
+      "checks": [
+        "spec",
+        "code",
+        "visual",
+        "interaction"
+      ],
+      "exceptions": []
+    },
+    {
+      "id": "PROJECT-FILETREE-HIERARCHY",
+      "applicable": true,
+      "scope": "공통 toolbar 아래 canvas와 파일 tree peer 관계, header 정렬·폭·개폐 경계·minimum·두 모드",
+      "reason": "사용자 교정의 toolbar 침범/검은 선과 내부 발견의0폭 재열기를 수정했다. E-T1/8/9/11에서 실제 기본/최소 창·개폐·폭·zoom/교환과 geometry/surface 회귀 검사로 재검증했다.",
       "checks": [
         "spec",
         "code",

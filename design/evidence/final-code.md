@@ -31,3 +31,5 @@ PR #11 칸 이동 재검토: LayoutNode는 split geometry를 보존하며 leaf U
 PR #12 헤더 배경: AppearanceMode.headerBackground(light F3F4F6/dark292D35)를 기존 applyAppearance에서 header.layer.backgroundColor로 소비한다. configureViews에서 헤더 layer만 준비하며 Ghostty TerminalView의 layer 생성 순서를 변경하지 않는다. 새/복원/가려진 칸 모두 기존 초기화·전체 모드 갱신 경로를 사용한다. 전체 칸 미리보기는 실제 헤더 bitmap을 포함한다. 치수·포커스·터미널 팔레트·조작/저장 로직은 같은 경로를 유지한다. 실제 두 모드/실행·빈 칸/편집·확대와 숨긴 칸 복귀에서 대조했다.
 
 PR #13 입력 포커스 경계 제거: 표현에만 쓰던 pane.isFocused와 Workspace의 배포를 제거했다. focusedID/didFocus 저장 알림·first responder/Ghostty focus·키보드 공간 이동은 유지한다. updateDropHighlight는 유효 드롭에서만2pt, 나머지는0이다. 실제 두 모드·클릭/키보드 입력·확대·칸 교환 뒤 경계 미표시를 E-F1–5에서 재검증했다. 네이티브 버튼/메뉴 포커스는 변경하지 않는다.
+
+PR #14 파일 트리: FileTree의 한 단계 메타데이터/문자 그대로 경로·자연 정렬, FileBrowserView의 generation 기반 비동기 탐색/복구·NSOpenPanel·native outline·바로가기/선택 동작을 대조했다. Workspace 공통 toolbar 아래 bodyHost에 canvas와 file split을 나란히 두고 minimum·reserved width·clip/재그리기/개폐 프레임을 연결했다. canvas와 surface는 재사용한다. 테스트15개와 실제 E-T1–10을 확인했고 사용자 교정 V-19/20과 내부 회귀 V-21/22를 기록했다. 기본4칸/아이콘/헤더/포커스 경계 제거 계약은 유지한다.
