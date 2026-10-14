@@ -145,6 +145,7 @@ final class WorkspaceView: NSView {
 
   private func configureToolbar() {
     presets.target = self
+    presets.font = ChopStyle.font
     presets.action = #selector(selectPreset(_:))
     presets.setAccessibilityLabel("레이아웃 프리셋")
     editButton.target = self
