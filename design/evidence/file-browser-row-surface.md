@@ -3,7 +3,7 @@
 ## 출처와 현재 계약
 
 - R-PANEL-ROW: [사용자 바로가기 crop](../references/file-shortcuts-row-user.png),596×254 image px. 큰 중립 배경에 홈/다운로드/문서가 세로로 놓여 있다. 사용자는 이 세 목적지를 가로 row로 배치하도록 후속 요청했다.
-- R-PANEL-BUTTON: [사용자 레이아웃 편집 버튼 crop](../references/layout-edit-button-user.png),229×82 image px. 이름을 감싸는 중립색 둥근 버튼이 조작 가능함을 나타낸다. 원본 DPR/전체 창 크기는 미확인이며 image px를 native pt 실측값으로 등치하지 않는다.
+- R-PANEL-BUTTON: [사용자 레이아웃 편집 버튼 crop](../references/layout-edit-button-user.png),238×82 image px. 이름을 감싸는 중립색 둥근 버튼이 조작 가능함을 나타낸다. 원본 DPR/전체 창 크기는 미확인이며 image px를 native pt 실측값으로 등치하지 않는다.
 - D-ROW / E-LOCATIONS: 기존 세로108pt 묶음 대신,경로 필드 아래에 높이28pt/gap8pt의 개별 native rounded 버튼을 한 줄로 둔다. 상단 편집 버튼과 같은 NSButton bezelStyle/font를 재사용한다. 이전 요청의 SF house/arrow.down.circle/doc 의미와14pt medium 글자는 유지한다. 아이콘–이름의 세부 간격/버튼 내부 여백은 AppKit image-leading 배치에 맡긴다. 세로 행의 동일 아이콘 열/이름 시작선 계약은 이번 가로 배치 요청으로 대체한다.
 - D-LIST / E-CONTENTS: 실제 파일 목록과 로딩/빈/오류 안내를 같은 목록 면 안에 둔다. headerBackground(light F3F4F6/dark292D35)를 fileListBackground라는 의미 별칭으로 재사용한다. 반경8/내부 inset8,바깥 좌우·하단 inset12와그룹 간8은 제품 선택/기존 스케일이다. 색상 추가·반복 제목·장식 구분선·새 모션은 없다.
 
