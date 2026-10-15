@@ -226,7 +226,8 @@ Resources/            # 앱 아이콘, macOS 메타데이터, 터미널 테마
 Dependencies/         # Ghostty 고정 버전, 패치와 빌드 결과
 scripts/              # 의존성 준비, 빌드, 실행, 검증
 .github/              # CI와 PR 템플릿
-docs/images/          # 실제 앱 스크린샷
+docs/images/          # README 앱 이미지
+docs/showcase/        # 실제 캡처·배경·사진 구성 원본
 design/               # 디자인 기준과 검증 기록
 ```
 

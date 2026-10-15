@@ -90,3 +90,5 @@ V-45 / F-SEARCH-RELATIVE-PATH: URL 접두사 비교가 /var와/private/var 표�
 V-46 / F-SEARCH-KEYBOARD: 실제 Enter가 검색 폴더를 열지 않던 구현을 doubleAction 전달로 수정하고 native key event 검사·실제 Tab/Down/Return으로 폴더 진입/초기화를 확인했다. fixed-and-verified. [관찰](evidence/file-tree-search.md).
 
 V-47 / FILE-TREE-SEARCH: 사용자 요청의 이름 검색을 현재 루트 하위·상대 경로·실시간 입력/초기화·오류와부분 실패·취소·결과 제한으로 구현했다. 두 모드/기본·최소 창,실제 입력·한글 붙여넣기·검색 지우기·폴더 Enter·많은 결과 스크롤·오류 복구와32개 검사를 확인했다. 포인터 파일 드래그는 새 종단 성공을 확인하지 못했으며 native 결과 URL 검사·이전 드롭 구현/증거와 구분한다. aligned (변경된 검색 범위). [관찰](evidence/file-tree-search.md).
+
+V-48 / F-README-MACOS-PRESENTATION: 사용자가 이전 사진의 완성도를 지적하고 macOS 구도를 지정했다. 창만 자른 V-37의 범위를 후속 교정으로 기록하고 오리지널 컬러 배경·중앙의 실제 최신 창·사방 여백·그림자로 세 장을 다시 구성했다. 최종 세 이미지 로컬 판독과 GitHub의 격자/picture·탭/목차 이동·실제1280×720 로드, 원본 앱 상태 복원과32개 검사를 확인했다. fixed-and-verified (문서 사진 범위); 실제 앱과 생성 배경을 구분하고 앱 UI는 바꾸지 않았다. [관찰](evidence/readme-macos-showcase.md).
