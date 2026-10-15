@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "reviewer": "Codex self-review; actual code/test/CUA observations, not independent approval",
-  "reviewed_at": "2026-10-15T02:12:59.111834+00:00",
-  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics. PR #8: changed appearance scopes rechecked against actual light/dark screenshots and E-A1–A6; unchanged structure/native exceptions retain earlier evidence; local 10-test suite rerun. No independent approval or exported PNG claimed. PR #10: toolbar icon roles, copy, geometry and actions rechecked in actual CUA images/AX, four layouts, both modes, minimum window and restart. Existing scopes outside changed toolbar retain prior observations and rerun PTY checks. PR #11: changed handle, preview, movement, keyboard, same live PTY and persisted order rechecked; direct user acceptance covers requested motion. CUA cannot capture transient drag frames; Reduce Motion physical settings were not changed. Unchanged exclusions/native exceptions retain prior evidence; 11-test checks rerun. PR #12: actual CUA light/dark header/body contrast, five-pane editing/zoom/hidden-pane updates rechecked; no new text/geometry. Existing exceptions and unrelated observations retained. 11-test check passed. Final PR #12 review follow-up adds only three doc comments in response to CodeRabbit coverage warning. Strict format/diff checks passed; no executable behavior or visual contract changed, so E-H1–5 remains applicable. External review coverage is explicitly fccec, follow-up comments self-reviewed. PR #13: pane focus outline removed by explicit user request. Real mouse/keyboard shell input and AX focus, light/dark, zoom and drag swap-back were rechecked in current CUA renders. Previous focus-border appearance is historical; RUI-23 declares the user-requested terminal-only exception, native control focus remains. No transient drag screenshot or full VoiceOver claim. Unchanged scopes retain prior evidence. PR #14: changed toolbar/body/file-panel consumers rechecked in actual CUA, including user hierarchy and stray-line corrections, long path, reopen, two-mode minimum, native folder picker, literal paths, folder expansion, copy/Finder and live shell preservation.15 tests passed. Final restart OS open wait and picker recovery are documented; no permission root cause claimed. Final pointer swap succeeded with2× image coordinates, keyboard restored original order. No drag implementation change or transient-frame claim. Unchanged native exclusions retain prior evidence. PR #14 follow-up: CodeRabbit actual review5101fb1/19files found one valid child metadata failure propagation. Minimal fallback plus deterministic injected-I/O regression test passed with all16 tests3.737s. Latest app restored project root and expanded Sources. Unchanged layout/appearance observations remain applicable; no external re-review of this follow-up is claimed. Path field actual dark/light click/selection/caret/edit+Enter rechecked;16 tests3.597s passed. Other native/layout/terminal consumers are unchanged. Header seam scope rechecked in actual light/dark,300→340→300pt file width,hide/reopen and editing headers.16 tests3.606s passed; no new input/drag/icon behavior. Location shortcut actual CUA icon click/three destinations, two modes,842×442 minimum and empty/long folder states rechecked;16 tests4.907s passed. Initial native glyph-width alignment failure is retained. File drop19 tests6.307s pass, typed pasteboard/argv/PTY/focus/no-Enter/lifecycle verified. Actual OS source writer observed but drop completion not verified; RUI-04/PROJECT-FILE-DROP unknown. No native endpoint or independent approval claimed.  Actual user-operated native file endpoint observed via CUA AX; no-Enter is established separately by the real PTY test, not inferred from subsequent shell output.  CUA shortcut section actual checks and19 tests4.852s passed; no external approval claimed.  Twenty tests4.923s plus native CUA endpoint checks; initial resize-hidden selection fixed and rechecked.  Twenty-two tests4.734s; unwanted scroll axis and native display-cycle crash found/fixed, native repeated switches and final zoom checks completed.  Twenty-two tests5.388s; actual four/five PTYs, ENV, native rows restore and minimum681x442 both modes passed.  Twenty-two tests5.065s and bundled icon decode; original bytes preserved; generated preview rejected, production native mask verified at actual consumers. README 변경은 readme-presentation 관찰에서 검증했다. 기존 앱 소스는 변경되지 않아 기존 규칙의 이유·예외·관찰을 유지한다. 스크롤 안정성은 즉시 native geometry 회귀와 실제 window resize/보기/확대/기존 셸 유지로 추가 검증했다. 과거 지연 수렴의 검사 한계와 native crash 기록을 지우지 않았다.",
+  "reviewed_at": "2026-10-15T03:25:22.105747+00:00",
+  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics. PR #8: changed appearance scopes rechecked against actual light/dark screenshots and E-A1–A6; unchanged structure/native exceptions retain earlier evidence; local 10-test suite rerun. No independent approval or exported PNG claimed. PR #10: toolbar icon roles, copy, geometry and actions rechecked in actual CUA images/AX, four layouts, both modes, minimum window and restart. Existing scopes outside changed toolbar retain prior observations and rerun PTY checks. PR #11: changed handle, preview, movement, keyboard, same live PTY and persisted order rechecked; direct user acceptance covers requested motion. CUA cannot capture transient drag frames; Reduce Motion physical settings were not changed. Unchanged exclusions/native exceptions retain prior evidence; 11-test checks rerun. PR #12: actual CUA light/dark header/body contrast, five-pane editing/zoom/hidden-pane updates rechecked; no new text/geometry. Existing exceptions and unrelated observations retained. 11-test check passed. Final PR #12 review follow-up adds only three doc comments in response to CodeRabbit coverage warning. Strict format/diff checks passed; no executable behavior or visual contract changed, so E-H1–5 remains applicable. External review coverage is explicitly fccec, follow-up comments self-reviewed. PR #13: pane focus outline removed by explicit user request. Real mouse/keyboard shell input and AX focus, light/dark, zoom and drag swap-back were rechecked in current CUA renders. Previous focus-border appearance is historical; RUI-23 declares the user-requested terminal-only exception, native control focus remains. No transient drag screenshot or full VoiceOver claim. Unchanged scopes retain prior evidence. PR #14: changed toolbar/body/file-panel consumers rechecked in actual CUA, including user hierarchy and stray-line corrections, long path, reopen, two-mode minimum, native folder picker, literal paths, folder expansion, copy/Finder and live shell preservation.15 tests passed. Final restart OS open wait and picker recovery are documented; no permission root cause claimed. Final pointer swap succeeded with2× image coordinates, keyboard restored original order. No drag implementation change or transient-frame claim. Unchanged native exclusions retain prior evidence. PR #14 follow-up: CodeRabbit actual review5101fb1/19files found one valid child metadata failure propagation. Minimal fallback plus deterministic injected-I/O regression test passed with all16 tests3.737s. Latest app restored project root and expanded Sources. Unchanged layout/appearance observations remain applicable; no external re-review of this follow-up is claimed. Path field actual dark/light click/selection/caret/edit+Enter rechecked;16 tests3.597s passed. Other native/layout/terminal consumers are unchanged. Header seam scope rechecked in actual light/dark,300→340→300pt file width,hide/reopen and editing headers.16 tests3.606s passed; no new input/drag/icon behavior. Location shortcut actual CUA icon click/three destinations, two modes,842×442 minimum and empty/long folder states rechecked;16 tests4.907s passed. Initial native glyph-width alignment failure is retained. File drop19 tests6.307s pass, typed pasteboard/argv/PTY/focus/no-Enter/lifecycle verified. Actual OS source writer observed but drop completion not verified; RUI-04/PROJECT-FILE-DROP unknown. No native endpoint or independent approval claimed.  Actual user-operated native file endpoint observed via CUA AX; no-Enter is established separately by the real PTY test, not inferred from subsequent shell output.  CUA shortcut section actual checks and19 tests4.852s passed; no external approval claimed.  Twenty tests4.923s plus native CUA endpoint checks; initial resize-hidden selection fixed and rechecked.  Twenty-two tests4.734s; unwanted scroll axis and native display-cycle crash found/fixed, native repeated switches and final zoom checks completed.  Twenty-two tests5.388s; actual four/five PTYs, ENV, native rows restore and minimum681x442 both modes passed.  Twenty-two tests5.065s and bundled icon decode; original bytes preserved; generated preview rejected, production native mask verified at actual consumers. README 변경은 readme-presentation 관찰에서 검증했다. 기존 앱 소스는 변경되지 않아 기존 규칙의 이유·예외·관찰을 유지한다. 스크롤 안정성은 즉시 native geometry 회귀와 실제 window resize/보기/확대/기존 셸 유지로 추가 검증했다. 과거 지연 수렴의 검사 한계와 native crash 기록을 지우지 않았다. 비표시 window 검사는 수정 전에도 통과했으므로 실제 앱 최초 결함과 최종 판독을 별도로 기록한다.",
   "catalog_sha256": "9af51eedfbd6625fdcae46aa6a55e6206c447fe43b23fb1d0ff61f8ac800114f",
-  "contract_sha256": "b6b8fcd797c73d6744553485b3ce68fa50220e578376fedc2a4e89c56347d3ad",
-  "target_sha256": "4a19200baf33ab0cdf45e594c3d1cd14ab84406b2cd50b5919ac73fec4d7dd26",
+  "contract_sha256": "f76dde4026ed9a268ac18675a1a4ce21024c4833dabeb371aa16c59e8f7bdf4c",
+  "target_sha256": "3ebf81132f2acb225d222b70522409cb2027c741489b743f6f62b479dceb6514",
   "results": [
     {
       "id": "ORC-F01",
@@ -2267,7 +2267,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "spec",
@@ -2346,7 +2346,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "spec",
@@ -2383,7 +2383,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "interaction",
@@ -2515,7 +2515,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "visual",
@@ -2604,7 +2604,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "visual",
@@ -2711,7 +2711,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "code",
@@ -2846,7 +2846,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "visual",
@@ -2903,7 +2903,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "visual",
@@ -3038,7 +3038,7 @@
     {
       "id": "RUI-13",
       "status": "pass",
-      "reason": "세로 행으로 바꾼 뒤 최소842×442pt에서 header/path/세 바로가기와 파일 목록이 가려지지 않는 것을 두 모드로 확인했다. 빈 상태는 scrollbar 없이, 긴 파일 목록은 기존 native scroll로 표시한다. 108pt 묶음과 기존 header/path/목록이 두 모드 최소842×442에서도 가려지지 않았다. 탭 overflow와 긴 이름/681×432 최소 창을 두 모드에서 확인했고 크기 변경 후 선택 탭을 드러내도록 수정했다. 실제 두 모드/최소842×442에서 모든 칸에 가로 탐색/키보드 focus로 접근하며 창을 화면 밖으로 강제 확대하지 않는다. 상하 모든 pane을 유지하며 두 모드1100×752/최소681×442에서 세로 scroll로 접근하고 불필요한 가로 scroller는 생기지 않았다. 사용자 리사이즈 교정 후 tile 직전 viewport 기준으로 축을 정해 들어가는 canvas의 불필요한 손잡이를 제거했다. 실제 두 모드/최소/반복 크기 변경과70회 동기 경계 회귀를 추가 확인했다.",
+      "reason": "세로 행으로 바꾼 뒤 최소842×442pt에서 header/path/세 바로가기와 파일 목록이 가려지지 않는 것을 두 모드로 확인했다. 빈 상태는 scrollbar 없이, 긴 파일 목록은 기존 native scroll로 표시한다. 108pt 묶음과 기존 header/path/목록이 두 모드 최소842×442에서도 가려지지 않았다. 탭 overflow와 긴 이름/681×432 최소 창을 두 모드에서 확인했고 크기 변경 후 선택 탭을 드러내도록 수정했다. 실제 두 모드/최소842×442에서 모든 칸에 가로 탐색/키보드 focus로 접근하며 창을 화면 밖으로 강제 확대하지 않는다. 상하 모든 pane을 유지하며 두 모드1100×752/최소681×442에서 세로 scroll로 접근하고 불필요한 가로 scroller는 생기지 않았다. 사용자 리사이즈 교정 후 tile 직전 viewport 기준으로 축을 정해 들어가는 canvas의 불필요한 손잡이를 제거했다. 실제 두 모드/최소/반복 크기 변경과70회 동기 경계 회귀를 추가 확인했다. 빈 탭 중앙 배치 교정 후 전용 컨테이너에서 기존 pane을 viewport 전체에 동기 배치한다. 실제5/7/8·두 모드·크기 왕복/격자 전환·파일 트리 개폐와25개 검사를 추가 확인했다.",
       "evidence": [
         {
           "kind": "code",
@@ -3179,6 +3179,21 @@
           "kind": "interaction",
           "path": "design/evidence/stable-canvas-scrollbars.md",
           "sha256": "955c4a9b02ded118b36774b1703da9ab1954dc1c63dff0c218c3a1d6c06670f9"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/center-empty-tab-content.md",
+          "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/center-empty-tab-content.md",
+          "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/center-empty-tab-content.md",
+          "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
         }
       ]
     },
@@ -3289,7 +3304,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "visual",
@@ -3386,7 +3401,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "visual",
@@ -3468,7 +3483,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "visual",
@@ -3666,7 +3681,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "code",
@@ -3804,7 +3819,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "visual",
@@ -3846,7 +3861,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "visual",
@@ -3928,7 +3943,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "code",
@@ -4045,12 +4060,12 @@
     {
       "id": "PROJECT-LAYOUT",
       "status": "pass",
-      "reason": "새 body split은 global toolbar 아래에만 설치하며 terminal canvas 내부 geometry/model을 유지한다. panel min280과 layout min을 합산하고 화면에 들어가지 않는 추가/열기를 거절한다. 최소 창·개폐·geometry 테스트와 실제 교환을 확인했다. 이번 PR은 단일 보기의1칸 제한만 해제하고 layout/surface를 모두 보존하는 presentation을 추가했다. 좌우/상하의 기존 제한은 후속 PR이다. 이후 좌우/격자의 모든 pane 보존 요구에 맞춰 실제 문서 최소/viewport 최소를 분리하고 화면 공간에 따른 추가 거절을 native overflow로 대체했다. 상하는 다음 PR이다. 이후 상하 전환도 같은 모든-pane 보존 경로로 통일해 마지막 fixed-capacity 축소/빈 칸 삭제를 제거했다. 모든 표시 모드가 기존 터미널 수로 전환을 막지 않는다. 현재 viewport에 들어가는 격자는 크기 왕복과 좌우/상하/탭 전환 뒤에도 이전 문서 크기/17pt 빈 가장자리를 남기지 않는 것을 추가 확인했다.",
+      "reason": "새 body split은 global toolbar 아래에만 설치하며 terminal canvas 내부 geometry/model을 유지한다. panel min280과 layout min을 합산하고 화면에 들어가지 않는 추가/열기를 거절한다. 최소 창·개폐·geometry 테스트와 실제 교환을 확인했다. 이번 PR은 단일 보기의1칸 제한만 해제하고 layout/surface를 모두 보존하는 presentation을 추가했다. 좌우/상하의 기존 제한은 후속 PR이다. 이후 좌우/격자의 모든 pane 보존 요구에 맞춰 실제 문서 최소/viewport 최소를 분리하고 화면 공간에 따른 추가 거절을 native overflow로 대체했다. 상하는 다음 PR이다. 이후 상하 전환도 같은 모든-pane 보존 경로로 통일해 마지막 fixed-capacity 축소/빈 칸 삭제를 제거했다. 모든 표시 모드가 기존 터미널 수로 전환을 막지 않는다. 현재 viewport에 들어가는 격자는 크기 왕복과 좌우/상하/탭 전환 뒤에도 이전 문서 크기/17pt 빈 가장자리를 남기지 않는 것을 추가 확인했다. 빈 탭 중앙 배치 교정 후 전용 컨테이너에서 기존 pane을 viewport 전체에 동기 배치한다. 실제5/7/8·두 모드·크기 왕복/격자 전환·파일 트리 개폐와25개 검사를 추가 확인했다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "code",
@@ -4261,6 +4276,26 @@
           "kind": "interaction",
           "path": "design/evidence/stable-canvas-scrollbars.md",
           "sha256": "955c4a9b02ded118b36774b1703da9ab1954dc1c63dff0c218c3a1d6c06670f9"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/center-empty-tab-content.md",
+          "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/center-empty-tab-content.md",
+          "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/center-empty-tab-content.md",
+          "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/center-empty-tab-content.md",
+          "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
         }
       ]
     },
@@ -4272,7 +4307,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "code",
@@ -4504,7 +4539,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "code",
@@ -4576,7 +4611,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "code",
@@ -4748,7 +4783,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "code",
@@ -4815,12 +4850,12 @@
     {
       "id": "PROJECT-RENDER",
       "status": "pass",
-      "reason": "Ghostty 소유 layer-hosting 순서와 실제 칸 크기를 적용해 동시 복원 glyph 누락을 수정했다. 최종 빌드 3개 셸 및 5번째 추가에서 정상 첫 줄/프롬프트를 직접 관찰했다. 새 sizing은 main queue 지연 대신 native tile 전에 문서를 맞춘다. 실제 모드/크기/확대·개폐 뒤 셸 ENV 유지와 새 crash report 없음,전체24개 검사를 추가 확인했다.",
+      "reason": "Ghostty 소유 layer-hosting 순서와 실제 칸 크기를 적용해 동시 복원 glyph 누락을 수정했다. 최종 빌드 3개 셸 및 5번째 추가에서 정상 첫 줄/프롬프트를 직접 관찰했다. 새 sizing은 main queue 지연 대신 native tile 전에 문서를 맞춘다. 실제 모드/크기/확대·개폐 뒤 셸 ENV 유지와 새 crash report 없음,전체24개 검사를 추가 확인했다. 빈 탭 중앙 배치 교정 후 전용 컨테이너에서 기존 pane을 viewport 전체에 동기 배치한다. 실제5/7/8·두 모드·크기 왕복/격자 전환·파일 트리 개폐와25개 검사를 추가 확인했다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "code",
@@ -4941,6 +4976,26 @@
           "kind": "interaction",
           "path": "design/evidence/stable-canvas-scrollbars.md",
           "sha256": "955c4a9b02ded118b36774b1703da9ab1954dc1c63dff0c218c3a1d6c06670f9"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/center-empty-tab-content.md",
+          "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/center-empty-tab-content.md",
+          "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/center-empty-tab-content.md",
+          "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/center-empty-tab-content.md",
+          "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
         }
       ]
     },
@@ -4952,7 +5007,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "code",
@@ -5224,7 +5279,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "code",
@@ -5261,7 +5316,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "code",
@@ -5478,7 +5533,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "a6644364192b3b25e55295dc5b9edb915d303d13e5b8e435c1d6ee8adaac8d8f"
+          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
         },
         {
           "kind": "code",
@@ -6063,7 +6118,7 @@
     {
       "id": "PROJECT-SINGLE-TABS",
       "status": "pass",
-      "reason": "실제4셸·ENV 보존/새 탭/닫기/긴 이름·최소 창 가로 탐색/두 모드/재실행을 확인했고20개 검사로 surface/focus/legacy decode와 복원을 검증했다. resize 수정 뒤683×432 탭 보기의 외부 canvas에는 불필요한 축이 없음을 확인했다. 상단 탭 목록의 스크롤은 기존 별도 구현이다.",
+      "reason": "실제4셸·ENV 보존/새 탭/닫기/긴 이름·최소 창 가로 탐색/두 모드/재실행을 확인했고20개 검사로 surface/focus/legacy decode와 복원을 검증했다. resize 수정 뒤683×432 탭 보기의 외부 canvas에는 불필요한 축이 없음을 확인했다. 상단 탭 목록의 스크롤은 기존 별도 구현이다. 빈 탭 중앙 배치 교정 후 전용 컨테이너에서 기존 pane을 viewport 전체에 동기 배치한다. 실제5/7/8·두 모드·크기 왕복/격자 전환·파일 트리 개폐와25개 검사를 추가 확인했다.",
       "evidence": [
         {
           "kind": "spec",
@@ -6104,6 +6159,26 @@
           "kind": "interaction",
           "path": "design/evidence/stable-canvas-scrollbars.md",
           "sha256": "955c4a9b02ded118b36774b1703da9ab1954dc1c63dff0c218c3a1d6c06670f9"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/center-empty-tab-content.md",
+          "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/center-empty-tab-content.md",
+          "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/center-empty-tab-content.md",
+          "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/center-empty-tab-content.md",
+          "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
         }
       ]
     },
@@ -6258,7 +6333,7 @@
     {
       "id": "PROJECT-RESIZE-STABILITY",
       "status": "pass",
-      "reason": "사용자 교정에 따라 tile 시점에 이전 문서/손잡이 폭을 남기지 않는다. 현재 전체 viewport와 문서 최소 크기에 필요한 축만 계산하고 실제 넘침은 유지한다. 수정 전 즉시 검사 실패,수정 후 두 스타일70회와실제두모드/최소/3회왕복/셸상태를 확인했다.",
+      "reason": "사용자 교정에 따라 tile 시점에 이전 문서/손잡이 폭을 남기지 않는다. 현재 전체 viewport와 문서 최소 크기에 필요한 축만 계산하고 실제 넘침은 유지한다. 수정 전 즉시 검사 실패,수정 후 두 스타일70회와실제두모드/최소/3회왕복/셸상태를 확인했다. 빈 탭 중앙 배치 교정 후 전용 컨테이너에서 기존 pane을 viewport 전체에 동기 배치한다. 실제5/7/8·두 모드·크기 왕복/격자 전환·파일 트리 개폐와25개 검사를 추가 확인했다.",
       "evidence": [
         {
           "kind": "spec",
@@ -6279,6 +6354,53 @@
           "kind": "interaction",
           "path": "design/evidence/stable-canvas-scrollbars.md",
           "sha256": "955c4a9b02ded118b36774b1703da9ab1954dc1c63dff0c218c3a1d6c06670f9"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/center-empty-tab-content.md",
+          "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/center-empty-tab-content.md",
+          "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/center-empty-tab-content.md",
+          "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/center-empty-tab-content.md",
+          "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
+        }
+      ]
+    },
+    {
+      "id": "PROJECT-EMPTY-TAB-CENTER",
+      "status": "pass",
+      "reason": "빈 탭 중앙 배치 교정 후 전용 컨테이너에서 기존 pane을 viewport 전체에 동기 배치한다. 실제5/7/8·두 모드·크기 왕복/격자 전환·파일 트리 개폐와25개 검사를 추가 확인했다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "design/evidence/center-empty-tab-content.md",
+          "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/center-empty-tab-content.md",
+          "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/center-empty-tab-content.md",
+          "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/center-empty-tab-content.md",
+          "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
         }
       ]
     }

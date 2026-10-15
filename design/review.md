@@ -72,3 +72,5 @@ V-36 / F-ICON-SHADOW-SCALE: 작은 출력에서 CGContext 축척만으로 그림
 V-37 / README-PRESENTATION: 사용자 지정 Wratop README 구성을 Chop의 실제 기능에 맞춰 적용하고 실제 macOS 창 사진3장을 추가했다. 개인 Downloads 대신 공개 프로젝트 복사본을 촬영하고 원래 앱 상태를 복원했다. 최종 로컬 이미지·GitHub 로고/배지/격자/탭 사진·목차5개 클릭·링크/alt·22개 검사를 확인했다. aligned (문서/사진 범위); 앱 UI 코드는 변경하지 않았다. [관찰](evidence/readme-presentation.md).
 
 V-38 / F-CANVAS-RESIZE-FLICKER (regression): 사용자 교정으로 resize 때 스크롤바가 나타났다 사라지는 현상을 재검토했다. 이전 비동기 수렴 검사는50ms 뒤만 검사해 native tile 직후17pt gutter/이전 문서 크기를 놓쳤다. 현재 viewport 기반 축 계산과 tile 전 문서 갱신으로 수정해 최초 FAIL→PASS,70회 동기 경계/두 스타일,실제 두 모드·최소/3회 크기 왕복·보기/확대·셸 유지와24개 검사를 확인했다. fixed-and-verified. 과거 V-33의 충돌 기록과 당시 검사 범위를 보존하며 이번에는 layout 안 수동 재타일링을 사용하지 않는다. [관찰](evidence/stable-canvas-scrollbars.md).
+
+V-39 / F-TAB-EMPTY-CENTER: 사용자 crop과 실제 실행 앱에서 빈 탭의 `+`가 이전 격자 좌표에 남는 것을 확인했다. 전용 탭 컨테이너가 선택 본문을 동기 배치하도록 수정해5/7/8·파일 트리 개폐·축소/재확대·두 모드·격자 왕복에서 중앙을 확인했다. 비표시 window 검사는 수정 전에도 통과했다는 한계를 남기며 전체25개 검사와 실제 창 판독을 함께 근거로 삼는다. fixed-and-verified. [관찰](evidence/center-empty-tab-content.md).
