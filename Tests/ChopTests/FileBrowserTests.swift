@@ -31,6 +31,9 @@ import Testing
     window.layoutIfNeeded()
     browser.layoutSubtreeIfNeeded()
     let views = descendants(of: browser)
+    let search = try #require(views.compactMap { $0 as? NSSearchField }.first)
+    #expect(browser.bounds.contains(browser.convert(search.bounds, from: search)))
+    #expect(search.bounds.width >= 256 && search.bounds.height == 28)
     let buttons = views.compactMap { $0 as? NSButton }.filter {
       ["홈", "다운로드", "문서"].contains($0.title)
     }
@@ -52,6 +55,133 @@ import Testing
     let point = outline.convert(NSPoint(x: row.midX, y: row.midY), to: browser.superview)
     let hit = try #require(browser.hitTest(point))
     #expect(hit === outline || hit.isDescendant(of: outline))
+  }
+}
+
+@MainActor
+@Test func fileBrowserSearchShowsRelativePathsAndKeepsNativeFileActions() async throws {
+  _ = NSApplication.shared
+  let suite = "chop-file-search-\(UUID().uuidString)"
+  let defaults = try #require(UserDefaults(suiteName: suite))
+  defer { defaults.removePersistentDomain(forName: suite) }
+  let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+  let folder = root.appendingPathComponent("folder")
+  try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+  defer { try? FileManager.default.removeItem(at: root) }
+  for url in [root.appendingPathComponent("README.md"), folder.appendingPathComponent("README.md")]
+  {
+    try Data().write(to: url)
+  }
+  let browser = FileBrowserView(initialURL: root, defaults: defaults)
+  try await waitForFileBrowser { !browser.isLoading }
+  func descendants(of view: NSView) -> [NSView] {
+    view.subviews.flatMap { [$0] + descendants(of: $0) }
+  }
+  let views = descendants(of: browser)
+  let field = try #require(views.compactMap { $0 as? NSSearchField }.first)
+  let outline = try #require(views.compactMap { $0 as? NSOutlineView }.first)
+  field.stringValue = "readme"
+  #expect(field.sendAction(try #require(field.action), to: field.target))
+  try await waitForFileBrowser { !browser.isLoading }
+  #expect(browser.searchQuery == "readme" && outline.numberOfRows == 2)
+  let labels = (0..<outline.numberOfRows).compactMap {
+    (outline.view(atColumn: 0, row: $0, makeIfNecessary: true) as? NSTableCellView)?
+      .textField?.stringValue
+  }
+  #expect(Set(labels) == ["README.md", "folder/README.md"])
+  let refresh = try #require(views.compactMap { $0 as? NSButton }.first { $0.toolTip == "새로고침" })
+  #expect(refresh.sendAction(try #require(refresh.action), to: refresh.target))
+  try await waitForFileBrowser { !browser.isLoading }
+  #expect(browser.searchQuery == "readme" && outline.numberOfRows == 2)
+  for row in 0..<outline.numberOfRows {
+    let writer = outline.dataSource?.outlineView?(
+      outline, pasteboardWriterForItem: try #require(outline.item(atRow: row)))
+    let url = try #require(writer as? NSURL)
+    let path = try #require(url.path)
+    let file = try #require(
+      FileManager.default.attributesOfItem(atPath: path)[.systemFileNumber] as? NSNumber)
+    let expectedURL =
+      labels[row] == "README.md"
+      ? root.appendingPathComponent("README.md") : folder.appendingPathComponent("README.md")
+    let expectedFile = try #require(
+      FileManager.default.attributesOfItem(atPath: expectedURL.path)[.systemFileNumber] as? NSNumber
+    )
+    #expect(url.isFileURL && file == expectedFile)
+  }
+  browser.search(for: "no-match")
+  try await waitForFileBrowser { !browser.isLoading }
+  #expect(outline.numberOfRows == 0 && browser.loadError == nil)
+  browser.search(for: "")
+  try await waitForFileBrowser { !browser.isLoading }
+  #expect(outline.numberOfRows == 2 && browser.rootURL.path == root.path)
+  browser.search(for: "folder")
+  try await waitForFileBrowser { !browser.isLoading }
+  let folderItem = try #require(outline.item(atRow: 0))
+  #expect(!outline.isExpandable(folderItem))
+  outline.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+  let enter = try #require(
+    NSEvent.keyEvent(
+      with: .keyDown, location: .zero, modifierFlags: [], timestamp: 0, windowNumber: 0,
+      context: nil, characters: "\r", charactersIgnoringModifiers: "\r", isARepeat: false,
+      keyCode: 36))
+  outline.keyDown(with: enter)
+  try await waitForFileBrowser { !browser.isLoading }
+  #expect(browser.rootURL.resolvingSymlinksInPath().path == folder.resolvingSymlinksInPath().path)
+  #expect(browser.searchQuery.isEmpty && field.stringValue.isEmpty)
+  #expect(outline.numberOfRows == 1)
+}
+
+@MainActor
+@Test func fileBrowserSearchIgnoresAnOlderQueryThatFinishesLate() async throws {
+  _ = NSApplication.shared
+  let suite = "chop-file-search-race-\(UUID().uuidString)"
+  let defaults = try #require(UserDefaults(suiteName: suite))
+  defer { defaults.removePersistentDomain(forName: suite) }
+  let reader = SuspendedSearchReader()
+  let browser = FileBrowserView(
+    initialURL: URL(fileURLWithPath: "/search"), defaults: defaults
+  ) { url in try await reader.entries(at: url) }
+  try await waitForFileBrowser { !browser.isLoading }
+  browser.search(for: "slow")
+  try await waitForFileBrowser { await reader.isWaiting }
+  browser.search(for: "fast")
+  try await waitForFileBrowser { !browser.isLoading }
+  await reader.finish()
+  try await waitForFileBrowser { await reader.didReturn }
+  await Task.yield()
+  #expect(browser.searchQuery == "fast" && browser.loadError == nil && !browser.isLoading)
+  browser.navigate(to: URL(fileURLWithPath: "/other"))
+  try await waitForFileBrowser { !browser.isLoading }
+  #expect(browser.searchQuery.isEmpty && browser.rootURL.path == "/other")
+}
+
+private actor SuspendedSearchReader {
+  private var calls = 0
+  private var continuation: CheckedContinuation<[FileTreeEntry], any Error>?
+  private(set) var isWaiting = false
+  private(set) var didReturn = false
+
+  func entries(at url: URL) async throws -> [FileTreeEntry] {
+    calls += 1
+    if calls == 2 {
+      let entries: [FileTreeEntry] = try await withCheckedThrowingContinuation { continuation in
+        self.continuation = continuation
+        isWaiting = true
+      }
+      didReturn = true
+      return entries
+    }
+    return [
+      FileTreeEntry(
+        url: url.appendingPathComponent("fast.txt"), name: "fast.txt", isDirectory: false)
+    ]
+  }
+
+  func finish() {
+    continuation?.resume(returning: [
+      FileTreeEntry(
+        url: URL(fileURLWithPath: "/search/slow.txt"), name: "slow.txt", isDirectory: false)
+    ])
   }
 }
 

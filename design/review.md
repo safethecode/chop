@@ -84,3 +84,9 @@ V-42 / F-RENAME-TAB-REVEAL (regression): PR27 첫 CI에서464>457.5로 선택 �
 V-43 / FILE-BROWSER-ROW-SURFACE: 후속 사용자 요청에 따라108pt 세로 바로가기 묶음을28pt native 버튼 행으로 대체하고 목록/빈/오류를 기존 보조 배경으로 구분했다. 두 모드·기본/최소 패널280pt·세 목적지 이동·빈/오류 복구와27개 검사/최소 폭 hitTest를 확인했다. 이번 CUA 포인터 파일 드래그는 도구 입력 제약으로 새 성공을 확인하지 못했으며 이전 drag 코드/기록과 구분했다. accepted-difference (사용자 가로 배치 지정),verified (변경 범위). [관찰](evidence/file-browser-row-surface.md).
 
 V-44 / F-TREE-SURFACE-CONTRAST: 버튼 기본색을 목록 전체로 확대한 첫 시도에 사용자가 더 옅은 톤을 요청했다. 최신 요구에 따라 light F8F8F8/dark24262C로 대비를 낮추고 두 모드의 실제 release 화면·27개 검사로 확인했다. fixed-and-verified (사용자 후속 교정 범위). [관찰](evidence/file-tree-soft-surface.md).
+
+V-45 / F-SEARCH-RELATIVE-PATH: URL 접두사 비교가 /var와/private/var 표현 차이에서 동명 파일을 구분하지 못하던 첫 구현을 순회 상대 경로로 수정했다. 자동 검사와 실제 두 모드 docs/README.md·README.md를 확인했다. fixed-and-verified. [관찰](evidence/file-tree-search.md).
+
+V-46 / F-SEARCH-KEYBOARD: 실제 Enter가 검색 폴더를 열지 않던 구현을 doubleAction 전달로 수정하고 native key event 검사·실제 Tab/Down/Return으로 폴더 진입/초기화를 확인했다. fixed-and-verified. [관찰](evidence/file-tree-search.md).
+
+V-47 / FILE-TREE-SEARCH: 사용자 요청의 이름 검색을 현재 루트 하위·상대 경로·실시간 입력/초기화·오류와부분 실패·취소·결과 제한으로 구현했다. 두 모드/기본·최소 창,실제 입력·한글 붙여넣기·검색 지우기·폴더 Enter·많은 결과 스크롤·오류 복구와32개 검사를 확인했다. 포인터 파일 드래그는 새 종단 성공을 확인하지 못했으며 native 결과 URL 검사·이전 드롭 구현/증거와 구분한다. aligned (변경된 검색 범위). [관찰](evidence/file-tree-search.md).

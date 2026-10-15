@@ -9,9 +9,9 @@ private final class FileBrowserNode {
   var task: Task<Void, Never>?
   lazy var placeholder = FileBrowserNode(message: "불러오는 중…")
 
-  init(entry: FileTreeEntry) {
+  init(entry: FileTreeEntry, message: String? = nil) {
     self.entry = entry
-    message = entry.name
+    self.message = message ?? entry.name
   }
 
   init(message: String) {
@@ -30,16 +30,28 @@ private final class FileBrowserNode {
 private final class FileOutlineView: NSOutlineView {
   var onCopyPath: (() -> Void)?
   @objc func copy(_ sender: Any?) { onCopyPath?() }
+
+  override func keyDown(with event: NSEvent) {
+    // Return and keypad Enter activate the selected result just like a double-click.
+    if [36, 76].contains(event.keyCode),
+      event.modifierFlags.intersection([.command, .option, .control]).isEmpty
+    {
+      sendAction(doubleAction, to: target)
+    } else {
+      super.keyDown(with: event)
+    }
+  }
 }
 
 @MainActor
 final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDelegate,
-  NSMenuDelegate, NSMenuItemValidation
+  NSMenuDelegate, NSMenuItemValidation, NSSearchFieldDelegate
 {
   typealias Loader = @Sendable (URL) async throws -> [FileTreeEntry]
   private(set) var rootURL: URL
   private(set) var isLoading = false
   private(set) var loadError: String?
+  private(set) var searchQuery = ""
   private let defaults: UserDefaults
   private let loader: Loader
   private var generation = UUID()
@@ -48,6 +60,7 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
   private let header = NSView()
   private let titleLabel = NSTextField(labelWithString: "파일")
   private let pathField = NSTextField()
+  private let searchField = NSSearchField()
   private let statusLabel = NSTextField(wrappingLabelWithString: "")
   private let outline = FileOutlineView()
   private let scrollView = NSScrollView()
@@ -80,6 +93,8 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
   @available(*, unavailable)
   required init?(coder: NSCoder) { fatalError("Use init(initialURL:defaults:loader:).") }
 
+  deinit { rootTask?.cancel() }
+
   func applyAppearance(_ mode: AppearanceMode) {
     appearance = mode.appearance
     layer?.backgroundColor = mode.background.cgColor
@@ -92,37 +107,82 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
 
   /// Each navigation replaces its generation so delayed reads cannot overwrite a newer folder.
   func navigate(to directory: URL) {
+    rootURL = directory.standardizedFileURL
+    pathField.stringValue = rootURL.path
+    pathField.toolTip = rootURL.path
+    searchField.stringValue = ""
+    searchQuery = ""
+    reloadContents()
+  }
+
+  func search(for query: String) {
+    // Native edits already own the text; avoid resetting the field editor during IME composition.
+    if searchField.stringValue != query { searchField.stringValue = query }
+    let normalized = query.trimmingCharacters(in: .whitespacesAndNewlines)
+    guard normalized != searchQuery else { return }
+    searchQuery = normalized
+    reloadContents(debounce: true)
+  }
+
+  private func reloadContents(debounce: Bool = false) {
     rootTask?.cancel()
     for node in roots { node.cancelLoads() }
     generation = UUID()
     let request = generation
-    rootURL = directory.standardizedFileURL
-    pathField.stringValue = rootURL.path
-    pathField.toolTip = rootURL.path
+    let query = searchQuery
     roots = []
     loadError = nil
     isLoading = true
-    showStatus("불러오는 중…")
+    showStatus(query.isEmpty ? "불러오는 중…" : "검색 중…")
+    outline.setAccessibilityLabel(query.isEmpty ? "파일 트리" : "파일 검색 결과")
     outline.reloadData()
     let loader = loader
     let location = rootURL
     rootTask = Task { [weak self] in
       do {
-        let entries = try await loader(location)
+        if debounce && !query.isEmpty { try await Task.sleep(for: .milliseconds(200)) }
+        let rows: [(entry: FileTreeEntry, message: String)]
+        let status: String?
+        if query.isEmpty {
+          let entries = try await loader(location)
+          rows = entries.map { ($0, $0.name) }
+          status = entries.isEmpty ? "빈 폴더예요" : nil
+        } else {
+          let result = try await FileTreeSearch.search(
+            at: location, matching: query, reader: loader)
+          rows = result.matches.map { ($0.entry, $0.relativePath) }
+          status = Self.searchStatus(for: result)
+        }
         guard let self, generation == request, !Task.isCancelled else { return }
-        roots = entries.map(FileBrowserNode.init(entry:))
+        roots = rows.map { FileBrowserNode(entry: $0.entry, message: $0.message) }
         isLoading = false
         defaults.set(location.path, forKey: "fileTreeRootPath")
         outline.reloadData()
-        showStatus(entries.isEmpty ? "빈 폴더예요" : nil)
+        showStatus(status)
       } catch {
         guard let self, generation == request, !Task.isCancelled else { return }
         isLoading = false
         loadError = error.localizedDescription
-        showStatus("폴더를 열 수 없어요.\n\(error.localizedDescription)")
+        let message = query.isEmpty ? "폴더를 열 수 없어요." : "검색할 수 없어요."
+        showStatus("\(message)\n\(error.localizedDescription)")
       }
     }
   }
+
+  private static func searchStatus(for result: FileTreeSearchResult) -> String {
+    let count = result.matches.count
+    var status = count == 0 ? "검색 결과가 없어요" : "\(count)개 결과"
+    if result.isTruncated { status = "처음 \(count)개 결과 · 검색어를 좁혀 주세요." }
+    if result.skippedDirectories > 0 { status += "\n일부 폴더를 읽지 못했어요." }
+    return status
+  }
+
+  func controlTextDidChange(_ notification: Notification) {
+    guard notification.object as? NSSearchField === searchField else { return }
+    search(for: searchField.stringValue)
+  }
+
+  @objc private func searchChanged() { search(for: searchField.stringValue) }
 
   private func showStatus(_ text: String?) {
     statusLabel.stringValue = text ?? ""
@@ -137,7 +197,18 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
     }
   }
 
-  @objc private func refresh() { goToPath() }
+  @objc private func refresh() {
+    do {
+      let directory = try FileTree.directoryURL(for: pathField.stringValue, relativeTo: rootURL)
+      if directory.path == rootURL.path {
+        reloadContents()
+      } else {
+        navigate(to: directory)
+      }
+    } catch {
+      showStatus(error.localizedDescription)
+    }
+  }
 
   @objc private func visitShortcut(_ sender: NSButton) {
     guard quickLocations.indices.contains(sender.tag) else { return }
@@ -169,7 +240,9 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
       let node = outline.item(atRow: outline.selectedRow) as? FileBrowserNode
     else { return }
     if entry.isDirectory {
-      if outline.isItemExpanded(node) {
+      if !searchQuery.isEmpty {
+        navigate(to: entry.url)
+      } else if outline.isItemExpanded(node) {
         outline.collapseItem(node)
       } else {
         outline.expandItem(node)
@@ -213,7 +286,9 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
   }
 
   func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
-    guard let node = item as? FileBrowserNode, node.entry?.isDirectory == true else { return false }
+    guard searchQuery.isEmpty, let node = item as? FileBrowserNode,
+      node.entry?.isDirectory == true
+    else { return false }
     return node.children?.isEmpty != true
   }
 
@@ -238,7 +313,7 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
       do {
         let entries = try await loader(entry.url)
         guard let self, let node, generation == request, !Task.isCancelled else { return }
-        node.children = entries.map(FileBrowserNode.init(entry:))
+        node.children = entries.map { FileBrowserNode(entry: $0) }
         outline.reloadItem(node, reloadChildren: true)
       } catch {
         guard let self, let node, generation == request, !Task.isCancelled else { return }
@@ -303,6 +378,15 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
     pathField.setAccessibilityLabel("파일 트리 폴더 경로")
     pathField.target = self
     pathField.action = #selector(goToPath)
+    searchField.font = ChopStyle.font
+    searchField.placeholderString = "파일·폴더 이름 검색"
+    searchField.setAccessibilityLabel("파일 트리 검색")
+    searchField.toolTip = "현재 폴더와 하위 폴더에서 이름으로 검색"
+    searchField.focusRingType = .none
+    searchField.sendsSearchStringImmediately = true
+    searchField.delegate = self
+    searchField.target = self
+    searchField.action = #selector(searchChanged)
     let shortcuts = NSStackView()
     shortcuts.orientation = .horizontal
     shortcuts.alignment = .centerY
@@ -362,12 +446,13 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
     listSection.layer?.cornerRadius = 8
     listSection.layer?.masksToBounds = true
     listSection.addSubview(listContent)
-    let content = NSStackView(views: [pathField, shortcuts, listSection])
+    let content = NSStackView(views: [pathField, shortcuts, searchField, listSection])
     content.orientation = .vertical
     content.alignment = .leading
     content.spacing = 8
     for view in [
-      header, headerRow, content, pathField, shortcuts, listSection, listContent, statusLabel,
+      header, headerRow, content, pathField, shortcuts, searchField, listSection, listContent,
+      statusLabel,
       scrollView,
     ] {
       view.translatesAutoresizingMaskIntoConstraints = false
@@ -390,6 +475,8 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
       pathField.widthAnchor.constraint(equalTo: content.widthAnchor),
       pathField.heightAnchor.constraint(equalToConstant: 28),
       shortcuts.widthAnchor.constraint(lessThanOrEqualTo: content.widthAnchor),
+      searchField.widthAnchor.constraint(equalTo: content.widthAnchor),
+      searchField.heightAnchor.constraint(equalToConstant: 28),
       listSection.widthAnchor.constraint(equalTo: content.widthAnchor),
       listContent.leadingAnchor.constraint(equalTo: listSection.leadingAnchor, constant: 8),
       listContent.trailingAnchor.constraint(equalTo: listSection.trailingAnchor, constant: -8),
