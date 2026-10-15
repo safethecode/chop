@@ -20,6 +20,7 @@ final class TerminalPaneView: NSView {
   var canSplit: ((SplitAxis) -> Bool)?
   var onRemoveRequested: (() -> Void)?
   var onZoomRequested: (() -> Void)?
+  var onRenameRequested: (() -> Void)?
   var onDirectoryFallback: ((String) -> Void)?
   var canMovePane: ((UUID) -> Bool)?
   var onMoveRequested: ((UUID, NSRect) -> Bool)?
@@ -48,7 +49,7 @@ final class TerminalPaneView: NSView {
   private var headerHeight: NSLayoutConstraint?
   private let header = NSView()
   private let body = NSView()
-  private let titleLabel = NSTextField(labelWithString: "")
+  private let titleButton = NSButton()
   private let pathLabel = NSTextField(labelWithString: "")
   private let errorLabel = NSTextField(wrappingLabelWithString: "")
   private var openButton: NSButton!
@@ -86,7 +87,7 @@ final class TerminalPaneView: NSView {
     appearance = mode.appearance
     layer?.backgroundColor = mode.background.cgColor
     header.layer?.backgroundColor = mode.headerBackground.cgColor
-    titleLabel.textColor = mode.foreground
+    updateNameButton()
     pathLabel.textColor = mode.secondaryForeground
     errorLabel.textColor = mode.secondaryForeground
     updateDropHighlight()
@@ -271,6 +272,7 @@ final class TerminalPaneView: NSView {
   override func mouseDown(with event: NSEvent) { focus() }
 
   @objc private func toggleZoom() { onZoomRequested?() }
+  @objc private func renamePane() { onRenameRequested?() }
 
   @objc private func addFromCenter() {
     guard isRunning else {
@@ -308,9 +310,25 @@ final class TerminalPaneView: NSView {
       addSubview(view)
       view.translatesAutoresizingMaskIntoConstraints = false
     }
-    titleLabel.font = ChopStyle.font
-    titleLabel.lineBreakMode = .byTruncatingTail
-    titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+    titleButton.target = self
+    titleButton.action = #selector(renamePane)
+    titleButton.setButtonType(.momentaryPushIn)
+    titleButton.bezelStyle = .inline
+    titleButton.isBordered = false
+    titleButton.image = NSImage(systemSymbolName: "pencil", accessibilityDescription: nil)?
+      .withSymbolConfiguration(.init(pointSize: 14, weight: .medium))
+    titleButton.imagePosition = .imageTrailing
+    titleButton.imageScaling = .scaleProportionallyDown
+    titleButton.alignment = .left
+    titleButton.font = ChopStyle.font
+    titleButton.cell?.lineBreakMode = .byTruncatingTail
+    titleButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+    titleButton.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+    let nameMenu = NSMenu()
+    nameMenu.addItem(withTitle: "이름 바꾸기…", action: #selector(renamePane), keyEquivalent: "")
+      .target = self
+    header.menu = nameMenu
+    titleButton.menu = nameMenu
     pathLabel.font = ChopStyle.font
     pathLabel.lineBreakMode = .byTruncatingMiddle
     pathLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
@@ -329,7 +347,7 @@ final class TerminalPaneView: NSView {
       self?.onDragEnded?()
     }
     moveHandle.isHidden = true
-    let row = ChopStyle.headerRow(views: [moveHandle, titleLabel, pathLabel, zoomButton, close])
+    let row = ChopStyle.headerRow(views: [moveHandle, titleButton, pathLabel, zoomButton, close])
     header.addSubview(row)
     openButton = NSButton(
       image: NSImage(systemSymbolName: "plus", accessibilityDescription: "터미널 열기")!, target: self,
@@ -373,8 +391,7 @@ final class TerminalPaneView: NSView {
   private func updateHeader() {
     updateMoveHandle()
     moveHandle.setAccessibilityLabel("\(name) 이동")
-    titleLabel.stringValue = name
-    titleLabel.toolTip = "\(name) — 이름 바꾸기: ⌘⇧R"
+    updateNameButton()
     pathLabel.stringValue = (workingDirectory as NSString).abbreviatingWithTildeInPath
     pathLabel.toolTip = workingDirectory
     terminal?.setAccessibilityLabel("\(name) 터미널")
@@ -390,5 +407,14 @@ final class TerminalPaneView: NSView {
       systemSymbolName: isZoomed
         ? "arrow.down.right.and.arrow.up.left" : "arrow.up.left.and.arrow.down.right",
       accessibilityDescription: zoomLabel)
+  }
+
+  private func updateNameButton() {
+    titleButton.contentTintColor = engine.appearanceMode.secondaryForeground
+    titleButton.attributedTitle = NSAttributedString(
+      string: name,
+      attributes: [.font: ChopStyle.font, .foregroundColor: engine.appearanceMode.foreground])
+    titleButton.toolTip = "이름 바꾸기 (⌘⇧R)"
+    titleButton.setAccessibilityLabel("\(name) 이름 바꾸기")
   }
 }
