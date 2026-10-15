@@ -10,14 +10,11 @@ final class TerminalCanvasView: NSView {
 final class TerminalCanvasScrollView: NSScrollView {
   var minimumDocumentSize = NSSize.zero { didSet { updateDocumentSize() } }
   private var resizingCanvas = false
-  private var resizeScheduled = false
 
   init(canvas: NSView) {
     super.init(frame: .zero)
     documentView = canvas
-    hasHorizontalScroller = true
-    hasVerticalScroller = true
-    autohidesScrollers = true
+    autohidesScrollers = false
     scrollerStyle = .overlay
     drawsBackground = false
   }
@@ -26,38 +23,42 @@ final class TerminalCanvasScrollView: NSScrollView {
   required init?(coder: NSCoder) { fatalError("Use init(canvas:).") }
 
   override func tile() {
+    updateDocumentSize()
     super.tile()
-    scheduleDocumentResize()
-  }
-
-  override func layout() {
-    super.layout()
-    scheduleDocumentResize()
-  }
-
-  private func scheduleDocumentResize() {
-    guard !resizeScheduled else { return }
-    resizeScheduled = true
-    DispatchQueue.main.async { [weak self] in
-      guard let self else { return }
-      resizeScheduled = false
-      updateDocumentSize()
-    }
   }
 
   func updateDocumentSize() {
     guard !resizingCanvas, let documentView else { return }
     resizingCanvas = true
     defer { resizingCanvas = false }
-    let visible = contentView.bounds.size
+    // Start without gutters on every pass. Using the previous clip size feeds a
+    // disappearing legacy scroller back into the next document measurement.
+    var horizontal = false
+    var vertical = false
+    var visible = availableContentSize(horizontal: horizontal, vertical: vertical)
+    for _ in 0..<3 {
+      let nextHorizontal = minimumDocumentSize.width > visible.width
+      let nextVertical = minimumDocumentSize.height > visible.height
+      if horizontal == nextHorizontal && vertical == nextVertical { break }
+      horizontal = nextHorizontal
+      vertical = nextVertical
+      visible = availableContentSize(horizontal: horizontal, vertical: vertical)
+    }
+    if hasHorizontalScroller != horizontal { hasHorizontalScroller = horizontal }
+    if hasVerticalScroller != vertical { hasVerticalScroller = vertical }
     let size = NSSize(
       width: max(visible.width, minimumDocumentSize.width),
       height: max(visible.height, minimumDocumentSize.height))
     guard documentView.frame.size != size else { return }
     documentView.setFrameSize(size)
-    // Native tiling can change the other axis when legacy scrollers appear.
-    // Let AppKit finish its display cycle before settling the document again.
     reflectScrolledClipView(contentView)
-    scheduleDocumentResize()
+  }
+
+  private func availableContentSize(horizontal: Bool, vertical: Bool) -> NSSize {
+    NSScrollView.contentSize(
+      forFrameSize: bounds.size,
+      horizontalScrollerClass: horizontal ? NSScroller.self : nil,
+      verticalScrollerClass: vertical ? NSScroller.self : nil,
+      borderType: borderType, controlSize: .regular, scrollerStyle: scrollerStyle)
   }
 }
