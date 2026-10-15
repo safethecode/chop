@@ -80,3 +80,5 @@ V-40 / F-RENAME-ICON-GAP: 헤더 이름 버튼의 남는 폭 때문에 연필이
 V-41 / F-RENAME-TAB-REVEAL: 같은 viewport에서 마지막 탭 이름이 길어지면 선택 탭이 가려지는 회귀를 내용 폭 변화 감지로 수정했다. 최초469>316.5 FAIL→PASS,최종 실제683pt 창에서 이름 저장 직후240pt 선택 버튼 전체 표시,이름/셸 유지·취소·재실행 복원과26개 검사를 확인했다. fixed-and-verified. [관찰](evidence/terminal-name-controls.md).
 
 V-42 / F-RENAME-TAB-REVEAL (regression): PR27 첫 CI에서464>457.5로 선택 탭 끝이 가려져 이전 viewport/내용 폭 감지만으로 충분하지 않은 조건을 발견했다. 스택 배치 후 실제 trailing edge까지 문서 폭에 포함하도록 수정했다. 두 모드×두 스타일×세 길이12조건,전체26개 검사·최종 실제1배율683pt 창64자 변경과 두 모드 판독으로 다시 확인했다. fixed-and-verified (로컬/실제 앱),CI 결과는 PR에 별도 기록한다. [관찰](evidence/terminal-name-controls.md).
+
+V-43 / FILE-BROWSER-ROW-SURFACE: 후속 사용자 요청에 따라108pt 세로 바로가기 묶음을28pt native 버튼 행으로 대체하고 목록/빈/오류를 기존 보조 배경으로 구분했다. 두 모드·기본/최소 패널280pt·세 목적지 이동·빈/오류 복구와27개 검사/최소 폭 hitTest를 확인했다. 이번 CUA 포인터 파일 드래그는 도구 입력 제약으로 새 성공을 확인하지 못했으며 이전 drag 코드/기록과 구분했다. accepted-difference (사용자 가로 배치 지정),verified (변경 범위). [관찰](evidence/file-browser-row-surface.md).
