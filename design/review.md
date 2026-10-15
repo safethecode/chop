@@ -78,3 +78,5 @@ V-39 / F-TAB-EMPTY-CENTER: 사용자 crop과 실제 실행 앱에서 빈 탭의 
 V-40 / F-RENAME-ICON-GAP: 헤더 이름 버튼의 남는 폭 때문에 연필이 멀어진 최초 구현을 content hugging으로 수정했다. 최종 두 모드·최소 격자·짧고 긴 이름·실제 연필 클릭에서 확인했다. fixed-and-verified. [관찰](evidence/terminal-name-controls.md).
 
 V-41 / F-RENAME-TAB-REVEAL: 같은 viewport에서 마지막 탭 이름이 길어지면 선택 탭이 가려지는 회귀를 내용 폭 변화 감지로 수정했다. 최초469>316.5 FAIL→PASS,최종 실제683pt 창에서 이름 저장 직후240pt 선택 버튼 전체 표시,이름/셸 유지·취소·재실행 복원과26개 검사를 확인했다. fixed-and-verified. [관찰](evidence/terminal-name-controls.md).
+
+V-42 / F-RENAME-TAB-REVEAL (regression): PR27 첫 CI에서464>457.5로 선택 탭 끝이 가려져 이전 viewport/내용 폭 감지만으로 충분하지 않은 조건을 발견했다. 스택 배치 후 실제 trailing edge까지 문서 폭에 포함하도록 수정했다. 두 모드×두 스타일×세 길이12조건,전체26개 검사·최종 실제1배율683pt 창64자 변경과 두 모드 판독으로 다시 확인했다. fixed-and-verified (로컬/실제 앱),CI 결과는 PR에 별도 기록한다. [관찰](evidence/terminal-name-controls.md).

@@ -109,10 +109,17 @@ final class TerminalTabBar: NSView {
     scroll.frame = NSRect(x: 8, y: 0, width: max(0, bounds.width - 84), height: bounds.height)
     tabs.frame = NSRect(
       origin: .zero, size: NSSize(width: tabs.fittingSize.width, height: bounds.height))
+    tabs.layoutSubtreeIfNeeded()
+    // Native button metrics can settle after the stack's first fitting-size read.
+    // Include the laid-out trailing edge so scrolling can reveal the whole tab.
+    let trailingEdge = tabs.arrangedSubviews.map(\.frame.maxX).max() ?? 0
+    if trailingEdge > tabs.frame.width {
+      tabs.setFrameSize(NSSize(width: trailingEdge, height: bounds.height))
+      tabs.layoutSubtreeIfNeeded()
+    }
     if lastViewportSize != scroll.contentSize || lastTabsWidth != tabs.frame.width {
       lastViewportSize = scroll.contentSize
       lastTabsWidth = tabs.frame.width
-      tabs.layoutSubtreeIfNeeded()
       if let index = ids.firstIndex(of: selectedID) {
         tabs.scrollToVisible(buttons[index].frame.insetBy(dx: -4, dy: 0))
       }
