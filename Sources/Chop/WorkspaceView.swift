@@ -426,29 +426,13 @@ final class WorkspaceView: NSView {
     tabBar = nil
     let view: NSView
     if isTabbed {
-      let container = NSView()
       let bar = TerminalTabBar(
         panes: layout.paneIDs.compactMap { panes[$0] }, selectedID: focusedID,
         mode: engine.appearanceMode,
         onSelect: { [weak self] in self?.selectTab($0) }, onAdd: { [weak self] in self?.addTab() },
         onClose: { [weak self] in self?.requestCloseFocused() })
       tabBar = bar
-      let pane = focusedPane
-      for child in [bar, pane] {
-        child.translatesAutoresizingMaskIntoConstraints = false
-        container.addSubview(child)
-      }
-      NSLayoutConstraint.activate([
-        bar.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-        bar.trailingAnchor.constraint(equalTo: container.trailingAnchor),
-        bar.topAnchor.constraint(equalTo: container.topAnchor),
-        bar.heightAnchor.constraint(equalToConstant: ChopStyle.headerHeight),
-        pane.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-        pane.trailingAnchor.constraint(equalTo: container.trailingAnchor),
-        pane.topAnchor.constraint(equalTo: bar.bottomAnchor),
-        pane.bottomAnchor.constraint(equalTo: container.bottomAnchor),
-      ])
-      view = container
+      view = TerminalTabContentView(tabBar: bar, pane: focusedPane)
     } else {
       for pane in panes.values { pane.translatesAutoresizingMaskIntoConstraints = true }
       view = makeView(maximizedID.map { .pane($0) } ?? layout)
