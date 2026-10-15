@@ -20,6 +20,7 @@ import Testing
   defer { window.orderOut(nil) }
   window.layoutIfNeeded()
   workspace.layoutSubtreeIfNeeded()
+  let centerTolerance = 0.5 / window.backingScaleFactor + 0.001
   let second = try #require(workspace.panes[workspace.layout.paneIDs[1]])
   second.focus()
   #expect(workspace.applyPreset(.single))
@@ -41,9 +42,9 @@ import Testing
     #expect(abs(second.bounds.width - scroll.contentView.bounds.width) < 0.5)
     #expect(abs(second.bounds.height - (scroll.contentView.bounds.height - 40)) < 0.5)
     let visibleCenter = scroll.contentView.convert(center, from: second)
-    #expect(abs(visibleCenter.x - scroll.contentView.bounds.midX) < 0.5)
-    #expect(abs(visibleCenter.y - (scroll.contentView.bounds.midY + 20)) < 0.5)
-    #expect(abs(center.x - second.bounds.midX) < 0.5)
-    #expect(abs(center.y - second.bounds.midY) < 0.5)
+    #expect(abs(visibleCenter.x - scroll.contentView.bounds.midX) <= centerTolerance)
+    #expect(abs(visibleCenter.y - (scroll.contentView.bounds.midY + 20)) <= centerTolerance)
+    #expect(abs(center.x - second.bounds.midX) <= centerTolerance)
+    #expect(abs(center.y - second.bounds.midY) <= centerTolerance)
   }
 }
