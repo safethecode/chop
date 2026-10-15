@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "catalog_version": 5,
-  "scope_notes": "Native macOS Chop v0.1, user task and DESIGN comparison. macOS26.5.2/CI15; macOS14 physical, full VoiceOver/all IMEs and hardware wheel are explicitly outside verified combinations. Shell/TUI VT styling and standard OS chrome are distinguished from app-owned labels. cmux is technical/feature inspiration, not a visual pixel reference. User correction 2026-10-14 adds R-DEFAULT canvas screenshot as a visual/state reference; first shell + three empty plus panes is mandatory at default entry. Previous main gate lacked that condition; its historical ledger is retained. PR #8: user-requested light/dark modes; preserve default grid in both modes, apply to native chrome and all terminals without PTY replacement, persist selection. Evidence is self review, with actual CUA observations recorded as Markdown. PR #10: user-requested icon-only mode toggle and layout presets. Preserve R-DEFAULT canvas and R-TOOLBAR location/options/selection; icons are an intentional user-requested change from text, not an exact crop clone. PR #11: editing-only same-workspace pane exchange with whole-pane/GPU drag preview and placement motion, requested and directly accepted by user. Preserve live PTY and split geometry. CUA before/after observations are separate from user motion feedback; no mid-drag frame capture or physical Reduce Motion execution is claimed. PR #12: user-requested uniform header background distinct from body in both modes, not per-terminal colors. Actual five-pane light/dark, editing, zoom and hidden-pane mode update rechecked without changing geometry. PR #13: explicit user request removes the blue pane outline on input focus; preserve real terminal cursor, first responder, focus navigation/storage and native button/menu focus. Drag-target outline is a separate transient state. Actual two-mode four-pane mouse/keyboard input, zoom and swap-back rechecked. PR #14: user-requested right file tree is a peer of terminal canvas below the full-width global toolbar. User hierarchy/stray-divider corrections and internal long-path/reopen issues were fixed and rechecked. New lazy file navigation, native picker/shortcuts, async stale-result protection and separate settings preserve terminal surfaces. OS open wait on final restart was observed; native folder reselection recovered it without UI blocking. Two-mode default/minimum UI and final drag/keyboard restoration are scoped separately from prior evidence. PR #14 review follow-up: isolate child metadata failures with a literal-name/leaf fallback, keep root errors.16 tests and latest normal folder expansion rechecked; no layout change. CodeRabbit covered5101fb1, follow-up self-reviewed; docstring coverage warning is disclosed separately. Path focus PR: user-requested path field focus-ring removal only. Native caret/selection/editing remain; other requested refinements are separate. Header seam PR: reuse the same header row and foreground; fill only the functional file divider header segment. Actual two-mode/resize/hide/editing consumers rechecked; PTY unchanged. Location icons PR: user Finder crop adapted to three native full-row icon/name shortcuts, fixed aspect-fit16pt column and14pt labels. Actual three locations, two modes/minimum window and empty/long outline rechecked. File drop work in progress: native file URL writer and existing-terminal input with literal argument quoting;19 tests pass. Actual CUA NSCoreDrag remains awaiting mouse-up with no destination entry observed. Do not mark product/merge complete until native endpoint is verified.  Native endpoint subsequently observed in the same clean app after user interaction: the exact fixture file path appeared as a quoted shell argument in terminal11. Earlier CUA failure remains historical.  Shortcut navigation group now has a neutral surface separate from file contents; actual two-mode/minimum-size/empty/long/three-destination checks.  Single-view tabs preserve all pane identities and shells; actual four-running-shell/native tab flows, long/overflow/minimum/two-mode/restore verified. Uniform split changes remain subsequent PRs.  All-pane columns and grid with scrollable canvas, actual four/five PTYs and two-mode/minimum/native focus/zoom/roundtrips verified; rows follow separately.  All-pane rows complete mode switching without per-preset maximum/deletion; actual four/five-shell two-mode/minimum/vertical focus/manual scroll/restore verified.  Supplied brand image preserved and packaged as continuous rounded ICNS with transparent margins; actual About light/dark and Finder plus ten representation checks verified. README 소개와 실제 macOS 앱 스크린샷을 추가했다. 앱 소스/토큰은 그대로이며 새 PROJECT-README-PRESENTATION의 문서·사진·목차 범위만 추가 검토한다. 사용자 resize 교정으로 canvas 지연 갱신을 현재 viewport 기반 native tile 전 갱신으로 수정했다. 기존 각 규칙의 이유·예외는 보존하며 영향 범위를 stable-canvas-scrollbars 관찰로 추가 검사한다. 빈 탭 중앙 배치 교정의 실제 창/geometry 검증을 추가한다. 기존 이름 편집을 헤더/탭에서 발견할 수 있는 진입점을 추가하고 긴 이름 레이아웃 회귀를 검증했다. 사용자 후속 요청의 가로 버튼/목록 배경을 적용한다. 이전 세로 열 정렬·108pt 묶음은 역사적 관찰로 보존하며 현재 계약은 가로 행과 목록 면이다. 버튼 기본색의 직접 확장을 더 연한 목록 면으로 바꾸라는 후속 사용자 교정을 현재 색상 기준으로 적용한다. 이전 색/판독은 역사적 기록으로 보존한다.",
+  "scope_notes": "Native macOS Chop v0.1, user task and DESIGN comparison. macOS26.5.2/CI15; macOS14 physical, full VoiceOver/all IMEs and hardware wheel are explicitly outside verified combinations. Shell/TUI VT styling and standard OS chrome are distinguished from app-owned labels. cmux is technical/feature inspiration, not a visual pixel reference. User correction 2026-10-14 adds R-DEFAULT canvas screenshot as a visual/state reference; first shell + three empty plus panes is mandatory at default entry. Previous main gate lacked that condition; its historical ledger is retained. PR #8: user-requested light/dark modes; preserve default grid in both modes, apply to native chrome and all terminals without PTY replacement, persist selection. Evidence is self review, with actual CUA observations recorded as Markdown. PR #10: user-requested icon-only mode toggle and layout presets. Preserve R-DEFAULT canvas and R-TOOLBAR location/options/selection; icons are an intentional user-requested change from text, not an exact crop clone. PR #11: editing-only same-workspace pane exchange with whole-pane/GPU drag preview and placement motion, requested and directly accepted by user. Preserve live PTY and split geometry. CUA before/after observations are separate from user motion feedback; no mid-drag frame capture or physical Reduce Motion execution is claimed. PR #12: user-requested uniform header background distinct from body in both modes, not per-terminal colors. Actual five-pane light/dark, editing, zoom and hidden-pane mode update rechecked without changing geometry. PR #13: explicit user request removes the blue pane outline on input focus; preserve real terminal cursor, first responder, focus navigation/storage and native button/menu focus. Drag-target outline is a separate transient state. Actual two-mode four-pane mouse/keyboard input, zoom and swap-back rechecked. PR #14: user-requested right file tree is a peer of terminal canvas below the full-width global toolbar. User hierarchy/stray-divider corrections and internal long-path/reopen issues were fixed and rechecked. New lazy file navigation, native picker/shortcuts, async stale-result protection and separate settings preserve terminal surfaces. OS open wait on final restart was observed; native folder reselection recovered it without UI blocking. Two-mode default/minimum UI and final drag/keyboard restoration are scoped separately from prior evidence. PR #14 review follow-up: isolate child metadata failures with a literal-name/leaf fallback, keep root errors.16 tests and latest normal folder expansion rechecked; no layout change. CodeRabbit covered5101fb1, follow-up self-reviewed; docstring coverage warning is disclosed separately. Path focus PR: user-requested path field focus-ring removal only. Native caret/selection/editing remain; other requested refinements are separate. Header seam PR: reuse the same header row and foreground; fill only the functional file divider header segment. Actual two-mode/resize/hide/editing consumers rechecked; PTY unchanged. Location icons PR: user Finder crop adapted to three native full-row icon/name shortcuts, fixed aspect-fit16pt column and14pt labels. Actual three locations, two modes/minimum window and empty/long outline rechecked. File drop work in progress: native file URL writer and existing-terminal input with literal argument quoting;19 tests pass. Actual CUA NSCoreDrag remains awaiting mouse-up with no destination entry observed. Do not mark product/merge complete until native endpoint is verified.  Native endpoint subsequently observed in the same clean app after user interaction: the exact fixture file path appeared as a quoted shell argument in terminal11. Earlier CUA failure remains historical.  Shortcut navigation group now has a neutral surface separate from file contents; actual two-mode/minimum-size/empty/long/three-destination checks.  Single-view tabs preserve all pane identities and shells; actual four-running-shell/native tab flows, long/overflow/minimum/two-mode/restore verified. Uniform split changes remain subsequent PRs.  All-pane columns and grid with scrollable canvas, actual four/five PTYs and two-mode/minimum/native focus/zoom/roundtrips verified; rows follow separately.  All-pane rows complete mode switching without per-preset maximum/deletion; actual four/five-shell two-mode/minimum/vertical focus/manual scroll/restore verified.  Supplied brand image preserved and packaged as continuous rounded ICNS with transparent margins; actual About light/dark and Finder plus ten representation checks verified. README 소개와 실제 macOS 앱 스크린샷을 추가했다. 앱 소스/토큰은 그대로이며 새 PROJECT-README-PRESENTATION의 문서·사진·목차 범위만 추가 검토한다. 사용자 resize 교정으로 canvas 지연 갱신을 현재 viewport 기반 native tile 전 갱신으로 수정했다. 기존 각 규칙의 이유·예외는 보존하며 영향 범위를 stable-canvas-scrollbars 관찰로 추가 검사한다. 빈 탭 중앙 배치 교정의 실제 창/geometry 검증을 추가한다. 기존 이름 편집을 헤더/탭에서 발견할 수 있는 진입점을 추가하고 긴 이름 레이아웃 회귀를 검증했다. 사용자 후속 요청의 가로 버튼/목록 배경을 적용한다. 이전 세로 열 정렬·108pt 묶음은 역사적 관찰로 보존하며 현재 계약은 가로 행과 목록 면이다. 버튼 기본색의 직접 확장을 더 연한 목록 면으로 바꾸라는 후속 사용자 교정을 현재 색상 기준으로 적용한다. 이전 색/판독은 역사적 기록으로 보존한다. 사용자 요청의 파일트리 이름 검색을 기존 native 탐색 흐름에 추가한다. 파일 내용 검색과 새 포인터 드래그 종단 성공은 주장하지 않으며 결과 URL 경로는 실제 파일 식별자로 검사했다.",
   "targets": [
     "Sources",
     "Resources/terminal.conf",
@@ -721,7 +721,7 @@
       "id": "RUI-02",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "기존 ChopStyle14pt와 동적 labelColor를 실제 바로가기 label/icon에 적용한다. 고정 icon box는 원본 비율을 보존하며 terminal/header 토큰은 바꾸지 않는다. 앱 아이콘은 이후 제공된 원본 색을 그대로 쓰고 UI/header/native accent 토큰을 확장하거나 바꾸지 않았다. 버튼색을 그대로 넓힌 목록 면이 너무 강하다는 최신 사용자 교정으로 fileListBackground만 light F8F8F8/dark24262C의 연한 중립 면으로 조정했다. 두 모드의 새 release 화면과27개 검사에서 글자/아이콘 대비·헤더 정렬·기존 최소 폭 입력 경계를 확인했다. 버튼의 native 상태와본문/헤더는 유지한다.",
+      "reason": "기존 ChopStyle14pt와 동적 labelColor를 실제 바로가기 label/icon에 적용한다. 고정 icon box는 원본 비율을 보존하며 terminal/header 토큰은 바꾸지 않는다. 앱 아이콘은 이후 제공된 원본 색을 그대로 쓰고 UI/header/native accent 토큰을 확장하거나 바꾸지 않았다. 버튼색을 그대로 넓힌 목록 면이 너무 강하다는 최신 사용자 교정으로 fileListBackground만 light F8F8F8/dark24262C의 연한 중립 면으로 조정했다. 두 모드의 새 release 화면과27개 검사에서 글자/아이콘 대비·헤더 정렬·기존 최소 폭 입력 경계를 확인했다. 버튼의 native 상태와본문/헤더는 유지한다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다.",
       "checks": [
         "code"
       ],
@@ -741,7 +741,7 @@
       "id": "RUI-04",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "홈 아이콘 포인터 클릭과 문서/다운로드 실제 클릭으로 각 목적지 경로가 바뀌는 것을 확인했다. native full-row hit/AX 버튼 역할과16개 기존 경로/PTY 검사를 보존한다. 파일 드롭의 실제 사용자 조작 후 endpoint를 AX로 확인했으며 Enter 미전송은 실제 PTY 검사로 별도 확인했다. 이번 단일 탭 보기는 실제4셸 전환/ENV 보존/추가·닫기/가로 탐색/복원을 확인했다. 실제4/5셸 좌우/격자/탭 전환과 keyboard/manual scroll, ENV 보존 및 확대를 확인했다. 상하4/5셸 전환과 모든 모드 연속 전환/ENV 유지/Scroll Up·keyboard focus/재실행을 실제 확인했다.",
+      "reason": "홈 아이콘 포인터 클릭과 문서/다운로드 실제 클릭으로 각 목적지 경로가 바뀌는 것을 확인했다. native full-row hit/AX 버튼 역할과16개 기존 경로/PTY 검사를 보존한다. 파일 드롭의 실제 사용자 조작 후 endpoint를 AX로 확인했으며 Enter 미전송은 실제 PTY 검사로 별도 확인했다. 이번 단일 탭 보기는 실제4셸 전환/ENV 보존/추가·닫기/가로 탐색/복원을 확인했다. 실제4/5셸 좌우/격자/탭 전환과 keyboard/manual scroll, ENV 보존 및 확대를 확인했다. 상하4/5셸 전환과 모든 모드 연속 전환/ENV 유지/Scroll Up·keyboard focus/재실행을 실제 확인했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다.",
       "checks": [
         "spec",
         "interaction"
@@ -796,7 +796,7 @@
       "id": "RUI-09",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "바로가기 라벨은 system14pt medium을 재사용한다.16pt icon box와 native 버튼 높이를 글자 크기로 오인하지 않으며 작은 자체 보조 문구를 추가하지 않았다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다.",
+      "reason": "바로가기 라벨은 system14pt medium을 재사용한다.16pt icon box와 native 버튼 높이를 글자 크기로 오인하지 않으며 작은 자체 보조 문구를 추가하지 않았다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다.",
       "checks": [
         "code",
         "visual"
@@ -835,7 +835,7 @@
       "id": "RUI-12",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "사용자 Finder crop와 SF Symbols 출처를 기록했다. 홈=house/다운로드=arrow.down.circle/문서=doc 의미·방향과 실제 목적지 행동을 대조했고 image를 비율 유지해 표시한다. 앱 아이콘은 기능 SF 기호와 구분해 사용자 원본/관찰한 macOS crop/Apple HIG 근거 및 실제 bundle/정보 창/Finder 소비를 기록했다. 기존 native SF 예외는 그대로다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다.",
+      "reason": "사용자 Finder crop와 SF Symbols 출처를 기록했다. 홈=house/다운로드=arrow.down.circle/문서=doc 의미·방향과 실제 목적지 행동을 대조했고 image를 비율 유지해 표시한다. 앱 아이콘은 기능 SF 기호와 구분해 사용자 원본/관찰한 macOS crop/Apple HIG 근거 및 실제 bundle/정보 창/Finder 소비를 기록했다. 기존 native SF 예외는 그대로다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다.",
       "checks": [
         "code",
         "visual"
@@ -852,7 +852,7 @@
       "id": "RUI-13",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "세로 행으로 바꾼 뒤 최소842×442pt에서 header/path/세 바로가기와 파일 목록이 가려지지 않는 것을 두 모드로 확인했다. 빈 상태는 scrollbar 없이, 긴 파일 목록은 기존 native scroll로 표시한다. 108pt 묶음과 기존 header/path/목록이 두 모드 최소842×442에서도 가려지지 않았다. 탭 overflow와 긴 이름/681×432 최소 창을 두 모드에서 확인했고 크기 변경 후 선택 탭을 드러내도록 수정했다. 실제 두 모드/최소842×442에서 모든 칸에 가로 탐색/키보드 focus로 접근하며 창을 화면 밖으로 강제 확대하지 않는다. 상하 모든 pane을 유지하며 두 모드1100×752/최소681×442에서 세로 scroll로 접근하고 불필요한 가로 scroller는 생기지 않았다. 사용자 리사이즈 교정 후 tile 직전 viewport 기준으로 축을 정해 들어가는 canvas의 불필요한 손잡이를 제거했다. 실제 두 모드/최소/반복 크기 변경과70회 동기 경계 회귀를 추가 확인했다. 빈 탭 중앙 배치 교정 후 전용 컨테이너에서 기존 pane을 viewport 전체에 동기 배치한다. 실제5/7/8·두 모드·크기 왕복/격자 전환·파일 트리 개폐와25개 검사를 추가 확인했다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다.",
+      "reason": "세로 행으로 바꾼 뒤 최소842×442pt에서 header/path/세 바로가기와 파일 목록이 가려지지 않는 것을 두 모드로 확인했다. 빈 상태는 scrollbar 없이, 긴 파일 목록은 기존 native scroll로 표시한다. 108pt 묶음과 기존 header/path/목록이 두 모드 최소842×442에서도 가려지지 않았다. 탭 overflow와 긴 이름/681×432 최소 창을 두 모드에서 확인했고 크기 변경 후 선택 탭을 드러내도록 수정했다. 실제 두 모드/최소842×442에서 모든 칸에 가로 탐색/키보드 focus로 접근하며 창을 화면 밖으로 강제 확대하지 않는다. 상하 모든 pane을 유지하며 두 모드1100×752/최소681×442에서 세로 scroll로 접근하고 불필요한 가로 scroller는 생기지 않았다. 사용자 리사이즈 교정 후 tile 직전 viewport 기준으로 축을 정해 들어가는 canvas의 불필요한 손잡이를 제거했다. 실제 두 모드/최소/반복 크기 변경과70회 동기 경계 회귀를 추가 확인했다. 빈 탭 중앙 배치 교정 후 전용 컨테이너에서 기존 pane을 viewport 전체에 동기 배치한다. 실제5/7/8·두 모드·크기 왕복/격자 전환·파일 트리 개폐와25개 검사를 추가 확인했다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다.",
       "checks": [
         "code",
         "visual",
@@ -962,7 +962,7 @@
       "id": "RUI-22",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "부모 inset12·그룹 간8과 내부 row28/gap4/icon16/name-gap8의 소유를 구별한다. 실제 빈/긴 목록·최소/기본 창에서 padding 중첩이나 잘림이 없다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다.",
+      "reason": "부모 inset12·그룹 간8과 내부 row28/gap4/icon16/name-gap8의 소유를 구별한다. 실제 빈/긴 목록·최소/기본 창에서 padding 중첩이나 잘림이 없다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다.",
       "checks": [
         "code",
         "visual"
@@ -973,7 +973,7 @@
       "id": "RUI-23",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "바로가기만 같은14pt/동적 labelColor/네이티브 버튼 역할 안에서 바꿨다. 사용자 요청의 path field/pane focus-ring 생략과 실제 caret/selection, native 버튼/메뉴 의미는 유지한다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다.",
+      "reason": "바로가기만 같은14pt/동적 labelColor/네이티브 버튼 역할 안에서 바꿨다. 사용자 요청의 path field/pane focus-ring 생략과 실제 caret/selection, native 버튼/메뉴 의미는 유지한다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다.",
       "checks": [
         "spec",
         "code",
@@ -996,7 +996,7 @@
       "id": "RUI-24",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "파일 제목은 탐색 영역 이름이고 행 이름은 실제 항목이다. 경로를 매 행에 반복하거나 loading/empty 상태를 배지로 중복하지 않는다. tooltip/AX 전체 경로는 접근/긴 경로 보완이다.",
+      "reason": "파일 제목은 탐색 영역 이름이고 행 이름은 실제 항목이다. 경로를 매 행에 반복하거나 loading/empty 상태를 배지로 중복하지 않는다. tooltip/AX 전체 경로는 접근/긴 경로 보완이다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다.",
       "checks": [
         "spec",
         "visual"
@@ -1007,7 +1007,7 @@
       "id": "RUI-25",
       "applicable": true,
       "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "path→세 목적지 행→파일 outline 순서로 탐색 소속을 유지한다. 목적지 이름을 별도 설명/배지로 반복하지 않고 공통 toolbar 아래 peer 구조와 header 연결을 보존한다.",
+      "reason": "path→세 목적지 행→파일 outline 순서로 탐색 소속을 유지한다. 목적지 이름을 별도 설명/배지로 반복하지 않고 공통 toolbar 아래 peer 구조와 header 연결을 보존한다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다.",
       "checks": [
         "spec",
         "visual"
@@ -1135,7 +1135,7 @@
       "id": "PROJECT-APPEARANCE",
       "applicable": true,
       "scope": "상단 mode icon, 보기 메뉴, native chrome, 빈/실행/숨긴 칸, 새/복원 셸, 재실행 설정",
-      "reason": "새 icon/label의 동적 labelColor와 기존 mode를 실제 기본/최소 창의 light/dark에서 확인했다. 기존 header/본문 및 path focus 예외는 유지한다. 바로가기 묶음도 기존 headerBackground를 두 모드에서 갱신하는 것을 실제 확인했다. 새 탭/선택/넘침과 복원된 단일 보기에서도 두 모드 토큰과 native 강조를 실제 확인했다. 새 overflow canvas는 투명 native scroll 배경 안의 기존 두 모드 terminal/header를 유지하며 최소/기본 창을 실제 확인했다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 버튼색을 그대로 넓힌 목록 면이 너무 강하다는 최신 사용자 교정으로 fileListBackground만 light F8F8F8/dark24262C의 연한 중립 면으로 조정했다. 두 모드의 새 release 화면과27개 검사에서 글자/아이콘 대비·헤더 정렬·기존 최소 폭 입력 경계를 확인했다. 버튼의 native 상태와본문/헤더는 유지한다.",
+      "reason": "새 icon/label의 동적 labelColor와 기존 mode를 실제 기본/최소 창의 light/dark에서 확인했다. 기존 header/본문 및 path focus 예외는 유지한다. 바로가기 묶음도 기존 headerBackground를 두 모드에서 갱신하는 것을 실제 확인했다. 새 탭/선택/넘침과 복원된 단일 보기에서도 두 모드 토큰과 native 강조를 실제 확인했다. 새 overflow canvas는 투명 native scroll 배경 안의 기존 두 모드 terminal/header를 유지하며 최소/기본 창을 실제 확인했다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 버튼색을 그대로 넓힌 목록 면이 너무 강하다는 최신 사용자 교정으로 fileListBackground만 light F8F8F8/dark24262C의 연한 중립 면으로 조정했다. 두 모드의 새 release 화면과27개 검사에서 글자/아이콘 대비·헤더 정렬·기존 최소 폭 입력 경계를 확인했다. 버튼의 native 상태와본문/헤더는 유지한다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다.",
       "checks": [
         "spec",
         "code",
@@ -1200,7 +1200,7 @@
       "id": "PROJECT-FILETREE",
       "applicable": true,
       "scope": "오른쪽 native outline의 경로 입력/폴더 선택기/홈·다운로드·문서·하위 lazy read/상태 복구/Finder·복사/설정 저장",
-      "reason": "새 아이콘/이름 행에서 기존 홈·다운로드·문서 URL과 target-action을 그대로 쓴다. 실제 세 경로 이동·빈 폴더와 긴 목록을 확인했고 탐색/비동기/PTY는 바꾸지 않았다. 파일/폴더 행에 native file URL writer를 추가했고 파일 경로가 실제 terminal endpoint에 도달한 것을 확인했다. 새 묶음 안에서 실제 세 목적지 클릭과 빈/긴 목록을 확인했으며 탐색 로직은 유지한다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다.",
+      "reason": "새 아이콘/이름 행에서 기존 홈·다운로드·문서 URL과 target-action을 그대로 쓴다. 실제 세 경로 이동·빈 폴더와 긴 목록을 확인했고 탐색/비동기/PTY는 바꾸지 않았다. 파일/폴더 행에 native file URL writer를 추가했고 파일 경로가 실제 terminal endpoint에 도달한 것을 확인했다. 새 묶음 안에서 실제 세 목적지 클릭과 빈/긴 목록을 확인했으며 탐색 로직은 유지한다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다.",
       "checks": [
         "spec",
         "code",
@@ -1213,7 +1213,7 @@
       "id": "PROJECT-FILETREE-HIERARCHY",
       "applicable": true,
       "scope": "공통 toolbar 아래 canvas와 파일 tree peer 관계, header 정렬·폭·개폐 경계·minimum·두 모드",
-      "reason": "canvas/file peer hierarchy와 header40pt를 유지하고 경계 상단 표면을 연결했다. 두 모드·폭300→340→300·숨김/재열기·편집 header와 기존 geometry/surface 검사16개를 확인했다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다.",
+      "reason": "canvas/file peer hierarchy와 header40pt를 유지하고 경계 상단 표면을 연결했다. 두 모드·폭300→340→300·숨김/재열기·편집 header와 기존 geometry/surface 검사16개를 확인했다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다.",
       "checks": [
         "spec",
         "code",
@@ -1226,7 +1226,7 @@
       "id": "PROJECT-PATH-FOCUS",
       "applicable": true,
       "scope": "파일 트리 경로 field의 클릭/편집·light/dark",
-      "reason": "사용자 요청대로 외곽 focus ring 없이 실제 caret/selection/editing/Enter를 유지한다. 두 모드 실제 조작과 기존16개 검사를 확인했다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다.",
+      "reason": "사용자 요청대로 외곽 focus ring 없이 실제 caret/selection/editing/Enter를 유지한다. 두 모드 실제 조작과 기존16개 검사를 확인했다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다.",
       "checks": [
         "spec",
         "code",
@@ -1252,7 +1252,7 @@
       "id": "PROJECT-FILE-DROP",
       "applicable": true,
       "scope": "실제 파일/폴더 row → 실행 중인 terminal body의 경로 입력·Enter 미전송·focus/같은 surface·기존 pane 이동 공존",
-      "reason": "실제 사용자 조작 후 clean 앱의 터미널11에서 fixture 파일 경로의 인용 입력을 AX로 확인했다. 최초 CUA 놓기 대기와 후속 endpoint 관찰을 구분한다. Enter 미전송·다른 칸/surface·닫힌 target·인용/거절은19개 자동 검사와 코드로 검증하며 물리 변형 전체를 실행했다고 주장하지 않는다.",
+      "reason": "실제 사용자 조작 후 clean 앱의 터미널11에서 fixture 파일 경로의 인용 입력을 AX로 확인했다. 최초 CUA 놓기 대기와 후속 endpoint 관찰을 구분한다. Enter 미전송·다른 칸/surface·닫힌 target·인용/거절은19개 자동 검사와 코드로 검증하며 물리 변형 전체를 실행했다고 주장하지 않는다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다.",
       "checks": [
         "spec",
         "code",
@@ -1382,7 +1382,20 @@
       "id": "PROJECT-FILEBROWSER-ROW-SURFACE",
       "applicable": true,
       "scope": "홈·다운로드·문서 가로 native 버튼과 아래 파일 목록/빈·오류 배경·두 모드·최소 폭",
-      "reason": "후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 버튼색을 그대로 넓힌 목록 면이 너무 강하다는 최신 사용자 교정으로 fileListBackground만 light F8F8F8/dark24262C의 연한 중립 면으로 조정했다. 두 모드의 새 release 화면과27개 검사에서 글자/아이콘 대비·헤더 정렬·기존 최소 폭 입력 경계를 확인했다. 버튼의 native 상태와본문/헤더는 유지한다.",
+      "reason": "후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 버튼색을 그대로 넓힌 목록 면이 너무 강하다는 최신 사용자 교정으로 fileListBackground만 light F8F8F8/dark24262C의 연한 중립 면으로 조정했다. 두 모드의 새 release 화면과27개 검사에서 글자/아이콘 대비·헤더 정렬·기존 최소 폭 입력 경계를 확인했다. 버튼의 native 상태와본문/헤더는 유지한다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다.",
+      "checks": [
+        "spec",
+        "code",
+        "visual",
+        "interaction"
+      ],
+      "exceptions": []
+    },
+    {
+      "id": "PROJECT-FILETREE-SEARCH",
+      "applicable": true,
+      "scope": "현재 폴더 하위의 이름 검색,입력/초기화/상대 경로·동명 결과/폴더 키보드 활성화/취소·늦은 응답/0건·부분·오류·제한/두 모드·최소 폭",
+      "reason": "바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다.",
       "checks": [
         "spec",
         "code",
