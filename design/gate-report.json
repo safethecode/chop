@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "reviewer": "Codex self-review; actual code/test/CUA observations, not independent approval",
-  "reviewed_at": "2026-10-15T03:25:22.105747+00:00",
-  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics. PR #8: changed appearance scopes rechecked against actual light/dark screenshots and E-A1–A6; unchanged structure/native exceptions retain earlier evidence; local 10-test suite rerun. No independent approval or exported PNG claimed. PR #10: toolbar icon roles, copy, geometry and actions rechecked in actual CUA images/AX, four layouts, both modes, minimum window and restart. Existing scopes outside changed toolbar retain prior observations and rerun PTY checks. PR #11: changed handle, preview, movement, keyboard, same live PTY and persisted order rechecked; direct user acceptance covers requested motion. CUA cannot capture transient drag frames; Reduce Motion physical settings were not changed. Unchanged exclusions/native exceptions retain prior evidence; 11-test checks rerun. PR #12: actual CUA light/dark header/body contrast, five-pane editing/zoom/hidden-pane updates rechecked; no new text/geometry. Existing exceptions and unrelated observations retained. 11-test check passed. Final PR #12 review follow-up adds only three doc comments in response to CodeRabbit coverage warning. Strict format/diff checks passed; no executable behavior or visual contract changed, so E-H1–5 remains applicable. External review coverage is explicitly fccec, follow-up comments self-reviewed. PR #13: pane focus outline removed by explicit user request. Real mouse/keyboard shell input and AX focus, light/dark, zoom and drag swap-back were rechecked in current CUA renders. Previous focus-border appearance is historical; RUI-23 declares the user-requested terminal-only exception, native control focus remains. No transient drag screenshot or full VoiceOver claim. Unchanged scopes retain prior evidence. PR #14: changed toolbar/body/file-panel consumers rechecked in actual CUA, including user hierarchy and stray-line corrections, long path, reopen, two-mode minimum, native folder picker, literal paths, folder expansion, copy/Finder and live shell preservation.15 tests passed. Final restart OS open wait and picker recovery are documented; no permission root cause claimed. Final pointer swap succeeded with2× image coordinates, keyboard restored original order. No drag implementation change or transient-frame claim. Unchanged native exclusions retain prior evidence. PR #14 follow-up: CodeRabbit actual review5101fb1/19files found one valid child metadata failure propagation. Minimal fallback plus deterministic injected-I/O regression test passed with all16 tests3.737s. Latest app restored project root and expanded Sources. Unchanged layout/appearance observations remain applicable; no external re-review of this follow-up is claimed. Path field actual dark/light click/selection/caret/edit+Enter rechecked;16 tests3.597s passed. Other native/layout/terminal consumers are unchanged. Header seam scope rechecked in actual light/dark,300→340→300pt file width,hide/reopen and editing headers.16 tests3.606s passed; no new input/drag/icon behavior. Location shortcut actual CUA icon click/three destinations, two modes,842×442 minimum and empty/long folder states rechecked;16 tests4.907s passed. Initial native glyph-width alignment failure is retained. File drop19 tests6.307s pass, typed pasteboard/argv/PTY/focus/no-Enter/lifecycle verified. Actual OS source writer observed but drop completion not verified; RUI-04/PROJECT-FILE-DROP unknown. No native endpoint or independent approval claimed.  Actual user-operated native file endpoint observed via CUA AX; no-Enter is established separately by the real PTY test, not inferred from subsequent shell output.  CUA shortcut section actual checks and19 tests4.852s passed; no external approval claimed.  Twenty tests4.923s plus native CUA endpoint checks; initial resize-hidden selection fixed and rechecked.  Twenty-two tests4.734s; unwanted scroll axis and native display-cycle crash found/fixed, native repeated switches and final zoom checks completed.  Twenty-two tests5.388s; actual four/five PTYs, ENV, native rows restore and minimum681x442 both modes passed.  Twenty-two tests5.065s and bundled icon decode; original bytes preserved; generated preview rejected, production native mask verified at actual consumers. README 변경은 readme-presentation 관찰에서 검증했다. 기존 앱 소스는 변경되지 않아 기존 규칙의 이유·예외·관찰을 유지한다. 스크롤 안정성은 즉시 native geometry 회귀와 실제 window resize/보기/확대/기존 셸 유지로 추가 검증했다. 과거 지연 수렴의 검사 한계와 native crash 기록을 지우지 않았다. 비표시 window 검사는 수정 전에도 통과했으므로 실제 앱 최초 결함과 최종 판독을 별도로 기록한다.",
+  "reviewed_at": "2026-10-15T03:34:36.734855+00:00",
+  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics. PR #8: changed appearance scopes rechecked against actual light/dark screenshots and E-A1–A6; unchanged structure/native exceptions retain earlier evidence; local 10-test suite rerun. No independent approval or exported PNG claimed. PR #10: toolbar icon roles, copy, geometry and actions rechecked in actual CUA images/AX, four layouts, both modes, minimum window and restart. Existing scopes outside changed toolbar retain prior observations and rerun PTY checks. PR #11: changed handle, preview, movement, keyboard, same live PTY and persisted order rechecked; direct user acceptance covers requested motion. CUA cannot capture transient drag frames; Reduce Motion physical settings were not changed. Unchanged exclusions/native exceptions retain prior evidence; 11-test checks rerun. PR #12: actual CUA light/dark header/body contrast, five-pane editing/zoom/hidden-pane updates rechecked; no new text/geometry. Existing exceptions and unrelated observations retained. 11-test check passed. Final PR #12 review follow-up adds only three doc comments in response to CodeRabbit coverage warning. Strict format/diff checks passed; no executable behavior or visual contract changed, so E-H1–5 remains applicable. External review coverage is explicitly fccec, follow-up comments self-reviewed. PR #13: pane focus outline removed by explicit user request. Real mouse/keyboard shell input and AX focus, light/dark, zoom and drag swap-back were rechecked in current CUA renders. Previous focus-border appearance is historical; RUI-23 declares the user-requested terminal-only exception, native control focus remains. No transient drag screenshot or full VoiceOver claim. Unchanged scopes retain prior evidence. PR #14: changed toolbar/body/file-panel consumers rechecked in actual CUA, including user hierarchy and stray-line corrections, long path, reopen, two-mode minimum, native folder picker, literal paths, folder expansion, copy/Finder and live shell preservation.15 tests passed. Final restart OS open wait and picker recovery are documented; no permission root cause claimed. Final pointer swap succeeded with2× image coordinates, keyboard restored original order. No drag implementation change or transient-frame claim. Unchanged native exclusions retain prior evidence. PR #14 follow-up: CodeRabbit actual review5101fb1/19files found one valid child metadata failure propagation. Minimal fallback plus deterministic injected-I/O regression test passed with all16 tests3.737s. Latest app restored project root and expanded Sources. Unchanged layout/appearance observations remain applicable; no external re-review of this follow-up is claimed. Path field actual dark/light click/selection/caret/edit+Enter rechecked;16 tests3.597s passed. Other native/layout/terminal consumers are unchanged. Header seam scope rechecked in actual light/dark,300→340→300pt file width,hide/reopen and editing headers.16 tests3.606s passed; no new input/drag/icon behavior. Location shortcut actual CUA icon click/three destinations, two modes,842×442 minimum and empty/long folder states rechecked;16 tests4.907s passed. Initial native glyph-width alignment failure is retained. File drop19 tests6.307s pass, typed pasteboard/argv/PTY/focus/no-Enter/lifecycle verified. Actual OS source writer observed but drop completion not verified; RUI-04/PROJECT-FILE-DROP unknown. No native endpoint or independent approval claimed.  Actual user-operated native file endpoint observed via CUA AX; no-Enter is established separately by the real PTY test, not inferred from subsequent shell output.  CUA shortcut section actual checks and19 tests4.852s passed; no external approval claimed.  Twenty tests4.923s plus native CUA endpoint checks; initial resize-hidden selection fixed and rechecked.  Twenty-two tests4.734s; unwanted scroll axis and native display-cycle crash found/fixed, native repeated switches and final zoom checks completed.  Twenty-two tests5.388s; actual four/five PTYs, ENV, native rows restore and minimum681x442 both modes passed.  Twenty-two tests5.065s and bundled icon decode; original bytes preserved; generated preview rejected, production native mask verified at actual consumers. README 변경은 readme-presentation 관찰에서 검증했다. 기존 앱 소스는 변경되지 않아 기존 규칙의 이유·예외·관찰을 유지한다. 스크롤 안정성은 즉시 native geometry 회귀와 실제 window resize/보기/확대/기존 셸 유지로 추가 검증했다. 과거 지연 수렴의 검사 한계와 native crash 기록을 지우지 않았다. 비표시 window 검사는 수정 전에도 통과했으므로 실제 앱 최초 결함과 최종 판독을 별도로 기록한다. 실제 연필 클릭·비선택 대상·잘못된 이름·취소·긴 탭·두 모드/최소·PTY·재실행을 최신main의스크롤/중앙 배치와 결합해 확인했다.",
   "catalog_sha256": "9af51eedfbd6625fdcae46aa6a55e6206c447fe43b23fb1d0ff61f8ac800114f",
-  "contract_sha256": "f76dde4026ed9a268ac18675a1a4ce21024c4833dabeb371aa16c59e8f7bdf4c",
-  "target_sha256": "3ebf81132f2acb225d222b70522409cb2027c741489b743f6f62b479dceb6514",
+  "contract_sha256": "de2383c02d5297b5f089825b03ee32b6d5eda368940c0be1a30f1d2fda47a39d",
+  "target_sha256": "03b559d760ab939e41848dc66cad623e4d89c51d601149f9aa1bdc88988ee01e",
   "results": [
     {
       "id": "ORC-F01",
@@ -2267,7 +2267,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "spec",
@@ -2346,7 +2346,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "spec",
@@ -2383,7 +2383,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "interaction",
@@ -2515,7 +2515,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "visual",
@@ -2604,7 +2604,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "visual",
@@ -2711,7 +2711,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "code",
@@ -2763,7 +2763,7 @@
     {
       "id": "RUI-09",
       "status": "exception",
-      "reason": "바로가기 라벨은 system14pt medium을 재사용한다.16pt icon box와 native 버튼 높이를 글자 크기로 오인하지 않으며 작은 자체 보조 문구를 추가하지 않았다.",
+      "reason": "바로가기 라벨은 system14pt medium을 재사용한다.16pt icon box와 native 버튼 높이를 글자 크기로 오인하지 않으며 작은 자체 보조 문구를 추가하지 않았다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다.",
       "evidence": [
         {
           "kind": "code",
@@ -2834,6 +2834,16 @@
           "kind": "visual",
           "path": "design/evidence/location-icons.md",
           "sha256": "cc1d8d6f44f426b5e8b8c160ca39d848c56d7a13e702f36f70e37f5463f4cf66"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
         }
       ],
       "exception_id": "CHOP-RUI-09"
@@ -2846,7 +2856,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "visual",
@@ -2903,7 +2913,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "visual",
@@ -2955,7 +2965,7 @@
     {
       "id": "RUI-12",
       "status": "exception",
-      "reason": "사용자 Finder crop와 SF Symbols 출처를 기록했다. 홈=house/다운로드=arrow.down.circle/문서=doc 의미·방향과 실제 목적지 행동을 대조했고 image를 비율 유지해 표시한다. 앱 아이콘은 기능 SF 기호와 구분해 사용자 원본/관찰한 macOS crop/Apple HIG 근거 및 실제 bundle/정보 창/Finder 소비를 기록했다. 기존 native SF 예외는 그대로다.",
+      "reason": "사용자 Finder crop와 SF Symbols 출처를 기록했다. 홈=house/다운로드=arrow.down.circle/문서=doc 의미·방향과 실제 목적지 행동을 대조했고 image를 비율 유지해 표시한다. 앱 아이콘은 기능 SF 기호와 구분해 사용자 원본/관찰한 macOS crop/Apple HIG 근거 및 실제 bundle/정보 창/Finder 소비를 기록했다. 기존 native SF 예외는 그대로다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다.",
       "evidence": [
         {
           "kind": "code",
@@ -3031,6 +3041,16 @@
           "kind": "visual",
           "path": "design/evidence/macos-app-icon.md",
           "sha256": "268510c384da75e091a54703e55943af08d47af2c00c7b0b670ae62def577982"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
         }
       ],
       "exception_id": "CHOP-RUI-12"
@@ -3038,7 +3058,7 @@
     {
       "id": "RUI-13",
       "status": "pass",
-      "reason": "세로 행으로 바꾼 뒤 최소842×442pt에서 header/path/세 바로가기와 파일 목록이 가려지지 않는 것을 두 모드로 확인했다. 빈 상태는 scrollbar 없이, 긴 파일 목록은 기존 native scroll로 표시한다. 108pt 묶음과 기존 header/path/목록이 두 모드 최소842×442에서도 가려지지 않았다. 탭 overflow와 긴 이름/681×432 최소 창을 두 모드에서 확인했고 크기 변경 후 선택 탭을 드러내도록 수정했다. 실제 두 모드/최소842×442에서 모든 칸에 가로 탐색/키보드 focus로 접근하며 창을 화면 밖으로 강제 확대하지 않는다. 상하 모든 pane을 유지하며 두 모드1100×752/최소681×442에서 세로 scroll로 접근하고 불필요한 가로 scroller는 생기지 않았다. 사용자 리사이즈 교정 후 tile 직전 viewport 기준으로 축을 정해 들어가는 canvas의 불필요한 손잡이를 제거했다. 실제 두 모드/최소/반복 크기 변경과70회 동기 경계 회귀를 추가 확인했다. 빈 탭 중앙 배치 교정 후 전용 컨테이너에서 기존 pane을 viewport 전체에 동기 배치한다. 실제5/7/8·두 모드·크기 왕복/격자 전환·파일 트리 개폐와25개 검사를 추가 확인했다.",
+      "reason": "세로 행으로 바꾼 뒤 최소842×442pt에서 header/path/세 바로가기와 파일 목록이 가려지지 않는 것을 두 모드로 확인했다. 빈 상태는 scrollbar 없이, 긴 파일 목록은 기존 native scroll로 표시한다. 108pt 묶음과 기존 header/path/목록이 두 모드 최소842×442에서도 가려지지 않았다. 탭 overflow와 긴 이름/681×432 최소 창을 두 모드에서 확인했고 크기 변경 후 선택 탭을 드러내도록 수정했다. 실제 두 모드/최소842×442에서 모든 칸에 가로 탐색/키보드 focus로 접근하며 창을 화면 밖으로 강제 확대하지 않는다. 상하 모든 pane을 유지하며 두 모드1100×752/최소681×442에서 세로 scroll로 접근하고 불필요한 가로 scroller는 생기지 않았다. 사용자 리사이즈 교정 후 tile 직전 viewport 기준으로 축을 정해 들어가는 canvas의 불필요한 손잡이를 제거했다. 실제 두 모드/최소/반복 크기 변경과70회 동기 경계 회귀를 추가 확인했다. 빈 탭 중앙 배치 교정 후 전용 컨테이너에서 기존 pane을 viewport 전체에 동기 배치한다. 실제5/7/8·두 모드·크기 왕복/격자 전환·파일 트리 개폐와25개 검사를 추가 확인했다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다.",
       "evidence": [
         {
           "kind": "code",
@@ -3194,6 +3214,21 @@
           "kind": "interaction",
           "path": "design/evidence/center-empty-tab-content.md",
           "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
         }
       ]
     },
@@ -3304,7 +3339,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "visual",
@@ -3401,7 +3436,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "visual",
@@ -3483,7 +3518,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "visual",
@@ -3579,7 +3614,7 @@
     {
       "id": "RUI-22",
       "status": "pass",
-      "reason": "부모 inset12·그룹 간8과 내부 row28/gap4/icon16/name-gap8의 소유를 구별한다. 실제 빈/긴 목록·최소/기본 창에서 padding 중첩이나 잘림이 없다.",
+      "reason": "부모 inset12·그룹 간8과 내부 row28/gap4/icon16/name-gap8의 소유를 구별한다. 실제 빈/긴 목록·최소/기본 창에서 padding 중첩이나 잘림이 없다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다.",
       "evidence": [
         {
           "kind": "code",
@@ -3670,18 +3705,28 @@
           "kind": "visual",
           "path": "design/evidence/location-icons.md",
           "sha256": "cc1d8d6f44f426b5e8b8c160ca39d848c56d7a13e702f36f70e37f5463f4cf66"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
         }
       ]
     },
     {
       "id": "RUI-23",
       "status": "exception",
-      "reason": "바로가기만 같은14pt/동적 labelColor/네이티브 버튼 역할 안에서 바꿨다. 사용자 요청의 path field/pane focus-ring 생략과 실제 caret/selection, native 버튼/메뉴 의미는 유지한다.",
+      "reason": "바로가기만 같은14pt/동적 labelColor/네이티브 버튼 역할 안에서 바꿨다. 사용자 요청의 path field/pane focus-ring 생략과 실제 caret/selection, native 버튼/메뉴 의미는 유지한다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "code",
@@ -3807,6 +3852,21 @@
           "kind": "visual",
           "path": "design/evidence/location-icons.md",
           "sha256": "cc1d8d6f44f426b5e8b8c160ca39d848c56d7a13e702f36f70e37f5463f4cf66"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
         }
       ],
       "exception_id": "CHOP-PATH-FOCUS-RUI23"
@@ -3819,7 +3879,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "visual",
@@ -3861,7 +3921,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "visual",
@@ -3943,7 +4003,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "code",
@@ -4065,7 +4125,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "code",
@@ -4302,12 +4362,12 @@
     {
       "id": "PROJECT-MANAGE",
       "status": "pass",
-      "reason": "새 파일 탐색과 panel 개폐는 기존 canvas/view/surface를 재사용한다. 실제 PID/변수 보존, terminal zoom과11→16 교환/원위치 복원, 자동 surface/focus 검사로 확인했다. 경로 탐색은 셸 cwd를 바꾸지 않는다. 파일 드롭 시 기존 target focus/surface·다른 셸 유지와 닫힌 대상 거절을 PTY로 확인했다. 실제 단일 탭 전환 전후 같은 ENV를 출력했고 자동 검사에서4개 surface/포커스 유지와5번째 추가·닫기를 확인했다. 4/5셸의 surface/포커스/ENV·순서를 유지하고 실제 keyboard scroll/five roundtrips/zoom 복귀를 확인했다. 상하4/5셸의 실제 ENV 보존과 자동 surface/UUID/viewport focus를 확인했다.",
+      "reason": "새 파일 탐색과 panel 개폐는 기존 canvas/view/surface를 재사용한다. 실제 PID/변수 보존, terminal zoom과11→16 교환/원위치 복원, 자동 surface/focus 검사로 확인했다. 경로 탐색은 셸 cwd를 바꾸지 않는다. 파일 드롭 시 기존 target focus/surface·다른 셸 유지와 닫힌 대상 거절을 PTY로 확인했다. 실제 단일 탭 전환 전후 같은 ENV를 출력했고 자동 검사에서4개 surface/포커스 유지와5번째 추가·닫기를 확인했다. 4/5셸의 surface/포커스/ENV·순서를 유지하고 실제 keyboard scroll/five roundtrips/zoom 복귀를 확인했다. 상하4/5셸의 실제 ENV 보존과 자동 surface/UUID/viewport focus를 확인했다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "code",
@@ -4528,6 +4588,26 @@
           "kind": "interaction",
           "path": "design/evidence/all-terminal-rows.md",
           "sha256": "5f6bd02d50eaec59879e1d4ea99bc58571fc5c5d2b898a998e8fca8347edd21c"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
         }
       ]
     },
@@ -4539,7 +4619,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "code",
@@ -4606,12 +4686,12 @@
     {
       "id": "PROJECT-RESTORE",
       "status": "pass",
-      "reason": "기존 session snapshot은 바꾸지 않고 file root/표시/폭만 별도 UserDefaults에 저장한다. 실제 사용자4칸 복원, 마지막 성공 루트만 저장하는 격리 테스트를 확인했다. 최종 재실행 OS open 대기와 선택기 복구는 E-T10 후속 기록에 명시한다. 이후 단일 탭 보기 요구에 따라 v1 snapshot에 optional tabbed 필드를 추가했다. 구 저장 decode/새 flag roundtrip과 실제 네 셸·선택 복원을 확인했다. 임의 개수 balanced split tree는 기존 Codable schema로 저장하고 실제4열 복원 및22개 roundtrip 검사를 확인했다. 실제 앱을 종료/재실행해 상하4행·6번 선택·네 셸 복원을 확인했다.",
+      "reason": "기존 session snapshot은 바꾸지 않고 file root/표시/폭만 별도 UserDefaults에 저장한다. 실제 사용자4칸 복원, 마지막 성공 루트만 저장하는 격리 테스트를 확인했다. 최종 재실행 OS open 대기와 선택기 복구는 E-T10 후속 기록에 명시한다. 이후 단일 탭 보기 요구에 따라 v1 snapshot에 optional tabbed 필드를 추가했다. 구 저장 decode/새 flag roundtrip과 실제 네 셸·선택 복원을 확인했다. 임의 개수 balanced split tree는 기존 Codable schema로 저장하고 실제4열 복원 및22개 roundtrip 검사를 확인했다. 실제 앱을 종료/재실행해 상하4행·6번 선택·네 셸 복원을 확인했다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "code",
@@ -4772,6 +4852,26 @@
           "kind": "interaction",
           "path": "design/evidence/all-terminal-rows.md",
           "sha256": "5f6bd02d50eaec59879e1d4ea99bc58571fc5c5d2b898a998e8fca8347edd21c"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
         }
       ]
     },
@@ -4783,7 +4883,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "code",
@@ -4855,7 +4955,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "code",
@@ -5007,7 +5107,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "code",
@@ -5279,7 +5379,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "code",
@@ -5311,12 +5411,12 @@
     {
       "id": "PROJECT-APPEARANCE",
       "status": "pass",
-      "reason": "새 icon/label의 동적 labelColor와 기존 mode를 실제 기본/최소 창의 light/dark에서 확인했다. 기존 header/본문 및 path focus 예외는 유지한다. 바로가기 묶음도 기존 headerBackground를 두 모드에서 갱신하는 것을 실제 확인했다. 새 탭/선택/넘침과 복원된 단일 보기에서도 두 모드 토큰과 native 강조를 실제 확인했다. 새 overflow canvas는 투명 native scroll 배경 안의 기존 두 모드 terminal/header를 유지하며 최소/기본 창을 실제 확인했다.",
+      "reason": "새 icon/label의 동적 labelColor와 기존 mode를 실제 기본/최소 창의 light/dark에서 확인했다. 기존 header/본문 및 path focus 예외는 유지한다. 바로가기 묶음도 기존 headerBackground를 두 모드에서 갱신하는 것을 실제 확인했다. 새 탭/선택/넘침과 복원된 단일 보기에서도 두 모드 토큰과 native 강조를 실제 확인했다. 새 overflow canvas는 투명 native scroll 배경 안의 기존 두 모드 terminal/header를 유지하며 최소/기본 창을 실제 확인했다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "code",
@@ -5522,6 +5622,26 @@
           "kind": "interaction",
           "path": "design/evidence/all-terminal-columns.md",
           "sha256": "612d8326785d8e697963793a9678b4292c096f4f8dd2f08d94d4992f6f50554f"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
         }
       ]
     },
@@ -5533,7 +5653,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "2a830638df20fc827caab0654ae5c49a76ff556c8efb5af81bc299d19a973d24"
+          "sha256": "4450089e4bd2d9692053922797a8050dfb8a82f3d37fd53d21dbf2f480fd5e03"
         },
         {
           "kind": "code",
@@ -5682,7 +5802,7 @@
     {
       "id": "PROJECT-HEADER-BACKGROUND",
       "status": "pass",
-      "reason": "파일/terminal header의 mode별 배경/전경·40pt·공통 행 구성을 적용한다. 상단 경계도 같은 배경으로 연결하며 두 모드·일반/편집·resize를 실제 확인했다. 단일 보기에서는 중복 pane header를 접고 같은40pt header surface를 가로 탭으로 표시해 file header와 같은 줄을 유지한다.",
+      "reason": "파일/terminal header의 mode별 배경/전경·40pt·공통 행 구성을 적용한다. 상단 경계도 같은 배경으로 연결하며 두 모드·일반/편집·resize를 실제 확인했다. 단일 보기에서는 중복 pane header를 접고 같은40pt header surface를 가로 탭으로 표시해 file header와 같은 줄을 유지한다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다.",
       "evidence": [
         {
           "kind": "spec",
@@ -5783,6 +5903,26 @@
           "kind": "interaction",
           "path": "design/evidence/single-view-tabs.md",
           "sha256": "2a6abd2aefaa58cfbbaf30721d31ae5ef392d1ffc84655c57e59b23ab8e1aad3"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
         }
       ]
     },
@@ -6118,7 +6258,7 @@
     {
       "id": "PROJECT-SINGLE-TABS",
       "status": "pass",
-      "reason": "실제4셸·ENV 보존/새 탭/닫기/긴 이름·최소 창 가로 탐색/두 모드/재실행을 확인했고20개 검사로 surface/focus/legacy decode와 복원을 검증했다. resize 수정 뒤683×432 탭 보기의 외부 canvas에는 불필요한 축이 없음을 확인했다. 상단 탭 목록의 스크롤은 기존 별도 구현이다. 빈 탭 중앙 배치 교정 후 전용 컨테이너에서 기존 pane을 viewport 전체에 동기 배치한다. 실제5/7/8·두 모드·크기 왕복/격자 전환·파일 트리 개폐와25개 검사를 추가 확인했다.",
+      "reason": "실제4셸·ENV 보존/새 탭/닫기/긴 이름·최소 창 가로 탐색/두 모드/재실행을 확인했고20개 검사로 surface/focus/legacy decode와 복원을 검증했다. resize 수정 뒤683×432 탭 보기의 외부 canvas에는 불필요한 축이 없음을 확인했다. 상단 탭 목록의 스크롤은 기존 별도 구현이다. 빈 탭 중앙 배치 교정 후 전용 컨테이너에서 기존 pane을 viewport 전체에 동기 배치한다. 실제5/7/8·두 모드·크기 왕복/격자 전환·파일 트리 개폐와25개 검사를 추가 확인했다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다.",
       "evidence": [
         {
           "kind": "spec",
@@ -6179,6 +6319,26 @@
           "kind": "interaction",
           "path": "design/evidence/center-empty-tab-content.md",
           "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
         }
       ]
     },
@@ -6380,7 +6540,7 @@
     {
       "id": "PROJECT-EMPTY-TAB-CENTER",
       "status": "pass",
-      "reason": "빈 탭 중앙 배치 교정 후 전용 컨테이너에서 기존 pane을 viewport 전체에 동기 배치한다. 실제5/7/8·두 모드·크기 왕복/격자 전환·파일 트리 개폐와25개 검사를 추가 확인했다.",
+      "reason": "빈 탭 중앙 배치 교정 후 전용 컨테이너에서 기존 pane을 viewport 전체에 동기 배치한다. 실제5/7/8·두 모드·크기 왕복/격자 전환·파일 트리 개폐와25개 검사를 추가 확인했다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다.",
       "evidence": [
         {
           "kind": "spec",
@@ -6401,6 +6561,53 @@
           "kind": "interaction",
           "path": "design/evidence/center-empty-tab-content.md",
           "sha256": "47ab861daaa8f62721f3cb9cf1482fab50a99b3ba7e39a21e5f7013c3fbf8bd2"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        }
+      ]
+    },
+    {
+      "id": "PROJECT-RENAME-CONTROLS",
+      "status": "pass",
+      "reason": "이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/terminal-name-controls.md",
+          "sha256": "25e9ec6390c09d749df46b2ed12f6345353bb117943a7b92e5fe9fb3c3174b2e"
         }
       ]
     }

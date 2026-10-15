@@ -74,3 +74,7 @@ V-37 / README-PRESENTATION: 사용자 지정 Wratop README 구성을 Chop의 실
 V-38 / F-CANVAS-RESIZE-FLICKER (regression): 사용자 교정으로 resize 때 스크롤바가 나타났다 사라지는 현상을 재검토했다. 이전 비동기 수렴 검사는50ms 뒤만 검사해 native tile 직후17pt gutter/이전 문서 크기를 놓쳤다. 현재 viewport 기반 축 계산과 tile 전 문서 갱신으로 수정해 최초 FAIL→PASS,70회 동기 경계/두 스타일,실제 두 모드·최소/3회 크기 왕복·보기/확대·셸 유지와24개 검사를 확인했다. fixed-and-verified. 과거 V-33의 충돌 기록과 당시 검사 범위를 보존하며 이번에는 layout 안 수동 재타일링을 사용하지 않는다. [관찰](evidence/stable-canvas-scrollbars.md).
 
 V-39 / F-TAB-EMPTY-CENTER: 사용자 crop과 실제 실행 앱에서 빈 탭의 `+`가 이전 격자 좌표에 남는 것을 확인했다. 전용 탭 컨테이너가 선택 본문을 동기 배치하도록 수정해5/7/8·파일 트리 개폐·축소/재확대·두 모드·격자 왕복에서 중앙을 확인했다. 비표시 window 검사는 수정 전에도 통과했다는 한계를 남기며 전체25개 검사와 실제 창 판독을 함께 근거로 삼는다. fixed-and-verified. [관찰](evidence/center-empty-tab-content.md).
+
+V-40 / F-RENAME-ICON-GAP: 헤더 이름 버튼의 남는 폭 때문에 연필이 멀어진 최초 구현을 content hugging으로 수정했다. 최종 두 모드·최소 격자·짧고 긴 이름·실제 연필 클릭에서 확인했다. fixed-and-verified. [관찰](evidence/terminal-name-controls.md).
+
+V-41 / F-RENAME-TAB-REVEAL: 같은 viewport에서 마지막 탭 이름이 길어지면 선택 탭이 가려지는 회귀를 내용 폭 변화 감지로 수정했다. 최초469>316.5 FAIL→PASS,최종 실제683pt 창에서 이름 저장 직후240pt 선택 버튼 전체 표시,이름/셸 유지·취소·재실행 복원과26개 검사를 확인했다. fixed-and-verified. [관찰](evidence/terminal-name-controls.md).
