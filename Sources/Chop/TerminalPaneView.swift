@@ -414,7 +414,7 @@ final class TerminalPaneView: NSView {
     titleButton.attributedTitle = NSAttributedString(
       string: name,
       attributes: [.font: ChopStyle.font, .foregroundColor: engine.appearanceMode.foreground])
-    titleButton.toolTip = "이름 바꾸기 (⌘⇧R)"
+    titleButton.toolTip = "\(name) — 이름 바꾸기 (⌘⇧R)"
     titleButton.setAccessibilityLabel("\(name) 이름 바꾸기")
   }
 }
