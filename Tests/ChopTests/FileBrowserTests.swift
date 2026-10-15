@@ -5,6 +5,57 @@ import Testing
 @testable import Chop
 
 @MainActor
+@Test func fileBrowserControlsAndRowsRemainClickableAtMinimumWidth() async throws {
+  _ = NSApplication.shared
+  let suite = "chop-file-browser-hit-\(UUID().uuidString)"
+  let defaults = try #require(UserDefaults(suiteName: suite))
+  defer { defaults.removePersistentDomain(forName: suite) }
+  let root = URL(fileURLWithPath: "/chop-preview")
+  let browser = FileBrowserView(initialURL: root, defaults: defaults) { url in
+    [
+      FileTreeEntry(
+        url: url.appendingPathComponent("README.md"), name: "README.md", isDirectory: false)
+    ]
+  }
+  let window = NSWindow(
+    contentRect: NSRect(x: 0, y: 0, width: 280, height: 400),
+    styleMask: [.titled], backing: .buffered, defer: false)
+  window.contentView = browser
+  defer { window.orderOut(nil) }
+  try await waitForFileBrowser { !browser.isLoading }
+  func descendants(of view: NSView) -> [NSView] {
+    view.subviews.flatMap { [$0] + descendants(of: $0) }
+  }
+  for mode in [AppearanceMode.light, .dark] {
+    browser.applyAppearance(mode)
+    window.layoutIfNeeded()
+    browser.layoutSubtreeIfNeeded()
+    let views = descendants(of: browser)
+    let buttons = views.compactMap { $0 as? NSButton }.filter {
+      ["홈", "다운로드", "문서"].contains($0.title)
+    }
+    #expect(buttons.count == 3)
+    let firstButton = try #require(buttons.first)
+    let rowCenter = browser.convert(firstButton.bounds, from: firstButton).midY
+    for button in buttons {
+      let rect = browser.convert(button.bounds, from: button)
+      #expect(rect.width > 0 && rect.height > 0)
+      #expect(browser.bounds.contains(rect))
+      #expect(rect.width >= button.intrinsicContentSize.width - 0.5)
+      #expect(abs(rect.midY - rowCenter) <= 0.5)
+      let point = button.convert(
+        NSPoint(x: button.bounds.midX, y: button.bounds.midY), to: browser.superview)
+      #expect(browser.hitTest(point) === button)
+    }
+    let outline = try #require(views.compactMap { $0 as? NSOutlineView }.first)
+    let row = outline.rect(ofRow: 0)
+    let point = outline.convert(NSPoint(x: row.midX, y: row.midY), to: browser.superview)
+    let hit = try #require(browser.hitTest(point))
+    #expect(hit === outline || hit.isDescendant(of: outline))
+  }
+}
+
+@MainActor
 @Test func fileBrowserRemembersSuccessfulRootsAndRecoversAfterFailure() async throws {
   _ = NSApplication.shared
   let suite = "chop-file-browser-\(UUID().uuidString)"
