@@ -25,7 +25,7 @@ cmux 스크린샷의 픽셀·서체·간격은 측정하지 않았습니다.
 |---|---|---|---|
 | 콘텐츠·터미널 배경 | `#FFFFFF` | `#1E2026` | chosen; AppearanceMode, terminal-light/dark.conf |
 | 칸 헤더 배경 | `#F3F4F6` | `#292D35` | chosen; 사용자 요청으로 본문과 구분, AppearanceMode.headerBackground → TerminalPaneView.header |
-| 파일 목록 배경 | `#F3F4F6` | `#292D35` | existing-token alias; AppearanceMode.fileListBackground → FileBrowserView.listSection, 로딩/빈/오류 포함 |
+| 파일 목록 배경 | `#F8F8F8` | `#24262C` | chosen; 버튼의 중립색을 본문 쪽으로 약35%만 반영한 연한 면. AppearanceMode.fileListBackground → FileBrowserView.listSection, 로딩/빈/오류 포함 |
 | 기본 텍스트·커서 | `#24262B` | `#FFFFFF` | chosen; 같은 파일, 칸 이름/터미널 |
 | 보조 텍스트 | `#626975` | `#D1D5DB` | chosen; AppearanceMode, 경로/오류 |
 | 터미널 선택 배경 | `#CCE0FF` | `#3D5066` | chosen; terminal-light/dark.conf |
@@ -69,7 +69,7 @@ Chop의 라벨과 오류 문구는 medium으로 통일합니다. 셸·TUI가 출
 - 파일 트리는 공통 툴바 아래에서 터미널 칸과 같은 높이로 시작합니다. 파일 헤더40pt는 첫 터미널 헤더40pt와 정렬합니다. 두 헤더는 같은 행 구성(간격12/세로 중앙/글자14pt)을 재사용하며 폭 조절 경계의 상단40pt도 헤더 배경으로 이어집니다. 툴바의 편집/레이아웃/화면 모드 영역을 차지하지 않습니다.
 - 오른쪽 패널은 기본300pt, 최소280pt이며 네이티브 경계로 폭을 조절합니다. 닫으면 경계도 없애고 canvas 전체 폭을 터미널에 돌려줍니다. 화면에 최소 폭이 들어가지 않으면 열기를 거절하고, 초기 복원에서는 패널을 접습니다.
 - 파일 트리의 경로 입력·홈/다운로드/문서 바로가기·파일 목록은 하나의 탐색 영역입니다. 바깥 inset12/gap8, 한 줄 경로 입력28pt, 파일 행28pt, 들여쓰기16pt, 시스템14pt medium 글꼴을 유지합니다. 헤더 버튼은 기존28pt 아이콘입니다. 후속 사용자 요청의 `design/references/file-shortcuts-row-user.png` / `layout-edit-button-user.png`에 따라 바로가기는 기존 세로108pt 묶음을 대체하는 가로 한 줄의 개별 native rounded 버튼입니다. 높이28pt/gap8,기존14pt medium 글자와 SF house/arrow.down.circle/doc14pt 아이콘을 사용하고,아이콘·글자는 native image-leading 배치로 함께 누릅니다. 전체 이름과 경로 툴팁·AX 이름은 유지합니다. 사용자 지정 행 배치가 이전 Finder 세로 열 정렬 계약을 대체하며 이미지는 image-px 관찰 자료입니다.
-- 실제 파일 목록과 로딩/빈/오류 안내는 바로가기 아래의 별도 목록 면에 함께 둡니다. 배경은 headerBackground를 재사용한 fileListBackground 의미 별칭이며 새 팔레트·그라디언트·구분선은 추가하지 않습니다. 목록 면은 반경8pt/내부 inset8pt,바깥 좌우·하단 inset12pt로 구분합니다. 최소 패널280pt에서도 세 바로가기의 전체 이름·아이콘과 파일 행 클릭 영역이 유지돼야 합니다. 목록 자체의 선택·펼치기·키보드·스크롤·경로 드래그는 같은 NSOutlineView를 재사용합니다.
+- 실제 파일 목록과 로딩/빈/오류 안내는 바로가기 아래의 별도 목록 면에 함께 둡니다. 배경은 fileListBackground(light F8F8F8/dark24262C)입니다. 버튼색을 그대로 넓은 면에 쓰면 너무 강하다는 후속 사용자 교정에 따라,버튼의 중립색을 본문 쪽으로 약35%만 반영한 연한 톤을 사용합니다. 헤더·버튼색은 유지하며 그라디언트·구분선은 추가하지 않습니다. 목록 면은 반경8pt/내부 inset8pt,바깥 좌우·하단 inset12pt로 구분합니다. 최소 패널280pt에서도 세 바로가기의 전체 이름·아이콘과 파일 행 클릭 영역이 유지돼야 합니다. 목록 자체의 선택·펼치기·키보드·스크롤·경로 드래그는 같은 NSOutlineView를 재사용합니다.
 
 ## Elevation & Depth
 
