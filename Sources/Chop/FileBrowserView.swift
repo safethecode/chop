@@ -33,48 +33,6 @@ private final class FileOutlineView: NSOutlineView {
 }
 
 @MainActor
-private final class FileLocationButton: NSButton {
-  init(name: String, symbol: String, target: AnyObject, action: Selector) {
-    super.init(frame: .zero)
-    self.target = target
-    self.action = action
-    title = ""
-    setButtonType(.momentaryPushIn)
-    bezelStyle = .inline
-    isBordered = false
-    setAccessibilityLabel(name)
-    let icon = NSImageView()
-    icon.image = NSImage(systemSymbolName: symbol, accessibilityDescription: nil)?
-      .withSymbolConfiguration(.init(pointSize: 14, weight: .medium))
-    icon.imageScaling = .scaleProportionallyDown
-    icon.contentTintColor = .labelColor
-    let label = NSTextField(labelWithString: name)
-    label.font = ChopStyle.font
-    for view in [icon, label] {
-      view.setAccessibilityElement(false)
-      view.translatesAutoresizingMaskIntoConstraints = false
-      addSubview(view)
-    }
-    NSLayoutConstraint.activate([
-      icon.leadingAnchor.constraint(equalTo: leadingAnchor),
-      icon.centerYAnchor.constraint(equalTo: centerYAnchor),
-      icon.widthAnchor.constraint(equalToConstant: 16),
-      icon.heightAnchor.constraint(equalToConstant: 16),
-      label.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 8),
-      label.centerYAnchor.constraint(equalTo: centerYAnchor),
-      label.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
-    ])
-  }
-
-  @available(*, unavailable)
-  required init?(coder: NSCoder) { fatalError("Use init(name:symbol:target:action:).") }
-
-  override func hitTest(_ point: NSPoint) -> NSView? {
-    super.hitTest(point) == nil ? nil : self
-  }
-}
-
-@MainActor
 final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDelegate,
   NSMenuDelegate, NSMenuItemValidation
 {
@@ -93,7 +51,7 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
   private let statusLabel = NSTextField(wrappingLabelWithString: "")
   private let outline = FileOutlineView()
   private let scrollView = NSScrollView()
-  private let shortcutSection = NSView()
+  private let listSection = NSView()
   private let quickLocations: [URL] = [
     FileManager.default.homeDirectoryForCurrentUser,
     FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask)[0],
@@ -126,7 +84,7 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
     appearance = mode.appearance
     layer?.backgroundColor = mode.background.cgColor
     header.layer?.backgroundColor = mode.headerBackground.cgColor
-    shortcutSection.layer?.backgroundColor = mode.headerBackground.cgColor
+    listSection.layer?.backgroundColor = mode.fileListBackground.cgColor
     titleLabel.textColor = mode.foreground
     statusLabel.textColor = mode.secondaryForeground
     outline.reloadData()
@@ -346,25 +304,25 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
     pathField.target = self
     pathField.action = #selector(goToPath)
     let shortcuts = NSStackView()
-    shortcuts.orientation = .vertical
-    shortcuts.alignment = .leading
-    shortcuts.spacing = 4
-    shortcutSection.wantsLayer = true
-    shortcutSection.layer?.cornerRadius = 8
-    shortcutSection.addSubview(shortcuts)
+    shortcuts.orientation = .horizontal
+    shortcuts.alignment = .centerY
+    shortcuts.spacing = 8
     let locations = [("홈", "house"), ("다운로드", "arrow.down.circle"), ("문서", "doc")]
     for (index, location) in locations.enumerated() {
       let (name, symbol) = location
-      let button = FileLocationButton(
-        name: name, symbol: symbol, target: self, action: #selector(visitShortcut(_:)))
+      let button = NSButton(title: name, target: self, action: #selector(visitShortcut(_:)))
+      button.bezelStyle = .rounded
+      button.font = ChopStyle.font
+      button.image = NSImage(systemSymbolName: symbol, accessibilityDescription: nil)?
+        .withSymbolConfiguration(.init(pointSize: 14, weight: .medium))
+      button.imagePosition = .imageLeading
+      button.imageScaling = .scaleProportionallyDown
+      button.setAccessibilityLabel(name)
       button.tag = index
       button.toolTip = quickLocations[index].path
       shortcuts.addArrangedSubview(button)
       button.translatesAutoresizingMaskIntoConstraints = false
-      NSLayoutConstraint.activate([
-        button.widthAnchor.constraint(equalTo: shortcuts.widthAnchor),
-        button.heightAnchor.constraint(equalToConstant: 28),
-      ])
+      button.heightAnchor.constraint(equalToConstant: 28).isActive = true
     }
     statusLabel.font = ChopStyle.font
     statusLabel.setContentCompressionResistancePriority(.required, for: .vertical)
@@ -396,12 +354,21 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
     scrollView.hasVerticalScroller = true
     scrollView.autohidesScrollers = true
     scrollView.drawsBackground = false
-    let content = NSStackView(views: [pathField, shortcutSection, statusLabel, scrollView])
+    let listContent = NSStackView(views: [statusLabel, scrollView])
+    listContent.orientation = .vertical
+    listContent.alignment = .leading
+    listContent.spacing = 8
+    listSection.wantsLayer = true
+    listSection.layer?.cornerRadius = 8
+    listSection.layer?.masksToBounds = true
+    listSection.addSubview(listContent)
+    let content = NSStackView(views: [pathField, shortcuts, listSection])
     content.orientation = .vertical
     content.alignment = .leading
     content.spacing = 8
     for view in [
-      header, headerRow, content, pathField, shortcutSection, shortcuts, statusLabel, scrollView,
+      header, headerRow, content, pathField, shortcuts, listSection, listContent, statusLabel,
+      scrollView,
     ] {
       view.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -419,16 +386,17 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
       content.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ChopStyle.inset),
       content.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -ChopStyle.inset),
       content.topAnchor.constraint(equalTo: header.bottomAnchor, constant: 12),
-      content.bottomAnchor.constraint(equalTo: bottomAnchor),
+      content.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -ChopStyle.inset),
       pathField.widthAnchor.constraint(equalTo: content.widthAnchor),
       pathField.heightAnchor.constraint(equalToConstant: 28),
-      shortcutSection.widthAnchor.constraint(equalTo: content.widthAnchor),
-      shortcuts.leadingAnchor.constraint(equalTo: shortcutSection.leadingAnchor, constant: 8),
-      shortcuts.trailingAnchor.constraint(equalTo: shortcutSection.trailingAnchor, constant: -8),
-      shortcuts.topAnchor.constraint(equalTo: shortcutSection.topAnchor, constant: 8),
-      shortcuts.bottomAnchor.constraint(equalTo: shortcutSection.bottomAnchor, constant: -8),
-      statusLabel.widthAnchor.constraint(equalTo: content.widthAnchor),
-      scrollView.widthAnchor.constraint(equalTo: content.widthAnchor),
+      shortcuts.widthAnchor.constraint(lessThanOrEqualTo: content.widthAnchor),
+      listSection.widthAnchor.constraint(equalTo: content.widthAnchor),
+      listContent.leadingAnchor.constraint(equalTo: listSection.leadingAnchor, constant: 8),
+      listContent.trailingAnchor.constraint(equalTo: listSection.trailingAnchor, constant: -8),
+      listContent.topAnchor.constraint(equalTo: listSection.topAnchor, constant: 8),
+      listContent.bottomAnchor.constraint(equalTo: listSection.bottomAnchor, constant: -8),
+      statusLabel.widthAnchor.constraint(equalTo: listContent.widthAnchor),
+      scrollView.widthAnchor.constraint(equalTo: listContent.widthAnchor),
       scrollView.heightAnchor.constraint(greaterThanOrEqualToConstant: 0),
     ])
   }

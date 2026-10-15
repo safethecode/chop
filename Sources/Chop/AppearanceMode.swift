@@ -33,6 +33,9 @@ enum AppearanceMode: String, CaseIterable {
       : NSColor(srgbRed: 41 / 255, green: 45 / 255, blue: 53 / 255, alpha: 1)
   }
 
+  /// Reuses the secondary surface to distinguish file contents from navigation controls.
+  var fileListBackground: NSColor { headerBackground }
+
   var foreground: NSColor {
     self == .light ? NSColor(srgbRed: 36 / 255, green: 38 / 255, blue: 43 / 255, alpha: 1) : .white
   }
