@@ -138,6 +138,7 @@ final class WorkspaceView: NSView {
     pane.canSplit = { [weak self] axis in self?.canSplit(id, axis: axis) ?? false }
     pane.onRemoveRequested = { [weak self] in self?.removeEmptyPane(id) }
     pane.onZoomRequested = { [weak self] in self?.toggleZoom(id) }
+    pane.onRenameRequested = { [weak self] in self?.requestRename(id) }
     pane.onDirectoryFallback = { [weak self] path in self?.reportMissingDirectories([path]) }
     pane.canMovePane = { [weak self] source in self?.canSwapPanes(source, with: id) ?? false }
     pane.onMoveRequested = { [weak self] source, previewFrame in
@@ -397,6 +398,13 @@ final class WorkspaceView: NSView {
     focusedPane.focus()
   }
 
+  func requestRename(_ id: UUID) {
+    guard let pane = panes[id] else { return }
+    if isTabbed { selectTab(id) }
+    pane.focus()
+    requestRename()
+  }
+
   private func rebuild() {
     // Reparent existing pane objects; their Ghostty surfaces and PTYs remain alive.
     for pane in panes.values { pane.removeFromSuperview() }
@@ -430,7 +438,8 @@ final class WorkspaceView: NSView {
         panes: layout.paneIDs.compactMap { panes[$0] }, selectedID: focusedID,
         mode: engine.appearanceMode,
         onSelect: { [weak self] in self?.selectTab($0) }, onAdd: { [weak self] in self?.addTab() },
-        onClose: { [weak self] in self?.requestCloseFocused() })
+        onClose: { [weak self] in self?.requestCloseFocused() },
+        onRename: { [weak self] in self?.requestRename($0) })
       tabBar = bar
       view = TerminalTabContentView(tabBar: bar, pane: focusedPane)
     } else {
