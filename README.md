@@ -29,13 +29,13 @@
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./docs/images/chop-dark.jpg" />
-    <img src="./docs/images/chop-light.jpg" width="1100" alt="macOS에서 실행한 Chop: 터미널 한 개와 중앙 +가 있는 빈 칸 세 개, 오른쪽 파일 트리" />
+    <source media="(prefers-color-scheme: dark)" srcset="./docs/images/chop-macos-dark.jpg" />
+    <img src="./docs/images/chop-macos-light.jpg" width="1100" alt="macOS 스타일 배경 위의 실제 Chop 창: 세 터미널과 중앙 +가 있는 빈 칸, 오른쪽 파일 트리" />
   </picture>
 </p>
 
 <p align="center">
-  <sub>실제 Chop 실행 화면 · <a href="./docs/images/chop-light.jpg">라이트</a> / <a href="./docs/images/chop-dark.jpg">다크</a></sub>
+  <sub>실제 Chop 창을 오리지널 배경 위에 구성한 이미지 · <a href="./docs/images/chop-macos-light.jpg">라이트</a> / <a href="./docs/images/chop-macos-dark.jpg">다크</a></sub>
 </p>
 
 ## Chop은?
@@ -90,7 +90,7 @@ libghostty 엔진과 Metal 렌더러를 사용합니다.
 프로세스는 유지됩니다. 빈 칸을 닫으면 인접 칸과 합쳐지며 마지막 한 칸은 남습니다.
 
 <p align="center">
-  <img src="./docs/images/chop-tabs.jpg" width="1100" alt="Chop의 상단 탭 보기: 네 칸을 탭으로 유지하고 선택한 터미널을 크게 표시한 라이트 모드 화면" />
+  <img src="./docs/images/chop-macos-tabs.jpg" width="1100" alt="Chop의 상단 탭 보기: 네 칸을 탭으로 유지하고 선택한 터미널을 크게 표시한 라이트 모드 화면" />
   <br />
   <sub>넓게 볼 때는 탭으로. 다시 나눌 때도 기존 터미널은 그대로.</sub>
 </p>
