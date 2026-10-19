@@ -111,6 +111,7 @@ final class WorkspaceView: NSView {
   }
 
   func setFileTreeVisible(_ visible: Bool) {
+    terminalArea.setFileTreeVisible(visible)
     let label = visible ? "파일 트리 숨기기" : "파일 트리 보기"
     fileTreeButton.toolTip = label
     fileTreeButton.setAccessibilityLabel(label)

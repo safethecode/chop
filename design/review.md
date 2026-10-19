@@ -101,3 +101,5 @@ V-50 / TERMINAL-ADD-RAIL: 사용자 요청의 canvas/파일 트리 사이80pt �
 V-51 / F-TERMINAL-ADD-WIDTH: 사용자가 세로 plus 영역이 너무 넓다고 교정했다. 80→48pt 영역·56→32pt native plus·좌우8pt로 줄이고 빈 칸 중앙56pt는 보존했다. 실제 라이트 격자 추가 클릭·다크 탭/트리 숨김·643×434px 축소와 전체36개 검사를 확인했다. fixed-and-verified (셀프 리뷰). [관찰](evidence/terminal-add-width.md).
 
 V-52 / F-TERMINAL-ADD-BOUNDARY: 사용자 요청에 따라48pt 세로 추가 영역 좌우에 전체 높이1pt 경계를 추가했다(light B9BDC6/dark555B67). 실제 다크 탭/트리 숨김·라이트 격자/트리 표시·890×441px 축소와 plus 클릭을 확인했다. 오래된 기본4칸 최소 폭도890pt로 바로잡았다. 전체36개 검사, fixed-and-verified (셀프 리뷰). [관찰](evidence/terminal-add-borders.md).
+
+V-53 / F-TERMINAL-ADD-DOUBLE-BORDER: 사용자 교정으로 파일 트리 경계와 오른쪽 새 선이 붙어2pt처럼 보이고 색이 과한 introduced P2를 확인했다. 트리 표시 시 native divider 하나를 함께 쓰고, 숨김 시에만 자체 오른쪽 선을 표시한다. 자체 색은 DEDEDE/3D3D3D로 완화했다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 fixed-and-verified (셀프 리뷰). [관찰](evidence/terminal-add-soft-borders.md).
