@@ -77,10 +77,10 @@ import Testing
         let button = area.addButton
         let rect = area.convert(button.bounds, from: button)
         #expect(area.bounds.contains(rect))
-        #expect(rect.size == NSSize(width: 56, height: 56))
+        #expect(rect.size == NSSize(width: 32, height: 32))
         #expect(abs(rect.midX - (area.bounds.maxX - TerminalAreaView.railWidth / 2)) < 0.5)
         #expect(abs(rect.midY - area.bounds.midY) < 0.5)
-        let point = button.convert(NSPoint(x: 28, y: 28), to: workspace.superview)
+        let point = button.convert(NSPoint(x: 16, y: 16), to: workspace.superview)
         #expect(workspace.hitTest(point) === button)
       }
     }

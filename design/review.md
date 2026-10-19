@@ -97,3 +97,5 @@ V-48 / F-README-MACOS-PRESENTATION: 사용자가 이전 사진의 완성도를 �
 V-49 / FILE-SEARCH-LATENCY: 검색어마다 반복되던 디렉터리 읽기를 최대10초·10만 항목 캐시로 재사용하고75ms 입력 대기·부분 결과·실제 읽기 취소 전달을 적용했다. 200폴더/1만 파일 로컬 release 최적화 측정은 첫459ms→다음39ms(약12배)이며 환경별 보장은 아니다. 전체34개 검사와 check.sh 통과. 별도 bundle ID/세션 경로의 실제 검증 앱에서 Sources의 FileTree→FileTreeSearch, 새로고침·지우기와라이트/다크 검색을 확인했다. 사용 중인 원래 Chop 셸은 종료하지 않았다. 셀프 리뷰에서 캐시 예산·만료·취소 경합·새로고침 갱신을 확인했다. 최초 검사에서 추가한 fixture 파일로 폴더 행 수가 달라지는 기대값을 수정했다. verified (변경 범위).
 
 V-50 / TERMINAL-ADD-RAIL: 사용자 요청의 canvas/파일 트리 사이80pt 추가 영역과56pt native plus를 도입했다. 첫 빈 칸 우선·두 칸 행의 아래 추가·기존 분할/PTY 보존·16개 한도·⌘T를 연결했다. 초기 시제품에서 격자 선택 표시가 꺼진 introduced P2를 행 구조 판단으로 수정했다. 전체36개 check.sh 검사와 실제 두 모드·5/8/16개·키보드 스크롤/ENV·탭/패널 숨김·native 축소·확대 중 추가·16개 재실행을 확인했다. 셀프 리뷰이며 원래 사용 중인 앱은 종료하지 않았다. fixed-and-verified (변경 범위). [관찰](evidence/terminal-add-rail.md).
+
+V-51 / F-TERMINAL-ADD-WIDTH: 사용자가 세로 plus 영역이 너무 넓다고 교정했다. 80→48pt 영역·56→32pt native plus·좌우8pt로 줄이고 빈 칸 중앙56pt는 보존했다. 실제 라이트 격자 추가 클릭·다크 탭/트리 숨김·643×434px 축소와 전체36개 검사를 확인했다. fixed-and-verified (셀프 리뷰). [관찰](evidence/terminal-add-width.md).
