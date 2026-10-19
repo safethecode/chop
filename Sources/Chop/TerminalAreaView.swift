@@ -3,7 +3,7 @@ import AppKit
 /// The add control stays beside the viewport, including when the canvas scrolls or the tree is hidden.
 @MainActor
 final class TerminalAreaView: NSView {
-  static let railWidth: CGFloat = 80
+  static let railWidth: CGFloat = 48
   private let canvas: NSView
   private let rail = NSView()
   let addButton: NSButton
@@ -16,7 +16,7 @@ final class TerminalAreaView: NSView {
     super.init(frame: .zero)
     rail.wantsLayer = true
     addButton.bezelStyle = .circular
-    addButton.controlSize = .large
+    addButton.controlSize = .regular
     addButton.setAccessibilityLabel("터미널 추가")
     addButton.toolTip = "터미널 추가 (⌘T)"
     addSubview(canvas)
@@ -36,6 +36,6 @@ final class TerminalAreaView: NSView {
     canvas.frame = NSRect(x: 0, y: 0, width: max(0, bounds.width - width), height: bounds.height)
     rail.frame = NSRect(x: canvas.frame.maxX, y: 0, width: width, height: bounds.height)
     addButton.frame = NSRect(
-      x: (width - 56) / 2, y: (bounds.height - 56) / 2, width: 56, height: 56)
+      x: (width - 32) / 2, y: (bounds.height - 32) / 2, width: 32, height: 32)
   }
 }
