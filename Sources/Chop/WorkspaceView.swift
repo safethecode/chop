@@ -51,7 +51,9 @@ final class WorkspaceView: NSView {
   private var restoredRunningIDs: [UUID] = []
   private let dragGroupID = UUID()
 
-  init(engine: TerminalEngine, snapshot: WorkspaceSnapshot? = nil) {
+  init(
+    engine: TerminalEngine, snapshot: WorkspaceSnapshot? = nil, initialDirectory: String? = nil
+  ) {
     self.engine = engine
     let valid = snapshot.flatMap { (try? $0.validate()) != nil ? $0 : nil }
     var ids = valid?.layout.paneIDs ?? (0..<4).map { _ in UUID() }
@@ -75,7 +77,7 @@ final class WorkspaceView: NSView {
     terminalArea.applyAppearance(engine.appearanceMode)
     for id in ids {
       let saved = valid?.panes.first { $0.id == id }
-      addPane(id, directory: saved?.workingDirectory, name: saved?.name)
+      addPane(id, directory: saved?.workingDirectory ?? initialDirectory, name: saved?.name)
       if saved?.wasRunning == true { restoredRunningIDs.append(id) }
     }
     rebuild()

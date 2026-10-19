@@ -477,6 +477,128 @@ import Testing
   #expect(emptyRestored.focusedPane.terminal?.effectiveAppearance.name == .aqua)
   emptyRestored.closeAll()
   try await verifyGlobalTerminalAddition(engine: engine, window: window, directory: directory)
+  try await verifyProjectWindows(engine: engine, directory: directory)
+}
+
+@MainActor
+private func verifyProjectWindows(engine: TerminalEngine, directory: URL) async throws {
+  let suite = "chop-project-windows-\(UUID())"
+  var suites: [String] = []
+  var windowIDs: [UUID] = []
+  var clearedIDs: [UUID] = []
+  let manager = WorkspaceWindowManager(
+    engine: engine,
+    clearDefaultsForWindow: { id in
+      clearedIDs.append(id)
+      UserDefaults.standard.removePersistentDomain(forName: suite + id.uuidString)
+    },
+    defaultsForWindow: { id in
+      let name = suite + id.uuidString
+      suites.append(name)
+      windowIDs.append(id)
+      let defaults = UserDefaults(suiteName: name)!
+      // Window layout checks must not depend on a CI runner's physical screen width.
+      defaults.set(false, forKey: "fileTreeVisible")
+      return defaults
+    })
+  defer {
+    manager.shutdown()
+    for name in suites { UserDefaults(suiteName: name)?.removePersistentDomain(forName: name) }
+    for id in windowIDs { NSWindow.removeFrame(usingName: "ChopWorkspaceWindow-\(id.uuidString)") }
+  }
+  let a = directory.appendingPathComponent("project-a")
+  let b = directory.appendingPathComponent("project-b")
+  for url in [a, b] {
+    try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
+  }
+  let first = manager.open(directory: a.path)
+  let second = manager.open(directory: b.path)
+  let firstTerminal = try #require(first.pane.terminal)
+  let secondTerminal = try #require(second.pane.terminal)
+  try await waitFor { !firstTerminal.needsConfirmClose && !secondTerminal.needsConfirmClose }
+  #expect(manager.windows.count == 2 && manager.active === second)
+  #expect(first.window !== second.window && firstTerminal !== secondTerminal)
+  #expect(first.content.fileBrowser.rootURL.path == a.path)
+  #expect(second.content.fileBrowser.rootURL.path == b.path)
+  let firstWindow = try #require(first.window)
+  let secondWindow = try #require(second.window)
+  let firstFrameKey = "NSWindow Frame \(firstWindow.frameAutosaveName)"
+  let secondFrameKey = "NSWindow Frame \(secondWindow.frameAutosaveName)"
+  #expect(!firstWindow.frameAutosaveName.isEmpty && !secondWindow.frameAutosaveName.isEmpty)
+  firstWindow.saveFrame(usingName: firstWindow.frameAutosaveName)
+  secondWindow.saveFrame(usingName: secondWindow.frameAutosaveName)
+  #expect(UserDefaults.standard.object(forKey: secondFrameKey) != nil)
+  manager.activate(first.id)
+  #expect(manager.active === first)
+  firstTerminal.insertText(
+    "export CHOP_WINDOW_VALUE=kept; printf 'WINDOW_READY\\n'",
+    replacementRange: NSRange(location: NSNotFound, length: 0))
+  try pressReturn(on: firstTerminal, window: #require(first.window))
+  try await waitFor {
+    (firstTerminal.accessibilityValue() as? String ?? "").components(separatedBy: "WINDOW_READY")
+      .count >= 3
+      && !firstTerminal.needsConfirmClose
+  }
+  first.workspace.addTerminal()
+  #expect(first.workspace.panes.values.filter(\.isRunning).count == 2)
+  #expect(second.workspace.panes.values.filter(\.isRunning).count == 1)
+  #expect(first.workspace.renameFocused(to: "프로젝트 A 작업"))
+  second.content.fileBrowser.navigate(to: directory)
+  try await waitFor { !second.content.fileBrowser.isLoading }
+  #expect(first.content.fileBrowser.rootURL.path == a.path)
+  let saved = manager.snapshot()
+  try saved.validate()
+  #expect(saved.windows.count == 2)
+  #expect(
+    saved.windows.first { $0.id == first.id }?.workspace.panes.contains { $0.name == "프로젝트 A 작업" }
+      == true)
+  firstTerminal.insertText(
+    "sleep 1; printf 'OTHER_WINDOW_TASK_DONE\\n'",
+    replacementRange: NSRange(location: NSNotFound, length: 0))
+  try pressReturn(on: firstTerminal, window: #require(first.window))
+  try await waitFor { firstTerminal.needsConfirmClose }
+  manager.activate(second.id)
+  #expect(manager.needsConfirmClose && !second.workspace.needsConfirmClose)
+  second.window?.performClose(nil)
+  #expect(manager.windows.count == 1 && manager.windows[first.id] === first)
+  #expect(clearedIDs == [second.id])
+  #expect(UserDefaults.standard.persistentDomain(forName: suite + second.id.uuidString) == nil)
+  #expect(UserDefaults.standard.object(forKey: secondFrameKey) == nil)
+  #expect(UserDefaults.standard.object(forKey: firstFrameKey) != nil)
+  #expect(first.workspace.panes.values.contains { $0.terminal === firstTerminal })
+  try await waitFor {
+    (firstTerminal.accessibilityValue() as? String ?? "")
+      .components(separatedBy: "OTHER_WINDOW_TASK_DONE").count >= 3
+      && !firstTerminal.needsConfirmClose
+  }
+  manager.activate(first.id)
+  firstTerminal.insertText(
+    "printf 'WINDOW_A=%s\\n' \"$CHOP_WINDOW_VALUE\"",
+    replacementRange: NSRange(location: NSNotFound, length: 0))
+  try pressReturn(on: firstTerminal, window: #require(first.window))
+  try await waitFor {
+    (firstTerminal.accessibilityValue() as? String ?? "").contains("WINDOW_A=kept")
+      && !firstTerminal.needsConfirmClose
+  }
+  let third = manager.open(directory: b.path)
+  #expect(third.id != second.id)
+  third.content.fileBrowser.navigate(to: directory)
+  try await waitFor { !third.content.fileBrowser.isLoading }
+  let remaining = manager.snapshot()
+  manager.shutdown()
+  #expect(clearedIDs == [second.id], "Application shutdown retains settings for restored windows")
+  #expect(UserDefaults.standard.object(forKey: firstFrameKey) != nil)
+  #expect(
+    UserDefaults.standard.persistentDomain(forName: suite + third.id.uuidString)?[
+      "fileTreeRootPath"] as? String == directory.path)
+  for snapshot in remaining.windows { manager.open(snapshot: snapshot) }
+  if let id = remaining.focusedWindowID { manager.activate(id) }
+  #expect(manager.windows.count == 2)
+  #expect(manager.windows[second.id] == nil)
+  #expect(manager.active?.id == remaining.focusedWindowID)
+  #expect(
+    manager.windows[first.id]?.workspace.panes.values.contains { $0.name == "프로젝트 A 작업" } == true)
+  #expect(manager.windows[third.id]?.content.fileBrowser.rootURL.path == directory.path)
 }
 
 @MainActor
