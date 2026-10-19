@@ -3,23 +3,34 @@ import ChopCore
 
 @MainActor
 final class WorkspaceWindowController: NSWindowController, NSWindowDelegate {
+  let id: UUID
+  let projectDirectory: String
   let workspace: WorkspaceView
   let content: WorkspaceSplitView
   var pane: TerminalPaneView { workspace.focusedPane }
+  var onClose: (() -> Void)?
+  var onActivate: (() -> Void)?
 
-  init(engine: TerminalEngine, snapshot: WorkspaceSnapshot? = nil) {
-    workspace = WorkspaceView(engine: engine, snapshot: snapshot)
-    content = workspace.installFileBrowser()
+  init(
+    engine: TerminalEngine, id: UUID = UUID(), snapshot: WorkspaceSnapshot? = nil,
+    projectDirectory: String = FileManager.default.homeDirectoryForCurrentUser.path,
+    defaults: UserDefaults = .standard
+  ) {
+    self.id = id
+    self.projectDirectory = projectDirectory
+    workspace = WorkspaceView(
+      engine: engine, snapshot: snapshot, initialDirectory: projectDirectory)
+    content = workspace.installFileBrowser(defaults: defaults)
     let window = NSWindow(
       contentRect: NSRect(x: 0, y: 0, width: 1100, height: 720),
       styleMask: [.titled, .closable, .miniaturizable, .resizable],
       backing: .buffered,
       defer: false
     )
-    window.title = "Chop"
+    window.title = "\((projectDirectory as NSString).lastPathComponent) — Chop"
     window.minSize = NSSize(width: 640, height: 400)
     window.isReleasedWhenClosed = false
-    window.setFrameAutosaveName("ChopWorkspaceWindow")
+    window.setFrameAutosaveName("ChopWorkspaceWindow-\(id.uuidString)")
     window.center()
 
     window.contentView = workspace
@@ -51,6 +62,9 @@ final class WorkspaceWindowController: NSWindowController, NSWindowDelegate {
     workspace.closeAll()
     return true
   }
+
+  func windowWillClose(_ notification: Notification) { onClose?() }
+  func windowDidBecomeKey(_ notification: Notification) { onActivate?() }
 
   @available(*, unavailable)
   required init?(coder: NSCoder) {

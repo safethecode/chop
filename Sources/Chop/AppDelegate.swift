@@ -3,14 +3,15 @@ import ChopCore
 
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
-  private var workspaceWindow: WorkspaceWindowController?
+  private var workspaceWindow: WorkspaceWindowController? { windowManager.active }
+  private lazy var windowManager = WorkspaceWindowManager(engine: engine)
+  private var projectPanel: NSOpenPanel?
   private let engine = TerminalEngine()
   private let session = SessionCoordinator(
     store: SessionStore(
       fileURL:
         FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
         .appendingPathComponent("Chop/session.json")))
-  private var initialSnapshot: WorkspaceSnapshot?
 
   func applicationDidFinishLaunching(_ notification: Notification) {
     NSApp.setActivationPolicy(.regular)
@@ -27,8 +28,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
       return
     }
     configureMainMenu()
-    initialSnapshot = session.load()
-    showWorkspace()
+    let saved = session.load()
+    windowManager.onAppearanceChangeRequested = { [weak self] mode in self?.applyAppearance(mode) }
+    if let saved, !saved.windows.isEmpty {
+      for snapshot in saved.windows {
+        windowManager.open(
+          snapshot: snapshot, legacyDefaults: session.migratedLegacyWorkspace ? .standard : nil)
+      }
+      if let id = saved.focusedWindowID { windowManager.activate(id) }
+    } else {
+      windowManager.open()
+    }
+    session.attach(windowManager)
+    session.saveNow()
     NSApp.activate(ignoringOtherApps: true)
   }
 
@@ -37,31 +49,58 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     hasVisibleWindows flag: Bool
   ) -> Bool {
     if !flag {
-      showWorkspace()
+      if let existing = windowManager.active {
+        windowManager.activate(existing.id)
+      } else {
+        newWindow()
+      }
     }
     return true
   }
 
-  private func showWorkspace() {
-    if workspaceWindow == nil {
-      workspaceWindow = WorkspaceWindowController(engine: engine, snapshot: initialSnapshot)
-      workspaceWindow?.workspace.onAppearanceChangeRequested = { [weak self] mode in
-        self?.applyAppearance(mode)
-      }
-      initialSnapshot = nil
+  @objc private func newWindow() {
+    windowManager.open(directory: workspaceWindow?.pane.workingDirectory)
+    NSApp.activate(ignoringOtherApps: true)
+  }
+
+  @objc private func openProjectWindow() {
+    guard projectPanel == nil else { return }
+    let panel = NSOpenPanel()
+    projectPanel = panel
+    panel.title = "프로젝트 폴더에서 새 윈도우"
+    panel.prompt = "열기"
+    panel.canChooseDirectories = true
+    panel.canChooseFiles = false
+    panel.allowsMultipleSelection = false
+    panel.canCreateDirectories = false
+    panel.directoryURL = workspaceWindow?.content.fileBrowser.rootURL
+    let completion: (NSApplication.ModalResponse) -> Void = { [weak self] response in
+      self?.projectPanel = nil
+      guard response == .OK, let self, let url = panel.url else { return }
+      windowManager.open(directory: url.standardizedFileURL.path)
+      NSApp.activate(ignoringOtherApps: true)
     }
-    workspaceWindow?.showWindow(nil)
-    workspaceWindow?.window?.makeKeyAndOrderFront(nil)
-    if let workspace = workspaceWindow?.workspace {
-      workspace.layoutSubtreeIfNeeded()
-      workspace.startRestoredTerminals()
-      session.attach(workspace)
-      session.saveNow()
+    if let window = workspaceWindow?.window, window.attachedSheet == nil {
+      panel.beginSheetModal(for: window, completionHandler: completion)
+    } else {
+      panel.begin(completionHandler: completion)
     }
   }
 
+  func applicationDockMenu(_ sender: NSApplication) -> NSMenu? {
+    let menu = NSMenu()
+    for (title, action) in [
+      ("새 윈도우", #selector(newWindow)),
+      ("프로젝트 폴더에서 새 윈도우…", #selector(openProjectWindow)),
+    ] {
+      let item = menu.addItem(withTitle: title, action: action, keyEquivalent: "")
+      item.target = self
+    }
+    return menu
+  }
+
   func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
-    if workspaceWindow?.workspace.needsConfirmClose == true {
+    if windowManager.needsConfirmClose {
       let alert = NSAlert()
       alert.messageText = "Chop을 종료할까요?"
       alert.informativeText = "실행 중인 터미널 작업이 종료됩니다."
@@ -74,7 +113,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
 
   func applicationWillTerminate(_ notification: Notification) {
     session.prepareToTerminate()
-    workspaceWindow?.workspace.closeAll()
+    windowManager.shutdown()
     engine.shutdown()
   }
 
@@ -111,11 +150,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
   private func applyAppearance(_ mode: AppearanceMode) {
     engine.applyAppearance(mode)
     NSApp.appearance = mode.appearance
-    workspaceWindow?.workspace.applyAppearance(mode)
+    windowManager.applyAppearance(mode)
     mode.save()
   }
 
   func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+    if menuItem.action == #selector(newWindow) { return true }
+    if menuItem.action == #selector(openProjectWindow) { return projectPanel == nil }
     if menuItem.action == #selector(chooseAppearance(_:)) {
       menuItem.state =
         (menuItem.representedObject as? String) == engine.appearanceMode.rawValue ? .on : .off
@@ -169,6 +210,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     )
     applicationItem.submenu = applicationMenu
     mainMenu.addItem(applicationItem)
+
+    let fileItem = NSMenuItem()
+    let fileMenu = NSMenu(title: "파일")
+    let new = fileMenu.addItem(withTitle: "새 윈도우", action: #selector(newWindow), keyEquivalent: "n")
+    new.target = self
+    let project = fileMenu.addItem(
+      withTitle: "프로젝트 폴더에서 새 윈도우…", action: #selector(openProjectWindow), keyEquivalent: "n")
+    project.keyEquivalentModifierMask = [.command, .shift]
+    project.target = self
+    fileItem.submenu = fileMenu
+    mainMenu.addItem(fileItem)
 
     let terminalItem = NSMenuItem()
     let terminalMenu = NSMenu(title: "터미널")
