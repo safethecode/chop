@@ -111,3 +111,5 @@ V-55 / F-WINDOW-SETTINGS-LIFETIME: CodeRabbit 자동 리뷰의 창 닫기 후 su
 V-56 / INPUT-INSET-MOTION: 사용자 요청의 경로·검색·이름 입력창에 clip된 중립 blur inset과0.18초 hover/focus opacity 전환을 적용했다. native editor/IME·검색/취소·AX·프레임과 파란 외곽선 생략을 유지한다. 실제 두 모드 기본/포커스·한글 붙여넣기·Tab·취소·경로 Enter·이름 변경, 전체40개 검사와 native hover/조합/동작 줄이기 검사를 확인했다. 실제 포인터 hover 단독 캡처는 도구 제약으로 미확보이며 native 이벤트 검사와 구분한다. aligned (변경 범위, 셀프 리뷰). [관찰](evidence/inset-input-motion.md).
 
 V-57 / UI-TEST-ISOLATION: 입력창 변경 전 main과 PR 두 CI 실행이 빌드 완료 뒤 테스트 프로세스에서 응답하지 않았다. 공유 AppKit/엔진 상태의 겹침을 줄이도록 check.sh에 --no-parallel을 명시했다. 같은40개 검사가 순차 실행되고11.835초에 통과한 로컬 전체 check.sh를 확인했다. 정확한 CI deadlock 원인은 미확정이며 최종 원격 결과는 PR에 기록한다. 제품 UI/검사 항목/기대값은 바뀌지 않았다. [관찰](evidence/inset-input-motion.md).
+
+V-58 / INPUT-REDUNDANT-COMMIT: 같은 target opacity에서도 window.didUpdate마다 CATransaction을 예약하던 코드를 조기 반환으로 고쳤다. 같은 상태의 Reduce Motion 활성 시 기존 모션 제거도 회귀 검사했다. 최종40개 check.sh 통과 및 실제 두 모드 입력/caret·Tab과 외형을 재확인했다. CI 멈춤의 확정 원인으로 주장하지 않는다. fixed-and-verified (입력 갱신 범위, 셀프 리뷰). [관찰](evidence/inset-input-motion.md).

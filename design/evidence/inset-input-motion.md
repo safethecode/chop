@@ -30,3 +30,9 @@ macOS26.5.2/Apple Silicon, CUA에서 직접 본 실제 AppKit 창이다. 원래 
 완료된 원시 로그를 다시 확인하니 최초 실행도 debug 빌드를 끝낸 뒤 테스트 프로세스에서 응답이 없었다. live UI의 마지막 컴파일 줄만으로 compiler 자체가 멈췄다고 확정할 수 없다. 첫 실행은 동일 커밋 재검사를 위해 취소했고, 두 번째 실행도 빌드 완료 뒤 테스트 출력이 없었다. 입력창 변경 전 main 실행39340752253도 같은 단계에서30분 제한으로 종료됐다. 이 기록만으로 정확한 deadlock 위치를 단정하지 않는다.
 
 AppKit 창/field editor와 터미널 엔진의 공유 프로세스 상태를 다른 async UI 테스트가 동시에 건드리는 경합을 줄이기 위해 check.sh에 `swift test --no-parallel`을 명시했다. [Swift Testing 공식 문서](https://docs.swift.org/latest/documentation/testing/parallelizationtrait/)의 전체 병렬화 비활성 옵션이며, 기본 도움말 표시만으로 Swift Testing의 기본 실행을 순차라고 가정하지 않는다. 삭제·skip·기대값 완화 없이 같은40개 검사가 순차로 실행되는 것을 로그에서 확인했다. 최종 `./scripts/check.sh` 전체40개11.835초 및 release/서명/format/아이콘 검사 통과. 정확한 CI 멈춤 원인과 최종 원격 재실행 결과는 PR에서 별도로 기록한다. 제품 UI 소스는 이 후속 조정에서 바뀌지 않아 E-I1–4의 화면 관찰 범위는 그대로다.
+
+## 같은 상태의 반복 갱신 방지
+
+셀프 리뷰에서 window.didUpdate 때 opacity가 같아도 CATransaction을 매번 commit하던 코드를 발견해, 같은 target opacity이면 레이어 갱신을 생략했다. 같은 상태에서도 Reduce Motion이 활성화되면 진행 중 모션 제거는 유지하며 이를 기존 검사에 추가했다. 이 불필요한 commit이 CI 멈춤의 원인이라고 단정하지 않는다. 최종 check.sh는 전체40개12.321초 통과했다. E-I5: 새 코드로 별도 앱을 다시 빌드·실행해 다크 검색 편집/caret, 라이트 경로 편집/caret, Tab 이동과 동일한 inset 외형을 직접 확인하고 검증 앱만 종료했다. 이전 E-I2의 검색3건/취소/이름 저장 실행과 이 후속 상태 전환 확인을 구분한다.
+
+순차 실행 CI에서도 즉시 완료를 확인하지 못해 workflow에60초마다 실행 중인 swiftpm-testing/ChopPackageTests의2초 sample(앞160줄)을 기록하는 진단을 추가했다. 기존 check.sh를 그대로 실행하고 그 wait 종료 코드를 반환한다. monitor는 EXIT에서 종료하며 검사/기대값/30분 timeout을 줄이거나 성공으로 덮어쓰지 않는다. YAML parse 및 shell 구문 검사를 통과했다. 최종 원격 판정은 PR에 기록한다.
