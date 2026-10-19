@@ -43,8 +43,8 @@ enum AppearanceMode: String, CaseIterable {
   /// Both edges of the terminal add rail stay visible against neighboring surfaces.
   var terminalRailBorder: NSColor {
     self == .light
-      ? NSColor(srgbRed: 185 / 255, green: 189 / 255, blue: 198 / 255, alpha: 1)
-      : NSColor(srgbRed: 85 / 255, green: 91 / 255, blue: 103 / 255, alpha: 1)
+      ? NSColor(white: 222 / 255, alpha: 1)
+      : NSColor(white: 61 / 255, alpha: 1)
   }
 
   var foreground: NSColor {

@@ -40,6 +40,11 @@ final class TerminalAreaView: NSView {
     }
   }
 
+  func setFileTreeVisible(_ visible: Bool) {
+    // The file tree already owns the adjacent resize divider. Draw only one edge there.
+    trailingBorder.isHidden = visible
+  }
+
   override func resizeSubviews(withOldSize oldSize: NSSize) {
     let width = min(Self.railWidth, bounds.width)
     canvas.frame = NSRect(x: 0, y: 0, width: max(0, bounds.width - width), height: bounds.height)
