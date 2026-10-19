@@ -6,6 +6,8 @@ final class TerminalAreaView: NSView {
   static let railWidth: CGFloat = 48
   private let canvas: NSView
   private let rail = NSView()
+  private let leadingBorder = NSView()
+  private let trailingBorder = NSView()
   let addButton: NSButton
 
   init(canvas: NSView, target: AnyObject, action: Selector) {
@@ -21,6 +23,10 @@ final class TerminalAreaView: NSView {
     addButton.toolTip = "터미널 추가 (⌘T)"
     addSubview(canvas)
     addSubview(rail)
+    for border in [leadingBorder, trailingBorder] {
+      border.wantsLayer = true
+      rail.addSubview(border)
+    }
     rail.addSubview(addButton)
   }
 
@@ -29,12 +35,19 @@ final class TerminalAreaView: NSView {
 
   func applyAppearance(_ mode: AppearanceMode) {
     rail.layer?.backgroundColor = mode.fileListBackground.cgColor
+    for border in [leadingBorder, trailingBorder] {
+      border.layer?.backgroundColor = mode.terminalRailBorder.cgColor
+    }
   }
 
   override func resizeSubviews(withOldSize oldSize: NSSize) {
     let width = min(Self.railWidth, bounds.width)
     canvas.frame = NSRect(x: 0, y: 0, width: max(0, bounds.width - width), height: bounds.height)
     rail.frame = NSRect(x: canvas.frame.maxX, y: 0, width: width, height: bounds.height)
+    let borderWidth = min(1, width)
+    leadingBorder.frame = NSRect(x: 0, y: 0, width: borderWidth, height: bounds.height)
+    trailingBorder.frame = NSRect(
+      x: width - borderWidth, y: 0, width: borderWidth, height: bounds.height)
     addButton.frame = NSRect(
       x: (width - 32) / 2, y: (bounds.height - 32) / 2, width: 32, height: 32)
   }

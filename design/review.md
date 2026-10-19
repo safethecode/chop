@@ -99,3 +99,5 @@ V-49 / FILE-SEARCH-LATENCY: 검색어마다 반복되던 디렉터리 읽기를 
 V-50 / TERMINAL-ADD-RAIL: 사용자 요청의 canvas/파일 트리 사이80pt 추가 영역과56pt native plus를 도입했다. 첫 빈 칸 우선·두 칸 행의 아래 추가·기존 분할/PTY 보존·16개 한도·⌘T를 연결했다. 초기 시제품에서 격자 선택 표시가 꺼진 introduced P2를 행 구조 판단으로 수정했다. 전체36개 check.sh 검사와 실제 두 모드·5/8/16개·키보드 스크롤/ENV·탭/패널 숨김·native 축소·확대 중 추가·16개 재실행을 확인했다. 셀프 리뷰이며 원래 사용 중인 앱은 종료하지 않았다. fixed-and-verified (변경 범위). [관찰](evidence/terminal-add-rail.md).
 
 V-51 / F-TERMINAL-ADD-WIDTH: 사용자가 세로 plus 영역이 너무 넓다고 교정했다. 80→48pt 영역·56→32pt native plus·좌우8pt로 줄이고 빈 칸 중앙56pt는 보존했다. 실제 라이트 격자 추가 클릭·다크 탭/트리 숨김·643×434px 축소와 전체36개 검사를 확인했다. fixed-and-verified (셀프 리뷰). [관찰](evidence/terminal-add-width.md).
+
+V-52 / F-TERMINAL-ADD-BOUNDARY: 사용자 요청에 따라48pt 세로 추가 영역 좌우에 전체 높이1pt 경계를 추가했다(light B9BDC6/dark555B67). 실제 다크 탭/트리 숨김·라이트 격자/트리 표시·890×441px 축소와 plus 클릭을 확인했다. 오래된 기본4칸 최소 폭도890pt로 바로잡았다. 전체36개 검사, fixed-and-verified (셀프 리뷰). [관찰](evidence/terminal-add-borders.md).
