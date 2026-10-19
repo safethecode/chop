@@ -1,4 +1,5 @@
 import AppKit
+import ChopCore
 import Testing
 
 @testable import Chop
@@ -24,7 +25,7 @@ import Testing
   let second = try #require(workspace.panes[workspace.layout.paneIDs[1]])
   second.focus()
   #expect(workspace.applyPreset(.single))
-  #expect(abs(second.bounds.width - workspace.bounds.width) < 0.5)
+  #expect(abs(second.bounds.width - (workspace.bounds.width - TerminalAreaView.railWidth)) < 0.5)
   #expect(abs(second.bounds.height - (workspace.bounds.height - 88)) < 0.5)
   for size in [NSSize(width: 917, height: 756), NSSize(width: 640, height: 400)] {
     #expect(workspace.applyPreset(.grid))
@@ -46,5 +47,42 @@ import Testing
     #expect(abs(visibleCenter.y - (scroll.contentView.bounds.midY + 20)) <= centerTolerance)
     #expect(abs(center.x - second.bounds.midX) <= centerTolerance)
     #expect(abs(center.y - second.bounds.midY) <= centerTolerance)
+  }
+}
+
+@MainActor
+@Test func terminalAddRailStaysVisibleBesideTheViewportAtMinimumSizes() throws {
+  _ = NSApplication.shared
+  let suite = "chop-add-rail-\(UUID())"
+  let defaults = try #require(UserDefaults(suiteName: suite))
+  defer { defaults.removePersistentDomain(forName: suite) }
+  defaults.set(FileManager.default.temporaryDirectory.path, forKey: "fileTreeRootPath")
+  let workspace = WorkspaceView(engine: TerminalEngine())
+  let split = workspace.installFileBrowser(defaults: defaults)
+  // Exercise geometry without a physical display. Attaching to a runner's small
+  // screen can turn a panel toggle into an interactive "not enough space" alert.
+  workspace.setFrameSize(NSSize(width: 1100, height: 720))
+  func descendants(_ view: NSView) -> [NSView] {
+    view.subviews.flatMap { [$0] + descendants($0) }
+  }
+  let area = try #require(descendants(workspace).compactMap { $0 as? TerminalAreaView }.first)
+  for visible in [true, false, true] {
+    if split.isFileTreeVisible != visible { split.toggleFileTree() }
+    for mode in AppearanceMode.allCases {
+      workspace.applyAppearance(mode)
+      for preset in LayoutPreset.allCases {
+        workspace.applyPreset(preset)
+        workspace.setFrameSize(split.minimumContentSize)
+        workspace.layoutSubtreeIfNeeded()
+        let button = area.addButton
+        let rect = area.convert(button.bounds, from: button)
+        #expect(area.bounds.contains(rect))
+        #expect(rect.size == NSSize(width: 56, height: 56))
+        #expect(abs(rect.midX - (area.bounds.maxX - TerminalAreaView.railWidth / 2)) < 0.5)
+        #expect(abs(rect.midY - area.bounds.midY) < 0.5)
+        let point = button.convert(NSPoint(x: 28, y: 28), to: workspace.superview)
+        #expect(workspace.hitTest(point) === button)
+      }
+    }
   }
 }

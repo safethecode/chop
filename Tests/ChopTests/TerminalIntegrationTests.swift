@@ -475,6 +475,76 @@ import Testing
   #expect(emptyRestored.focusedID == emptyGrid.layout.paneIDs[0])
   emptyRestored.applyAppearance(.light)
   #expect(emptyRestored.focusedPane.terminal?.effectiveAppearance.name == .aqua)
+  emptyRestored.closeAll()
+  try await verifyGlobalTerminalAddition(engine: engine, window: window, directory: directory)
+}
+
+@MainActor
+private func verifyGlobalTerminalAddition(
+  engine: TerminalEngine, window: NSWindow, directory: URL
+) async throws {
+  let workspace = WorkspaceView(engine: engine)
+  window.setContentSize(NSSize(width: 1100, height: 720))
+  window.contentView = workspace
+  window.layoutIfNeeded()
+  defer { workspace.closeAll() }
+  for pane in workspace.panes.values { pane.workingDirectory = directory.path }
+  let initialLayout = workspace.layout
+  let initialIDs = initialLayout.paneIDs
+  workspace.startRestoredTerminals()
+  let first = try #require(workspace.focusedPane.terminal)
+  try await waitFor { !first.needsConfirmClose }
+  first.insertText(
+    "export CHOP_ADD_VALUE=kept", replacementRange: NSRange(location: NSNotFound, length: 0))
+  try pressReturn(on: first, window: window)
+  try await waitFor { !first.needsConfirmClose }
+  for id in initialIDs.dropFirst() {
+    workspace.addTerminal()
+    #expect(workspace.focusedID == id && workspace.focusedPane.isRunning)
+    #expect(workspace.layout == initialLayout)
+  }
+  workspace.addTerminal()
+  let fifthID = workspace.focusedID
+  #expect(workspace.panes.count == 6 && workspace.layout.paneIDs[4] == fifthID)
+  #expect(
+    workspace.focusedPane.isRunning && workspace.focusedPane.workingDirectory == directory.path)
+  #expect(workspace.panes[workspace.layout.paneIDs[5]]?.isRunning == false)
+  workspace.toggleZoom()
+  workspace.addTerminal()
+  #expect(workspace.maximizedID == nil && workspace.focusedID == workspace.layout.paneIDs[5])
+  for _ in 7...16 { workspace.addTerminal() }
+  #expect(workspace.panes.count == 16 && workspace.panes.values.allSatisfy(\.isRunning))
+  #expect(workspace.focusedPane.visibleRect.height >= workspace.focusedPane.bounds.height - 1)
+  #expect(!workspace.canAddTerminal)
+  let fullLayout = workspace.layout
+  workspace.addTerminal()
+  #expect(workspace.layout == fullLayout, "Adding at capacity must preserve the layout")
+  #expect(workspace.panes[initialIDs[0]]?.terminal === first)
+  workspace.panes[fifthID]?.closeTerminal()
+  #expect(workspace.canAddTerminal)
+  workspace.addTerminal()
+  #expect(workspace.focusedID == fifthID && workspace.panes.count == 16)
+  workspace.panes[fifthID]?.closeTerminal()
+  workspace.applyPreset(.single)
+  workspace.addTerminal()
+  #expect(workspace.isTabbed && workspace.focusedID == fifthID)
+  workspace.panes[fifthID]?.closeTerminal()
+  workspace.removeEmptyPane(fifthID)
+  workspace.addTerminal()
+  #expect(workspace.isTabbed && workspace.panes.count == 16 && workspace.focusedPane.isRunning)
+  workspace.applyPreset(.grid)
+  workspace.panes[initialIDs[0]]?.focus()
+  first.insertText(
+    "printf 'ADD=%s\\n' \"$CHOP_ADD_VALUE\"",
+    replacementRange: NSRange(location: NSNotFound, length: 0))
+  try pressReturn(on: first, window: window)
+  try await waitFor {
+    (first.accessibilityValue() as? String ?? "").contains("ADD=kept") && !first.needsConfirmClose
+  }
+  let saved = workspace.snapshot()
+  try saved.validate()
+  let restored = WorkspaceView(engine: engine, snapshot: saved)
+  #expect(restored.layout == saved.layout && restored.panes.count == 16)
 }
 
 @MainActor
