@@ -111,6 +111,10 @@ import Testing
   browser.search(for: "no-match")
   try await waitForFileBrowser { !browser.isLoading }
   #expect(outline.numberOfRows == 0 && browser.loadError == nil)
+  try Data().write(to: folder.appendingPathComponent("no-match.txt"))
+  #expect(refresh.sendAction(refresh.action, to: refresh.target))
+  try await waitForFileBrowser { !browser.isLoading }
+  #expect(outline.numberOfRows == 1, "Refresh must discard cached directory contents")
   browser.search(for: "")
   try await waitForFileBrowser { !browser.isLoading }
   #expect(outline.numberOfRows == 2 && browser.rootURL.path == root.path)
@@ -128,7 +132,7 @@ import Testing
   try await waitForFileBrowser { !browser.isLoading }
   #expect(browser.rootURL.resolvingSymlinksInPath().path == folder.resolvingSymlinksInPath().path)
   #expect(browser.searchQuery.isEmpty && field.stringValue.isEmpty)
-  #expect(outline.numberOfRows == 1)
+  #expect(outline.numberOfRows == 2)
 }
 
 @MainActor
