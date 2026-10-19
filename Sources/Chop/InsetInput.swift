@@ -164,15 +164,20 @@ final class InsetInputBorder: NSView {
     isHovered = hovered
     isFocused = focused
     let opacity: Float = focused ? 0.25 : hovered ? 0.17 : 0.10
+    let reduceMotion = reducesMotion()
+    // Window updates also arrive while editing; an unchanged state must not schedule another commit.
+    guard borderLayer.opacity != opacity else {
+      if reduceMotion { borderLayer.removeAnimation(forKey: "input-emphasis") }
+      return
+    }
     let current = borderLayer.presentation()?.opacity ?? borderLayer.opacity
-    let changed = borderLayer.opacity != opacity
     CATransaction.begin()
     CATransaction.setDisableActions(true)
     borderLayer.opacity = opacity
     CATransaction.commit()
-    if reducesMotion() {
+    if reduceMotion {
       borderLayer.removeAnimation(forKey: "input-emphasis")
-    } else if changed {
+    } else {
       let animation = CABasicAnimation(keyPath: "opacity")
       animation.fromValue = current
       animation.toValue = opacity

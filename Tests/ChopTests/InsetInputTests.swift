@@ -26,6 +26,9 @@ import Testing
     border.borderLayer.animation(forKey: "input-emphasis") as? CABasicAnimation)
   #expect((focus.toValue as? Float ?? 0) > (hover.toValue as? Float ?? 0))
   border.reducesMotion = { true }
+  border.setInteraction(hovered: true, focused: true)
+  #expect(border.borderLayer.animation(forKey: "input-emphasis") == nil)
+  #expect(border.borderLayer.opacity == focus.toValue as? Float)
   border.setInteraction(hovered: false, focused: false)
   #expect(border.borderLayer.animation(forKey: "input-emphasis") == nil)
   #expect(border.borderLayer.opacity == hover.fromValue as? Float)
