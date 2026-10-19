@@ -484,17 +484,27 @@ import Testing
 private func verifyProjectWindows(engine: TerminalEngine, directory: URL) async throws {
   let suite = "chop-project-windows-\(UUID())"
   var suites: [String] = []
-  let manager = WorkspaceWindowManager(engine: engine) { id in
-    let name = suite + id.uuidString
-    suites.append(name)
-    let defaults = UserDefaults(suiteName: name)!
-    // Window layout checks must not depend on a CI runner's physical screen width.
-    defaults.set(false, forKey: "fileTreeVisible")
-    return defaults
-  }
+  var windowIDs: [UUID] = []
+  var clearedIDs: [UUID] = []
+  let manager = WorkspaceWindowManager(
+    engine: engine,
+    clearDefaultsForWindow: { id in
+      clearedIDs.append(id)
+      UserDefaults.standard.removePersistentDomain(forName: suite + id.uuidString)
+    },
+    defaultsForWindow: { id in
+      let name = suite + id.uuidString
+      suites.append(name)
+      windowIDs.append(id)
+      let defaults = UserDefaults(suiteName: name)!
+      // Window layout checks must not depend on a CI runner's physical screen width.
+      defaults.set(false, forKey: "fileTreeVisible")
+      return defaults
+    })
   defer {
     manager.shutdown()
     for name in suites { UserDefaults(suiteName: name)?.removePersistentDomain(forName: name) }
+    for id in windowIDs { NSWindow.removeFrame(usingName: "ChopWorkspaceWindow-\(id.uuidString)") }
   }
   let a = directory.appendingPathComponent("project-a")
   let b = directory.appendingPathComponent("project-b")
@@ -510,6 +520,14 @@ private func verifyProjectWindows(engine: TerminalEngine, directory: URL) async 
   #expect(first.window !== second.window && firstTerminal !== secondTerminal)
   #expect(first.content.fileBrowser.rootURL.path == a.path)
   #expect(second.content.fileBrowser.rootURL.path == b.path)
+  let firstWindow = try #require(first.window)
+  let secondWindow = try #require(second.window)
+  let firstFrameKey = "NSWindow Frame \(firstWindow.frameAutosaveName)"
+  let secondFrameKey = "NSWindow Frame \(secondWindow.frameAutosaveName)"
+  #expect(!firstWindow.frameAutosaveName.isEmpty && !secondWindow.frameAutosaveName.isEmpty)
+  firstWindow.saveFrame(usingName: firstWindow.frameAutosaveName)
+  secondWindow.saveFrame(usingName: secondWindow.frameAutosaveName)
+  #expect(UserDefaults.standard.object(forKey: secondFrameKey) != nil)
   manager.activate(first.id)
   #expect(manager.active === first)
   firstTerminal.insertText(
@@ -543,6 +561,10 @@ private func verifyProjectWindows(engine: TerminalEngine, directory: URL) async 
   #expect(manager.needsConfirmClose && !second.workspace.needsConfirmClose)
   second.window?.performClose(nil)
   #expect(manager.windows.count == 1 && manager.windows[first.id] === first)
+  #expect(clearedIDs == [second.id])
+  #expect(UserDefaults.standard.persistentDomain(forName: suite + second.id.uuidString) == nil)
+  #expect(UserDefaults.standard.object(forKey: secondFrameKey) == nil)
+  #expect(UserDefaults.standard.object(forKey: firstFrameKey) != nil)
   #expect(first.workspace.panes.values.contains { $0.terminal === firstTerminal })
   try await waitFor {
     (firstTerminal.accessibilityValue() as? String ?? "")
@@ -558,14 +580,25 @@ private func verifyProjectWindows(engine: TerminalEngine, directory: URL) async 
     (firstTerminal.accessibilityValue() as? String ?? "").contains("WINDOW_A=kept")
       && !firstTerminal.needsConfirmClose
   }
+  let third = manager.open(directory: b.path)
+  #expect(third.id != second.id)
+  third.content.fileBrowser.navigate(to: directory)
+  try await waitFor { !third.content.fileBrowser.isLoading }
+  let remaining = manager.snapshot()
   manager.shutdown()
-  for snapshot in saved.windows { manager.open(snapshot: snapshot) }
-  if let id = saved.focusedWindowID { manager.activate(id) }
+  #expect(clearedIDs == [second.id], "Application shutdown retains settings for restored windows")
+  #expect(UserDefaults.standard.object(forKey: firstFrameKey) != nil)
+  #expect(
+    UserDefaults.standard.persistentDomain(forName: suite + third.id.uuidString)?[
+      "fileTreeRootPath"] as? String == directory.path)
+  for snapshot in remaining.windows { manager.open(snapshot: snapshot) }
+  if let id = remaining.focusedWindowID { manager.activate(id) }
   #expect(manager.windows.count == 2)
-  #expect(manager.active?.id == saved.focusedWindowID)
+  #expect(manager.windows[second.id] == nil)
+  #expect(manager.active?.id == remaining.focusedWindowID)
   #expect(
     manager.windows[first.id]?.workspace.panes.values.contains { $0.name == "프로젝트 A 작업" } == true)
-  #expect(manager.windows[second.id]?.content.fileBrowser.rootURL.path == directory.path)
+  #expect(manager.windows[third.id]?.content.fileBrowser.rootURL.path == directory.path)
 }
 
 @MainActor

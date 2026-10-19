@@ -71,3 +71,34 @@ V-54: 변경 범위 aligned. 파일 메뉴/단축키·폴더 선택·복원·독
 위 실제 실행으로 확인했다. Dock 두 항목은 같은 target/action 연결을 코드로 확인했고
 Dock 포인터 실행은 별도 확인으로 주장하지 않는다. 셀프 리뷰/기존 native 예외와
 미변경 근거를 구분한다.
+
+## 자동 리뷰 후 설정 수명 수정
+
+V-55 / E-WIN-6: CodeRabbit의2549298 자동 리뷰에서 사용자 닫기 후 창별 defaults와
+frame 저장값이 남는 introduced P2를 지적했다. 셀프 검토로 재현 경로를 확인하고 사용자
+닫기에서만 같은 suite를 정리하도록 바꿨다. 테스트의 custom factory에는 matching cleanup을
+주입한다. shutdown은 정리를 호출하지 않으므로 다음 실행에 복원할 창의 설정을 보존한다.
+
+새 회귀 검사의 최초 실패에서 window의 autosave 이름이 비어 있음을 확인했다.
+SDK NSWindowController.h는 initWithWindow가 컨트롤러의 autosave 이름을 window에
+설정한다고 명시한다. 기존 초기화 순서에서 먼저 준 이름이 지워지므로 super.init 뒤
+controller.windowFrameAutosaveName을 설정하도록 고쳤다. 닫기에서는 autosave 등록을
+해제한 뒤 NSWindow.removeFrame으로 같은 이름의 위치 저장값을 제거한다.
+
+최종 ./scripts/check.sh 전체38개 통과. 실제 셸 통합 검사에서 이름이 비어 있지 않음과
+실제 frame 저장 키 생성, B 닫기 후 B suite/frame 삭제·A frame 유지, A/C를 앱 종료 방식으로
+닫은 후 suite/frame 유지와 두 창 복원을 확인했다. 닫기 전의 오래된 snapshot으로 B를
+다시 여는 검사는 앱의 실제 복원 경로와 달라, B를 제외한 현재 두 창 snapshot을 복원하도록
+바꿨다. 다른 창 작업/ENV 보존 검사는 유지했다.
+
+실제 최종 검증 앱에서도 두 창 중 Sources 창을 닫았다. session 목록에서 그 ID가 빠지고
+해당 suite의 루트·해당 frame 키가 삭제된 것을 defaults 읽기로 확인했다. 남은 창에서
+⌘N이 같은 Sources 폴더의 새 창을 열었다. 앱 종료 후 저장된 두 창의 루트/frame 키는
+모두 남았고 재실행의 윈도우 메뉴에 aaron-son/Sources 두 창이 표시됐다. 닫기 직후 남은
+창의 AX 조회는 CUA 시간 초과가 났으며 sample의 앱 main thread는 정상 이벤트 대기였다.
+이 즉시 AX 관찰은 성공으로 표시하지 않는다. 설정 정리·새 창 실행·종료/재실행은 위 별도
+관찰로 확인했다. 원래 Chop 작업은 종료하지 않았다.
+
+자동 리뷰는 외부 사람의 승인으로 표현하지 않는다. 수정 후 셀프 리뷰와 위 검증으로
+fixed-and-verified (설정 수명 범위). UI 색·치수·메뉴는 바꾸지 않아 앞선 시각 관찰을
+유지하며 새 화면 검증으로 확대하지 않는다.

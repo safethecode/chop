@@ -5,6 +5,7 @@ import ChopCore
 final class WorkspaceWindowManager {
   private let engine: TerminalEngine
   private let defaultsForWindow: (UUID) -> UserDefaults
+  private let clearDefaultsForWindow: (UUID) -> Void
   private(set) var windows: [UUID: WorkspaceWindowController] = [:]
   private var order: [UUID] = []
   private var focusedID: UUID?
@@ -13,12 +14,17 @@ final class WorkspaceWindowManager {
 
   init(
     engine: TerminalEngine,
+    clearDefaultsForWindow: @escaping (UUID) -> Void = {
+      UserDefaults.standard.removePersistentDomain(
+        forName: "com.safethecode.chop.window.\($0.uuidString)")
+    },
     defaultsForWindow: @escaping (UUID) -> UserDefaults = {
       UserDefaults(suiteName: "com.safethecode.chop.window.\($0.uuidString)")!
     }
   ) {
     self.engine = engine
     self.defaultsForWindow = defaultsForWindow
+    self.clearDefaultsForWindow = clearDefaultsForWindow
   }
 
   var active: WorkspaceWindowController? {
@@ -87,9 +93,13 @@ final class WorkspaceWindowManager {
   }
 
   private func remove(_ id: UUID) {
-    windows.removeValue(forKey: id)
+    guard let controller = windows.removeValue(forKey: id) else { return }
     order.removeAll { $0 == id }
     if focusedID == id { focusedID = order.last }
+    clearDefaultsForWindow(id)
+    let name = controller.windowFrameAutosaveName
+    controller.windowFrameAutosaveName = ""
+    NSWindow.removeFrame(usingName: name)
     onChange?()
   }
 

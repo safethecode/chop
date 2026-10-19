@@ -30,12 +30,13 @@ final class WorkspaceWindowController: NSWindowController, NSWindowDelegate {
     window.title = "\((projectDirectory as NSString).lastPathComponent) — Chop"
     window.minSize = NSSize(width: 640, height: 400)
     window.isReleasedWhenClosed = false
-    window.setFrameAutosaveName("ChopWorkspaceWindow-\(id.uuidString)")
     window.center()
 
     window.contentView = workspace
 
     super.init(window: window)
+    // The controller applies its own autosave name when it takes ownership of the window.
+    windowFrameAutosaveName = "ChopWorkspaceWindow-\(id.uuidString)"
     window.delegate = self
     content.onMinimumSizeChange = { [weak window] minimum in
       guard let window else { return }
