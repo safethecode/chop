@@ -53,6 +53,7 @@ public enum FileTree {
     return try FileManager.default.contentsOfDirectory(
       at: directory, includingPropertiesForKeys: Array(keys), options: .skipsHiddenFiles
     ).map { url in
+      try Task.checkCancellation()
       // A child may disappear after enumeration; preserve the rest of the readable folder.
       let values = (try? readResourceValues(url, keys)) ?? URLResourceValues()
       return FileTreeEntry(

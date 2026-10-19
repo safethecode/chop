@@ -15,11 +15,12 @@ public struct FileTreeSearchResult: Equatable, Sendable {
 
 public enum FileTreeSearch {
   public typealias Reader = @Sendable (URL) async throws -> [FileTreeEntry]
+  public typealias Progress = @Sendable (FileTreeSearchResult) async -> Void
 
   /// Searches visible names below a root, using the tree's package and symlink leaf rules.
   public static func search(
     at directory: URL, matching query: String, limit: Int = 500,
-    reader: Reader = { try FileTree.entries(at: $0) }
+    reader: Reader = { try FileTree.entries(at: $0) }, onProgress: Progress? = nil
   ) async throws -> FileTreeSearchResult {
     precondition(limit > 0)
     let query = query.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -37,6 +38,8 @@ public enum FileTreeSearch {
     let root = directory.standardizedFileURL
     var pending = [(url: root, path: "")]
     var visited = Set<URL>()
+    var nextProgress = ContinuousClock.now
+    var reportedCount = 0
     while let (folder, parentPath) = pending.popLast() {
       try Task.checkCancellation()
       guard visited.insert(folder.standardizedFileURL).inserted else { continue }
@@ -66,6 +69,12 @@ public enum FileTreeSearch {
         if entry.isDirectory { children.append((entry.url, path)) }
       }
       pending.append(contentsOf: children.reversed())
+      if let onProgress, matches.count != reportedCount, ContinuousClock.now >= nextProgress {
+        try Task.checkCancellation()
+        await onProgress(result())
+        reportedCount = matches.count
+        nextProgress = .now.advanced(by: .milliseconds(75))
+      }
     }
     return result()
   }

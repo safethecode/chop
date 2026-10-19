@@ -54,6 +54,7 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
   private(set) var searchQuery = ""
   private let defaults: UserDefaults
   private let loader: Loader
+  private var searchCache: FileTreeSearchCache
   private var generation = UUID()
   private var rootTask: Task<Void, Never>?
   private var roots: [FileBrowserNode] = []
@@ -74,13 +75,19 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
   init(
     initialURL: URL, defaults: UserDefaults = .standard,
     loader: @escaping Loader = { directory in
-      try await Task.detached(priority: .userInitiated) {
+      let task = Task.detached(priority: .userInitiated) {
         try FileTree.entries(at: directory)
-      }.value
+      }
+      return try await withTaskCancellationHandler {
+        try await task.value
+      } onCancel: {
+        task.cancel()
+      }
     }
   ) {
     self.defaults = defaults
     self.loader = loader
+    searchCache = FileTreeSearchCache(reader: loader)
     rootURL =
       defaults.string(forKey: "fileTreeRootPath")
       .map { URL(fileURLWithPath: $0) } ?? initialURL
@@ -107,6 +114,7 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
 
   /// Each navigation replaces its generation so delayed reads cannot overwrite a newer folder.
   func navigate(to directory: URL) {
+    searchCache = FileTreeSearchCache(reader: loader)
     rootURL = directory.standardizedFileURL
     pathField.stringValue = rootURL.path
     pathField.toolTip = rootURL.path
@@ -137,10 +145,11 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
     outline.setAccessibilityLabel(query.isEmpty ? "파일 트리" : "파일 검색 결과")
     outline.reloadData()
     let loader = loader
+    let cache = searchCache
     let location = rootURL
     rootTask = Task { [weak self] in
       do {
-        if debounce && !query.isEmpty { try await Task.sleep(for: .milliseconds(200)) }
+        if debounce && !query.isEmpty { try await Task.sleep(for: .milliseconds(75)) }
         let rows: [(entry: FileTreeEntry, message: String)]
         let status: String?
         if query.isEmpty {
@@ -149,7 +158,10 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
           status = entries.isEmpty ? "빈 폴더예요" : nil
         } else {
           let result = try await FileTreeSearch.search(
-            at: location, matching: query, reader: loader)
+            at: location, matching: query, reader: { try await cache.entries(at: $0) },
+            onProgress: { [weak self] result in
+              await self?.showSearchProgress(result, request: request)
+            })
           rows = result.matches.map { ($0.entry, $0.relativePath) }
           status = Self.searchStatus(for: result)
         }
@@ -167,6 +179,13 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
         showStatus("\(message)\n\(error.localizedDescription)")
       }
     }
+  }
+
+  private func showSearchProgress(_ result: FileTreeSearchResult, request: UUID) {
+    guard generation == request, !Task.isCancelled else { return }
+    roots = result.matches.map { FileBrowserNode(entry: $0.entry, message: $0.relativePath) }
+    outline.reloadData()
+    showStatus("\(result.matches.count)개 결과 · 검색 중…")
   }
 
   private static func searchStatus(for result: FileTreeSearchResult) -> String {
@@ -201,6 +220,7 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
     do {
       let directory = try FileTree.directoryURL(for: pathField.stringValue, relativeTo: rootURL)
       if directory.path == rootURL.path {
+        searchCache = FileTreeSearchCache(reader: loader)
         reloadContents()
       } else {
         navigate(to: directory)

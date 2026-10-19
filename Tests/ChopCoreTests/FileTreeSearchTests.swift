@@ -87,3 +87,66 @@ import Testing
   await #expect(throws: CancellationError.self) { try await task.value }
   started.continuation.finish()
 }
+
+@Test func fileSearchReusesDirectoryReadsAcrossQueriesAndBoundsItsCache() async throws {
+  let root = URL(fileURLWithPath: "/cached-search")
+  let reader = CountingSearchReader()
+  let cache = FileTreeSearchCache { try await reader.entries(at: $0) }
+  for query in ["file", "file1", "no-match", "file2"] {
+    let result = try await FileTreeSearch.search(at: root, matching: query) {
+      try await cache.entries(at: $0)
+    }
+    #expect(result.entries.count == (query == "no-match" ? 0 : query == "file" ? 2 : 1))
+  }
+  #expect(await reader.calls == 2, "Editing queries should not re-read the filesystem")
+  let bounded = FileTreeSearchCache(maximumEntries: 1) { try await reader.entries(at: $0) }
+  _ = try await bounded.entries(at: root)
+  _ = try await bounded.entries(at: root.appendingPathComponent("folder"))
+  _ = try await bounded.entries(at: root)
+  #expect(await reader.calls == 5, "Entries exceeding the memory budget are not cached")
+  let expired = FileTreeSearchCache(lifetime: .zero) { try await reader.entries(at: $0) }
+  _ = try await expired.entries(at: root)
+  _ = try await expired.entries(at: root)
+  #expect(await reader.calls == 7)
+}
+
+@Test func fileSearchPublishesMatchesBeforeASlowSubdirectoryFinishes() async throws {
+  let root = URL(fileURLWithPath: "/progress-search")
+  let progress = CountingSearchReader()
+  let result = try await FileTreeSearch.search(
+    at: root, matching: "file",
+    reader: { url in
+      if url == root {
+        return [
+          FileTreeEntry(
+            url: root.appendingPathComponent("file1"), name: "file1", isDirectory: false),
+          FileTreeEntry(
+            url: root.appendingPathComponent("folder"), name: "folder", isDirectory: true),
+        ]
+      }
+      #expect(await progress.calls == 1, "The first result must appear before the next read")
+      return []
+    },
+    onProgress: { result in
+      #expect(result.matches.map(\.relativePath) == ["file1"])
+      _ = try? await progress.entries(at: root)
+    })
+  #expect(result.matches.count == 1)
+}
+
+private actor CountingSearchReader {
+  private(set) var calls = 0
+
+  func entries(at url: URL) throws -> [FileTreeEntry] {
+    calls += 1
+    if url.lastPathComponent == "folder" {
+      return [
+        FileTreeEntry(url: url.appendingPathComponent("file2"), name: "file2", isDirectory: false)
+      ]
+    }
+    return [
+      FileTreeEntry(url: url.appendingPathComponent("file1"), name: "file1", isDirectory: false),
+      FileTreeEntry(url: url.appendingPathComponent("folder"), name: "folder", isDirectory: true),
+    ]
+  }
+}
