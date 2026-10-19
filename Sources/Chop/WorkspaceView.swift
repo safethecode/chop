@@ -417,8 +417,8 @@ final class WorkspaceView: NSView {
   }
 
   @objc func requestRename() {
-    let field = NSTextField(string: focusedPane.name)
-    field.frame = NSRect(x: 0, y: 0, width: 300, height: 24)
+    let field = InsetTextField(string: focusedPane.name)
+    field.frame = NSRect(x: 0, y: 0, width: 300, height: 28)
     field.font = ChopStyle.font
     field.setAccessibilityLabel("칸 이름")
     let alert = NSAlert()
