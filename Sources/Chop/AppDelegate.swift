@@ -78,7 +78,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     engine.shutdown()
   }
 
-  @objc private func openTerminal() { workspaceWindow?.pane.openTerminal() }
+  @objc private func openTerminal() { workspaceWindow?.workspace.addTerminal() }
   @objc private func closeTerminal() { workspaceWindow?.workspace.requestCloseFocused() }
   @objc private func splitRight() { workspaceWindow?.workspace.splitRight() }
   @objc private func splitDown() { workspaceWindow?.workspace.splitDown() }
@@ -124,6 +124,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     guard let workspace = workspaceWindow?.workspace, workspaceWindow?.window?.isVisible == true
     else { return false }
     switch menuItem.action {
+    case #selector(openTerminal): return workspace.canAddTerminal
     case #selector(toggleFileTree):
       menuItem.title =
         workspaceWindow?.content.isFileTreeVisible == true
@@ -172,7 +173,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     let terminalItem = NSMenuItem()
     let terminalMenu = NSMenu(title: "터미널")
     let open = terminalMenu.addItem(
-      withTitle: "터미널 열기", action: #selector(openTerminal), keyEquivalent: "t")
+      withTitle: "터미널 추가", action: #selector(openTerminal), keyEquivalent: "t")
     open.target = self
     let close = terminalMenu.addItem(
       withTitle: "터미널 닫기", action: #selector(closeTerminal), keyEquivalent: "w")

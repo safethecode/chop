@@ -58,12 +58,21 @@ public indirect enum LayoutNode: Codable, Equatable, Sendable {
     case .columns: return line(leaves[...], .horizontal)
     case .rows: return line(leaves[...], .vertical)
     case .grid:
-      let columns = Int(ceil(sqrt(Double(leaves.count))))
+      let columns = min(2, leaves.count)
       let rows = stride(from: 0, to: leaves.count, by: columns).map { start in
         line(leaves[start..<min(start + columns, leaves.count)], .horizontal)
       }
       return line(rows[...], .vertical)
     }
+  }
+
+  /// Grow downward without replacing existing split identities, ratios or pane order.
+  public func appendingRow(_ ids: [UUID]) -> LayoutNode {
+    let row = Self.preset(.columns, ids: ids)
+    return .split(
+      id: UUID(), axis: .vertical,
+      ratio: Double(minimumSize.height / (minimumSize.height + row.minimumSize.height)),
+      first: self, second: row)
   }
 
   public func splitting(_ target: UUID, axis: SplitAxis, adding id: UUID) -> LayoutNode {

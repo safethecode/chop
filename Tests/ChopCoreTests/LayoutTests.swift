@@ -94,3 +94,32 @@ import Testing
     }
   }
 }
+
+@Test func gridGrowthKeepsTwoColumnsAndPreservesTheExistingSplits() throws {
+  let ids = (0..<16).map { _ in UUID() }
+  var tree = LayoutNode.preset(.grid, ids: Array(ids.prefix(4)))
+  for count in stride(from: 6, through: 16, by: 2) {
+    let previous = tree
+    tree = tree.appendingRow(Array(ids[(count - 2)..<count]))
+    guard case .split(_, .vertical, _, let first, _) = tree else {
+      Issue.record("New rows must grow below the existing layout")
+      return
+    }
+    #expect(first == previous)
+    #expect(tree.paneIDs == Array(ids.prefix(count)))
+    #expect(tree.minimumSize.width == 561)
+    let frames = tree.frames(in: CGRect(origin: .zero, size: tree.minimumSize))
+    #expect(frames[ids[count - 2]]!.minY > frames[ids[count - 3]]!.minY)
+    #expect(frames[ids[count - 2]]!.minY == frames[ids[count - 1]]!.minY)
+    let snapshot = WorkspaceSnapshot(
+      layout: tree,
+      panes: tree.paneIDs.map {
+        PaneSnapshot(id: $0, name: "Terminal", workingDirectory: "/tmp", wasRunning: true)
+      }, focusedID: ids[count - 2])
+    try snapshot.validate()
+  }
+  for count in [5, 6, 7, 16] {
+    let grid = LayoutNode.preset(.grid, ids: Array(ids.prefix(count)))
+    #expect(grid.minimumSize.width == 561, "Grid switches must keep growing downwards")
+  }
+}

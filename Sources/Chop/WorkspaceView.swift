@@ -12,6 +12,10 @@ final class WorkspaceView: NSView {
   private(set) var isTabbed = false
   private var tabBar: TerminalTabBar?
   var displayMinimumSize: CGSize {
+    let minimum = canvasDisplayMinimumSize
+    return CGSize(width: minimum.width + TerminalAreaView.railWidth, height: minimum.height)
+  }
+  private var canvasDisplayMinimumSize: CGSize {
     if isTabbed {
       return CGSize(
         width: LayoutNode.paneMinimum.width,
@@ -32,6 +36,8 @@ final class WorkspaceView: NSView {
   private var nextName = 1
   private let canvas = TerminalCanvasView()
   private lazy var canvasScroll = TerminalCanvasScrollView(canvas: canvas)
+  private lazy var terminalArea = TerminalAreaView(
+    canvas: canvasScroll, target: self, action: #selector(addTerminal))
   private let bodyHost = NSView()
   private(set) var fileSplit: WorkspaceSplitView?
   private var root: NSView?
@@ -66,6 +72,7 @@ final class WorkspaceView: NSView {
     wantsLayer = true
     applyAppearance(engine.appearanceMode)
     configureToolbar()
+    terminalArea.applyAppearance(engine.appearanceMode)
     for id in ids {
       let saved = valid?.panes.first { $0.id == id }
       addPane(id, directory: saved?.workingDirectory, name: saved?.name)
@@ -85,6 +92,8 @@ final class WorkspaceView: NSView {
     for pane in panes.values { pane.applyAppearance() }
     fileSplit?.applyAppearance(mode)
     tabBar?.applyAppearance(mode)
+    // Initial appearance is applied before the canvas/rail have been installed.
+    if root != nil { terminalArea.applyAppearance(mode) }
     updateAppearanceButton()
   }
 
@@ -114,8 +123,8 @@ final class WorkspaceView: NSView {
   @discardableResult
   func installFileBrowser(defaults: UserDefaults = .standard) -> WorkspaceSplitView {
     if let fileSplit { return fileSplit }
-    canvasScroll.removeFromSuperview()
-    let split = WorkspaceSplitView(workspace: self, canvas: canvasScroll, defaults: defaults)
+    terminalArea.removeFromSuperview()
+    let split = WorkspaceSplitView(workspace: self, canvas: terminalArea, defaults: defaults)
     fileSplit = split
     bodyHost.addSubview(split)
     split.frame = bodyHost.bounds
@@ -191,6 +200,33 @@ final class WorkspaceView: NSView {
 
   func canSplit(_ id: UUID, axis _: SplitAxis) -> Bool {
     panes[id] != nil && layout.paneIDs.count < 16
+  }
+
+  var canAddTerminal: Bool {
+    panes.values.contains { !$0.isRunning } || panes.count < 16
+  }
+
+  @objc func addTerminal() {
+    if let empty = layout.paneIDs.first(where: { panes[$0]?.isRunning == false }) {
+      focusedID = empty
+      maximizedID = nil
+      rebuild()
+      focusedPane.openTerminal()
+      return
+    }
+    guard panes.count < 16 else { return }
+    if isTabbed {
+      addTab()
+      return
+    }
+    let ids = (0..<min(2, 16 - panes.count)).map { _ in UUID() }
+    let directory = focusedPane.workingDirectory
+    for id in ids { addPane(id, directory: directory) }
+    layout = layout.appendingRow(ids)
+    focusedID = ids[0]
+    maximizedID = nil
+    rebuild()
+    focusedPane.openTerminal()
   }
 
   @objc func splitRight() { split(focusedID, axis: .horizontal) }
@@ -452,7 +488,7 @@ final class WorkspaceView: NSView {
     root = view
     canvasScroll.minimumDocumentSize =
       isTabbed
-      ? displayMinimumSize : maximizedID != nil ? LayoutNode.paneMinimum : layout.minimumSize
+      ? canvasDisplayMinimumSize : maximizedID != nil ? LayoutNode.paneMinimum : layout.minimumSize
     onMinimumSizeChange?(displayMinimumSize)
     layoutSubtreeIfNeeded()
     focusedPane.focus()
@@ -525,9 +561,9 @@ final class WorkspaceView: NSView {
       addSubview(view)
       view.translatesAutoresizingMaskIntoConstraints = false
     }
-    bodyHost.addSubview(canvasScroll)
-    canvasScroll.frame = bodyHost.bounds
-    canvasScroll.autoresizingMask = [.width, .height]
+    bodyHost.addSubview(terminalArea)
+    terminalArea.frame = bodyHost.bounds
+    terminalArea.autoresizingMask = [.width, .height]
     NSLayoutConstraint.activate([
       toolbar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
       toolbar.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
@@ -556,12 +592,29 @@ final class WorkspaceView: NSView {
       presets.selectedSegment = preset.rawValue
     }
     tabBar?.update(panes: layout.paneIDs.compactMap { panes[$0] }, selectedID: focusedID)
+    terminalArea.addButton.isEnabled = canAddTerminal
+    terminalArea.addButton.toolTip =
+      canAddTerminal ? "터미널 추가 (⌘T)" : "터미널은 최대 16개까지 열 수 있어요"
     editButton.state = isEditing ? .on : .off
     editButton.title = isEditing ? "편집 완료" : "레이아웃 편집"
   }
 
   private func matchesPreset(_ preset: LayoutPreset) -> Bool {
     if isTabbed { return preset == .single }
+    if preset == .grid {
+      func rows(_ node: LayoutNode) -> [Int]? {
+        switch node {
+        case .pane: return [1]
+        case .split(_, .horizontal, _, .pane, .pane): return [2]
+        case .split(_, .vertical, _, let first, let second):
+          guard let a = rows(first), let b = rows(second) else { return nil }
+          return a + b
+        default: return nil
+        }
+      }
+      guard let counts = rows(layout) else { return false }
+      return counts.count >= 2 && counts.contains(2)
+    }
     func shape(_ node: LayoutNode) -> String {
       switch node {
       case .pane: return "p"

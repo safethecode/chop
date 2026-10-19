@@ -1,0 +1,41 @@
+import AppKit
+
+/// The add control stays beside the viewport, including when the canvas scrolls or the tree is hidden.
+@MainActor
+final class TerminalAreaView: NSView {
+  static let railWidth: CGFloat = 80
+  private let canvas: NSView
+  private let rail = NSView()
+  let addButton: NSButton
+
+  init(canvas: NSView, target: AnyObject, action: Selector) {
+    self.canvas = canvas
+    addButton = NSButton(
+      image: NSImage(systemSymbolName: "plus", accessibilityDescription: "터미널 추가")!,
+      target: target, action: action)
+    super.init(frame: .zero)
+    rail.wantsLayer = true
+    addButton.bezelStyle = .circular
+    addButton.controlSize = .large
+    addButton.setAccessibilityLabel("터미널 추가")
+    addButton.toolTip = "터미널 추가 (⌘T)"
+    addSubview(canvas)
+    addSubview(rail)
+    rail.addSubview(addButton)
+  }
+
+  @available(*, unavailable)
+  required init?(coder: NSCoder) { fatalError("Use init(canvas:target:action:).") }
+
+  func applyAppearance(_ mode: AppearanceMode) {
+    rail.layer?.backgroundColor = mode.fileListBackground.cgColor
+  }
+
+  override func resizeSubviews(withOldSize oldSize: NSSize) {
+    let width = min(Self.railWidth, bounds.width)
+    canvas.frame = NSRect(x: 0, y: 0, width: max(0, bounds.width - width), height: bounds.height)
+    rail.frame = NSRect(x: canvas.frame.maxX, y: 0, width: width, height: bounds.height)
+    addButton.frame = NSRect(
+      x: (width - 56) / 2, y: (bounds.height - 56) / 2, width: 56, height: 56)
+  }
+}
