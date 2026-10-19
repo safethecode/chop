@@ -24,3 +24,9 @@ macOS26.5.2/Apple Silicon, CUA에서 직접 본 실제 AppKit 창이다. 원래 
 `./scripts/check.sh`: strict Swift format, shell syntax, plist, release 빌드·서명·아이콘과 전체40개 테스트 통과. 최종 native 이벤트 검사 수정 뒤 해당 두 검사도 재실행했다. 기존 최소280pt 파일 패널 hitTest·배치 검사는 두 모드에서 통과했다. 실제 hover 단독 포인터, 물리 Reduce Motion과 자동 상태 검사를 혼동하지 않는다.
 
 결과: 변경된 입력창의 실제 두 모드 외형과 편집/이동 행동, native 이벤트 기반 hover와 애니메이션 계약은 aligned. 다른 앱 기능과 이전 사진/자산의 증거는 새 실행으로 포장하지 않는다.
+
+## CI 후속 확인과 테스트 격리
+
+완료된 원시 로그를 다시 확인하니 최초 실행도 debug 빌드를 끝낸 뒤 테스트 프로세스에서 응답이 없었다. live UI의 마지막 컴파일 줄만으로 compiler 자체가 멈췄다고 확정할 수 없다. 첫 실행은 동일 커밋 재검사를 위해 취소했고, 두 번째 실행도 빌드 완료 뒤 테스트 출력이 없었다. 입력창 변경 전 main 실행39340752253도 같은 단계에서30분 제한으로 종료됐다. 이 기록만으로 정확한 deadlock 위치를 단정하지 않는다.
+
+AppKit 창/field editor와 터미널 엔진의 공유 프로세스 상태를 다른 async UI 테스트가 동시에 건드리는 경합을 줄이기 위해 check.sh에 `swift test --no-parallel`을 명시했다. [Swift Testing 공식 문서](https://docs.swift.org/latest/documentation/testing/parallelizationtrait/)의 전체 병렬화 비활성 옵션이며, 기본 도움말 표시만으로 Swift Testing의 기본 실행을 순차라고 가정하지 않는다. 삭제·skip·기대값 완화 없이 같은40개 검사가 순차로 실행되는 것을 로그에서 확인했다. 최종 `./scripts/check.sh` 전체40개11.835초 및 release/서명/format/아이콘 검사 통과. 정확한 CI 멈춤 원인과 최종 원격 재실행 결과는 PR에서 별도로 기록한다. 제품 UI 소스는 이 후속 조정에서 바뀌지 않아 E-I1–4의 화면 관찰 범위는 그대로다.

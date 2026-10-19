@@ -16,5 +16,6 @@ icon_name="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIconFile' "$project_dire
 iconset_path="$project_directory/build/icon-check.iconset"
 rm -rf -- "$iconset_path"
 iconutil -c iconset "$project_directory/build/release/Chop.app/Contents/Resources/$icon_name" -o "$iconset_path"
-swift test
+# AppKit windows and the terminal engine share process state across async UI tests.
+swift test --no-parallel
 echo "All checks passed."

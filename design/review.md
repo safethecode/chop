@@ -109,3 +109,5 @@ V-54 / PROJECT-WINDOWS: 사용자 요청의 프로젝트별 독립 창을 파일
 V-55 / F-WINDOW-SETTINGS-LIFETIME: CodeRabbit 자동 리뷰의 창 닫기 후 suite/frame 잔존 지적을 확인하고 사용자 닫기에만 matching cleanup을 적용했다. 새 회귀 검사에서 기존 초기화 순서가 frame autosave 이름을 지우는 것도 발견해 컨트롤러 초기화 후 등록으로 고쳤다. 실제 앱의 닫힌 ID/suite/frame 삭제·남은 창 생성·종료 후 두 창 설정 유지/재실행과 전체38개 검사를 확인했다. 닫기 직후 남은 창 AX 시간 초과는 성공으로 표시하지 않는다. fixed-and-verified (셀프 수정/검증, 외부 사람 승인 아님). [관찰](evidence/project-windows.md).
 
 V-56 / INPUT-INSET-MOTION: 사용자 요청의 경로·검색·이름 입력창에 clip된 중립 blur inset과0.18초 hover/focus opacity 전환을 적용했다. native editor/IME·검색/취소·AX·프레임과 파란 외곽선 생략을 유지한다. 실제 두 모드 기본/포커스·한글 붙여넣기·Tab·취소·경로 Enter·이름 변경, 전체40개 검사와 native hover/조합/동작 줄이기 검사를 확인했다. 실제 포인터 hover 단독 캡처는 도구 제약으로 미확보이며 native 이벤트 검사와 구분한다. aligned (변경 범위, 셀프 리뷰). [관찰](evidence/inset-input-motion.md).
+
+V-57 / UI-TEST-ISOLATION: 입력창 변경 전 main과 PR 두 CI 실행이 빌드 완료 뒤 테스트 프로세스에서 응답하지 않았다. 공유 AppKit/엔진 상태의 겹침을 줄이도록 check.sh에 --no-parallel을 명시했다. 같은40개 검사가 순차 실행되고11.835초에 통과한 로컬 전체 check.sh를 확인했다. 정확한 CI deadlock 원인은 미확정이며 최종 원격 결과는 PR에 기록한다. 제품 UI/검사 항목/기대값은 바뀌지 않았다. [관찰](evidence/inset-input-motion.md).
