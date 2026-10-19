@@ -59,11 +59,9 @@ import Testing
   defaults.set(FileManager.default.temporaryDirectory.path, forKey: "fileTreeRootPath")
   let workspace = WorkspaceView(engine: TerminalEngine())
   let split = workspace.installFileBrowser(defaults: defaults)
-  let window = NSWindow(
-    contentRect: NSRect(x: 0, y: 0, width: 1100, height: 720),
-    styleMask: [.titled, .resizable], backing: .buffered, defer: false)
-  window.contentView = workspace
-  defer { window.orderOut(nil) }
+  // Exercise geometry without a physical display. Attaching to a runner's small
+  // screen can turn a panel toggle into an interactive "not enough space" alert.
+  workspace.setFrameSize(NSSize(width: 1100, height: 720))
   func descendants(_ view: NSView) -> [NSView] {
     view.subviews.flatMap { [$0] + descendants($0) }
   }
@@ -74,8 +72,7 @@ import Testing
       workspace.applyAppearance(mode)
       for preset in LayoutPreset.allCases {
         workspace.applyPreset(preset)
-        window.setContentSize(split.minimumContentSize)
-        window.layoutIfNeeded()
+        workspace.setFrameSize(split.minimumContentSize)
         workspace.layoutSubtreeIfNeeded()
         let button = area.addButton
         let rect = area.convert(button.bounds, from: button)
