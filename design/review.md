@@ -103,3 +103,5 @@ V-51 / F-TERMINAL-ADD-WIDTH: 사용자가 세로 plus 영역이 너무 넓다고
 V-52 / F-TERMINAL-ADD-BOUNDARY: 사용자 요청에 따라48pt 세로 추가 영역 좌우에 전체 높이1pt 경계를 추가했다(light B9BDC6/dark555B67). 실제 다크 탭/트리 숨김·라이트 격자/트리 표시·890×441px 축소와 plus 클릭을 확인했다. 오래된 기본4칸 최소 폭도890pt로 바로잡았다. 전체36개 검사, fixed-and-verified (셀프 리뷰). [관찰](evidence/terminal-add-borders.md).
 
 V-53 / F-TERMINAL-ADD-DOUBLE-BORDER: 사용자 교정으로 파일 트리 경계와 오른쪽 새 선이 붙어2pt처럼 보이고 색이 과한 introduced P2를 확인했다. 트리 표시 시 native divider 하나를 함께 쓰고, 숨김 시에만 자체 오른쪽 선을 표시한다. 자체 색은 DEDEDE/3D3D3D로 완화했다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 fixed-and-verified (셀프 리뷰). [관찰](evidence/terminal-add-soft-borders.md).
+
+V-54 / PROJECT-WINDOWS: 사용자 요청의 프로젝트별 독립 창을 파일 메뉴·⌘N/⌘⇧N과 Dock 메뉴로 제공한다. 활성 창 명령, 창별 셸/배치/트리, 전체 화면 모드/종료 확인과 v2 세션·v1 이전을 구현했다. 실제 폴더 선택/취소·창 전환·닫기 후 다른 창 ENV·세 창 재실행·0창 후 재진입·cwd 상속·최종 옅은 단일 경계 결합과 전체38개 검사를 확인했다. Dock 항목은 코드 연결을 확인했으며 실제 포인터 실행으로 표시하지 않는다. aligned (변경 범위, 셀프 리뷰). [관찰](evidence/project-windows.md).

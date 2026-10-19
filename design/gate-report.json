@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "reviewer": "Codex self-review; actual code/test/CUA observations, not independent approval",
-  "reviewed_at": "2026-10-19T18:18:46.386065+00:00",
-  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics. PR #8: changed appearance scopes rechecked against actual light/dark screenshots and E-A1–A6; unchanged structure/native exceptions retain earlier evidence; local 10-test suite rerun. No independent approval or exported PNG claimed. PR #10: toolbar icon roles, copy, geometry and actions rechecked in actual CUA images/AX, four layouts, both modes, minimum window and restart. Existing scopes outside changed toolbar retain prior observations and rerun PTY checks. PR #11: changed handle, preview, movement, keyboard, same live PTY and persisted order rechecked; direct user acceptance covers requested motion. CUA cannot capture transient drag frames; Reduce Motion physical settings were not changed. Unchanged exclusions/native exceptions retain prior evidence; 11-test checks rerun. PR #12: actual CUA light/dark header/body contrast, five-pane editing/zoom/hidden-pane updates rechecked; no new text/geometry. Existing exceptions and unrelated observations retained. 11-test check passed. Final PR #12 review follow-up adds only three doc comments in response to CodeRabbit coverage warning. Strict format/diff checks passed; no executable behavior or visual contract changed, so E-H1–5 remains applicable. External review coverage is explicitly fccec, follow-up comments self-reviewed. PR #13: pane focus outline removed by explicit user request. Real mouse/keyboard shell input and AX focus, light/dark, zoom and drag swap-back were rechecked in current CUA renders. Previous focus-border appearance is historical; RUI-23 declares the user-requested terminal-only exception, native control focus remains. No transient drag screenshot or full VoiceOver claim. Unchanged scopes retain prior evidence. PR #14: changed toolbar/body/file-panel consumers rechecked in actual CUA, including user hierarchy and stray-line corrections, long path, reopen, two-mode minimum, native folder picker, literal paths, folder expansion, copy/Finder and live shell preservation.15 tests passed. Final restart OS open wait and picker recovery are documented; no permission root cause claimed. Final pointer swap succeeded with2× image coordinates, keyboard restored original order. No drag implementation change or transient-frame claim. Unchanged native exclusions retain prior evidence. PR #14 follow-up: CodeRabbit actual review5101fb1/19files found one valid child metadata failure propagation. Minimal fallback plus deterministic injected-I/O regression test passed with all16 tests3.737s. Latest app restored project root and expanded Sources. Unchanged layout/appearance observations remain applicable; no external re-review of this follow-up is claimed. Path field actual dark/light click/selection/caret/edit+Enter rechecked;16 tests3.597s passed. Other native/layout/terminal consumers are unchanged. Header seam scope rechecked in actual light/dark,300→340→300pt file width,hide/reopen and editing headers.16 tests3.606s passed; no new input/drag/icon behavior. Location shortcut actual CUA icon click/three destinations, two modes,842×442 minimum and empty/long folder states rechecked;16 tests4.907s passed. Initial native glyph-width alignment failure is retained. File drop19 tests6.307s pass, typed pasteboard/argv/PTY/focus/no-Enter/lifecycle verified. Actual OS source writer observed but drop completion not verified; RUI-04/PROJECT-FILE-DROP unknown. No native endpoint or independent approval claimed.  Actual user-operated native file endpoint observed via CUA AX; no-Enter is established separately by the real PTY test, not inferred from subsequent shell output.  CUA shortcut section actual checks and19 tests4.852s passed; no external approval claimed.  Twenty tests4.923s plus native CUA endpoint checks; initial resize-hidden selection fixed and rechecked.  Twenty-two tests4.734s; unwanted scroll axis and native display-cycle crash found/fixed, native repeated switches and final zoom checks completed.  Twenty-two tests5.388s; actual four/five PTYs, ENV, native rows restore and minimum681x442 both modes passed.  Twenty-two tests5.065s and bundled icon decode; original bytes preserved; generated preview rejected, production native mask verified at actual consumers. README 변경은 readme-presentation 관찰에서 검증했다. 기존 앱 소스는 변경되지 않아 기존 규칙의 이유·예외·관찰을 유지한다. 스크롤 안정성은 즉시 native geometry 회귀와 실제 window resize/보기/확대/기존 셸 유지로 추가 검증했다. 과거 지연 수렴의 검사 한계와 native crash 기록을 지우지 않았다. 비표시 window 검사는 수정 전에도 통과했으므로 실제 앱 최초 결함과 최종 판독을 별도로 기록한다. 실제 연필 클릭·비선택 대상·잘못된 이름·취소·긴 탭·두 모드/최소·PTY·재실행을 최신main의스크롤/중앙 배치와 결합해 확인했다. 두 모드·기본/최소 창·실제 목적지/빈/오류/복구와27개 검사를 확인했다. 이번 포인터 파일 드래그 미확인은 별도로 기록하며 새 성공으로 표시하지 않는다. 파일 목록 색의 변경 범위만 새 두 모드 release 화면/27개 검사로 판독했다. 검색 변경 범위를 실제 입력/키보드/복구/두 모드·최소 창 새 렌더와32개 검사로 확인했다. V-48/F-README-MACOS-PRESENTATION의 실제 캡처/생성 배경/로컬·GitHub 판독 범위를 별도로 기록했다. 2026-10-20: changed canvas/rail/grid/search scopes rechecked in the actual isolated AppKit app, with36 passing tests. Changed dimensions/actions/theme consumers use terminal-add-rail evidence; unchanged assets/platform exceptions retain earlier observations only. No new pointer file-drop, physical Reduce Motion or full VoiceOver result is claimed.",
+  "reviewed_at": "2026-10-19T22:59:29.461397+00:00",
+  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics. PR #8: changed appearance scopes rechecked against actual light/dark screenshots and E-A1–A6; unchanged structure/native exceptions retain earlier evidence; local 10-test suite rerun. No independent approval or exported PNG claimed. PR #10: toolbar icon roles, copy, geometry and actions rechecked in actual CUA images/AX, four layouts, both modes, minimum window and restart. Existing scopes outside changed toolbar retain prior observations and rerun PTY checks. PR #11: changed handle, preview, movement, keyboard, same live PTY and persisted order rechecked; direct user acceptance covers requested motion. CUA cannot capture transient drag frames; Reduce Motion physical settings were not changed. Unchanged exclusions/native exceptions retain prior evidence; 11-test checks rerun. PR #12: actual CUA light/dark header/body contrast, five-pane editing/zoom/hidden-pane updates rechecked; no new text/geometry. Existing exceptions and unrelated observations retained. 11-test check passed. Final PR #12 review follow-up adds only three doc comments in response to CodeRabbit coverage warning. Strict format/diff checks passed; no executable behavior or visual contract changed, so E-H1–5 remains applicable. External review coverage is explicitly fccec, follow-up comments self-reviewed. PR #13: pane focus outline removed by explicit user request. Real mouse/keyboard shell input and AX focus, light/dark, zoom and drag swap-back were rechecked in current CUA renders. Previous focus-border appearance is historical; RUI-23 declares the user-requested terminal-only exception, native control focus remains. No transient drag screenshot or full VoiceOver claim. Unchanged scopes retain prior evidence. PR #14: changed toolbar/body/file-panel consumers rechecked in actual CUA, including user hierarchy and stray-line corrections, long path, reopen, two-mode minimum, native folder picker, literal paths, folder expansion, copy/Finder and live shell preservation.15 tests passed. Final restart OS open wait and picker recovery are documented; no permission root cause claimed. Final pointer swap succeeded with2× image coordinates, keyboard restored original order. No drag implementation change or transient-frame claim. Unchanged native exclusions retain prior evidence. PR #14 follow-up: CodeRabbit actual review5101fb1/19files found one valid child metadata failure propagation. Minimal fallback plus deterministic injected-I/O regression test passed with all16 tests3.737s. Latest app restored project root and expanded Sources. Unchanged layout/appearance observations remain applicable; no external re-review of this follow-up is claimed. Path field actual dark/light click/selection/caret/edit+Enter rechecked;16 tests3.597s passed. Other native/layout/terminal consumers are unchanged. Header seam scope rechecked in actual light/dark,300→340→300pt file width,hide/reopen and editing headers.16 tests3.606s passed; no new input/drag/icon behavior. Location shortcut actual CUA icon click/three destinations, two modes,842×442 minimum and empty/long folder states rechecked;16 tests4.907s passed. Initial native glyph-width alignment failure is retained. File drop19 tests6.307s pass, typed pasteboard/argv/PTY/focus/no-Enter/lifecycle verified. Actual OS source writer observed but drop completion not verified; RUI-04/PROJECT-FILE-DROP unknown. No native endpoint or independent approval claimed.  Actual user-operated native file endpoint observed via CUA AX; no-Enter is established separately by the real PTY test, not inferred from subsequent shell output.  CUA shortcut section actual checks and19 tests4.852s passed; no external approval claimed.  Twenty tests4.923s plus native CUA endpoint checks; initial resize-hidden selection fixed and rechecked.  Twenty-two tests4.734s; unwanted scroll axis and native display-cycle crash found/fixed, native repeated switches and final zoom checks completed.  Twenty-two tests5.388s; actual four/five PTYs, ENV, native rows restore and minimum681x442 both modes passed.  Twenty-two tests5.065s and bundled icon decode; original bytes preserved; generated preview rejected, production native mask verified at actual consumers. README 변경은 readme-presentation 관찰에서 검증했다. 기존 앱 소스는 변경되지 않아 기존 규칙의 이유·예외·관찰을 유지한다. 스크롤 안정성은 즉시 native geometry 회귀와 실제 window resize/보기/확대/기존 셸 유지로 추가 검증했다. 과거 지연 수렴의 검사 한계와 native crash 기록을 지우지 않았다. 비표시 window 검사는 수정 전에도 통과했으므로 실제 앱 최초 결함과 최종 판독을 별도로 기록한다. 실제 연필 클릭·비선택 대상·잘못된 이름·취소·긴 탭·두 모드/최소·PTY·재실행을 최신main의스크롤/중앙 배치와 결합해 확인했다. 두 모드·기본/최소 창·실제 목적지/빈/오류/복구와27개 검사를 확인했다. 이번 포인터 파일 드래그 미확인은 별도로 기록하며 새 성공으로 표시하지 않는다. 파일 목록 색의 변경 범위만 새 두 모드 release 화면/27개 검사로 판독했다. 검색 변경 범위를 실제 입력/키보드/복구/두 모드·최소 창 새 렌더와32개 검사로 확인했다. V-48/F-README-MACOS-PRESENTATION의 실제 캡처/생성 배경/로컬·GitHub 판독 범위를 별도로 기록했다. 2026-10-20: changed canvas/rail/grid/search scopes rechecked in the actual isolated AppKit app, with36 passing tests. Changed dimensions/actions/theme consumers use terminal-add-rail evidence; unchanged assets/platform exceptions retain earlier observations only. No new pointer file-drop, physical Reduce Motion or full VoiceOver result is claimed. 프로젝트 윈도우 변경 범위는 project-windows.md의 실제 AppKit 관찰과38개 검사로 검증했다. Dock 항목은 코드로만 확인했고, 임시 첨부 이미지의 시각 대조나 독립적인 승인을 주장하지 않는다. 기존 미변경 근거와 플랫폼 예외는 유지한다.",
   "catalog_sha256": "9af51eedfbd6625fdcae46aa6a55e6206c447fe43b23fb1d0ff61f8ac800114f",
-  "contract_sha256": "c5ae67e9acd3983c4e6d6fe041f535d62035c3c655e55a9db6ac78c54d109479",
-  "target_sha256": "9246bdd09f392a9dd2fed3a072418e1117a704c8b9c554f1077dc1e417534ca5",
+  "contract_sha256": "d963bf99cc06726b2e955ba9cf6c47c183df4a56279b58a7a9b8202ae5d794e7",
+  "target_sha256": "d9485d3202b85f0a12be2a9aeca78f5d56c28ea363f3bd4a9e00b60627176175",
   "results": [
     {
       "id": "ORC-F01",
@@ -2743,7 +2743,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "spec",
@@ -2847,7 +2847,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "spec",
@@ -2884,7 +2884,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "interaction",
@@ -3036,7 +3036,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "visual",
@@ -3130,7 +3130,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "visual",
@@ -3277,7 +3277,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "code",
@@ -3502,7 +3502,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "visual",
@@ -3569,7 +3569,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "visual",
@@ -4080,7 +4080,7 @@
     {
       "id": "RUI-16",
       "status": "pass",
-      "reason": "Finder crop의 같은 icon 열/이름 시작선·세로 행 관계를 실제 구현에 연결했다. 한국어 세 목적지는 기존 요청을 유지하고 glyph 폭 어긋남을 실제 화면에서 수정했다. 사용자가 지정한 PCMag macOS 구도에 따라 원본 실제 창과 오리지널 생성 배경을 HTML/CSS로 구성했다. 같은1280×720 구도의 세 사진·GitHub picture/목차/실제 이미지 로드를 판독했고 생성 범위와 실제 앱 픽셀/출력을 구분한다. 앱 UI는 변경하지 않았다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다.",
+      "reason": "Finder crop의 같은 icon 열/이름 시작선·세로 행 관계를 실제 구현에 연결했다. 한국어 세 목적지는 기존 요청을 유지하고 glyph 폭 어긋남을 실제 화면에서 수정했다. 사용자가 지정한 PCMag macOS 구도에 따라 원본 실제 창과 오리지널 생성 배경을 HTML/CSS로 구성했다. 같은1280×720 구도의 세 사진·GitHub picture/목차/실제 이미지 로드를 판독했고 생성 범위와 실제 앱 픽셀/출력을 구분한다. 앱 UI는 변경하지 않았다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20: Ghostty처럼 프로젝트별 창을 여는 행동 요청을 기존 native 파일/윈도우 메뉴·폴더 선택기에 적용했다. 첨부 임시 이미지는 OS 권한으로 읽지 못했으므로 시각 복제라고 주장하지 않는다. 새 사이드바/장식/상시 설명은 추가하지 않았다.",
       "evidence": [
         {
           "kind": "spec",
@@ -4100,7 +4100,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "visual",
@@ -4221,13 +4221,23 @@
           "kind": "visual",
           "path": "design/evidence/terminal-add-soft-borders.md",
           "sha256": "a87a35abc9520be5322420ffbb146ef0cd8b42e2f4e8522d5bfa440f1b768e0a"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
         }
       ]
     },
     {
       "id": "RUI-17",
       "status": "pass",
-      "reason": "초기 image-leading/size만으로는 이름 정렬이 맞지 않는 것을 실제 화면에서 발견해 고정16pt icon 열로 수정했다. 두 모드/최소 창/실제 목적지·빈 목록의 전체 조합으로 다시 확인했다. 버튼색을 그대로 넓힌 목록 면이 너무 강하다는 최신 사용자 교정으로 fileListBackground만 light F8F8F8/dark24262C의 연한 중립 면으로 조정했다. 두 모드의 새 release 화면과27개 검사에서 글자/아이콘 대비·헤더 정렬·기존 최소 폭 입력 경계를 확인했다. 버튼의 native 상태와본문/헤더는 유지한다. 사용자가 지정한 PCMag macOS 구도에 따라 원본 실제 창과 오리지널 생성 배경을 HTML/CSS로 구성했다. 같은1280×720 구도의 세 사진·GitHub picture/목차/실제 이미지 로드를 판독했고 생성 범위와 실제 앱 픽셀/출력을 구분한다. 앱 UI는 변경하지 않았다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다.",
+      "reason": "초기 image-leading/size만으로는 이름 정렬이 맞지 않는 것을 실제 화면에서 발견해 고정16pt icon 열로 수정했다. 두 모드/최소 창/실제 목적지·빈 목록의 전체 조합으로 다시 확인했다. 버튼색을 그대로 넓힌 목록 면이 너무 강하다는 최신 사용자 교정으로 fileListBackground만 light F8F8F8/dark24262C의 연한 중립 면으로 조정했다. 두 모드의 새 release 화면과27개 검사에서 글자/아이콘 대비·헤더 정렬·기존 최소 폭 입력 경계를 확인했다. 버튼의 native 상태와본문/헤더는 유지한다. 사용자가 지정한 PCMag macOS 구도에 따라 원본 실제 창과 오리지널 생성 배경을 HTML/CSS로 구성했다. 같은1280×720 구도의 세 사진·GitHub picture/목차/실제 이미지 로드를 판독했고 생성 범위와 실제 앱 픽셀/출력을 구분한다. 앱 UI는 변경하지 않았다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20: 최종 기존 toolbar·두 열·중앙 plus·오른쪽 트리와 새 native 창/메뉴를 조합해 실제 재실행/창 생성/닫기를 판독했다. 검증 범위는 실제 관찰과38개 검사에 한정하며 이전 미변경 자산/플랫폼 예외는 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "spec",
@@ -4247,7 +4257,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "visual",
@@ -4378,6 +4388,16 @@
           "kind": "visual",
           "path": "design/evidence/terminal-add-soft-borders.md",
           "sha256": "a87a35abc9520be5322420ffbb146ef0cd8b42e2f4e8522d5bfa440f1b768e0a"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
         }
       ]
     },
@@ -4389,7 +4409,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "visual",
@@ -4622,12 +4642,12 @@
     {
       "id": "RUI-23",
       "status": "exception",
-      "reason": "바로가기만 같은14pt/동적 labelColor/네이티브 버튼 역할 안에서 바꿨다. 사용자 요청의 path field/pane focus-ring 생략과 실제 caret/selection, native 버튼/메뉴 의미는 유지한다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다.",
+      "reason": "바로가기만 같은14pt/동적 labelColor/네이티브 버튼 역할 안에서 바꿨다. 사용자 요청의 path field/pane focus-ring 생략과 실제 caret/selection, native 버튼/메뉴 의미는 유지한다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20: 새 파일 메뉴와 native 폴더 선택기는 기존 AppKit 메뉴 글자/포커스/키보드 의미를 유지한다. 실제 선택/취소·단축키를 실행했다. 기존 사용자 지정 본문/경로 포커스 예외는 유지한다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "code",
@@ -4828,6 +4848,21 @@
           "kind": "visual",
           "path": "design/evidence/terminal-add-soft-borders.md",
           "sha256": "a87a35abc9520be5322420ffbb146ef0cd8b42e2f4e8522d5bfa440f1b768e0a"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
         }
       ],
       "exception_id": "CHOP-PATH-FOCUS-RUI23"
@@ -4840,7 +4875,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "visual",
@@ -4892,7 +4927,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "visual",
@@ -4994,7 +5029,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "code",
@@ -5176,7 +5211,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "code",
@@ -5433,12 +5468,12 @@
     {
       "id": "PROJECT-MANAGE",
       "status": "pass",
-      "reason": "새 파일 탐색과 panel 개폐는 기존 canvas/view/surface를 재사용한다. 실제 PID/변수 보존, terminal zoom과11→16 교환/원위치 복원, 자동 surface/focus 검사로 확인했다. 경로 탐색은 셸 cwd를 바꾸지 않는다. 파일 드롭 시 기존 target focus/surface·다른 셸 유지와 닫힌 대상 거절을 PTY로 확인했다. 실제 단일 탭 전환 전후 같은 ENV를 출력했고 자동 검사에서4개 surface/포커스 유지와5번째 추가·닫기를 확인했다. 4/5셸의 surface/포커스/ENV·순서를 유지하고 실제 keyboard scroll/five roundtrips/zoom 복귀를 확인했다. 상하4/5셸의 실제 ENV 보존과 자동 surface/UUID/viewport focus를 확인했다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 2026-10-20: 전역 +/⌘T의 첫 빈 칸 우선, 아래 새 행,16개 한도/닫힌 칸 재사용을 실제 앱과 통합 검사로 확인했다.",
+      "reason": "새 파일 탐색과 panel 개폐는 기존 canvas/view/surface를 재사용한다. 실제 PID/변수 보존, terminal zoom과11→16 교환/원위치 복원, 자동 surface/focus 검사로 확인했다. 경로 탐색은 셸 cwd를 바꾸지 않는다. 파일 드롭 시 기존 target focus/surface·다른 셸 유지와 닫힌 대상 거절을 PTY로 확인했다. 실제 단일 탭 전환 전후 같은 ENV를 출력했고 자동 검사에서4개 surface/포커스 유지와5번째 추가·닫기를 확인했다. 4/5셸의 surface/포커스/ENV·순서를 유지하고 실제 keyboard scroll/five roundtrips/zoom 복귀를 확인했다. 상하4/5셸의 실제 ENV 보존과 자동 surface/UUID/viewport focus를 확인했다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 2026-10-20: 전역 +/⌘T의 첫 빈 칸 우선, 아래 새 행,16개 한도/닫힌 칸 재사용을 실제 앱과 통합 검사로 확인했다. 2026-10-20: 파일 메뉴/⌘N/⌘⇧N으로 독립 창을 만들며 명령은 활성 창을 대상으로 한다. 실제 cwd 상속·프로젝트 폴더 선택/취소·창 전환과 활성 창만 두 셸 추가를 확인했다. Dock 메뉴는 같은 target/action 연결을 코드로 확인했다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "code",
@@ -5699,18 +5734,38 @@
           "kind": "interaction",
           "path": "design/evidence/terminal-add-rail.md",
           "sha256": "3ef7f12dac6476731728a2170e91448cad862df242677d1ccb4c42827644e0e6"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
         }
       ]
     },
     {
       "id": "PROJECT-CLOSE",
       "status": "pass",
-      "reason": "실행 중 foreground 작업은 닫기/창 닫기/quit 전에 확인한다. 실제 sleep 닫기 취소와 Ctrl+C, 다중 셸 종료 취소를 실행했다. 2026-10-20: 새 추가 경로에서16개 한도 도달 후 마지막 탭을 닫자 추가 버튼이 다시 활성화됐다. 실제 검증 셸만 종료했고 사용 중인 원래 앱은 유지했다.",
+      "reason": "실행 중 foreground 작업은 닫기/창 닫기/quit 전에 확인한다. 실제 sleep 닫기 취소와 Ctrl+C, 다중 셸 종료 취소를 실행했다. 2026-10-20: 새 추가 경로에서16개 한도 도달 후 마지막 탭을 닫자 추가 버튼이 다시 활성화됐다. 실제 검증 셸만 종료했고 사용 중인 원래 앱은 유지했다. 2026-10-20: 창 닫기는 해당 창의 작업만 확인하고 그 창만 제거하며, 앱 종료는 모든 창의 작업을 확인한다. 실제 한 창을 닫은 뒤 다른 창의 ENV 출력과 0창 후 새 창을 확인했다. 통합 검사에서 A의 실행 작업 중 대기 중인 B 창을 닫아 A의 완료/ENV를 보존했다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "code",
@@ -5791,18 +5846,38 @@
           "kind": "interaction",
           "path": "design/evidence/terminal-add-rail.md",
           "sha256": "3ef7f12dac6476731728a2170e91448cad862df242677d1ccb4c42827644e0e6"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
         }
       ]
     },
     {
       "id": "PROJECT-RESTORE",
       "status": "pass",
-      "reason": "기존 session snapshot은 바꾸지 않고 file root/표시/폭만 별도 UserDefaults에 저장한다. 실제 사용자4칸 복원, 마지막 성공 루트만 저장하는 격리 테스트를 확인했다. 최종 재실행 OS open 대기와 선택기 복구는 E-T10 후속 기록에 명시한다. 이후 단일 탭 보기 요구에 따라 v1 snapshot에 optional tabbed 필드를 추가했다. 구 저장 decode/새 flag roundtrip과 실제 네 셸·선택 복원을 확인했다. 임의 개수 balanced split tree는 기존 Codable schema로 저장하고 실제4열 복원 및22개 roundtrip 검사를 확인했다. 실제 앱을 종료/재실행해 상하4행·6번 선택·네 셸 복원을 확인했다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 2026-10-20: 실제 검증 앱의16개 배치/순서/선택을 재실행해 새 셸이 열리는 것을 확인했다.36개 테스트는16개 snapshot 유효성과 기존 복원을 함께 검증했다.",
+      "reason": "기존 session snapshot은 바꾸지 않고 file root/표시/폭만 별도 UserDefaults에 저장한다. 실제 사용자4칸 복원, 마지막 성공 루트만 저장하는 격리 테스트를 확인했다. 최종 재실행 OS open 대기와 선택기 복구는 E-T10 후속 기록에 명시한다. 이후 단일 탭 보기 요구에 따라 v1 snapshot에 optional tabbed 필드를 추가했다. 구 저장 decode/새 flag roundtrip과 실제 네 셸·선택 복원을 확인했다. 임의 개수 balanced split tree는 기존 Codable schema로 저장하고 실제4열 복원 및22개 roundtrip 검사를 확인했다. 실제 앱을 종료/재실행해 상하4행·6번 선택·네 셸 복원을 확인했다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 2026-10-20: 실제 검증 앱의16개 배치/순서/선택을 재실행해 새 셸이 열리는 것을 확인했다.36개 테스트는16개 snapshot 유효성과 기존 복원을 함께 검증했다. 2026-10-20: 현재 v2 세션은 열린 창 목록/선택 창과 각 v1 workspace를 원자 저장한다. 단일 v1은 첫 창으로 읽고 기존 파일 트리 설정을 이전한다. 실제 세 창 재실행과 최종 Sources 두 셸 복원, 이전/손상/과대/중복/빈 창 목록의 자동 검사를 확인했다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "code",
@@ -6003,6 +6078,26 @@
           "kind": "interaction",
           "path": "design/evidence/terminal-add-rail.md",
           "sha256": "3ef7f12dac6476731728a2170e91448cad862df242677d1ccb4c42827644e0e6"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
         }
       ]
     },
@@ -6014,7 +6109,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "code",
@@ -6106,7 +6201,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "code",
@@ -6278,7 +6373,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "code",
@@ -6550,7 +6645,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "code",
@@ -6622,12 +6717,12 @@
     {
       "id": "PROJECT-APPEARANCE",
       "status": "pass",
-      "reason": "새 icon/label의 동적 labelColor와 기존 mode를 실제 기본/최소 창의 light/dark에서 확인했다. 기존 header/본문 및 path focus 예외는 유지한다. 바로가기 묶음도 기존 headerBackground를 두 모드에서 갱신하는 것을 실제 확인했다. 새 탭/선택/넘침과 복원된 단일 보기에서도 두 모드 토큰과 native 강조를 실제 확인했다. 새 overflow canvas는 투명 native scroll 배경 안의 기존 두 모드 terminal/header를 유지하며 최소/기본 창을 실제 확인했다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 버튼색을 그대로 넓힌 목록 면이 너무 강하다는 최신 사용자 교정으로 fileListBackground만 light F8F8F8/dark24262C의 연한 중립 면으로 조정했다. 두 모드의 새 release 화면과27개 검사에서 글자/아이콘 대비·헤더 정렬·기존 최소 폭 입력 경계를 확인했다. 버튼의 native 상태와본문/헤더는 유지한다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 2026-10-20: 새 세로 영역의 기존 fileListBackground, native circular plus와 기존 본문/헤더를 실제 라이트/다크 default4와8칸에서 대조했다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다.",
+      "reason": "새 icon/label의 동적 labelColor와 기존 mode를 실제 기본/최소 창의 light/dark에서 확인했다. 기존 header/본문 및 path focus 예외는 유지한다. 바로가기 묶음도 기존 headerBackground를 두 모드에서 갱신하는 것을 실제 확인했다. 새 탭/선택/넘침과 복원된 단일 보기에서도 두 모드 토큰과 native 강조를 실제 확인했다. 새 overflow canvas는 투명 native scroll 배경 안의 기존 두 모드 terminal/header를 유지하며 최소/기본 창을 실제 확인했다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 버튼색을 그대로 넓힌 목록 면이 너무 강하다는 최신 사용자 교정으로 fileListBackground만 light F8F8F8/dark24262C의 연한 중립 면으로 조정했다. 두 모드의 새 release 화면과27개 검사에서 글자/아이콘 대비·헤더 정렬·기존 최소 폭 입력 경계를 확인했다. 버튼의 native 상태와본문/헤더는 유지한다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 2026-10-20: 새 세로 영역의 기존 fileListBackground, native circular plus와 기존 본문/헤더를 실제 라이트/다크 default4와8칸에서 대조했다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20: 화면 모드는 앱 전체로 적용한다. 실제 한 창의 전환 후 다른 창의 라이트 화면을 확인했다. 최종 통합 앱은48pt/32pt·옅은 단일 경계를 유지하고 Sources 창을 복원했다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "code",
@@ -6993,6 +7088,26 @@
           "kind": "interaction",
           "path": "design/evidence/terminal-add-soft-borders.md",
           "sha256": "a87a35abc9520be5322420ffbb146ef0cd8b42e2f4e8522d5bfa440f1b768e0a"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
         }
       ]
     },
@@ -7004,7 +7119,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "e45a71751d1de12677832a398180dfddc9c806be8c7e1ce6304a8e582b57784e"
+          "sha256": "de7772cbe251db8abc1a5e212c59a6e16f65bc8f536fad48d0559afa763868a4"
         },
         {
           "kind": "code",
@@ -7407,7 +7522,7 @@
     {
       "id": "PROJECT-FILETREE",
       "status": "pass",
-      "reason": "새 아이콘/이름 행에서 기존 홈·다운로드·문서 URL과 target-action을 그대로 쓴다. 실제 세 경로 이동·빈 폴더와 긴 목록을 확인했고 탐색/비동기/PTY는 바꾸지 않았다. 파일/폴더 행에 native file URL writer를 추가했고 파일 경로가 실제 terminal endpoint에 도달한 것을 확인했다. 새 묶음 안에서 실제 세 목적지 클릭과 빈/긴 목록을 확인했으며 탐색 로직은 유지한다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 검색어 변경은10초/10만 항목 캐시를 재사용하며75ms 입력 대기와 부분 결과/읽기 취소를 적용했다. 실제 Sources 검색3→2건·새로고침·지우기·두 모드/축소 창을 확인했다. 1만 파일 측정459→39ms는 환경 한정이며 새로고침·캐시 만료로 외부 변경을 반영한다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다.",
+      "reason": "새 아이콘/이름 행에서 기존 홈·다운로드·문서 URL과 target-action을 그대로 쓴다. 실제 세 경로 이동·빈 폴더와 긴 목록을 확인했고 탐색/비동기/PTY는 바꾸지 않았다. 파일/폴더 행에 native file URL writer를 추가했고 파일 경로가 실제 terminal endpoint에 도달한 것을 확인했다. 새 묶음 안에서 실제 세 목적지 클릭과 빈/긴 목록을 확인했으며 탐색 로직은 유지한다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 검색어 변경은10초/10만 항목 캐시를 재사용하며75ms 입력 대기와 부분 결과/읽기 취소를 적용했다. 실제 Sources 검색3→2건·새로고침·지우기·두 모드/축소 창을 확인했다. 1만 파일 측정459→39ms는 환경 한정이며 새로고침·캐시 만료로 외부 변경을 반영한다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20: 파일 트리 루트/폭/표시는 창 ID별 defaults로 분리한다. 실제 서로 다른 Sources/chop 트리 복원과 자동 검사에서 B 탐색 후 A 루트 보존을 확인했다.",
       "evidence": [
         {
           "kind": "spec",
@@ -7588,6 +7703,26 @@
           "kind": "interaction",
           "path": "design/evidence/terminal-add-soft-borders.md",
           "sha256": "a87a35abc9520be5322420ffbb146ef0cd8b42e2f4e8522d5bfa440f1b768e0a"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
         }
       ]
     },
@@ -8707,6 +8842,33 @@
           "kind": "interaction",
           "path": "design/evidence/terminal-add-rail.md",
           "sha256": "3ef7f12dac6476731728a2170e91448cad862df242677d1ccb4c42827644e0e6"
+        }
+      ]
+    },
+    {
+      "id": "PROJECT-WINDOWS",
+      "status": "pass",
+      "reason": "파일 메뉴와⌘N/⌘⇧N·native 폴더 선택/취소·윈도우 메뉴 전환을 실제 실행했다. 다른 창 ENV 보존·세 창 복원·0창 후 생성·cwd 상속·최종 경계 결합을 확인했다. Dock 항목은 코드 연결을 확인했고 별도 포인터 실행으로 표시하지 않는다. 전체38개 검사와 이전/쓰기 실패 보존·다른 창 실행 작업 중 닫기를 확인했다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/project-windows.md",
+          "sha256": "d7c7c600bd335e1e8443c52b08ff1391f9537bb1244b59ec62e5e4bb89195abb"
         }
       ]
     }
