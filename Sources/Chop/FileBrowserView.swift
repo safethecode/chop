@@ -60,8 +60,8 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
   private var roots: [FileBrowserNode] = []
   private let header = NSView()
   private let titleLabel = NSTextField(labelWithString: "파일")
-  private let pathField = NSTextField()
-  private let searchField = NSSearchField()
+  private let pathField = InsetTextField()
+  private let searchField = InsetSearchField()
   private let statusLabel = NSTextField(wrappingLabelWithString: "")
   private let outline = FileOutlineView()
   private let scrollView = NSScrollView()

@@ -55,4 +55,23 @@ jobs:
             .cache/zig
           key: ${{ runner.os }}-${{ runner.arch }}-ghostty-${{ hashFiles('scripts/prepare-ghostty.sh', 'scripts/ghostty-xcrun.sh', 'scripts/ghostty-libtool.sh', 'Dependencies/ghostty-config.patch') }}
       - name: Check and package app
-        run: ./scripts/check.sh
+        run: |
+          ./scripts/check.sh &
+          check_pid=$!
+          (
+            while kill -0 "$check_pid" 2>/dev/null; do
+              sleep 60
+              for process_name in swiftpm-testing ChopPackageTests; do
+                for process_id in $(pgrep -x "$process_name" || true); do
+                  sample_file="$RUNNER_TEMP/chop-sample-$process_id.txt"
+                  sample "$process_id" 2 10 -file "$sample_file" >/dev/null 2>&1 || true
+                  if [[ -f "$sample_file" ]]; then
+                    head -160 "$sample_file"
+                  fi
+                done
+              done
+            done
+          ) &
+          monitor_pid=$!
+          trap 'kill "$monitor_pid" 2>/dev/null || true' EXIT
+          wait "$check_pid"
