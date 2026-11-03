@@ -33,3 +33,5 @@ macOS26.5.2/Apple Silicon, 별도 bundle ID·세션 경로의 /tmp/ChopLocalServ
 HTTPS 힌트를 위해 accessibilityValue(SCREEN 전체 기록)를 매번 복사하던 경로를 ACTIVE 출력 화면의 최대32KiB로 제한했다. 확인한 HTTPS scheme은 현재 listener가 유지되는 동안 보존하고 새 명시 HTTP 출력은 다시 적용한다. listener가 없어지면 scheme 캐시도 비운다. source snapshot은 E-L1 첫 핵심 화면 당시의 보존본이며 덮어쓰지 않았다. 변경된 부분은 텍스트 조회/프로토콜 힌트이므로 HTTP 주소/헤더 geometry/메뉴와 E-L1–5 화면은 바뀌지 않는다. 명시 HTTP override/HTTPS 선호 유지 검사와 최종 전체44개14.196초 check.sh를 재실행했다. 원격 결과는 PR에 기록한다.
 
 최종 후속: 대문자 HTTPS://LOCALHOST 힌트도 같은 방식으로 처리하며, child fixture는 파일 생성 여부가 아닌 유효한 포트 값까지 기다려 부분 쓰기 경합을 피한다. 전체44개 check.sh를14.435초에 통과했다. UI 코드/geometry는 바뀌지 않았다.
+
+자동 리뷰 후 README의 프로토콜 설명을 현재 구현과 맞췄다. 같은 포트의 로컬 주소만 힌트로 사용하고, 화면상 마지막 HTTP/HTTPS가 우선하며 화면에서 힌트가 사라져도 실행 중인 listener의 선호 방식은 유지한다. 기존 URL 제한/HTTP override/HTTPS 캐시 검사와 코드로 대조했다. 이번 후속은 문서만 바꿨으며 UI 재검증이나 전체 검사 재실행으로 표시하지 않는다.
