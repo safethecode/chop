@@ -1,0 +1,826 @@
+=== Sources/Chop/TerminalPaneView.swift ===
+import AppKit
+import ChopCore
+
+@MainActor
+final class TerminalPaneView: NSView {
+  let id: UUID
+  let engine: TerminalEngine
+  let workspaceID: UUID
+  private(set) var terminal: TerminalView?
+  var workingDirectory: String
+  var name: String {
+    didSet {
+      updateHeader()
+      onChange?()
+    }
+  }
+  var onChange: (() -> Void)?
+  var onLocalServersChange: (() -> Void)?
+  var localServerURLs: [URL] { terminal?.localServerURLs ?? [] }
+  var onFocus: (() -> Void)?
+  var onSplitRequested: ((SplitAxis) -> Void)?
+  var canSplit: ((SplitAxis) -> Bool)?
+  var onRemoveRequested: (() -> Void)?
+  var onZoomRequested: (() -> Void)?
+  var onRenameRequested: (() -> Void)?
+  var onDirectoryFallback: ((String) -> Void)?
+  var canMovePane: ((UUID) -> Bool)?
+  var onMoveRequested: ((UUID, NSRect) -> Bool)?
+  var onDragEnded: (() -> Void)?
+  var canRemove = false { didSet { updateHeader() } }
+  var canZoom = false { didSet { updateHeader() } }
+  var isZoomed = false { didSet { updateHeader() } }
+  var isEditing = false {
+    didSet {
+      updateAddButton()
+      updateMoveHandle()
+      if !isEditing {
+        clearDropHighlight()
+        alphaValue = 1
+      }
+    }
+  }
+  private var isDropTarget = false { didSet { updateDropHighlight() } }
+  private lazy var moveHandle = PaneDragHandleView(paneID: id, workspaceID: workspaceID)
+  var showsHeader = true {
+    didSet {
+      header.isHidden = !showsHeader
+      headerHeight?.constant = showsHeader ? ChopStyle.headerHeight : 0
+    }
+  }
+  private var headerHeight: NSLayoutConstraint?
+  private let header = NSView()
+  private let body = NSView()
+  private let titleButton = NSButton()
+  private let pathLabel = NSTextField(labelWithString: "")
+  private let serverButton = LocalServerButton()
+  private let errorLabel = NSTextField(wrappingLabelWithString: "")
+  private var openButton: NSButton!
+  private var closeButton: NSButton!
+  private var zoomButton: NSButton!
+
+  init(
+    engine: TerminalEngine, id: UUID = UUID(), name: String = "터미널 1",
+    workspaceID: UUID = UUID(),
+    workingDirectory: String = FileManager.default.homeDirectoryForCurrentUser.path
+  ) {
+    self.engine = engine
+    self.workspaceID = workspaceID
+    self.id = id
+    self.name = name
+    self.workingDirectory = workingDirectory
+    super.init(frame: .zero)
+    wantsLayer = true
+    setAccessibilityIdentifier("pane-\(id.uuidString)")
+    registerForDraggedTypes([PaneDragHandleView.pasteboardType])
+    configureViews()
+    applyAppearance()
+    updateHeader()
+  }
+
+  @available(*, unavailable)
+  required init?(coder: NSCoder) { fatalError("Use init(engine:).") }
+
+  var isRunning: Bool { terminal != nil }
+  var needsConfirmClose: Bool { terminal?.needsConfirmClose ?? false }
+
+  /// Refreshes pane chrome, including hidden panes, without recreating the terminal surface.
+  func applyAppearance() {
+    let mode = engine.appearanceMode
+    appearance = mode.appearance
+    layer?.backgroundColor = mode.background.cgColor
+    header.layer?.backgroundColor = mode.headerBackground.cgColor
+    updateNameButton()
+    pathLabel.textColor = mode.secondaryForeground
+    serverButton.contentTintColor = mode.secondaryForeground
+    errorLabel.textColor = mode.secondaryForeground
+    updateDropHighlight()
+  }
+
+  private func updateDropHighlight() {
+    layer?.borderWidth = isDropTarget ? 2 : 0
+    effectiveAppearance.performAsCurrentDrawingAppearance {
+      layer?.borderColor = NSColor.keyboardFocusIndicatorColor.cgColor
+    }
+  }
+
+  func clearDropHighlight() { isDropTarget = false }
+
+  func dragPreview(in source: NSView) -> PaneDragPreview? {
+    layoutSubtreeIfNeeded()
+    guard bounds.width > 0, bounds.height > 0,
+      let bitmap = bitmapImageRepForCachingDisplay(in: bounds)
+    else { return nil }
+    cacheDisplay(in: bounds, to: bitmap)
+    let snapshot = NSImage(size: bounds.size)
+    snapshot.addRepresentation(bitmap)
+    let background = engine.appearanceMode.background
+    let chrome = NSDraggingImageComponent(key: .icon)
+    chrome.frame = NSRect(origin: .zero, size: bounds.size)
+    chrome.contents = NSImage(size: bounds.size, flipped: false) { rect in
+      background.setFill()
+      rect.fill()
+      snapshot.draw(in: rect)
+      return true
+    }
+    var components = [chrome]
+    // AppKit's bitmap cache does not reliably include a layer-hosted GPU view.
+    // Drag components accept CALayer contents, so retain the current IOSurface
+    // directly instead of substituting text or moving/recreating the PTY view.
+    if let terminal, let contents = terminal.layer?.contents {
+      let rendered = NSDraggingImageComponent(key: .init(rawValue: "chop.terminal"))
+      rendered.contents = contents
+      rendered.frame = convert(terminal.bounds, from: terminal)
+      components.append(rendered)
+    }
+    return PaneDragPreview(frame: source.convert(bounds, from: self), components: components)
+  }
+
+  private func draggedPane(_ sender: any NSDraggingInfo) -> UUID? {
+    guard isEditing, let source = sender.draggingSource as? PaneDragHandleView,
+      source.workspaceID == workspaceID, source.paneID != id,
+      sender.draggingPasteboard.string(forType: PaneDragHandleView.pasteboardType)
+        == source.paneID.uuidString,
+      canMovePane?(source.paneID) == true
+    else { return nil }
+    return source.paneID
+  }
+
+  override func draggingEntered(_ sender: any NSDraggingInfo) -> NSDragOperation {
+    isDropTarget = draggedPane(sender) != nil
+    return isDropTarget ? .move : []
+  }
+
+  override func draggingUpdated(_ sender: any NSDraggingInfo) -> NSDragOperation {
+    draggingEntered(sender)
+  }
+
+  override func draggingExited(_ sender: (any NSDraggingInfo)?) { clearDropHighlight() }
+
+  override func prepareForDragOperation(_ sender: any NSDraggingInfo) -> Bool {
+    draggedPane(sender) != nil
+  }
+
+  override func performDragOperation(_ sender: any NSDraggingInfo) -> Bool {
+    clearDropHighlight()
+    guard let source = draggedPane(sender),
+      let handle = sender.draggingSource as? PaneDragHandleView,
+      let size = handle.previewSize
+    else { return false }
+    let previewFrame = NSRect(origin: sender.draggedImageLocation, size: size)
+    return onMoveRequested?(source, previewFrame) ?? false
+  }
+
+  override func concludeDragOperation(_ sender: (any NSDraggingInfo)?) { clearDropHighlight() }
+
+  private func updateMoveHandle() {
+    moveHandle.isHidden = !isEditing || !canZoom
+    window?.invalidateCursorRects(for: moveHandle)
+  }
+
+  @objc func openTerminal() {
+    guard terminal == nil else {
+      focus()
+      return
+    }
+    do {
+      if let missing = resolveWorkingDirectory() { onDirectoryFallback?(missing) }
+      layoutSubtreeIfNeeded()
+      let view = try TerminalView(
+        engine: engine, workingDirectory: workingDirectory, frame: body.bounds)
+      terminal = view
+      view.onExit = { [weak self, weak view] in
+        guard let self, let view, self.terminal === view else { return }
+        self.closeTerminal()
+      }
+      view.onFocus = { [weak self] in self?.onFocus?() }
+      view.onMetadataChange = { [weak self] in
+        guard let self, let terminal = self.terminal else { return }
+        self.workingDirectory = terminal.workingDirectory
+        self.updateHeader()
+        self.onChange?()
+      }
+      view.onLocalServersChange = { [weak self] in
+        self?.updateServerDisplay()
+        self?.onLocalServersChange?()
+      }
+      body.addSubview(view)
+      view.translatesAutoresizingMaskIntoConstraints = false
+      NSLayoutConstraint.activate([
+        view.leadingAnchor.constraint(equalTo: body.leadingAnchor),
+        view.trailingAnchor.constraint(equalTo: body.trailingAnchor),
+        view.topAnchor.constraint(equalTo: body.topAnchor),
+        view.bottomAnchor.constraint(equalTo: body.bottomAnchor),
+      ])
+      body.addSubview(openButton, positioned: .above, relativeTo: view)
+      updateAddButton()
+      errorLabel.isHidden = true
+      updateHeader()
+      focus()
+      onChange?()
+    } catch {
+      errorLabel.stringValue = error.localizedDescription
+      errorLabel.isHidden = false
+      openButton.setAccessibilityLabel("다시 열기")
+      openButton.toolTip = "다시 열기"
+    }
+  }
+
+  func closeTerminal() {
+    guard let terminal else { return }
+    workingDirectory = terminal.workingDirectory
+    terminal.close()
+    terminal.removeFromSuperview()
+    self.terminal = nil
+    openButton.isHidden = false
+    errorLabel.isHidden = true
+    openButton.setAccessibilityLabel("터미널 열기")
+    openButton.toolTip = "터미널 열기"
+    updateHeader()
+    focus()
+    onChange?()
+  }
+
+  /// Resolve every saved path before restore; no path is interpreted as a command.
+  func resolveWorkingDirectory() -> String? {
+    var isDirectory: ObjCBool = false
+    guard
+      !FileManager.default.fileExists(atPath: workingDirectory, isDirectory: &isDirectory)
+        || !isDirectory.boolValue || !FileManager.default.isReadableFile(atPath: workingDirectory)
+        || !FileManager.default.isExecutableFile(atPath: workingDirectory)
+    else { return nil }
+    let missing = workingDirectory
+    workingDirectory = FileManager.default.homeDirectoryForCurrentUser.path
+    updateHeader()
+    onChange?()
+    return missing
+  }
+
+  func focus() {
+    window?.makeFirstResponder(terminal ?? openButton)
+    onFocus?()
+  }
+
+  @objc func requestClose() {
+    guard isRunning else {
+      onRemoveRequested?()
+      return
+    }
+    if needsConfirmClose {
+      let alert = NSAlert()
+      alert.messageText = "이 터미널을 닫을까요?"
+      alert.informativeText = "이 칸에서 실행 중인 작업이 종료됩니다."
+      alert.addButton(withTitle: "취소")
+      alert.addButton(withTitle: "터미널 닫기")
+      guard alert.runModal() == .alertSecondButtonReturn else { return }
+    }
+    closeTerminal()
+  }
+
+  override func mouseDown(with event: NSEvent) { focus() }
+
+  @objc private func toggleZoom() { onZoomRequested?() }
+  @objc private func renamePane() { onRenameRequested?() }
+
+  @objc private func addFromCenter() {
+    guard isRunning else {
+      openTerminal()
+      return
+    }
+    let menu = NSMenu()
+    menu.autoenablesItems = false
+    for (title, action, axis) in [
+      ("오른쪽에 추가", #selector(addRight), SplitAxis.horizontal),
+      ("아래에 추가", #selector(addDown), .vertical),
+    ] {
+      let item = menu.addItem(withTitle: title, action: action, keyEquivalent: "")
+      item.target = self
+      item.isEnabled = canSplit?(axis) ?? false
+    }
+    menu.popUp(
+      positioning: nil, at: NSPoint(x: openButton.frame.minX, y: openButton.frame.minY), in: body)
+  }
+
+  @objc private func addRight() { onSplitRequested?(.horizontal) }
+  @objc private func addDown() { onSplitRequested?(.vertical) }
+
+  private func updateAddButton() {
+    openButton.isHidden = isRunning && !isEditing
+    let label = isRunning ? "터미널 추가" : "터미널 열기"
+    openButton.setAccessibilityLabel(label)
+    openButton.toolTip = label
+  }
+
+  /// Builds header and body controls before the initial appearance is applied.
+  private func configureViews() {
+    header.wantsLayer = true
+    for view in [header, body] {
+      addSubview(view)
+      view.translatesAutoresizingMaskIntoConstraints = false
+    }
+    titleButton.target = self
+    titleButton.action = #selector(renamePane)
+    titleButton.setButtonType(.momentaryPushIn)
+    titleButton.bezelStyle = .inline
+    titleButton.isBordered = false
+    titleButton.image = NSImage(systemSymbolName: "pencil", accessibilityDescription: nil)?
+      .withSymbolConfiguration(.init(pointSize: 14, weight: .medium))
+    titleButton.imagePosition = .imageTrailing
+    titleButton.imageScaling = .scaleProportionallyDown
+    titleButton.alignment = .left
+    titleButton.font = ChopStyle.font
+    titleButton.cell?.lineBreakMode = .byTruncatingTail
+    titleButton.setContentHuggingPriority(.required, for: .horizontal)
+    titleButton.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+    let nameMenu = NSMenu()
+    nameMenu.addItem(withTitle: "이름 바꾸기…", action: #selector(renamePane), keyEquivalent: "")
+      .target = self
+    header.menu = nameMenu
+    titleButton.menu = nameMenu
+    pathLabel.font = ChopStyle.font
+    pathLabel.lineBreakMode = .byTruncatingMiddle
+    pathLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+    pathLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+    let close = ChopStyle.iconButton(
+      "xmark", label: "터미널 닫기", target: self, action: #selector(requestClose))
+    closeButton = close
+    zoomButton = ChopStyle.iconButton(
+      "arrow.up.left.and.arrow.down.right", label: "칸 확대", target: self,
+      action: #selector(toggleZoom))
+    moveHandle.onFocus = { [weak self] in self?.focus() }
+    moveHandle.onPrepareDrag = { [weak self] source in self?.dragPreview(in: source) }
+    moveHandle.onDragBegan = { [weak self] in self?.alphaValue = 0.35 }
+    moveHandle.onDragEnded = { [weak self] in
+      self?.alphaValue = 1
+      self?.onDragEnded?()
+    }
+    moveHandle.isHidden = true
+    let row = ChopStyle.headerRow(views: [
+      moveHandle, titleButton, pathLabel, serverButton, zoomButton, close,
+    ])
+    header.addSubview(row)
+    openButton = NSButton(
+      image: NSImage(systemSymbolName: "plus", accessibilityDescription: "터미널 열기")!, target: self,
+      action: #selector(addFromCenter))
+    openButton.bezelStyle = .circular
+    openButton.controlSize = .large
+    openButton.toolTip = "터미널 열기"
+    openButton.setAccessibilityLabel("터미널 열기")
+    openButton.translatesAutoresizingMaskIntoConstraints = false
+    body.addSubview(openButton)
+    errorLabel.font = ChopStyle.font
+    errorLabel.alignment = .center
+    errorLabel.isHidden = true
+    errorLabel.translatesAutoresizingMaskIntoConstraints = false
+    body.addSubview(errorLabel)
+    let headerHeightConstraint = header.heightAnchor.constraint(
+      equalToConstant: ChopStyle.headerHeight)
+    headerHeight = headerHeightConstraint
+    NSLayoutConstraint.activate([
+      header.leadingAnchor.constraint(equalTo: leadingAnchor),
+      header.trailingAnchor.constraint(equalTo: trailingAnchor),
+      header.topAnchor.constraint(equalTo: topAnchor),
+      headerHeightConstraint,
+      row.leadingAnchor.constraint(equalTo: header.leadingAnchor, constant: ChopStyle.inset),
+      row.trailingAnchor.constraint(equalTo: header.trailingAnchor, constant: -ChopStyle.inset),
+      row.centerYAnchor.constraint(equalTo: header.centerYAnchor),
+      body.leadingAnchor.constraint(equalTo: leadingAnchor),
+      body.trailingAnchor.constraint(equalTo: trailingAnchor),
+      body.topAnchor.constraint(equalTo: header.bottomAnchor),
+      body.bottomAnchor.constraint(equalTo: bottomAnchor),
+      openButton.centerXAnchor.constraint(equalTo: body.centerXAnchor),
+      openButton.centerYAnchor.constraint(equalTo: body.centerYAnchor),
+      openButton.widthAnchor.constraint(equalToConstant: 56),
+      openButton.heightAnchor.constraint(equalToConstant: 56),
+      errorLabel.topAnchor.constraint(equalTo: openButton.bottomAnchor, constant: 16),
+      errorLabel.centerXAnchor.constraint(equalTo: body.centerXAnchor),
+      errorLabel.widthAnchor.constraint(lessThanOrEqualTo: body.widthAnchor, constant: -32),
+    ])
+  }
+
+  private func updateHeader() {
+    updateServerDisplay()
+    updateMoveHandle()
+    moveHandle.setAccessibilityLabel("\(name) 이동")
+    updateNameButton()
+    pathLabel.stringValue = (workingDirectory as NSString).abbreviatingWithTildeInPath
+    pathLabel.toolTip = workingDirectory
+    terminal?.setAccessibilityLabel("\(name) 터미널")
+    closeButton.isEnabled = isRunning || canRemove
+    let closeLabel = isRunning ? "터미널 닫기" : "빈 칸 제거"
+    closeButton.setAccessibilityLabel(closeLabel)
+    closeButton.toolTip = closeLabel
+    let zoomLabel = isZoomed ? "전체 레이아웃으로 돌아가기" : "칸 확대"
+    zoomButton.setAccessibilityLabel(zoomLabel)
+    zoomButton.isEnabled = canZoom
+    zoomButton.toolTip = zoomLabel
+    zoomButton.image = NSImage(
+      systemSymbolName: isZoomed
+        ? "arrow.down.right.and.arrow.up.left" : "arrow.up.left.and.arrow.down.right",
+      accessibilityDescription: zoomLabel)
+  }
+
+  override func layout() {
+    super.layout()
+    updatePathVisibility()
+  }
+
+  private func updateServerDisplay() {
+    serverButton.update(localServerURLs)
+    updatePathVisibility()
+  }
+
+  private func updatePathVisibility() {
+    serverButton.setCompact(bounds.width < 340)
+    // Narrow panes prioritize the server; the directory remains in the name's tooltip.
+    let hidePath = !localServerURLs.isEmpty && bounds.width < 480
+    if pathLabel.isHidden != hidePath { pathLabel.isHidden = hidePath }
+  }
+
+  private func updateNameButton() {
+    titleButton.contentTintColor = engine.appearanceMode.secondaryForeground
+    titleButton.attributedTitle = NSAttributedString(
+      string: name,
+      attributes: [.font: ChopStyle.font, .foregroundColor: engine.appearanceMode.foreground])
+    titleButton.toolTip = "\(name) — 이름 바꾸기 (⌘⇧R)\n\(workingDirectory)"
+    titleButton.setAccessibilityLabel("\(name) 이름 바꾸기")
+  }
+}
+
+=== Sources/Chop/TerminalTabBar.swift ===
+import AppKit
+
+/// A horizontal list keeps every terminal reachable while one pane fills the canvas.
+@MainActor
+final class TerminalTabBar: NSView {
+  private let scroll = NSScrollView()
+  private let tabs = NSStackView()
+  private let ids: [UUID]
+  private var selectedID: UUID
+  private var lastViewportSize = NSSize.zero
+  private var lastTabsWidth: CGFloat = 0
+  private let onSelect: (UUID) -> Void
+  private let onRename: (UUID) -> Void
+  private var buttons: [NSButton] = []
+  private let addButton: NSButton
+  private let closeButton: NSButton
+  private let serverButton = LocalServerButton()
+
+  init(
+    panes: [TerminalPaneView], selectedID: UUID, mode: AppearanceMode,
+    onSelect: @escaping (UUID) -> Void, onAdd: @escaping () -> Void, onClose: @escaping () -> Void,
+    onRename: @escaping (UUID) -> Void
+  ) {
+    ids = panes.map(\.id)
+    self.selectedID = selectedID
+    self.onSelect = onSelect
+    self.onRename = onRename
+    addButton = ChopStyle.iconButton(
+      "plus", label: "터미널 탭 추가", target: nil, action: #selector(addTab))
+    closeButton = ChopStyle.iconButton(
+      "xmark", label: "선택한 터미널 닫기", target: nil, action: #selector(closeTab))
+    self.onAdd = onAdd
+    self.onClose = onClose
+    super.init(frame: .zero)
+    wantsLayer = true
+    setAccessibilityLabel("터미널 탭")
+    tabs.orientation = .horizontal
+    tabs.alignment = .centerY
+    tabs.spacing = 4
+    for (index, pane) in panes.enumerated() {
+      let button = NSButton(title: pane.name, target: self, action: #selector(selectTab(_:)))
+      button.tag = index
+      let menu = NSMenu()
+      let rename = menu.addItem(
+        withTitle: "이름 바꾸기…", action: #selector(renameTab(_:)), keyEquivalent: "")
+      rename.target = self
+      rename.tag = index
+      rename.image = NSImage(systemSymbolName: "pencil", accessibilityDescription: nil)
+      button.menu = menu
+      button.font = ChopStyle.font
+      button.bezelStyle = .rounded
+      button.setButtonType(.pushOnPushOff)
+      button.cell?.lineBreakMode = .byTruncatingTail
+      button.translatesAutoresizingMaskIntoConstraints = false
+      button.widthAnchor.constraint(lessThanOrEqualToConstant: 240).isActive = true
+      button.heightAnchor.constraint(equalToConstant: 28).isActive = true
+      tabs.addArrangedSubview(button)
+      buttons.append(button)
+    }
+    scroll.documentView = tabs
+    scroll.hasHorizontalScroller = true
+    scroll.autohidesScrollers = true
+    scroll.scrollerStyle = .overlay
+    scroll.drawsBackground = false
+    addSubview(scroll)
+    addSubview(serverButton)
+    for button in [addButton, closeButton] {
+      button.target = self
+      addSubview(button)
+    }
+    NSLayoutConstraint.activate([
+      serverButton.trailingAnchor.constraint(equalTo: closeButton.leadingAnchor, constant: -8),
+      serverButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+      addButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+      addButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+      closeButton.trailingAnchor.constraint(equalTo: addButton.leadingAnchor, constant: -4),
+      closeButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+    ])
+    update(panes: panes, selectedID: selectedID)
+    applyAppearance(mode)
+  }
+
+  private let onAdd: () -> Void
+  private let onClose: () -> Void
+
+  @available(*, unavailable)
+  required init?(coder: NSCoder) {
+    fatalError("Use init(panes:selectedID:mode:onSelect:onAdd:onClose:onRename:).")
+  }
+
+  func update(panes: [TerminalPaneView], selectedID: UUID) {
+    self.selectedID = selectedID
+    serverButton.update(panes.first { $0.id == selectedID }?.localServerURLs ?? [])
+    for (button, id) in zip(buttons, ids) {
+      guard let pane = panes.first(where: { $0.id == id }) else { continue }
+      button.title = pane.name
+      button.toolTip = "\(pane.name) — \(pane.workingDirectory)\n우클릭으로 이름 바꾸기"
+      button.setAccessibilityLabel(pane.name)
+      button.state = id == selectedID ? .on : .off
+    }
+    addButton.isEnabled = panes.count < 16
+    closeButton.isEnabled =
+      panes.first { $0.id == selectedID }.map { $0.isRunning || panes.count > 1 } ?? false
+    needsLayout = true
+  }
+
+  func applyAppearance(_ mode: AppearanceMode) {
+    appearance = mode.appearance
+    layer?.backgroundColor = mode.headerBackground.cgColor
+    serverButton.contentTintColor = mode.secondaryForeground
+  }
+
+  override func layout() {
+    super.layout()
+    serverButton.setCompact(bounds.width < 420)
+    let serverWidth = serverButton.isHidden ? 0 : serverButton.intrinsicContentSize.width + 8
+    scroll.frame = NSRect(
+      x: 8, y: 0, width: max(0, bounds.width - 84 - serverWidth), height: bounds.height)
+    tabs.frame = NSRect(
+      origin: .zero, size: NSSize(width: tabs.fittingSize.width, height: bounds.height))
+    tabs.layoutSubtreeIfNeeded()
+    // Native button metrics can settle after the stack's first fitting-size read.
+    // Include the laid-out trailing edge so scrolling can reveal the whole tab.
+    let trailingEdge = tabs.arrangedSubviews.map(\.frame.maxX).max() ?? 0
+    if trailingEdge > tabs.frame.width {
+      tabs.setFrameSize(NSSize(width: trailingEdge, height: bounds.height))
+      tabs.layoutSubtreeIfNeeded()
+    }
+    if lastViewportSize != scroll.contentSize || lastTabsWidth != tabs.frame.width {
+      lastViewportSize = scroll.contentSize
+      lastTabsWidth = tabs.frame.width
+      if let index = ids.firstIndex(of: selectedID) {
+        tabs.scrollToVisible(buttons[index].frame.insetBy(dx: -4, dy: 0))
+      }
+    }
+  }
+
+  func revealSelection(_ id: UUID) {
+    layoutSubtreeIfNeeded()
+    guard let index = ids.firstIndex(of: id) else { return }
+    tabs.scrollToVisible(buttons[index].frame.insetBy(dx: -4, dy: 0))
+  }
+
+  @objc private func selectTab(_ sender: NSButton) { onSelect(ids[sender.tag]) }
+  @objc private func renameTab(_ sender: NSMenuItem) { onRename(ids[sender.tag]) }
+  @objc private func addTab() { onAdd() }
+  @objc private func closeTab() { onClose() }
+}
+
+=== Sources/Chop/LocalServerButton.swift ===
+import AppKit
+
+/// Shared by pane headers and the selected terminal's tab bar; opening is always user initiated.
+@MainActor
+final class LocalServerButton: NSButton {
+  private(set) var urls: [URL] = []
+  private var compact = false
+  var openURL: (URL) -> Void = { NSWorkspace.shared.open($0) }
+
+  init() {
+    super.init(frame: .zero)
+    target = self
+    action = #selector(openServer)
+    isBordered = false
+    bezelStyle = .inline
+    font = ChopStyle.font
+    image = NSImage(systemSymbolName: "arrow.up.right", accessibilityDescription: nil)?
+      .withSymbolConfiguration(.init(pointSize: 14, weight: .medium))
+    imagePosition = .imageTrailing
+    alignment = .right
+    cell?.lineBreakMode = .byTruncatingMiddle
+    setContentCompressionResistancePriority(.required, for: .horizontal)
+    setContentHuggingPriority(.defaultHigh, for: .horizontal)
+    isHidden = true
+    translatesAutoresizingMaskIntoConstraints = false
+    heightAnchor.constraint(equalToConstant: 28).isActive = true
+  }
+
+  @available(*, unavailable)
+  required init?(coder: NSCoder) { fatalError("Use init().") }
+
+  func update(_ urls: [URL]) {
+    self.urls = urls
+    isHidden = urls.isEmpty
+    guard let first = urls.first else { return }
+    let address =
+      compact
+      ? ":\(first.port ?? 80)"
+      : first.absoluteString
+        .replacingOccurrences(of: "https://", with: "").replacingOccurrences(
+          of: "http://", with: "")
+    title = address + (urls.count > 1 ? " +\(urls.count - 1)" : "")
+    toolTip = urls.map(\.absoluteString).joined(separator: "\n")
+    setAccessibilityLabel(
+      urls.count == 1 ? "로컬 서버 \(first.absoluteString) 열기" : "로컬 서버 \(urls.count)개 보기")
+  }
+
+  func setCompact(_ value: Bool) {
+    guard compact != value else { return }
+    compact = value
+    update(urls)
+  }
+
+  @objc private func openServer() {
+    guard let first = urls.first else { return }
+    if urls.count == 1 {
+      openURL(first)
+    } else {
+      let menu = NSMenu()
+      for url in urls {
+        let item = menu.addItem(
+          withTitle: url.absoluteString, action: #selector(openItem(_:)), keyEquivalent: "")
+        item.target = self
+        item.representedObject = url
+      }
+      menu.popUp(positioning: nil, at: NSPoint(x: 0, y: bounds.minY), in: self)
+    }
+  }
+
+  @objc private func openItem(_ sender: NSMenuItem) {
+    // A menu can remain open while the listener exits; do not open a removed endpoint.
+    guard let url = sender.representedObject as? URL, urls.contains(url) else { return }
+    openURL(url)
+  }
+}
+
+=== Sources/ChopCore/LocalServer.swift ===
+import Darwin
+import Foundation
+
+/// A local TCP listener. The browser uses HTTP unless the terminal advertises HTTPS for this port.
+public struct LocalServer: Hashable, Sendable {
+  private static let urlExpression = try! NSRegularExpression(
+    pattern: #"https?://[^\s<>\"']+"#, options: .caseInsensitive)
+  public let host: String
+  public let port: UInt16
+
+  public init(host: String, port: UInt16) {
+    self.host = host
+    self.port = port
+  }
+
+  public var address: String { "\(host.contains(":") ? "[\(host)]" : host):\(port)" }
+
+  public func browserURL(screenText: String = "") -> URL {
+    var scheme = "http"
+    // Only use the scheme, never a terminal-provided destination or executable URL scheme.
+    do {
+      let text = String(screenText.suffix(32_768))
+      for match in Self.urlExpression.matches(
+        in: text, range: NSRange(text.startIndex..., in: text))
+      {
+        guard let range = Range(match.range, in: text),
+          let parts = URLComponents(string: String(text[range])),
+          ["localhost", "127.0.0.1", "0.0.0.0", "[::1]", "[::]", host].contains(
+            parts.host?.lowercased() ?? ""),
+          parts.user == nil, parts.password == nil,
+          (parts.port ?? (parts.scheme == "https" ? 443 : 80)) == Int(port)
+        else { continue }
+        scheme = parts.scheme == "https" ? "https" : "http"
+      }
+    }
+    return URL(string: "\(scheme)://\(address)")!
+  }
+}
+
+/// Inspect only the supplied shells and their descendants. No shell command, system-wide port scan,
+/// environment read, or network request is needed.
+public enum LocalServerDiscovery {
+  public static func scan(rootPIDs: [Int32]) -> [Int32: [LocalServer]] {
+    var result: [Int32: [LocalServer]] = [:]
+    let ownedRoots = Set(children(of: getpid()))
+    for root in Set(rootPIDs) where root > 0 {
+      guard !Task.isCancelled, root == getpid() || ownedRoots.contains(root)
+      else { continue }
+      let before = identity(root)
+      var pending = [root]
+      var visited = Set<Int32>()
+      var servers = Set<LocalServer>()
+      while let pid = pending.popLast(), visited.count < 4096, !Task.isCancelled {
+        let process = identity(pid)
+        guard pid == root || process.map({ visited.contains(Int32($0.pbi_ppid)) }) == true,
+          visited.insert(pid).inserted
+        else { continue }
+        if let process {
+          let found = listeners(pid)
+          if let current = identity(pid), process.pbi_start_tvsec == current.pbi_start_tvsec,
+            process.pbi_start_tvusec == current.pbi_start_tvusec,
+            process.pbi_ppid == current.pbi_ppid
+          {
+            servers.formUnion(found)
+          }
+        }
+        // macOS login(1) is privileged: its BSD info can be denied even though its children are ours.
+        pending += children(of: pid)
+      }
+      if let before {
+        guard let after = identity(root), before.pbi_start_tvsec == after.pbi_start_tvsec,
+          before.pbi_start_tvusec == after.pbi_start_tvusec, before.pbi_ppid == after.pbi_ppid
+        else { continue }
+      } else if !children(of: getpid()).contains(root) {
+        continue
+      }
+      result[root] = servers.sorted {
+        $0.port == $1.port ? $0.host < $1.host : $0.port < $1.port
+      }
+    }
+    return result
+  }
+
+  private static func children(of pid: Int32) -> [Int32] {
+    // Unlike proc_pidinfo, proc_listchildpids returns a PID count, not a byte count.
+    let capacity = Int(proc_listchildpids(pid, nil, 0)) + 32
+    guard capacity > 0, capacity < 65_536 else { return [] }
+    var children = [Int32](repeating: 0, count: capacity)
+    let count = children.withUnsafeMutableBytes {
+      proc_listchildpids(pid, $0.baseAddress, Int32($0.count))
+    }
+    return count > 0 ? children.prefix(Int(count)).filter { $0 > 0 } : []
+  }
+
+  private static func identity(_ pid: Int32) -> proc_bsdinfo? {
+    var info = proc_bsdinfo()
+    let size = Int32(MemoryLayout.size(ofValue: info))
+    return proc_pidinfo(pid, PROC_PIDTBSDINFO, 0, &info, size) == size ? info : nil
+  }
+
+  private static func listeners(_ pid: Int32) -> [LocalServer] {
+    let stride = MemoryLayout<proc_fdinfo>.stride
+    let required = Int(proc_pidinfo(pid, PROC_PIDLISTFDS, 0, nil, 0))
+    guard required > 0, required < 16_777_216 else { return [] }
+    var descriptors = [proc_fdinfo](repeating: proc_fdinfo(), count: required / stride + 32)
+    let bytes = descriptors.withUnsafeMutableBytes {
+      proc_pidinfo(pid, PROC_PIDLISTFDS, 0, $0.baseAddress, Int32($0.count))
+    }
+    guard bytes > 0 else { return [] }
+    var result: [LocalServer] = []
+    for descriptor in descriptors.prefix(Int(bytes) / stride)
+    where descriptor.proc_fdtype == UInt32(PROX_FDTYPE_SOCKET) {
+      if Task.isCancelled { break }
+      var socket = socket_fdinfo()
+      let size = Int32(MemoryLayout.size(ofValue: socket))
+      guard proc_pidfdinfo(pid, descriptor.proc_fd, PROC_PIDFDSOCKETINFO, &socket, size) == size,
+        socket.psi.soi_kind == SOCKINFO_TCP,
+        socket.psi.soi_proto.pri_tcp.tcpsi_state == TSI_S_LISTEN
+      else { continue }
+      let info = socket.psi.soi_proto.pri_tcp.tcpsi_ini
+      let port = UInt16(bigEndian: UInt16(truncatingIfNeeded: info.insi_lport))
+      guard port > 0 else { continue }
+      if info.insi_vflag & UInt8(INI_IPV4) != 0 {
+        var address = info.insi_laddr.ina_46.i46a_addr4
+        let value = UInt32(bigEndian: address.s_addr)
+        guard value == 0 || value >> 24 == 127 else { continue }
+        var buffer = [CChar](repeating: 0, count: Int(INET_ADDRSTRLEN))
+        guard inet_ntop(AF_INET, &address, &buffer, socklen_t(buffer.count)) != nil else {
+          continue
+        }
+        let host =
+          value == 0 || value == 0x7f00_0001
+          ? "localhost"
+          : String(decoding: buffer.prefix { $0 != 0 }.map { UInt8(bitPattern: $0) }, as: UTF8.self)
+        result.append(LocalServer(host: host, port: port))
+      } else if info.insi_vflag & UInt8(INI_IPV6) != 0 {
+        var address = info.insi_laddr.ina_6
+        let values = withUnsafeBytes(of: &address) { Array($0) }
+        guard
+          values.allSatisfy({ $0 == 0 })
+            || (values.dropLast().allSatisfy({ $0 == 0 }) && values.last == 1)
+        else { continue }
+        result.append(LocalServer(host: "localhost", port: port))
+      }
+    }
+    return result
+  }
+}

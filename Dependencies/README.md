@@ -9,7 +9,7 @@ Chop은 macOS용 libghostty embedder API와 Metal 렌더러를 사용합니다.
 이 API는 안정적인 범용 API가 아니므로 버전을 고정하고 `TerminalEngine` / `TerminalView`에서만 사용합니다.
 외부용 libghostty-vt는 렌더링과 프로세스 관리를 직접 구현해야 하므로 현재 버전에는 사용하지 않습니다.
 
-`ghostty-config.patch`는 Chop의 번들 설정 파일을 읽는 함수 하나와 아카이브 도구 어댑터 연결을 추가합니다.
+`ghostty-config.patch`는 Chop의 번들 설정 파일 읽기·surface의 셸 PID 조회 함수와 아카이브 도구 어댑터 연결을 추가합니다.
 사용자의 Ghostty 설정이나 프로세스 인자를 수정하지 않고 설정을 읽습니다.
 최신 Apple libtool이 Zig 아카이브의 정렬되지 않은 객체를 누락하는 문제는
 `scripts/ghostty-libtool.sh`에서 객체를 꺼내 재조립해 해결합니다. 완성한 라이브러리의 공개 함수도 검사합니다.
@@ -27,3 +27,5 @@ Xcode 26의 일부 arm64 SDK에서는 Zig 0.14 링크가 실패합니다.
 Metal 도구가 빠져 있으면 Xcode의 공식 `MetalToolchain` 구성 요소를 내려받습니다.
 Git 전송을 사용하는 `zg`와 `zigimg`는 같은 커밋의 아카이브를 미리 받아 업스트림에 고정된 Zig 콘텐츠 해시를 검증합니다.
 Codeberg의 Git capability 조회가 실패하는 CI 환경에서도 패키지 버전을 바꾸지 않고 빌드하기 위한 처리입니다.
+
+`chop_ghostty_surface_child_pid`는 IO 스레드가 publish한 atomic PID만 읽습니다. 실행 중인 터미널에 속한 TCP listener를 구분하는 용도이며 원래 버전·라이선스는 유지합니다.

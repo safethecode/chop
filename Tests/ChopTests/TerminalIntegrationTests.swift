@@ -478,6 +478,88 @@ import Testing
   emptyRestored.closeAll()
   try await verifyGlobalTerminalAddition(engine: engine, window: window, directory: directory)
   try await verifyProjectWindows(engine: engine, directory: directory)
+  try await verifyLocalServers(engine: engine, window: window, directory: directory)
+}
+
+@MainActor
+private func verifyLocalServers(engine: TerminalEngine, window: NSWindow, directory: URL)
+  async throws
+{
+  let workspace = WorkspaceView(engine: engine, initialDirectory: directory.path)
+  window.contentView = workspace
+  window.setContentSize(NSSize(width: 640, height: 450))
+  window.layoutIfNeeded()
+  defer { workspace.closeAll() }
+  workspace.startRestoredTerminals()
+  let first = try #require(workspace.focusedPane.terminal)
+  workspace.addTerminal()
+  let second = try #require(workspace.focusedPane.terminal)
+  var completed = false
+  defer {
+    if !completed {
+      Issue.record(
+        "Local server fixture: first PID \(first.childPID), URLs \(first.localServerURLs), screen \(viewport(of: first)); second PID \(second.childPID), URLs \(second.localServerURLs), screen \(viewport(of: second))"
+      )
+    }
+  }
+  try await waitFor { first.childPID > 0 && second.childPID > 0 && !workspace.needsConfirmClose }
+  #expect(first.childPID != second.childPID)
+  let script =
+    "import socket,time; sockets=[socket.socket(),socket.socket()]; [(s.bind((\"127.0.0.1\",0)),s.listen()) for s in sockets]; time.sleep(60)"
+  first.insertText(
+    "/usr/bin/python3 -u -c '\(script)'", replacementRange: NSRange(location: NSNotFound, length: 0)
+  )
+  try pressReturn(on: first, window: window)
+  // A nested launcher is typical of npm/pnpm; its child's listener belongs to this pane only.
+  let nested =
+    "import subprocess,sys; subprocess.run([sys.executable,\"-c\",\"import socket,time; s=socket.socket(); s.bind((\\\"127.0.0.1\\\",0)); s.listen(); time.sleep(60)\"])"
+  second.insertText(
+    "/usr/bin/python3 -u -c '\(nested)'", replacementRange: NSRange(location: NSNotFound, length: 0)
+  )
+  try pressReturn(on: second, window: window)
+  try await waitFor { first.localServerURLs.count == 2 && second.localServerURLs.count == 1 }
+  #expect(Set(first.localServerURLs).isDisjoint(with: second.localServerURLs))
+  for mode in [AppearanceMode.light, .dark] {
+    workspace.applyAppearance(mode)
+    window.layoutIfNeeded()
+    workspace.layoutSubtreeIfNeeded()
+    for pane in workspace.panes.values where pane.isRunning {
+      func descendants(_ view: NSView) -> [NSView] {
+        view.subviews.flatMap { [$0] + descendants($0) }
+      }
+      let controls = descendants(pane).compactMap { $0 as? NSButton }.filter {
+        !$0.isHiddenOrHasHiddenAncestor
+      }
+      let server = try #require(controls.compactMap { $0 as? LocalServerButton }.first)
+      let rect = pane.convert(server.bounds, from: server)
+      #expect(pane.bounds.contains(rect) && rect.width >= server.intrinsicContentSize.width - 0.5)
+      for control in controls where control !== server {
+        #expect(!rect.intersects(pane.convert(control.bounds, from: control)))
+      }
+    }
+  }
+  let firstID = try #require(workspace.panes.values.first { $0.terminal === first }?.id)
+  let secondID = workspace.focusedID
+  #expect(workspace.applyPreset(.single))
+  workspace.selectTab(firstID)
+  func buttons(_ view: NSView) -> [LocalServerButton] {
+    view.subviews.flatMap { child in (child as? LocalServerButton).map { [$0] } ?? buttons(child) }
+  }
+  #expect(buttons(workspace).contains { !$0.isHidden && $0.urls == first.localServerURLs })
+  workspace.selectTab(secondID)
+  #expect(buttons(workspace).contains { !$0.isHidden && $0.urls == second.localServerURLs })
+  let interrupt = try #require(
+    NSEvent.keyEvent(
+      with: .keyDown, location: .zero, modifierFlags: .control, timestamp: 0,
+      windowNumber: window.windowNumber, context: nil, characters: "\u{03}",
+      charactersIgnoringModifiers: "c", isARepeat: false, keyCode: 8))
+  first.keyDown(with: interrupt)
+  try await waitFor { first.localServerURLs.isEmpty }
+  #expect(second.localServerURLs.count == 1)
+  let secondPane = try #require(workspace.panes[secondID])
+  secondPane.closeTerminal()
+  #expect(secondPane.localServerURLs.isEmpty)
+  completed = true
 }
 
 @MainActor

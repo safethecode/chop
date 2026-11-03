@@ -32,3 +32,69 @@ diff --git a/src/build/LibtoolStep.zig b/src/build/LibtoolStep.zig
 @@ -44 +44 @@
 -    run_step.addArgs(&.{ "libtool", "-static", "-o" });
 +    run_step.addArgs(&.{ "chop-libtool", "-static", "-o" });
+diff --git a/include/ghostty.h b/include/ghostty.h
+--- a/include/ghostty.h
++++ b/include/ghostty.h
+@@ -936,6 +936,7 @@
+ void ghostty_surface_update_config(ghostty_surface_t, ghostty_config_t);
+ bool ghostty_surface_needs_confirm_quit(ghostty_surface_t);
+ bool ghostty_surface_process_exited(ghostty_surface_t);
++int32_t chop_ghostty_surface_child_pid(ghostty_surface_t);
+ void ghostty_surface_refresh(ghostty_surface_t);
+ void ghostty_surface_draw(ghostty_surface_t);
+ void ghostty_surface_set_content_scale(ghostty_surface_t, double, double);
+diff --git a/src/termio/Exec.zig b/src/termio/Exec.zig
+--- a/src/termio/Exec.zig
++++ b/src/termio/Exec.zig
+@@ -42,6 +42,9 @@
+ /// The subprocess state for our exec backend.
+ subprocess: Subprocess,
+ 
++// Published by IO startup for Chop; UI reads only this atomic, never Command state.
++chop_child_pid: std.atomic.Value(i32) = std.atomic.Value(i32).init(0),
++
+ /// Initialize the exec state. This will NOT start it, this only sets
+ /// up the internal state necessary to start it later.
+ pub fn init(
+@@ -87,6 +90,7 @@
+     io: *termio.Termio,
+     td: *termio.Termio.ThreadData,
+ ) !void {
++    errdefer self.chop_child_pid.store(0, .release);
+     // Start our subprocess
+     const pty_fds = self.subprocess.start(alloc) catch |err| {
+         // If we specifically got this error then we are in the forked
+@@ -118,6 +122,7 @@
+             return error.ProcessNotStarted;
+         const pid = command.pid orelse
+             return error.ProcessNoPid;
++        self.chop_child_pid.store(pid, .release);
+         break :process try xev.Process.init(pid);
+     };
+     errdefer if (process) |*p| p.deinit();
+@@ -197,6 +202,7 @@
+ }
+ 
+ pub fn threadExit(self: *Exec, td: *termio.Termio.ThreadData) void {
++    self.chop_child_pid.store(0, .release);
+     assert(td.backend == .exec);
+     const exec = &td.backend.exec;
+ 
+diff --git a/src/apprt/embedded.zig b/src/apprt/embedded.zig
+--- a/src/apprt/embedded.zig
++++ b/src/apprt/embedded.zig
+@@ -1519,6 +1519,14 @@
+         return surface.core_surface.child_exited;
+     }
+ 
++    // Chop extension: read the IO-published root PID without inspecting mutable subprocess state.
++    export fn chop_ghostty_surface_child_pid(surface: *Surface) i32 {
++        if (surface.core_surface.child_exited) return 0;
++        return switch (surface.core_surface.io.backend) {
++            .exec => |*exec| exec.chop_child_pid.load(.acquire),
++        };
++    }
++
+     /// Returns true if the surface has a selection.
+     export fn ghostty_surface_has_selection(surface: *Surface) bool {
+         return surface.core_surface.hasSelection();

@@ -10,6 +10,10 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
   var onExit: (() -> Void)?
   var onFocus: (() -> Void)?
   var onMetadataChange: (() -> Void)?
+  var onLocalServersChange: (() -> Void)?
+  private(set) var localServerURLs: [URL] = []
+  private var serverSchemes: [LocalServer: Bool] = [:]
+  var childPID: Int32 { surface.map { chop_ghostty_surface_child_pid($0) } ?? 0 }
   var terminalTitle = "" { didSet { onMetadataChange?() } }
   var workingDirectory: String { didSet { onMetadataChange?() } }
   private var markedText = ""
@@ -65,8 +69,41 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
   }
 
   func close() {
+    updateLocalServers([])
     if let surface { ghostty_surface_free(surface) }
     surface = nil
+  }
+
+  func updateLocalServers(_ listeners: [LocalServer]) {
+    let text = listeners.isEmpty ? "" : serverScreenText()
+    var schemes: [LocalServer: Bool] = [:]
+    let urls = listeners.map {
+      let url = $0.browserURL(screenText: text, preferringHTTPS: serverSchemes[$0] ?? false)
+      schemes[$0] = url.scheme == "https"
+      return url
+    }
+    serverSchemes = schemes
+    guard urls != localServerURLs else { return }
+    localServerURLs = urls
+    onLocalServersChange?()
+  }
+
+  private func serverScreenText() -> String {
+    guard let surface else { return "" }
+    // ACTIVE covers the current output screen, never the unbounded scrollback or user selection.
+    let selection = ghostty_selection_s(
+      top_left: ghostty_point_s(
+        tag: GHOSTTY_POINT_ACTIVE, coord: GHOSTTY_POINT_COORD_TOP_LEFT, x: 0, y: 0),
+      bottom_right: ghostty_point_s(
+        tag: GHOSTTY_POINT_ACTIVE, coord: GHOSTTY_POINT_COORD_BOTTOM_RIGHT, x: 0, y: 0),
+      rectangle: false)
+    var text = ghostty_text_s()
+    guard ghostty_surface_read_text(surface, selection, &text), let contents = text.text else {
+      return ""
+    }
+    defer { ghostty_surface_free_text(surface, &text) }
+    let bytes = UnsafeBufferPointer(start: contents, count: min(Int(text.text_len), 32_768))
+    return String(decoding: bytes.map { UInt8(bitPattern: $0) }, as: UTF8.self)
   }
 
   var needsConfirmClose: Bool {

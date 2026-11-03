@@ -146,6 +146,7 @@ final class WorkspaceView: NSView {
       self?.refreshControls()
       self?.onChange?()
     }
+    pane.onLocalServersChange = { [weak self] in self?.refreshControls() }
     pane.onSplitRequested = { [weak self] axis in self?.split(id, axis: axis) }
     pane.canSplit = { [weak self] axis in self?.canSplit(id, axis: axis) ?? false }
     pane.onRemoveRequested = { [weak self] in self?.removeEmptyPane(id) }

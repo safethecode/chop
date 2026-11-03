@@ -15,6 +15,8 @@ final class TerminalPaneView: NSView {
     }
   }
   var onChange: (() -> Void)?
+  var onLocalServersChange: (() -> Void)?
+  var localServerURLs: [URL] { terminal?.localServerURLs ?? [] }
   var onFocus: (() -> Void)?
   var onSplitRequested: ((SplitAxis) -> Void)?
   var canSplit: ((SplitAxis) -> Bool)?
@@ -51,6 +53,7 @@ final class TerminalPaneView: NSView {
   private let body = NSView()
   private let titleButton = NSButton()
   private let pathLabel = NSTextField(labelWithString: "")
+  private let serverButton = LocalServerButton()
   private let errorLabel = NSTextField(wrappingLabelWithString: "")
   private var openButton: NSButton!
   private var closeButton: NSButton!
@@ -89,6 +92,7 @@ final class TerminalPaneView: NSView {
     header.layer?.backgroundColor = mode.headerBackground.cgColor
     updateNameButton()
     pathLabel.textColor = mode.secondaryForeground
+    serverButton.contentTintColor = mode.secondaryForeground
     errorLabel.textColor = mode.secondaryForeground
     updateDropHighlight()
   }
@@ -195,6 +199,10 @@ final class TerminalPaneView: NSView {
         self.workingDirectory = terminal.workingDirectory
         self.updateHeader()
         self.onChange?()
+      }
+      view.onLocalServersChange = { [weak self] in
+        self?.updateServerDisplay()
+        self?.onLocalServersChange?()
       }
       body.addSubview(view)
       view.translatesAutoresizingMaskIntoConstraints = false
@@ -322,7 +330,7 @@ final class TerminalPaneView: NSView {
     titleButton.alignment = .left
     titleButton.font = ChopStyle.font
     titleButton.cell?.lineBreakMode = .byTruncatingTail
-    titleButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+    titleButton.setContentHuggingPriority(.required, for: .horizontal)
     titleButton.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     let nameMenu = NSMenu()
     nameMenu.addItem(withTitle: "이름 바꾸기…", action: #selector(renamePane), keyEquivalent: "")
@@ -347,7 +355,9 @@ final class TerminalPaneView: NSView {
       self?.onDragEnded?()
     }
     moveHandle.isHidden = true
-    let row = ChopStyle.headerRow(views: [moveHandle, titleButton, pathLabel, zoomButton, close])
+    let row = ChopStyle.headerRow(views: [
+      moveHandle, titleButton, pathLabel, serverButton, zoomButton, close,
+    ])
     header.addSubview(row)
     openButton = NSButton(
       image: NSImage(systemSymbolName: "plus", accessibilityDescription: "터미널 열기")!, target: self,
@@ -389,6 +399,7 @@ final class TerminalPaneView: NSView {
   }
 
   private func updateHeader() {
+    updateServerDisplay()
     updateMoveHandle()
     moveHandle.setAccessibilityLabel("\(name) 이동")
     updateNameButton()
@@ -409,12 +420,29 @@ final class TerminalPaneView: NSView {
       accessibilityDescription: zoomLabel)
   }
 
+  override func layout() {
+    super.layout()
+    updatePathVisibility()
+  }
+
+  private func updateServerDisplay() {
+    serverButton.update(localServerURLs)
+    updatePathVisibility()
+  }
+
+  private func updatePathVisibility() {
+    serverButton.setCompact(bounds.width < 340)
+    // Narrow panes prioritize the server; the directory remains in the name's tooltip.
+    let hidePath = !localServerURLs.isEmpty && bounds.width < 480
+    if pathLabel.isHidden != hidePath { pathLabel.isHidden = hidePath }
+  }
+
   private func updateNameButton() {
     titleButton.contentTintColor = engine.appearanceMode.secondaryForeground
     titleButton.attributedTitle = NSAttributedString(
       string: name,
       attributes: [.font: ChopStyle.font, .foregroundColor: engine.appearanceMode.foreground])
-    titleButton.toolTip = "\(name) — 이름 바꾸기 (⌘⇧R)"
+    titleButton.toolTip = "\(name) — 이름 바꾸기 (⌘⇧R)\n\(workingDirectory)"
     titleButton.setAccessibilityLabel("\(name) 이름 바꾸기")
   }
 }

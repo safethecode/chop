@@ -14,6 +14,7 @@ final class TerminalTabBar: NSView {
   private var buttons: [NSButton] = []
   private let addButton: NSButton
   private let closeButton: NSButton
+  private let serverButton = LocalServerButton()
 
   init(
     panes: [TerminalPaneView], selectedID: UUID, mode: AppearanceMode,
@@ -62,11 +63,14 @@ final class TerminalTabBar: NSView {
     scroll.scrollerStyle = .overlay
     scroll.drawsBackground = false
     addSubview(scroll)
+    addSubview(serverButton)
     for button in [addButton, closeButton] {
       button.target = self
       addSubview(button)
     }
     NSLayoutConstraint.activate([
+      serverButton.trailingAnchor.constraint(equalTo: closeButton.leadingAnchor, constant: -8),
+      serverButton.centerYAnchor.constraint(equalTo: centerYAnchor),
       addButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
       addButton.centerYAnchor.constraint(equalTo: centerYAnchor),
       closeButton.trailingAnchor.constraint(equalTo: addButton.leadingAnchor, constant: -4),
@@ -86,6 +90,7 @@ final class TerminalTabBar: NSView {
 
   func update(panes: [TerminalPaneView], selectedID: UUID) {
     self.selectedID = selectedID
+    serverButton.update(panes.first { $0.id == selectedID }?.localServerURLs ?? [])
     for (button, id) in zip(buttons, ids) {
       guard let pane = panes.first(where: { $0.id == id }) else { continue }
       button.title = pane.name
@@ -102,11 +107,15 @@ final class TerminalTabBar: NSView {
   func applyAppearance(_ mode: AppearanceMode) {
     appearance = mode.appearance
     layer?.backgroundColor = mode.headerBackground.cgColor
+    serverButton.contentTintColor = mode.secondaryForeground
   }
 
   override func layout() {
     super.layout()
-    scroll.frame = NSRect(x: 8, y: 0, width: max(0, bounds.width - 84), height: bounds.height)
+    serverButton.setCompact(bounds.width < 420)
+    let serverWidth = serverButton.isHidden ? 0 : serverButton.intrinsicContentSize.width + 8
+    scroll.frame = NSRect(
+      x: 8, y: 0, width: max(0, bounds.width - 84 - serverWidth), height: bounds.height)
     tabs.frame = NSRect(
       origin: .zero, size: NSSize(width: tabs.fittingSize.width, height: bounds.height))
     tabs.layoutSubtreeIfNeeded()

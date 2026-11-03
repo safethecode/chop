@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "decomposition_sha256": "bedd4af43a0fa310b25a48c328183ac225846c3fdad67f0e8f7f0e3cb345a6b9",
+  "coverage": [
+    {
+      "ref": "RAW-grid",
+      "status": "planned",
+      "target": "TerminalPaneView/WorkspaceView canvas and headers",
+      "interpretation": "원본 2×2/중앙 plus와 작은 header 관계를 보존; 파란 focus/헤더 면은 후속 사용자 계약, font 수치는 원본 미확인으로 기존14pt 제품 토큰 사용."
+    },
+    {
+      "ref": "E-canvas",
+      "status": "planned",
+      "target": "TerminalPaneView/WorkspaceView canvas and headers",
+      "interpretation": "원본 2×2/중앙 plus와 작은 header 관계를 보존; 파란 focus/헤더 면은 후속 사용자 계약, font 수치는 원본 미확인으로 기존14pt 제품 토큰 사용."
+    },
+    {
+      "ref": "O-columns",
+      "status": "planned",
+      "target": "TerminalPaneView/WorkspaceView canvas and headers",
+      "interpretation": "원본 2×2/중앙 plus와 작은 header 관계를 보존; 파란 focus/헤더 면은 후속 사용자 계약, font 수치는 원본 미확인으로 기존14pt 제품 토큰 사용."
+    },
+    {
+      "ref": "O-rows",
+      "status": "planned",
+      "target": "TerminalPaneView/WorkspaceView canvas and headers",
+      "interpretation": "원본 2×2/중앙 plus와 작은 header 관계를 보존; 파란 focus/헤더 면은 후속 사용자 계약, font 수치는 원본 미확인으로 기존14pt 제품 토큰 사용."
+    },
+    {
+      "ref": "O-hierarchy",
+      "status": "planned",
+      "target": "TerminalPaneView/WorkspaceView canvas and headers",
+      "interpretation": "원본 2×2/중앙 plus와 작은 header 관계를 보존; 파란 focus/헤더 면은 후속 사용자 계약, font 수치는 원본 미확인으로 기존14pt 제품 토큰 사용."
+    },
+    {
+      "ref": "O-historical-focus",
+      "status": "planned",
+      "target": "TerminalPaneView/WorkspaceView canvas and headers",
+      "interpretation": "원본 2×2/중앙 plus와 작은 header 관계를 보존; 파란 focus/헤더 면은 후속 사용자 계약, font 수치는 원본 미확인으로 기존14pt 제품 토큰 사용."
+    },
+    {
+      "ref": "O-font",
+      "status": "unknown",
+      "target": "TerminalPaneView/WorkspaceView canvas and headers",
+      "interpretation": "원본 2×2/중앙 plus와 작은 header 관계를 보존; 파란 focus/헤더 면은 후속 사용자 계약, font 수치는 원본 미확인으로 기존14pt 제품 토큰 사용."
+    },
+    {
+      "ref": "A-current-user",
+      "status": "planned",
+      "target": "TerminalPaneView/WorkspaceView canvas and headers",
+      "interpretation": "원본 2×2/중앙 plus와 작은 header 관계를 보존; 파란 focus/헤더 면은 후속 사용자 계약, font 수치는 원본 미확인으로 기존14pt 제품 토큰 사용."
+    }
+  ]
+}
