@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "decomposition": {
+    "path": "design/local-server-reference/decomposition.json",
+    "sha256": "bedd4af43a0fa310b25a48c328183ac225846c3fdad67f0e8f7f0e3cb345a6b9"
+  },
+  "interpretation": {
+    "path": "design/local-server-reference/interpretation.json",
+    "sha256": "bb75ebdb77b50b2a7199bc6e7cf91e0e8e7aaf308be8e57f5d372daf986e20f1"
+  },
+  "anchors": [
+    {
+      "id": "Q-columns",
+      "feature": "기본 canvas의 거의 같은 columns",
+      "observation_id": "O-columns",
+      "source": {
+        "path": "design/references/default-grid-user.png",
+        "sha256": "a6458f33e04bf5250cce326ae91d14ac60e2a092d78fa55b00d84716e4efd45f"
+      },
+      "observed": {
+        "value": 1,
+        "unit": "ratio",
+        "basis": "estimated",
+        "method": "1099×671 crop의 중앙 경계 직접 판독",
+        "uncertainty": 0.015
+      },
+      "expected": {
+        "value": 1,
+        "unit": "ratio",
+        "tolerance": 0.02
+      },
+      "target": "기본 격자 canvas"
+    },
+    {
+      "id": "Q-rows",
+      "feature": "기본 canvas의 거의 같은 rows",
+      "observation_id": "O-rows",
+      "source": {
+        "path": "design/references/default-grid-user.png",
+        "sha256": "a6458f33e04bf5250cce326ae91d14ac60e2a092d78fa55b00d84716e4efd45f"
+      },
+      "observed": {
+        "value": 1,
+        "unit": "ratio",
+        "basis": "estimated",
+        "method": "1099×671 crop의 중앙 경계 직접 판독",
+        "uncertainty": 0.015
+      },
+      "expected": {
+        "value": 1,
+        "unit": "ratio",
+        "tolerance": 0.02
+      },
+      "target": "기본 격자 canvas"
+    }
+  ]
+}

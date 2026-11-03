@@ -113,3 +113,5 @@ V-56 / INPUT-INSET-MOTION: 사용자 요청의 경로·검색·이름 입력창�
 V-57 / UI-TEST-ISOLATION: 입력창 변경 전 main과 PR 두 CI 실행이 빌드 완료 뒤 테스트 프로세스에서 응답하지 않았다. 공유 AppKit/엔진 상태의 겹침을 줄이도록 check.sh에 --no-parallel을 명시했다. 같은40개 검사가 순차 실행되고11.835초에 통과한 로컬 전체 check.sh를 확인했다. 정확한 CI deadlock 원인은 미확정이며 최종 원격 결과는 PR에 기록한다. 제품 UI/검사 항목/기대값은 바뀌지 않았다. [관찰](evidence/inset-input-motion.md).
 
 V-58 / INPUT-REDUNDANT-COMMIT: 같은 target opacity에서도 window.didUpdate마다 CATransaction을 예약하던 코드를 조기 반환으로 고쳤다. 같은 상태의 Reduce Motion 활성 시 기존 모션 제거도 회귀 검사했다. 최종40개 check.sh 통과 및 실제 두 모드 입력/caret·Tab과 외형을 재확인했다. CI 멈춤의 확정 원인으로 주장하지 않는다. fixed-and-verified (입력 갱신 범위, 셀프 리뷰). [관찰](evidence/inset-input-motion.md).
+
+V-59 / LOCAL-SERVERS: 사용자 요청의 terminal별 주소 표시/브라우저 열기를 실제 listener와 native header/tab/menu로 구현했다. PID count 오독과 privileged login 조회 실패로 후손을 누락하던 introduced 결함을 발견하고 소유 root/자식 순회·수명 검증으로 고쳤다. 실제 단일/복수/두 터미널 격리·브라우저 두 주소·종료/restore·라이트/다크/축소/탭과 전체44개 검사 통과. fixed-and-verified (셀프 리뷰, 변경 범위). [관찰](evidence/local-servers.md).

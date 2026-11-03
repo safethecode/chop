@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "document_id": "chop-default-grid-local-server-extension",
+  "revision": "2026-11-04",
+  "sources": [
+    {
+      "id": "R-grid",
+      "kind": "image",
+      "artifact": {
+        "path": "design/references/default-grid-user.png",
+        "sha256": "a6458f33e04bf5250cce326ae91d14ac60e2a092d78fa55b00d84716e4efd45f"
+      }
+    }
+  ],
+  "spaces": [
+    {
+      "id": "S-grid",
+      "source_id": "R-grid",
+      "unit": "image-px",
+      "width": 1099,
+      "height": 671,
+      "origin": "top-left",
+      "dpr": null
+    }
+  ],
+  "raw": [
+    {
+      "id": "RAW-grid",
+      "artifact": {
+        "path": "design/local-server-reference/raw.md",
+        "sha256": "ad86cfd2814c72095e072ca3e5a725d38ff079b69bcf176c6fdcecb3a2ad3988"
+      }
+    }
+  ],
+  "elements": [
+    {
+      "id": "E-canvas",
+      "parent_id": null,
+      "role": "terminal-workspace-canvas",
+      "source_ids": [
+        "R-grid"
+      ],
+      "raw_refs": [
+        "RAW-grid"
+      ],
+      "properties": {
+        "column_ratio": {
+          "id": "O-columns",
+          "kind": "ratio",
+          "status": "estimated",
+          "value": 1,
+          "source_ids": [
+            "R-grid"
+          ],
+          "raw_refs": [
+            "RAW-grid"
+          ],
+          "method": "직접 본 원본 canvas crop의 경계/구조 판독",
+          "uncertainty": "시각 추정이며 이미지의 배율·원본 pt는 미확인",
+          "unit": "ratio"
+        },
+        "row_ratio": {
+          "id": "O-rows",
+          "kind": "ratio",
+          "status": "estimated",
+          "value": 1,
+          "source_ids": [
+            "R-grid"
+          ],
+          "raw_refs": [
+            "RAW-grid"
+          ],
+          "method": "직접 본 원본 canvas crop의 경계/구조 판독",
+          "uncertainty": "시각 추정이며 이미지의 배율·원본 pt는 미확인",
+          "unit": "ratio"
+        },
+        "hierarchy": {
+          "id": "O-hierarchy",
+          "kind": "layout",
+          "status": "estimated",
+          "value": "2×2, 첫 shell/세 빈 칸 중앙 plus, 작은 이름/경로/조작 헤더",
+          "source_ids": [
+            "R-grid"
+          ],
+          "raw_refs": [
+            "RAW-grid"
+          ],
+          "method": "직접 본 원본 canvas crop의 경계/구조 판독",
+          "uncertainty": "시각 추정이며 이미지의 배율·원본 pt는 미확인"
+        },
+        "historical_focus": {
+          "id": "O-historical-focus",
+          "kind": "state",
+          "status": "estimated",
+          "value": "원본은 첫 칸의 파란 focus 경계가 있음",
+          "source_ids": [
+            "R-grid"
+          ],
+          "raw_refs": [
+            "RAW-grid"
+          ],
+          "method": "직접 본 원본 canvas crop의 경계/구조 판독",
+          "uncertainty": "시각 추정이며 이미지의 배율·원본 pt는 미확인"
+        },
+        "font": {
+          "id": "O-font",
+          "kind": "typography",
+          "status": "unknown",
+          "value": null,
+          "unknown_reason": "정지 crop만으로 정확한 font family와 pt를 확정하지 않음",
+          "source_ids": [
+            "R-grid"
+          ],
+          "raw_refs": [
+            "RAW-grid"
+          ]
+        }
+      }
+    }
+  ],
+  "relations": [],
+  "adaptations": [
+    {
+      "id": "A-current-user",
+      "element_ids": [
+        "E-canvas"
+      ],
+      "requirement": "후속 사용자 지시: 파란 pane focus 제거, 헤더 면/오른쪽 파일 트리/48pt 추가 영역/로컬 서버 주소",
+      "reason": "기본 canvas 관계는 유지하고 명시된 역할만 현재 계약으로 확장한다. 폰트/hover 원본 복제를 주장하지 않는다.",
+      "raw_refs": [
+        "RAW-grid"
+      ]
+    }
+  ],
+  "required": [
+    "E-canvas",
+    "O-columns",
+    "O-rows",
+    "O-hierarchy"
+  ]
+}

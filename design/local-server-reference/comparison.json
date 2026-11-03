@@ -1,0 +1,89 @@
+{
+  "schema_version": 2,
+  "handoff_sha256": "67ada5c8aab1abc320189fd5331ed68f83a546611e1f5d921f9c98a74fb4fad6",
+  "target_sha256": "9f33c3c3f20003adcd8d258356098978cac101bc1cd2231e262f58c67ee45b44",
+  "core_review": {
+    "path": "design/local-server-reference/core-review.json",
+    "sha256": "a2ed7de29e578f27b7a4278bdc8377b511eea8ebd0ee1c7122fa03c1fb453127"
+  },
+  "consumption": [
+    {
+      "ref": "RAW-grid",
+      "status": "applied",
+      "target": "WorkspaceView canvas/TerminalPaneView headers",
+      "interpretation": "현재 실제 canvas 관계와 E-L1–3을 직접 대조했다. 원본 font family/pt는 미확인으로 유지하며 사용자 지정14pt 제품 토큰을 사용한다. 파란 focus 등은 후속 명시 요구의 국소 변경이다."
+    },
+    {
+      "ref": "E-canvas",
+      "status": "applied",
+      "target": "WorkspaceView canvas/TerminalPaneView headers",
+      "interpretation": "현재 실제 canvas 관계와 E-L1–3을 직접 대조했다. 원본 font family/pt는 미확인으로 유지하며 사용자 지정14pt 제품 토큰을 사용한다. 파란 focus 등은 후속 명시 요구의 국소 변경이다."
+    },
+    {
+      "ref": "O-columns",
+      "status": "applied",
+      "target": "WorkspaceView canvas/TerminalPaneView headers",
+      "interpretation": "현재 실제 canvas 관계와 E-L1–3을 직접 대조했다. 원본 font family/pt는 미확인으로 유지하며 사용자 지정14pt 제품 토큰을 사용한다. 파란 focus 등은 후속 명시 요구의 국소 변경이다."
+    },
+    {
+      "ref": "O-rows",
+      "status": "applied",
+      "target": "WorkspaceView canvas/TerminalPaneView headers",
+      "interpretation": "현재 실제 canvas 관계와 E-L1–3을 직접 대조했다. 원본 font family/pt는 미확인으로 유지하며 사용자 지정14pt 제품 토큰을 사용한다. 파란 focus 등은 후속 명시 요구의 국소 변경이다."
+    },
+    {
+      "ref": "O-hierarchy",
+      "status": "applied",
+      "target": "WorkspaceView canvas/TerminalPaneView headers",
+      "interpretation": "현재 실제 canvas 관계와 E-L1–3을 직접 대조했다. 원본 font family/pt는 미확인으로 유지하며 사용자 지정14pt 제품 토큰을 사용한다. 파란 focus 등은 후속 명시 요구의 국소 변경이다."
+    },
+    {
+      "ref": "O-historical-focus",
+      "status": "applied",
+      "target": "WorkspaceView canvas/TerminalPaneView headers",
+      "interpretation": "현재 실제 canvas 관계와 E-L1–3을 직접 대조했다. 원본 font family/pt는 미확인으로 유지하며 사용자 지정14pt 제품 토큰을 사용한다. 파란 focus 등은 후속 명시 요구의 국소 변경이다."
+    },
+    {
+      "ref": "O-font",
+      "status": "unverified",
+      "target": "WorkspaceView canvas/TerminalPaneView headers",
+      "interpretation": "현재 실제 canvas 관계와 E-L1–3을 직접 대조했다. 원본 font family/pt는 미확인으로 유지하며 사용자 지정14pt 제품 토큰을 사용한다. 파란 focus 등은 후속 명시 요구의 국소 변경이다."
+    },
+    {
+      "ref": "A-current-user",
+      "status": "applied",
+      "target": "WorkspaceView canvas/TerminalPaneView headers",
+      "interpretation": "현재 실제 canvas 관계와 E-L1–3을 직접 대조했다. 원본 font family/pt는 미확인으로 유지하며 사용자 지정14pt 제품 토큰을 사용한다. 파란 focus 등은 후속 명시 요구의 국소 변경이다."
+    }
+  ],
+  "results": [
+    {
+      "id": "Q-columns",
+      "capture": {
+        "path": "design/evidence/local-servers.md",
+        "sha256": "deb10616498c7716a9f1f09584e09fa74ce7188f59b52bcba68f54496ab73801"
+      },
+      "actual": {
+        "value": 1,
+        "unit": "ratio",
+        "method": "E-L1 최종 CUA 이미지의 canvas 중앙 분할 경계 시각 추정(약±0.01), 두 모드 Native geometry 검사로 관계 유지도 확인"
+      }
+    },
+    {
+      "id": "Q-rows",
+      "capture": {
+        "path": "design/evidence/local-servers.md",
+        "sha256": "deb10616498c7716a9f1f09584e09fa74ce7188f59b52bcba68f54496ab73801"
+      },
+      "actual": {
+        "value": 1,
+        "unit": "ratio",
+        "method": "E-L1 최종 CUA 이미지의 canvas 중앙 분할 경계 시각 추정(약±0.01), 두 모드 Native geometry 검사로 관계 유지도 확인"
+      }
+    }
+  ],
+  "visual_review": {
+    "status": "adapted-and-verified",
+    "reason": "현재 실제 E-L1 canvas는 동등한 두 열·두 행, 작은 header와 빈 칸 중앙 plus를 유지한다. 주소가 있는 두 shell은 기능 검증 상태의 차이이며 header 색/파란 선 제거는 후속 사용자 요구다. 서버 주소가 본문 면적/파일 트리/기존 조작을 밀어내지 않고 E-L2/3 축소·탭에서도 읽힌다. 원본 toolbar/font/hover 미확인을 복제 성공으로 표시하지 않는다."
+  }
+}
