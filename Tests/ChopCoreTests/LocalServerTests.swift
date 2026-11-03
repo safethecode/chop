@@ -22,10 +22,13 @@ import Testing
     try? FileManager.default.removeItem(at: marker)
   }
   let deadline = ContinuousClock.now.advanced(by: .seconds(5))
-  while !FileManager.default.fileExists(atPath: marker.path), ContinuousClock.now < deadline {
+  var announcedPort: UInt16?
+  while announcedPort == nil, ContinuousClock.now < deadline {
+    announcedPort = (try? String(contentsOf: marker, encoding: .utf8)).flatMap(UInt16.init)
+    if announcedPort != nil { break }
     try await Task.sleep(for: .milliseconds(20))
   }
-  let port = try #require(UInt16(String(contentsOf: marker, encoding: .utf8)))
+  let port = try #require(announcedPort)
   let root = process.processIdentifier
   let found = LocalServerDiscovery.scan(rootPIDs: [root])
   #expect(found[root]?.contains(LocalServer(host: "localhost", port: port)) == true)
@@ -36,6 +39,7 @@ import Testing
   let server = LocalServer(host: "localhost", port: 3000)
   #expect(server.browserURL().absoluteString == "http://localhost:3000")
   #expect(server.browserURL(preferringHTTPS: true).scheme == "https")
+  #expect(server.browserURL(screenText: "HTTPS://LOCALHOST:3000").scheme == "https")
   #expect(
     server.browserURL(screenText: "http://localhost:3000", preferringHTTPS: true).scheme == "http")
   #expect(

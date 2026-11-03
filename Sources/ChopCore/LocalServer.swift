@@ -28,9 +28,9 @@ public struct LocalServer: Hashable, Sendable {
           ["localhost", "127.0.0.1", "0.0.0.0", "[::1]", "[::]", host].contains(
             parts.host?.lowercased() ?? ""),
           parts.user == nil, parts.password == nil,
-          (parts.port ?? (parts.scheme == "https" ? 443 : 80)) == Int(port)
+          (parts.port ?? (parts.scheme?.lowercased() == "https" ? 443 : 80)) == Int(port)
         else { continue }
-        scheme = parts.scheme == "https" ? "https" : "http"
+        scheme = parts.scheme?.lowercased() == "https" ? "https" : "http"
       }
     }
     return URL(string: "\(scheme)://\(address)")!

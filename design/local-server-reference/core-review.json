@@ -8,7 +8,7 @@
   },
   "capture": {
     "path": "design/evidence/local-servers.md",
-    "sha256": "d6234cb715cf1067ae43da483f281ad8b49c1cc7dd6adfd0fe4f859db5568acd"
+    "sha256": "a90724e1b781adf3aae474a5c32094a1baddb963194ec0953b0de6c44751a4d5"
   },
   "status": "adapted-and-verified",
   "reason": "현재 실제 E-L1 canvas는 동등한 두 열·두 행, 작은 header와 빈 칸 중앙 plus를 유지한다. 주소가 있는 두 shell은 기능 검증 상태의 차이이며 header 색/파란 선 제거는 후속 사용자 요구다. 서버 주소가 본문 면적/파일 트리/기존 조작을 밀어내지 않고 E-L2/3 축소·탭에서도 읽힌다. 원본 toolbar/font/hover 미확인을 복제 성공으로 표시하지 않는다."
