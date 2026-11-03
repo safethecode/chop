@@ -10,6 +10,9 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
   var onExit: (() -> Void)?
   var onFocus: (() -> Void)?
   var onMetadataChange: (() -> Void)?
+  var onLocalServersChange: (() -> Void)?
+  private(set) var localServerURLs: [URL] = []
+  var childPID: Int32 { surface.map { chop_ghostty_surface_child_pid($0) } ?? 0 }
   var terminalTitle = "" { didSet { onMetadataChange?() } }
   var workingDirectory: String { didSet { onMetadataChange?() } }
   private var markedText = ""
@@ -65,8 +68,17 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
   }
 
   func close() {
+    updateLocalServers([])
     if let surface { ghostty_surface_free(surface) }
     surface = nil
+  }
+
+  func updateLocalServers(_ listeners: [LocalServer]) {
+    let text = listeners.isEmpty ? "" : (accessibilityValue() as? String ?? "")
+    let urls = listeners.map { $0.browserURL(screenText: text) }
+    guard urls != localServerURLs else { return }
+    localServerURLs = urls
+    onLocalServersChange?()
   }
 
   var needsConfirmClose: Bool {

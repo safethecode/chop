@@ -1,4 +1,5 @@
 import AppKit
+import ChopCore
 import GhosttyKit
 
 private func wakeupGhostty(_ userdata: UnsafeMutableRawPointer?) {
@@ -26,6 +27,7 @@ final class TerminalEngine: NSObject {
   private(set) var appearanceMode: AppearanceMode = .light
   private let clipboard: NSPasteboard
   let command: String?
+  private var serverMonitor: Task<Void, Never>?
 
   init(clipboard: NSPasteboard = .general, command: String? = nil) {
     self.clipboard = clipboard
@@ -121,9 +123,12 @@ final class TerminalEngine: NSObject {
       self, selector: #selector(keyboardChanged),
       name: NSTextInputContext.keyboardSelectionDidChangeNotification, object: nil)
     focusChanged()
+    monitorLocalServers()
   }
 
   func shutdown() {
+    serverMonitor?.cancel()
+    serverMonitor = nil
     NotificationCenter.default.removeObserver(self)
     if let app { ghostty_app_free(app) }
     app = nil
@@ -131,6 +136,27 @@ final class TerminalEngine: NSObject {
     configs.removeAll()
     terminals.removeAllObjects()
     Self.shared = nil
+  }
+
+  private func monitorLocalServers() {
+    serverMonitor = Task { [weak self] in
+      while !Task.isCancelled {
+        guard let self, app != nil else { return }
+        let targets = terminals.allObjects.map { ($0, $0.childPID) }.filter { $0.1 > 0 }
+        let roots = targets.map(\.1)
+        let scan = Task.detached(priority: .utility) { LocalServerDiscovery.scan(rootPIDs: roots) }
+        let result = await withTaskCancellationHandler {
+          await scan.value
+        } onCancel: {
+          scan.cancel()
+        }
+        guard !Task.isCancelled, app != nil else { return }
+        for (terminal, pid) in targets where terminal.childPID == pid {
+          terminal.updateLocalServers(result[pid] ?? [])
+        }
+        do { try await Task.sleep(for: .seconds(1)) } catch { return }
+      }
+    }
   }
 
   func applyAppearance(_ mode: AppearanceMode) {
