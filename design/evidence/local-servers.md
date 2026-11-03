@@ -27,3 +27,7 @@ macOS26.5.2/Apple Silicon, 별도 bundle ID·세션 경로의 /tmp/ChopLocalServ
 최종 ./scripts/check.sh: strict format·shell syntax·plist·release/서명/아이콘과 전체44개15.152초 통과. 실제 TCP bind→LISTEN→close, 외부 root 제외, 자식 Python listener, URL destination 제한과 HTTPS hint, 클릭 전 자동 열기 없음/중지 후 클릭 방지, 실제 두 셸 PID/중첩 launcher/2개 대1개 포트 격리/Tab 전환/Ctrl+C/칸 닫기, 두 모드 최소 칸의 frame/hit overlap을 검사한다. 물리 VoiceOver 전체/고대비/모든 셸·TLS·외부 daemon은 실행 완료로 표시하지 않는다. 입력 inset와 나머지 변경 없는 자산의 이전 근거는 이번 실행으로 포장하지 않는다.
 
 변경 범위는 aligned. 원본 기본 grid와 현재 canvas의 관계만 재대조했으며 서버 버튼에 외부 시각 레퍼런스가 있었다고 주장하지 않는다. 현재 source snapshot과 이 기록을 v2 reference comparison에 연결한다.
+
+## 셀프 리뷰 후 조회 비용 보완
+
+HTTPS 힌트를 위해 accessibilityValue(SCREEN 전체 기록)를 매번 복사하던 경로를 ACTIVE 출력 화면의 최대32KiB로 제한했다. 확인한 HTTPS scheme은 현재 listener가 유지되는 동안 보존하고 새 명시 HTTP 출력은 다시 적용한다. listener가 없어지면 scheme 캐시도 비운다. source snapshot은 E-L1 첫 핵심 화면 당시의 보존본이며 덮어쓰지 않았다. 변경된 부분은 텍스트 조회/프로토콜 힌트이므로 HTTP 주소/헤더 geometry/메뉴와 E-L1–5 화면은 바뀌지 않는다. 명시 HTTP override/HTTPS 선호 유지 검사와 최종 전체44개14.196초 check.sh를 재실행했다. 원격 결과는 PR에 기록한다.

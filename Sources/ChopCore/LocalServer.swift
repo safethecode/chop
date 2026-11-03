@@ -15,8 +15,8 @@ public struct LocalServer: Hashable, Sendable {
 
   public var address: String { "\(host.contains(":") ? "[\(host)]" : host):\(port)" }
 
-  public func browserURL(screenText: String = "") -> URL {
-    var scheme = "http"
+  public func browserURL(screenText: String = "", preferringHTTPS: Bool = false) -> URL {
+    var scheme = preferringHTTPS ? "https" : "http"
     // Only use the scheme, never a terminal-provided destination or executable URL scheme.
     do {
       let text = String(screenText.suffix(32_768))

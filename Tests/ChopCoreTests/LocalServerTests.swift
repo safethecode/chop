@@ -35,6 +35,9 @@ import Testing
 @Test func localServerHintsCannotReplaceTheListenerDestination() {
   let server = LocalServer(host: "localhost", port: 3000)
   #expect(server.browserURL().absoluteString == "http://localhost:3000")
+  #expect(server.browserURL(preferringHTTPS: true).scheme == "https")
+  #expect(
+    server.browserURL(screenText: "http://localhost:3000", preferringHTTPS: true).scheme == "http")
   #expect(
     server.browserURL(screenText: "Local: https://localhost:3000/base/").absoluteString
       == "https://localhost:3000")
