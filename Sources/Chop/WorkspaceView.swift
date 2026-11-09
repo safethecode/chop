@@ -33,6 +33,7 @@ final class WorkspaceView: NSView {
   var onMissingDirectories: (([String]) -> Void)?
   var onAppearanceChangeRequested: ((AppearanceMode) -> Void)?
   var onFileTreeToggleRequested: (() -> Void)?
+  var onCloneRequested: (() -> Void)?
   private var nextName = 1
   private let canvas = TerminalCanvasView()
   private lazy var canvasScroll = TerminalCanvasScrollView(canvas: canvas)
@@ -75,6 +76,7 @@ final class WorkspaceView: NSView {
     applyAppearance(engine.appearanceMode)
     configureToolbar()
     terminalArea.applyAppearance(engine.appearanceMode)
+    terminalArea.onCloneRequested = { [weak self] in self?.onCloneRequested?() }
     for id in ids {
       let saved = valid?.panes.first { $0.id == id }
       addPane(id, directory: saved?.workingDirectory ?? initialDirectory, name: saved?.name)

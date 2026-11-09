@@ -33,8 +33,8 @@
     {
       "id": "ORC-F01",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "오른쪽 파일 트리와 터미널 본문은 같은 mode.background를 사용하고 헤더도 동일 neutral 역할이다. E-T1/8/9의 두 모드·최소 창에서 밝기/톤 분리를 확인했다. 이 규칙은 새 사이드바 때문에 적용 대상으로 바꿨다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "오른쪽 파일 트리와 터미널 본문은 같은 mode.background를 사용하고 헤더도 동일 neutral 역할이다. E-T1/8/9의 두 모드·최소 창에서 밝기/톤 분리를 확인했다. 이 규칙은 새 사이드바 때문에 적용 대상으로 바꿨다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -44,8 +44,8 @@
     {
       "id": "ORC-F02",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "사용자 요청으로 terminal pane와 파일 경로 입력의 파란 외곽선을 없애도 공통 layout/edit/native 버튼 선택의 accent는 남는다. 경로 caret/selection을 유지하며 두 모드 실제 클릭/편집을 대조했다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "사용자 요청으로 terminal pane와 파일 경로 입력의 파란 외곽선을 없애도 공통 layout/edit/native 버튼 선택의 accent는 남는다. 경로 caret/selection을 유지하며 두 모드 실제 클릭/편집을 대조했다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -55,8 +55,8 @@
     {
       "id": "ORC-F03",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "두 모드의 경로 글자/선택/caret 대비를 실제 확인했다. 사용자 요청으로 경로 field 외곽 focus ring만 제거했고 기존 terminal 입력 커서와 다른 native 컨트롤의 초점은 유지한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "두 모드의 경로 글자/선택/caret 대비를 실제 확인했다. 사용자 요청으로 경로 field 외곽 focus ring만 제거했고 기존 terminal 입력 커서와 다른 native 컨트롤의 초점은 유지한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -64,7 +64,7 @@
       "exceptions": [
         {
           "id": "CHOP-ORC-F03",
-          "reason": "두 모드의 텍스트/헤더 대비를 유지한다. pane 포커스 경계는 사용자 요청으로 없애고 실제 terminal 입력 커서/AX 초점을 보존한다. E-F1–5에서 실제 입력과 함께 확인했다.",
+          "reason": "두 모드의 텍스트/헤더 대비를 유지한다. pane 포커스 경계는 사용자 요청으로 없애고 실제 terminal 입력 커서/AX 초점을 보존한다. E-F1–5에서 실제 입력과 함께 확인했다. 새 native 클론 시트는14pt medium과 AppKit semantic 보조/오류/비활성 색을 사용하며 사용자별 고대비 설정 전체를 검증했다고 주장하지 않는다.",
           "basis": "DESIGN.md; explicit user request to remove blue pane focus border, E-F1–5"
         }
       ]
@@ -72,8 +72,8 @@
     {
       "id": "ORC-F04",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -81,7 +81,7 @@
       "exceptions": [
         {
           "id": "CHOP-ORC-F04",
-          "reason": "각 중앙 +는 서로 다른 칸을 대상으로 한다. 같은 동작의 macOS 메뉴/단축키는 키보드 접근을 위해 유지한다. 콘텐츠에 전역 CTA를 반복하지 않는다. 2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다.",
+          "reason": "각 중앙 +는 서로 다른 칸을 대상으로 한다. 같은 동작의 macOS 메뉴/단축키는 키보드 접근을 위해 유지한다. 콘텐츠에 전역 CTA를 반복하지 않는다. 2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다. 클론 rail의 download는 기존 compact native icon 패턴과 같은 AX/tooltip을 제공한다. 파일 메뉴의 같은 명령은 키보드/메뉴 접근 경로이며 콘텐츠에 CTA를 반복하지 않는다.",
           "basis": "DESIGN.md: native platform and user-requested central plus / 1-2-4 layout contract; 2026-10-20 사용자 세로 추가 영역 요청, DESIGN.md 및 terminal-add-rail 관찰"
         }
       ]
@@ -100,8 +100,8 @@
     {
       "id": "ORC-F06",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "파일/터미널 헤더는 같은 neutral 배경 역할이다. 폴더/doc 기호와 이름은 항목 종류를 나타내고 임의 상태 색은 배정하지 않는다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "파일/터미널 헤더는 같은 neutral 배경 역할이다. 폴더/doc 기호와 이름은 항목 종류를 나타내고 임의 상태 색은 배정하지 않는다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -111,8 +111,8 @@
     {
       "id": "ORC-F07",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "페이지 hero/대제목이 없다. 네이티브 창 제목과 14pt 칸 라벨이 터미널의 작업 공간을 밀어내지 않는다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "페이지 hero/대제목이 없다. 네이티브 창 제목과 14pt 칸 라벨이 터미널의 작업 공간을 밀어내지 않는다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -151,8 +151,8 @@
     {
       "id": "ORC-F10",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "바로가기의16pt aspect-fit 아이콘과14pt 이름을 동일 세로 중앙/고정 시작선으로 배치했다. 두 모드·최소 창 실제 화면에서 glyph 고유 폭에 따른 어긋남을 수정해 확인했다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "바로가기의16pt aspect-fit 아이콘과14pt 이름을 동일 세로 중앙/고정 시작선으로 배치했다. 두 모드·최소 창 실제 화면에서 glyph 고유 폭에 따른 어긋남을 수정해 확인했다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -173,8 +173,8 @@
     {
       "id": "ORC-F12",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "기존 panel inset12/그룹 간8을 유지하고 바로가기 내부는 row28/gap4/icon16/name-gap8로 선택했다. 실제 최소 창/빈·긴 목록에서 중복 여백·겹침이 없었다. 바로가기 묶음 내부8pt를 추가하고108pt 높이를 실제 최소/기본 창에서 확인했다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "기존 panel inset12/그룹 간8을 유지하고 바로가기 내부는 row28/gap4/icon16/name-gap8로 선택했다. 실제 최소 창/빈·긴 목록에서 중복 여백·겹침이 없었다. 바로가기 묶음 내부8pt를 추가하고108pt 높이를 실제 최소/기본 창에서 확인했다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -184,8 +184,8 @@
     {
       "id": "ORC-F13",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "이동 손잡이는 native openHand cursor를 제공한다. 다른 native 버튼·splitter는 기존 플랫폼 커서를 유지한다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "이동 손잡이는 native openHand cursor를 제공한다. 다른 native 버튼·splitter는 기존 플랫폼 커서를 유지한다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual",
@@ -213,8 +213,8 @@
     {
       "id": "ORC-F16",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "세 바로가기는 고정 높이의 목적지 행이고 외부 scroller를 추가하지 않았다. 실제 빈 폴더는 scrollbar가 없고 긴 파일 목록만 기존 native scroll을 표시했다. 이번 overflow canvas는 실제 pane 최소 크기 때문에만 native 스크롤하며 반대 축 불필요 scroller를 legacy 회귀와 실제 두 모드로 검증했다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "세 바로가기는 고정 높이의 목적지 행이고 외부 scroller를 추가하지 않았다. 실제 빈 폴더는 scrollbar가 없고 긴 파일 목록만 기존 native scroll을 표시했다. 이번 overflow canvas는 실제 pane 최소 크기 때문에만 native 스크롤하며 반대 축 불필요 scroller를 legacy 회귀와 실제 두 모드로 검증했다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual",
@@ -236,8 +236,8 @@
     {
       "id": "ORC-G01",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "Sources와 terminal*.conf에 사용자 정의 gradient가 없다. 라이트 흰색/사용자가 요청한 다크 1E2026 canvas가 실제 화면에서 평면이다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "Sources와 terminal*.conf에 사용자 정의 gradient가 없다. 라이트 흰색/사용자가 요청한 다크 1E2026 canvas가 실제 화면에서 평면이다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -247,8 +247,8 @@
     {
       "id": "ORC-G02",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "앱 자체 shadow를 만들지 않는다. macOS 창/메뉴/표준 컨트롤의 시스템 그림자는 플랫폼 예외로 유지한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "앱 자체 shadow를 만들지 않는다. macOS 창/메뉴/표준 컨트롤의 시스템 그림자는 플랫폼 예외로 유지한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -264,8 +264,8 @@
     {
       "id": "ORC-G03",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "56pt 원형 중앙 +와 네이티브 컨트롤/윈도우 곡률은 사용자 핵심 조작 및 플랫폼 예외다. CSS px 곡률을 macOS pt로 측정했다고 주장하지 않는다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "56pt 원형 중앙 +와 네이티브 컨트롤/윈도우 곡률은 사용자 핵심 조작 및 플랫폼 예외다. CSS px 곡률을 macOS pt로 측정했다고 주장하지 않는다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -281,8 +281,8 @@
     {
       "id": "ORC-G04",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "기존 light white/dark1E2026 본문, header F3F4F6/292D35를 새 패널에서도 재사용한다. native accent/selection 외 임의 색을 추가하지 않았다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "기존 light white/dark1E2026 본문, header F3F4F6/292D35를 새 패널에서도 재사용한다. native accent/selection 외 임의 색을 추가하지 않았다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -292,8 +292,8 @@
     {
       "id": "ORC-G05",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "hover 장식은 없다. 사용자가 요청한 직접 드래그/배치 transform0.18초와 source alpha0.35만 허용한다. 사용자가 최신 모션을 직접 확인했다. Reduce Motion 분기는 코드 확인이며 해당 시스템 설정의 체감 검증을 주장하지 않는다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "hover 장식은 없다. 사용자가 요청한 직접 드래그/배치 transform0.18초와 source alpha0.35만 허용한다. 사용자가 최신 모션을 직접 확인했다. Reduce Motion 분기는 코드 확인이며 해당 시스템 설정의 체감 검증을 주장하지 않는다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual",
@@ -310,8 +310,8 @@
     {
       "id": "ORC-G06",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "새 바로가기 이름은 ChopStyle14pt medium, glyph는 SF14pt config를16pt box에 aspect-fit한다. native OS chrome 예외와 CSS px/pt 구별을 유지한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "새 바로가기 이름은 ChopStyle14pt medium, glyph는 SF14pt config를16pt box에 aspect-fit한다. native OS chrome 예외와 CSS px/pt 구별을 유지한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -327,8 +327,8 @@
     {
       "id": "ORC-G07",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "바로가기 내부4/8/16/28과 부모 inset12는 기존4pt 스케일이다. native font/glyph 광학 여백과 실제 고정 열을 구분해 두 모드 최소/기본 창에서 대조했다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "바로가기 내부4/8/16/28과 부모 inset12는 기존4pt 스케일이다. native font/glyph 광학 여백과 실제 고정 열을 구분해 두 모드 최소/기본 창에서 대조했다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -338,8 +338,8 @@
     {
       "id": "ORC-G08",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "요청한 아이콘+이름을 세로 목적지 행으로 배치해 최소280pt 폭에서도 읽힌다. 기존 header/path 뒤의92pt 그룹 아래 나머지는 실제 가변 파일 목록이며 빈 상태에 장식을 채우지 않는다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "요청한 아이콘+이름을 세로 목적지 행으로 배치해 최소280pt 폭에서도 읽힌다. 기존 header/path 뒤의92pt 그룹 아래 나머지는 실제 가변 파일 목록이며 빈 상태에 장식을 채우지 않는다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -349,8 +349,8 @@
     {
       "id": "ORC-G09",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "새 SF 아이콘은 파일 종류·폴더 선택·갱신·패널 개폐에 대응한다. 장식 그림이나 무관한 지표를 추가하지 않았다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "새 SF 아이콘은 파일 종류·폴더 선택·갱신·패널 개폐에 대응한다. 장식 그림이나 무관한 지표를 추가하지 않았다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -360,8 +360,8 @@
     {
       "id": "ORC-G10",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "terminal/file 헤더가 동일 mode.headerBackground/foreground와 공통 행을 소비한다. 두 모드 실제 화면에서 header 사이 기능 경계의 색 틈이 없어 같은 표면으로 읽힌다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "terminal/file 헤더가 동일 mode.headerBackground/foreground와 공통 행을 소비한다. 두 모드 실제 화면에서 header 사이 기능 경계의 색 틈이 없어 같은 표면으로 읽힌다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -371,8 +371,8 @@
     {
       "id": "ORC-G11",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "일반/편집/폭 변경의 실제 화면에서 terminal/file 제목·경로·아이콘이 같은 중앙선에 놓이고 읽혔다. 글자/본문 치수는 바꾸지 않았다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "일반/편집/폭 변경의 실제 화면에서 terminal/file 제목·경로·아이콘이 같은 중앙선에 놓이고 읽혔다. 글자/본문 치수는 바꾸지 않았다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -380,7 +380,7 @@
       "exceptions": [
         {
           "id": "CHOP-ORC-G11",
-          "reason": "두 모드의 실제 헤더 제목/경로/확대/닫기/이동손잡이를 확인했다. 약295pt 좁은 칸과 전폭 확대에서도 읽히고 겹치지 않았다.",
+          "reason": "두 모드의 실제 헤더 제목/경로/확대/닫기/이동손잡이를 확인했다. 약295pt 좁은 칸과 전폭 확대에서도 읽히고 겹치지 않았다. 새 native 클론 시트는14pt medium과 AppKit semantic 보조/오류/비활성 색을 사용하며 사용자별 고대비 설정 전체를 검증했다고 주장하지 않는다.",
           "basis": "DESIGN.md; user-requested uniform header/body distinction and E-H1–5"
         }
       ]
@@ -388,8 +388,8 @@
     {
       "id": "ORC-G12",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -397,7 +397,7 @@
       "exceptions": [
         {
           "id": "CHOP-ORC-G12",
-          "reason": "칸마다 대상이 다른 +를 제공하고 콘텐츠 전역 CTA는 반복하지 않는다. 메뉴/단축키 동등 경로는 macOS 키보드 접근성 예외다. 2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다.",
+          "reason": "칸마다 대상이 다른 +를 제공하고 콘텐츠 전역 CTA는 반복하지 않는다. 메뉴/단축키 동등 경로는 macOS 키보드 접근성 예외다. 2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다. 클론 rail의 download는 기존 compact native icon 패턴과 같은 AX/tooltip을 제공한다. 파일 메뉴의 같은 명령은 키보드/메뉴 접근 경로이며 콘텐츠에 CTA를 반복하지 않는다.",
           "basis": "DESIGN.md: native platform and user-requested central plus / 1-2-4 layout contract; 2026-10-20 사용자 세로 추가 영역 요청, DESIGN.md 및 terminal-add-rail 관찰"
         }
       ]
@@ -416,8 +416,8 @@
     {
       "id": "ORC-G14",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "앱이 임의 빨강/초록 상태를 만들지 않는다. 창 닫기와 확인은 macOS 표준이며 셸의 사용자 프로그램 색은 별도다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "앱이 임의 빨강/초록 상태를 만들지 않는다. 창 닫기와 확인은 macOS 표준이며 셸의 사용자 프로그램 색은 별도다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -427,8 +427,8 @@
     {
       "id": "ORC-G15",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "24px를 넘는 웹 page title에 해당하는 자체 대제목이 없다. 제품명은 네이티브 창 제목으로만 표시한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "24px를 넘는 웹 page title에 해당하는 자체 대제목이 없다. 제품명은 네이티브 창 제목으로만 표시한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -467,8 +467,8 @@
     {
       "id": "ORC-G18",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "house/arrow.down.circle/doc의 다른 고유 폭이 이름 시작선을 바꾸지 않게16pt icon 열과8pt 간격을 적용했다. 실제 glyph/name 중앙과 세 목적지 행동을 확인했다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "house/arrow.down.circle/doc의 다른 고유 폭이 이름 시작선을 바꾸지 않게16pt icon 열과8pt 간격을 적용했다. 실제 glyph/name 중앙과 세 목적지 행동을 확인했다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -489,8 +489,8 @@
     {
       "id": "ORC-G20",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "동일28pt 행/4pt 간격/16pt icon/8pt 이름 간격을 공유한다. 실제 기본/최소 창과 빈·긴 목록에서 부모 padding 중첩 없이 정렬됐다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "동일28pt 행/4pt 간격/16pt icon/8pt 이름 간격을 공유한다. 실제 기본/최소 창과 빈·긴 목록에서 부모 padding 중첩 없이 정렬됐다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -500,8 +500,8 @@
     {
       "id": "ORC-G21",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "이동 조작에는 native openHand, 버튼·splitter에는 기존 AppKit 커서를 사용한다. 웹의 pointer 모양을 macOS에 강제하지 않는다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "이동 조작에는 native openHand, 버튼·splitter에는 기존 AppKit 커서를 사용한다. 웹의 pointer 모양을 macOS에 강제하지 않는다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual",
@@ -529,8 +529,8 @@
     {
       "id": "ORC-G23",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "바로가기 그룹 자체는 스크롤하지 않으며 빈 임시 폴더에 불필요한 scroller가 없다. 실제 긴 Downloads 목록은 native scroll을 유지하고 최소 창에서도 조작을 가리지 않는다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "바로가기 그룹 자체는 스크롤하지 않으며 빈 임시 폴더에 불필요한 scroller가 없다. 실제 긴 Downloads 목록은 native scroll을 유지하고 최소 창에서도 조작을 가리지 않는다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual",
@@ -552,8 +552,8 @@
     {
       "id": "ORC-A01",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "모든 요소에 같은 rounded 스타일을 적용하지 않았다. 네이티브 원형 추가, 작은 버튼, 사각 terminal canvas가 역할별로 다르다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "모든 요소에 같은 rounded 스타일을 적용하지 않았다. 네이티브 원형 추가, 작은 버튼, 사각 terminal canvas가 역할별로 다르다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -563,8 +563,8 @@
     {
       "id": "ORC-A02",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "사용자가 선택하는 평면 라이트 white/다크 1E2026를 제품 계약에 반영했다. G01과 충돌하는 micro-gradient/texture는 추가하지 않는 예외를 유지한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "사용자가 선택하는 평면 라이트 white/다크 1E2026를 제품 계약에 반영했다. G01과 충돌하는 micro-gradient/texture는 추가하지 않는 예외를 유지한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -580,8 +580,8 @@
     {
       "id": "ORC-A03",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "앱 소유 shadow 코드는 없다. NSAlert/메뉴/창과 버튼의 표준 시스템 깊이는 AppKit 예외다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "앱 소유 shadow 코드는 없다. NSAlert/메뉴/창과 버튼의 표준 시스템 깊이는 AppKit 예외다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -597,8 +597,8 @@
     {
       "id": "ORC-A04",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "임의 blue-500을 추가하지 않는다. 사용자 명시 요청으로 terminal pane와 파일 경로 field의 focus outline을 표시하지 않지만 caret/선택과 toolbar/native 버튼 초점·drag 대상은 유지한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "임의 blue-500을 추가하지 않는다. 사용자 명시 요청으로 terminal pane와 파일 경로 field의 focus outline을 표시하지 않지만 caret/선택과 toolbar/native 버튼 초점·drag 대상은 유지한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -614,8 +614,8 @@
     {
       "id": "ORC-A05",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "균등 1/2/4 배치는 사용자가 요청한 핵심 프리셋이다. 고정 대칭을 강요하지 않으며 실제 680pt 드래그와 재귀 분할로 비대칭이 가능하다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "균등 1/2/4 배치는 사용자가 요청한 핵심 프리셋이다. 고정 대칭을 강요하지 않으며 실제 680pt 드래그와 재귀 분할로 비대칭이 가능하다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -648,8 +648,8 @@
     {
       "id": "ORC-A07",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "바로가기에 아이콘만 남기지 않고 기존 한국어 목적지 이름을 함께 표시한다. native button AX 이름/tooltip을 보존하고 아이콘·글자·빈 행 영역이 같은 동작을 실행한다. 2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "바로가기에 아이콘만 남기지 않고 기존 한국어 목적지 이름을 함께 표시한다. native button AX 이름/tooltip을 보존하고 아이콘·글자·빈 행 영역이 같은 동작을 실행한다. 2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -657,7 +657,7 @@
       "exceptions": [
         {
           "id": "CHOP-ORC-A07",
-          "reason": "사용자가 중앙 +·header·상단 layout/mode를 아이콘으로 요청했다. 각 native 버튼/segment에 tooltip·AX 의미를 제공하고 실제 네 preset 방향 및 두 모드 상태를 실행했다. 2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다.",
+          "reason": "사용자가 중앙 +·header·상단 layout/mode를 아이콘으로 요청했다. 각 native 버튼/segment에 tooltip·AX 의미를 제공하고 실제 네 preset 방향 및 두 모드 상태를 실행했다. 2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다. 클론 rail의 download는 기존 compact native icon 패턴과 같은 AX/tooltip을 제공한다. 파일 메뉴의 같은 명령은 키보드/메뉴 접근 경로이며 콘텐츠에 CTA를 반복하지 않는다.",
           "basis": "DESIGN.md: native platform and user-requested central plus / 1-2-4 layout contract; 2026-10-20 사용자 세로 추가 영역 요청, DESIGN.md 및 terminal-add-rail 관찰"
         }
       ]
@@ -693,8 +693,8 @@
     {
       "id": "ORC-A10",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "실제 async loading/빈 폴더/없는 경로 오류/복구/늦은 응답 거절을 확인했다. OS open 대기 조합은 별도 관찰로 남기고 다른 경로/폴더 선택기로 복구했다. 상태 문구가 실제 읽기 상태와 일치한다. CodeRabbit의 개별 metadata 실패 전파를 확인해 이름/leaf fallback으로 수정했다. 오류 주입 회귀 검사와 최신 앱의 일반 폴더 표시/펼치기로 재검증했다. 검색어 변경은10초/10만 항목 캐시를 재사용하며75ms 입력 대기와 부분 결과/읽기 취소를 적용했다. 실제 Sources 검색3→2건·새로고침·지우기·두 모드/축소 창을 확인했다. 1만 파일 측정459→39ms는 환경 한정이며 새로고침·캐시 만료로 외부 변경을 반영한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "실제 async loading/빈 폴더/없는 경로 오류/복구/늦은 응답 거절을 확인했다. OS open 대기 조합은 별도 관찰로 남기고 다른 경로/폴더 선택기로 복구했다. 상태 문구가 실제 읽기 상태와 일치한다. CodeRabbit의 개별 metadata 실패 전파를 확인해 이름/leaf fallback으로 수정했다. 오류 주입 회귀 검사와 최신 앱의 일반 폴더 표시/펼치기로 재검증했다. 검색어 변경은10초/10만 항목 캐시를 재사용하며75ms 입력 대기와 부분 결과/읽기 취소를 적용했다. 실제 Sources 검색3→2건·새로고침·지우기·두 모드/축소 창을 확인했다. 1만 파일 측정459→39ms는 환경 한정이며 새로고침·캐시 만료로 외부 변경을 반영한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual",
@@ -711,8 +711,8 @@
     {
       "id": "RUI-01",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "사용자 Finder crop의 image-px와 Chop의 macOS pt를 구별했다.16pt box/14pt glyph/28pt row는 선택값이며 원본의 전체 창·배율·미관측 상태를 복원했다고 주장하지 않는다. 사용자가 지정한 PCMag macOS 구도에 따라 원본 실제 창과 오리지널 생성 배경을 HTML/CSS로 구성했다. 같은1280×720 구도의 세 사진·GitHub picture/목차/실제 이미지 로드를 판독했고 생성 범위와 실제 앱 픽셀/출력을 구분한다. 앱 UI는 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "사용자 Finder crop의 image-px와 Chop의 macOS pt를 구별했다.16pt box/14pt glyph/28pt row는 선택값이며 원본의 전체 창·배율·미관측 상태를 복원했다고 주장하지 않는다. 사용자가 지정한 PCMag macOS 구도에 따라 원본 실제 창과 오리지널 생성 배경을 HTML/CSS로 구성했다. 같은1280×720 구도의 세 사진·GitHub picture/목차/실제 이미지 로드를 판독했고 생성 범위와 실제 앱 픽셀/출력을 구분한다. 앱 UI는 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "spec"
       ],
@@ -721,8 +721,8 @@
     {
       "id": "RUI-02",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "기존 ChopStyle14pt와 동적 labelColor를 실제 바로가기 label/icon에 적용한다. 고정 icon box는 원본 비율을 보존하며 terminal/header 토큰은 바꾸지 않는다. 앱 아이콘은 이후 제공된 원본 색을 그대로 쓰고 UI/header/native accent 토큰을 확장하거나 바꾸지 않았다. 버튼색을 그대로 넓힌 목록 면이 너무 강하다는 최신 사용자 교정으로 fileListBackground만 light F8F8F8/dark24262C의 연한 중립 면으로 조정했다. 두 모드의 새 release 화면과27개 검사에서 글자/아이콘 대비·헤더 정렬·기존 최소 폭 입력 경계를 확인했다. 버튼의 native 상태와본문/헤더는 유지한다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 사용자가 지정한 PCMag macOS 구도에 따라 원본 실제 창과 오리지널 생성 배경을 HTML/CSS로 구성했다. 같은1280×720 구도의 세 사진·GitHub picture/목차/실제 이미지 로드를 판독했고 생성 범위와 실제 앱 픽셀/출력을 구분한다. 앱 UI는 변경하지 않았다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "기존 ChopStyle14pt와 동적 labelColor를 실제 바로가기 label/icon에 적용한다. 고정 icon box는 원본 비율을 보존하며 terminal/header 토큰은 바꾸지 않는다. 앱 아이콘은 이후 제공된 원본 색을 그대로 쓰고 UI/header/native accent 토큰을 확장하거나 바꾸지 않았다. 버튼색을 그대로 넓힌 목록 면이 너무 강하다는 최신 사용자 교정으로 fileListBackground만 light F8F8F8/dark24262C의 연한 중립 면으로 조정했다. 두 모드의 새 release 화면과27개 검사에서 글자/아이콘 대비·헤더 정렬·기존 최소 폭 입력 경계를 확인했다. 버튼의 native 상태와본문/헤더는 유지한다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 사용자가 지정한 PCMag macOS 구도에 따라 원본 실제 창과 오리지널 생성 배경을 HTML/CSS로 구성했다. 같은1280×720 구도의 세 사진·GitHub picture/목차/실제 이미지 로드를 판독했고 생성 범위와 실제 앱 픽셀/출력을 구분한다. 앱 UI는 변경하지 않았다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code"
       ],
@@ -731,8 +731,8 @@
     {
       "id": "RUI-03",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "사용자 요청의 path field focus-ring 제거를 terminal-only 예외와 구분해 추가했다. 나머지 active 규칙과 과거 실패를 보존하며 헤더/바로가기/파일 드래그 요청을 이 PR에서 완료했다고 주장하지 않는다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "사용자 요청의 path field focus-ring 제거를 terminal-only 예외와 구분해 추가했다. 나머지 active 규칙과 과거 실패를 보존하며 헤더/바로가기/파일 드래그 요청을 이 PR에서 완료했다고 주장하지 않는다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "spec"
       ],
@@ -741,8 +741,8 @@
     {
       "id": "RUI-04",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "홈 아이콘 포인터 클릭과 문서/다운로드 실제 클릭으로 각 목적지 경로가 바뀌는 것을 확인했다. native full-row hit/AX 버튼 역할과16개 기존 경로/PTY 검사를 보존한다. 파일 드롭의 실제 사용자 조작 후 endpoint를 AX로 확인했으며 Enter 미전송은 실제 PTY 검사로 별도 확인했다. 이번 단일 탭 보기는 실제4셸 전환/ENV 보존/추가·닫기/가로 탐색/복원을 확인했다. 실제4/5셸 좌우/격자/탭 전환과 keyboard/manual scroll, ENV 보존 및 확대를 확인했다. 상하4/5셸 전환과 모든 모드 연속 전환/ENV 유지/Scroll Up·keyboard focus/재실행을 실제 확인했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 실제 세로 +/⌘T로 빈 칸을 채워5·8·16개를 만들고 한도 비활성/닫기 후 활성·확대 중 추가·탭/패널 숨김·키보드 focus/스크롤과 ENV 출력을 확인했다. 16개 실제 재실행과36개 check.sh 검사에서 분할/PTY 보존과 cwd·snapshot을 검증했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "홈 아이콘 포인터 클릭과 문서/다운로드 실제 클릭으로 각 목적지 경로가 바뀌는 것을 확인했다. native full-row hit/AX 버튼 역할과16개 기존 경로/PTY 검사를 보존한다. 파일 드롭의 실제 사용자 조작 후 endpoint를 AX로 확인했으며 Enter 미전송은 실제 PTY 검사로 별도 확인했다. 이번 단일 탭 보기는 실제4셸 전환/ENV 보존/추가·닫기/가로 탐색/복원을 확인했다. 실제4/5셸 좌우/격자/탭 전환과 keyboard/manual scroll, ENV 보존 및 확대를 확인했다. 상하4/5셸 전환과 모든 모드 연속 전환/ENV 유지/Scroll Up·keyboard focus/재실행을 실제 확인했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 실제 세로 +/⌘T로 빈 칸을 채워5·8·16개를 만들고 한도 비활성/닫기 후 활성·확대 중 추가·탭/패널 숨김·키보드 focus/스크롤과 ENV 출력을 확인했다. 16개 실제 재실행과36개 check.sh 검사에서 분할/PTY 보존과 cwd·snapshot을 검증했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "spec",
         "interaction"
@@ -752,8 +752,8 @@
     {
       "id": "RUI-05",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "Ghostty 엔진과 cmux 기능 아이디어를 Chop의 중앙 칸 추가에 연결했다. 사이드바 표면 복제로 대체하지 않았고 실제 다섯 번째 터미널을 열었다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "Ghostty 엔진과 cmux 기능 아이디어를 Chop의 중앙 칸 추가에 연결했다. 사이드바 표면 복제로 대체하지 않았고 실제 다섯 번째 터미널을 열었다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "spec",
         "visual"
@@ -763,8 +763,8 @@
     {
       "id": "RUI-06",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "바로가기 native button 구성·hitTest/AX 의미를 셀프 리뷰했다. strict format/build/signature와 전체16개 테스트4.907초 및 실제 목적지 입력을 확인했다. 파일 드롭 source/대상 수명·인용을 셀프 리뷰했고19개 검사4.111초와 최신 원격 CI가 통과했다. 좌우↔탭 실제 전환에서 발견한 display-cycle crash를 다음 main queue 크기 정리로 수정하고 실제5회 왕복과22개 검사를 다시 확인했다. 실제 세로 +/⌘T로 빈 칸을 채워5·8·16개를 만들고 한도 비활성/닫기 후 활성·확대 중 추가·탭/패널 숨김·키보드 focus/스크롤과 ENV 출력을 확인했다. 16개 실제 재실행과36개 check.sh 검사에서 분할/PTY 보존과 cwd·snapshot을 검증했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "바로가기 native button 구성·hitTest/AX 의미를 셀프 리뷰했다. strict format/build/signature와 전체16개 테스트4.907초 및 실제 목적지 입력을 확인했다. 파일 드롭 source/대상 수명·인용을 셀프 리뷰했고19개 검사4.111초와 최신 원격 CI가 통과했다. 좌우↔탭 실제 전환에서 발견한 display-cycle crash를 다음 main queue 크기 정리로 수정하고 실제5회 왕복과22개 검사를 다시 확인했다. 실제 세로 +/⌘T로 빈 칸을 채워5·8·16개를 만들고 한도 비활성/닫기 후 활성·확대 중 추가·탭/패널 숨김·키보드 focus/스크롤과 ENV 출력을 확인했다. 16개 실제 재실행과36개 check.sh 검사에서 분할/PTY 보존과 cwd·snapshot을 검증했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code"
       ],
@@ -773,8 +773,8 @@
     {
       "id": "RUI-07",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "파일 header/path 아래 목적지 묶음과 그 아래 파일 outline의 계층을 유지한다. 사용자 crop의 왼쪽 icon+이름 관계를 최소 폭에서도 읽히도록 세로 행으로 적용했다. 바로가기만 중립 surface로 구분해 목적지 묶음과 실제 파일 contents의 계층을 명확히 했다. 단일 모드에서는 중복 pane header 대신 같은40pt 가로 탭 행을 file header와 정렬하며 toolbar 계층을 보존한다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "파일 header/path 아래 목적지 묶음과 그 아래 파일 outline의 계층을 유지한다. 사용자 crop의 왼쪽 icon+이름 관계를 최소 폭에서도 읽히도록 세로 행으로 적용했다. 바로가기만 중립 surface로 구분해 목적지 묶음과 실제 파일 contents의 계층을 명확히 했다. 단일 모드에서는 중복 pane header 대신 같은40pt 가로 탭 행을 file header와 정렬하며 toolbar 계층을 보존한다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "spec",
         "visual"
@@ -784,8 +784,8 @@
     {
       "id": "RUI-08",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "이름 Chop은 사용자 제공이며 창 제목으로 쓴다. 별도 로고/워드마크/캐릭터/슬로건을 만들지 않았다. SF 기호는 기능 버튼이다. 이후 사용자가 직접 제공한 열매 로고를 앱 아이콘에만 적용했다. 원본 SHA/cmp를 보존하고 임의 캐릭터/슬로건을 새로 만들지 않았다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "이름 Chop은 사용자 제공이며 창 제목으로 쓴다. 별도 로고/워드마크/캐릭터/슬로건을 만들지 않았다. SF 기호는 기능 버튼이다. 이후 사용자가 직접 제공한 열매 로고를 앱 아이콘에만 적용했다. 원본 SHA/cmp를 보존하고 임의 캐릭터/슬로건을 새로 만들지 않았다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "spec",
         "code",
@@ -796,8 +796,8 @@
     {
       "id": "RUI-09",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "바로가기 라벨은 system14pt medium을 재사용한다.16pt icon box와 native 버튼 높이를 글자 크기로 오인하지 않으며 작은 자체 보조 문구를 추가하지 않았다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "바로가기 라벨은 system14pt medium을 재사용한다.16pt icon box와 native 버튼 높이를 글자 크기로 오인하지 않으며 작은 자체 보조 문구를 추가하지 않았다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -813,8 +813,8 @@
     {
       "id": "RUI-10",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "세 바로가기는 이름이 명시된 목적지 행이며 CTA나 새 navigation 탭이 아니다. native NSButton target-action/tooltip/AX 이름과 실제 폴더 이동을 유지한다. 2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "세 바로가기는 이름이 명시된 목적지 행이며 CTA나 새 navigation 탭이 아니다. native NSButton target-action/tooltip/AX 이름과 실제 폴더 이동을 유지한다. 2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "spec",
         "visual"
@@ -824,8 +824,8 @@
     {
       "id": "RUI-11",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "파일 제목과 직접 경로를 표시하고 매 행에 설명을 붙이지 않는다. loading/empty/error는 실제 해당 상태에서만 나타나며 실패 후 입력/선택/새로고침으로 복구한다. 2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "파일 제목과 직접 경로를 표시하고 매 행에 설명을 붙이지 않는다. loading/empty/error는 실제 해당 상태에서만 나타나며 실패 후 입력/선택/새로고침으로 복구한다. 2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "spec",
         "visual"
@@ -835,8 +835,8 @@
     {
       "id": "RUI-12",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "사용자 Finder crop와 SF Symbols 출처를 기록했다. 홈=house/다운로드=arrow.down.circle/문서=doc 의미·방향과 실제 목적지 행동을 대조했고 image를 비율 유지해 표시한다. 앱 아이콘은 기능 SF 기호와 구분해 사용자 원본/관찰한 macOS crop/Apple HIG 근거 및 실제 bundle/정보 창/Finder 소비를 기록했다. 기존 native SF 예외는 그대로다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "사용자 Finder crop와 SF Symbols 출처를 기록했다. 홈=house/다운로드=arrow.down.circle/문서=doc 의미·방향과 실제 목적지 행동을 대조했고 image를 비율 유지해 표시한다. 앱 아이콘은 기능 SF 기호와 구분해 사용자 원본/관찰한 macOS crop/Apple HIG 근거 및 실제 bundle/정보 창/Finder 소비를 기록했다. 기존 native SF 예외는 그대로다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -844,7 +844,7 @@
       "exceptions": [
         {
           "id": "CHOP-RUI-12",
-          "reason": "이동용 arrow.up.and.down.and.arrow.left.and.right를 기존 SF Symbols 예외로 추가했다. 14pt medium/28pt handle·대상 이름 AX·자리 바꾸기 tooltip/메뉴가 실제 행동과 일치한다.",
+          "reason": "이동용 arrow.up.and.down.and.arrow.left.and.right를 기존 SF Symbols 예외로 추가했다. 14pt medium/28pt handle·대상 이름 AX·자리 바꾸기 tooltip/메뉴가 실제 행동과 일치한다. 클론 rail의 download는 기존 compact native icon 패턴과 같은 AX/tooltip을 제공한다. 파일 메뉴의 같은 명령은 키보드/메뉴 접근 경로이며 콘텐츠에 CTA를 반복하지 않는다.",
           "basis": "DESIGN.md; user-requested pane movement/motion and E-M1–7 actual observations"
         }
       ]
@@ -852,8 +852,8 @@
     {
       "id": "RUI-13",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "세로 행으로 바꾼 뒤 최소842×442pt에서 header/path/세 바로가기와 파일 목록이 가려지지 않는 것을 두 모드로 확인했다. 빈 상태는 scrollbar 없이, 긴 파일 목록은 기존 native scroll로 표시한다. 108pt 묶음과 기존 header/path/목록이 두 모드 최소842×442에서도 가려지지 않았다. 탭 overflow와 긴 이름/681×432 최소 창을 두 모드에서 확인했고 크기 변경 후 선택 탭을 드러내도록 수정했다. 실제 두 모드/최소842×442에서 모든 칸에 가로 탐색/키보드 focus로 접근하며 창을 화면 밖으로 강제 확대하지 않는다. 상하 모든 pane을 유지하며 두 모드1100×752/최소681×442에서 세로 scroll로 접근하고 불필요한 가로 scroller는 생기지 않았다. 사용자 리사이즈 교정 후 tile 직전 viewport 기준으로 축을 정해 들어가는 canvas의 불필요한 손잡이를 제거했다. 실제 두 모드/최소/반복 크기 변경과70회 동기 경계 회귀를 추가 확인했다. 빈 탭 중앙 배치 교정 후 전용 컨테이너에서 기존 pane을 viewport 전체에 동기 배치한다. 실제5/7/8·두 모드·크기 왕복/격자 전환·파일 트리 개폐와25개 검사를 추가 확인했다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "세로 행으로 바꾼 뒤 최소842×442pt에서 header/path/세 바로가기와 파일 목록이 가려지지 않는 것을 두 모드로 확인했다. 빈 상태는 scrollbar 없이, 긴 파일 목록은 기존 native scroll로 표시한다. 108pt 묶음과 기존 header/path/목록이 두 모드 최소842×442에서도 가려지지 않았다. 탭 overflow와 긴 이름/681×432 최소 창을 두 모드에서 확인했고 크기 변경 후 선택 탭을 드러내도록 수정했다. 실제 두 모드/최소842×442에서 모든 칸에 가로 탐색/키보드 focus로 접근하며 창을 화면 밖으로 강제 확대하지 않는다. 상하 모든 pane을 유지하며 두 모드1100×752/최소681×442에서 세로 scroll로 접근하고 불필요한 가로 scroller는 생기지 않았다. 사용자 리사이즈 교정 후 tile 직전 viewport 기준으로 축을 정해 들어가는 canvas의 불필요한 손잡이를 제거했다. 실제 두 모드/최소/반복 크기 변경과70회 동기 경계 회귀를 추가 확인했다. 빈 탭 중앙 배치 교정 후 전용 컨테이너에서 기존 pane을 viewport 전체에 동기 배치한다. 실제5/7/8·두 모드·크기 왕복/격자 전환·파일 트리 개폐와25개 검사를 추가 확인했다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual",
@@ -864,8 +864,8 @@
     {
       "id": "RUI-14",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "새 장식 바를 만들지 않고 기능 divider의 header 부분만 동일 배경으로 채운다. 본문 resize hit 영역을 유지하며 숨김 때 divider와 잔상이 없다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "새 장식 바를 만들지 않고 기능 divider의 header 부분만 동일 배경으로 채운다. 본문 resize hit 영역을 유지하며 숨김 때 divider와 잔상이 없다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -893,8 +893,8 @@
     {
       "id": "RUI-16",
       "applicable": true,
-      "scope": "R-DEFAULT 사용자 canvas crop와 Chop 기본 진입 화면의 구조/상태/컴포넌트 관계",
-      "reason": "Finder crop의 같은 icon 열/이름 시작선·세로 행 관계를 실제 구현에 연결했다. 한국어 세 목적지는 기존 요청을 유지하고 glyph 폭 어긋남을 실제 화면에서 수정했다. 사용자가 지정한 PCMag macOS 구도에 따라 원본 실제 창과 오리지널 생성 배경을 HTML/CSS로 구성했다. 같은1280×720 구도의 세 사진·GitHub picture/목차/실제 이미지 로드를 판독했고 생성 범위와 실제 앱 픽셀/출력을 구분한다. 앱 UI는 변경하지 않았다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20: Ghostty처럼 프로젝트별 창을 여는 행동 요청을 기존 native 파일/윈도우 메뉴·폴더 선택기에 적용했다. 첨부 임시 이미지는 OS 권한으로 읽지 못했으므로 시각 복제라고 주장하지 않는다. 새 사이드바/장식/상시 설명은 추가하지 않았다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "R-DEFAULT 사용자 canvas crop와 Chop 기본 진입 화면의 구조/상태/컴포넌트 관계; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "Finder crop의 같은 icon 열/이름 시작선·세로 행 관계를 실제 구현에 연결했다. 한국어 세 목적지는 기존 요청을 유지하고 glyph 폭 어긋남을 실제 화면에서 수정했다. 사용자가 지정한 PCMag macOS 구도에 따라 원본 실제 창과 오리지널 생성 배경을 HTML/CSS로 구성했다. 같은1280×720 구도의 세 사진·GitHub picture/목차/실제 이미지 로드를 판독했고 생성 범위와 실제 앱 픽셀/출력을 구분한다. 앱 UI는 변경하지 않았다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20: Ghostty처럼 프로젝트별 창을 여는 행동 요청을 기존 native 파일/윈도우 메뉴·폴더 선택기에 적용했다. 첨부 임시 이미지는 OS 권한으로 읽지 못했으므로 시각 복제라고 주장하지 않는다. 새 사이드바/장식/상시 설명은 추가하지 않았다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "spec",
         "visual"
@@ -904,8 +904,8 @@
     {
       "id": "RUI-17",
       "applicable": true,
-      "scope": "R-DEFAULT 사용자 canvas crop와 Chop 기본 진입 화면의 구조/상태/컴포넌트 관계",
-      "reason": "초기 image-leading/size만으로는 이름 정렬이 맞지 않는 것을 실제 화면에서 발견해 고정16pt icon 열로 수정했다. 두 모드/최소 창/실제 목적지·빈 목록의 전체 조합으로 다시 확인했다. 버튼색을 그대로 넓힌 목록 면이 너무 강하다는 최신 사용자 교정으로 fileListBackground만 light F8F8F8/dark24262C의 연한 중립 면으로 조정했다. 두 모드의 새 release 화면과27개 검사에서 글자/아이콘 대비·헤더 정렬·기존 최소 폭 입력 경계를 확인했다. 버튼의 native 상태와본문/헤더는 유지한다. 사용자가 지정한 PCMag macOS 구도에 따라 원본 실제 창과 오리지널 생성 배경을 HTML/CSS로 구성했다. 같은1280×720 구도의 세 사진·GitHub picture/목차/실제 이미지 로드를 판독했고 생성 범위와 실제 앱 픽셀/출력을 구분한다. 앱 UI는 변경하지 않았다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20: 최종 기존 toolbar·두 열·중앙 plus·오른쪽 트리와 새 native 창/메뉴를 조합해 실제 재실행/창 생성/닫기를 판독했다. 검증 범위는 실제 관찰과38개 검사에 한정하며 이전 미변경 자산/플랫폼 예외는 새 검증으로 표시하지 않는다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "R-DEFAULT 사용자 canvas crop와 Chop 기본 진입 화면의 구조/상태/컴포넌트 관계; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "초기 image-leading/size만으로는 이름 정렬이 맞지 않는 것을 실제 화면에서 발견해 고정16pt icon 열로 수정했다. 두 모드/최소 창/실제 목적지·빈 목록의 전체 조합으로 다시 확인했다. 버튼색을 그대로 넓힌 목록 면이 너무 강하다는 최신 사용자 교정으로 fileListBackground만 light F8F8F8/dark24262C의 연한 중립 면으로 조정했다. 두 모드의 새 release 화면과27개 검사에서 글자/아이콘 대비·헤더 정렬·기존 최소 폭 입력 경계를 확인했다. 버튼의 native 상태와본문/헤더는 유지한다. 사용자가 지정한 PCMag macOS 구도에 따라 원본 실제 창과 오리지널 생성 배경을 HTML/CSS로 구성했다. 같은1280×720 구도의 세 사진·GitHub picture/목차/실제 이미지 로드를 판독했고 생성 범위와 실제 앱 픽셀/출력을 구분한다. 앱 UI는 변경하지 않았다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20: 최종 기존 toolbar·두 열·중앙 plus·오른쪽 트리와 새 native 창/메뉴를 조합해 실제 재실행/창 생성/닫기를 판독했다. 검증 범위는 실제 관찰과38개 검사에 한정하며 이전 미변경 자산/플랫폼 예외는 새 검증으로 표시하지 않는다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "spec",
         "visual"
@@ -915,8 +915,8 @@
     {
       "id": "RUI-18",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "새 사용자 Finder crop의 관찰과 Chop 각색 결정을 별도 기록하고 실제 파일 탐색 소비 화면을 검증했다. 기존 engine/cmux/canvas 출처와 toolbar/body 계층을 유지한다. 앱 브랜딩의 사용자 원본/둥근 crop 관찰과 Apple HIG를 연결하고 chosen mask 수치와 원본 보존을 구분해 실제 정보 창/Finder에서 확인했다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "새 사용자 Finder crop의 관찰과 Chop 각색 결정을 별도 기록하고 실제 파일 탐색 소비 화면을 검증했다. 기존 engine/cmux/canvas 출처와 toolbar/body 계층을 유지한다. 앱 브랜딩의 사용자 원본/둥근 crop 관찰과 Apple HIG를 연결하고 chosen mask 수치와 원본 보존을 구분해 실제 정보 창/Finder에서 확인했다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "spec",
         "visual"
@@ -939,8 +939,8 @@
     {
       "id": "RUI-20",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "이름 변경/오류/닫기 목적 제목은 native NSAlert heading이며 입력/설명보다 위계가 높다. 실제 폴더/작업 닫기 경고 화면에서 제목·본문·버튼이 읽혔다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "이름 변경/오류/닫기 목적 제목은 native NSAlert heading이며 입력/설명보다 위계가 높다. 실제 폴더/작업 닫기 경고 화면에서 제목·본문·버튼이 읽혔다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -962,8 +962,8 @@
     {
       "id": "RUI-22",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "부모 inset12·그룹 간8과 내부 row28/gap4/icon16/name-gap8의 소유를 구별한다. 실제 빈/긴 목록·최소/기본 창에서 padding 중첩이나 잘림이 없다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "부모 inset12·그룹 간8과 내부 row28/gap4/icon16/name-gap8의 소유를 구별한다. 실제 빈/긴 목록·최소/기본 창에서 padding 중첩이나 잘림이 없다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "code",
         "visual"
@@ -973,8 +973,8 @@
     {
       "id": "RUI-23",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "바로가기만 같은14pt/동적 labelColor/네이티브 버튼 역할 안에서 바꿨다. 사용자 요청의 path field/pane focus-ring 생략과 실제 caret/selection, native 버튼/메뉴 의미는 유지한다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20: 새 파일 메뉴와 native 폴더 선택기는 기존 AppKit 메뉴 글자/포커스/키보드 의미를 유지한다. 실제 선택/취소·단축키를 실행했다. 기존 사용자 지정 본문/경로 포커스 예외는 유지한다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "바로가기만 같은14pt/동적 labelColor/네이티브 버튼 역할 안에서 바꿨다. 사용자 요청의 path field/pane focus-ring 생략과 실제 caret/selection, native 버튼/메뉴 의미는 유지한다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20: 새 파일 메뉴와 native 폴더 선택기는 기존 AppKit 메뉴 글자/포커스/키보드 의미를 유지한다. 실제 선택/취소·단축키를 실행했다. 기존 사용자 지정 본문/경로 포커스 예외는 유지한다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "spec",
         "code",
@@ -996,8 +996,8 @@
     {
       "id": "RUI-24",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "파일 제목은 탐색 영역 이름이고 행 이름은 실제 항목이다. 경로를 매 행에 반복하거나 loading/empty 상태를 배지로 중복하지 않는다. tooltip/AX 전체 경로는 접근/긴 경로 보완이다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "파일 제목은 탐색 영역 이름이고 행 이름은 실제 항목이다. 경로를 매 행에 반복하거나 loading/empty 상태를 배지로 중복하지 않는다. tooltip/AX 전체 경로는 접근/긴 경로 보완이다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "spec",
         "visual"
@@ -1007,8 +1007,8 @@
     {
       "id": "RUI-25",
       "applicable": true,
-      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below",
-      "reason": "path→세 목적지 행→파일 outline 순서로 탐색 소속을 유지한다. 목적지 이름을 별도 설명/배지로 반복하지 않고 공통 toolbar 아래 peer 구조와 header 연결을 보존한다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "scope": "Chop v0.1 workspace/pane/toolbar/native dialogs; specific scope and exclusions below; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "path→세 목적지 행→파일 outline 순서로 탐색 소속을 유지한다. 목적지 이름을 별도 설명/배지로 반복하지 않고 공통 toolbar 아래 peer 구조와 header 연결을 보존한다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "spec",
         "visual"
@@ -1408,8 +1408,8 @@
     {
       "id": "PROJECT-TERMINAL-ADD-RAIL",
       "applicable": true,
-      "scope": "canvas/파일 트리 사이의 고정 추가 영역과 아래 행 생성",
-      "reason": "실제 세로 +/⌘T로 빈 칸을 채워5·8·16개를 만들고 한도 비활성/닫기 후 활성·확대 중 추가·탭/패널 숨김·키보드 focus/스크롤과 ENV 출력을 확인했다. 16개 실제 재실행과36개 check.sh 검사에서 분할/PTY 보존과 cwd·snapshot을 검증했다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다.",
+      "scope": "canvas/파일 트리 사이의 고정 추가 영역과 아래 행 생성; GitHub clone rail/sheet 및 새 프로젝트 목적지",
+      "reason": "실제 세로 +/⌘T로 빈 칸을 채워5·8·16개를 만들고 한도 비활성/닫기 후 활성·확대 중 추가·탭/패널 숨김·키보드 focus/스크롤과 ENV 출력을 확인했다. 16개 실제 재실행과36개 check.sh 검사에서 분할/PTY 보존과 cwd·snapshot을 검증했다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다.",
       "checks": [
         "spec",
         "code",
@@ -1462,6 +1462,19 @@
       "applicable": true,
       "scope": "실제 터미널별 로컬 listener/헤더/선택 tab/주소 목록/브라우저 열기·종료 수명",
       "reason": "2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다.",
+      "checks": [
+        "spec",
+        "code",
+        "visual",
+        "interaction"
+      ],
+      "exceptions": []
+    },
+    {
+      "id": "PROJECT-GITHUB-CLONE",
+      "applicable": true,
+      "scope": "TerminalAreaView 하단 clone / GitCloneSheet / GitCloneJob / WorkspaceWindowManager 새 프로젝트",
+      "reason": "사용자 요청: GitHub 저장소를 클론한 뒤 해당 폴더에서 터미널을 연다. URL/위치/이름·실패 재시도·취소/앱 종료 정리·기존 항목 보존과 새 창/첫 셸/파일 트리를 함께 검증한다.",
       "checks": [
         "spec",
         "code",

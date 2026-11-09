@@ -115,3 +115,9 @@ V-57 / UI-TEST-ISOLATION: 입력창 변경 전 main과 PR 두 CI 실행이 빌�
 V-58 / INPUT-REDUNDANT-COMMIT: 같은 target opacity에서도 window.didUpdate마다 CATransaction을 예약하던 코드를 조기 반환으로 고쳤다. 같은 상태의 Reduce Motion 활성 시 기존 모션 제거도 회귀 검사했다. 최종40개 check.sh 통과 및 실제 두 모드 입력/caret·Tab과 외형을 재확인했다. CI 멈춤의 확정 원인으로 주장하지 않는다. fixed-and-verified (입력 갱신 범위, 셀프 리뷰). [관찰](evidence/inset-input-motion.md).
 
 V-59 / LOCAL-SERVERS: 사용자 요청의 terminal별 주소 표시/브라우저 열기를 실제 listener와 native header/tab/menu로 구현했다. PID count 오독과 privileged login 조회 실패로 후손을 누락하던 introduced 결함을 발견하고 소유 root/자식 순회·수명 검증으로 고쳤다. 실제 단일/복수/두 터미널 격리·브라우저 두 주소·종료/restore·라이트/다크/축소/탭과 전체44개 검사 통과. fixed-and-verified (셀프 리뷰, 변경 범위). [관찰](evidence/local-servers.md).
+
+V-60 / GITHUB-CLONE: 48pt rail 하단32pt 버튼에서 URL/위치/이름→실제 GitHub clone→새 창·첫 셸·파일 트리를 연결했다. /tmp/repo 오인 허용을 거부 검사로 발견/수정했고, 실패 입력 유지/한글 이름 재시도·실제 pwd/origin·두 모드/최소/탭/트리 숨김·취소/정리와49개 검사를 확인했다. aligned (변경 범위, 셀프 리뷰). [근거](evidence/github-clone.md).
+
+V-61 / F-CLONE-MODAL-QUIT: 최초 클론 시트에서 Cmd+Q가 막힌 native 기본값을 실제 관찰했다. 해당 시트에 termination 허용을 적용하고 전송→종료 요청→취소(유지)→재요청→종료/정리, 기존 결과 보존을 실제 확인했다. fixed-and-verified (셀프 수정/검증). [근거](evidence/github-clone.md).
+
+V-62 / F-CLONE-GIT-ENV: 자동 리뷰의 상속된 Git 경로 설정 지적을 실제 주입 검사에서 .failed로 재현했다. clone과 fixture의 repository-local 환경만 정리한 뒤 원래 config 보존·잘못된 index/object 미생성·정상 clone 및49개15.179초 check.sh를 확인했다. UI/경로 목적지는 변경하지 않았다. fixed-and-verified (셀프 수정/검증, 원격 최종 상태는 PR). [근거](evidence/github-clone.md).

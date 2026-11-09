@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "decomposition_sha256": "bedd4af43a0fa310b25a48c328183ac225846c3fdad67f0e8f7f0e3cb345a6b9",
+  "interpretation_sha256": "bb75ebdb77b50b2a7199bc6e7cf91e0e8e7aaf308be8e57f5d372daf986e20f1",
+  "source_snapshot": {
+    "path": "design/github-clone-reference/first-canvas-source.patch.txt",
+    "sha256": "58a094e54020f8dcdf88c426e8f7e60dcb6891dd4e725fed596c774f4865bdfc"
+  },
+  "capture": {
+    "path": "design/evidence/github-clone.md",
+    "sha256": "3273c8847185b344a0eb76375c387c532c441b78c0f9ee30c31b6f718aed0e35"
+  },
+  "status": "adapted-and-verified",
+  "reason": "E-C2 실제 light canvas는 원본 default-grid의 거의 동등한 두 열/두 행과 첫 실행/나머지 중앙 plus 및 작은 header를 유지한다. 하단 clone과 새 프로젝트 결과는 사용자 신규 요구이며 다른 native control이나 canvas 면적을 밀어내지 않는다. E-C3 두 모드·최소·탭/트리 숨김도 확인했다. 원본 crop에 없던 폼은 native/기존 입력 계약의 확장이며 외부 시각 원본 복제로 주장하지 않는다."
+}

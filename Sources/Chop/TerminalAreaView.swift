@@ -9,12 +9,17 @@ final class TerminalAreaView: NSView {
   private let leadingBorder = NSView()
   private let trailingBorder = NSView()
   let addButton: NSButton
+  let cloneButton: NSButton
+  var onCloneRequested: (() -> Void)?
 
   init(canvas: NSView, target: AnyObject, action: Selector) {
     self.canvas = canvas
     addButton = NSButton(
       image: NSImage(systemSymbolName: "plus", accessibilityDescription: "터미널 추가")!,
       target: target, action: action)
+    cloneButton = NSButton(
+      image: NSImage(systemSymbolName: "arrow.down.to.line", accessibilityDescription: nil)!,
+      target: nil, action: nil)
     super.init(frame: .zero)
     rail.wantsLayer = true
     addButton.bezelStyle = .circular
@@ -28,6 +33,13 @@ final class TerminalAreaView: NSView {
       rail.addSubview(border)
     }
     rail.addSubview(addButton)
+    cloneButton.bezelStyle = .circular
+    cloneButton.controlSize = .regular
+    cloneButton.target = self
+    cloneButton.action = #selector(requestClone)
+    cloneButton.toolTip = "GitHub 프로젝트 클론…"
+    cloneButton.setAccessibilityLabel("GitHub 프로젝트 클론")
+    rail.addSubview(cloneButton)
   }
 
   @available(*, unavailable)
@@ -45,6 +57,8 @@ final class TerminalAreaView: NSView {
     trailingBorder.isHidden = visible
   }
 
+  @objc private func requestClone() { onCloneRequested?() }
+
   override func resizeSubviews(withOldSize oldSize: NSSize) {
     let width = min(Self.railWidth, bounds.width)
     canvas.frame = NSRect(x: 0, y: 0, width: max(0, bounds.width - width), height: bounds.height)
@@ -55,5 +69,6 @@ final class TerminalAreaView: NSView {
       x: width - borderWidth, y: 0, width: borderWidth, height: bounds.height)
     addButton.frame = NSRect(
       x: (width - 32) / 2, y: (bounds.height - 32) / 2, width: 32, height: 32)
+    cloneButton.frame = NSRect(x: (width - 32) / 2, y: 12, width: 32, height: 32)
   }
 }

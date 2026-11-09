@@ -87,6 +87,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     }
   }
 
+  @objc private func cloneProject() { windowManager.requestClone() }
+
   func applicationDockMenu(_ sender: NSApplication) -> NSMenu? {
     let menu = NSMenu()
     for (title, action) in [
@@ -100,15 +102,27 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
   }
 
   func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
-    if windowManager.needsConfirmClose {
+    if windowManager.needsConfirmClose || windowManager.isCloningProject {
       let alert = NSAlert()
       alert.messageText = "Chop을 종료할까요?"
-      alert.informativeText = "실행 중인 터미널 작업이 종료됩니다."
+      alert.informativeText =
+        windowManager.isCloningProject
+        ? "실행 중인 터미널 작업과 프로젝트 클론이 종료됩니다."
+        : "실행 중인 터미널 작업이 종료됩니다."
       alert.addButton(withTitle: "취소")
       alert.addButton(withTitle: "종료")
       if alert.runModal() != .alertSecondButtonReturn { return .terminateCancel }
     }
-    return session.confirmTerminationIfUnsaved() ? .terminateNow : .terminateCancel
+    guard session.confirmTerminationIfUnsaved() else { return .terminateCancel }
+    if windowManager.isCloningProject {
+      windowManager.prepareToTerminate()
+      Task {
+        await windowManager.cancelClonesForTermination()
+        sender.reply(toApplicationShouldTerminate: true)
+      }
+      return .terminateLater
+    }
+    return .terminateNow
   }
 
   func applicationWillTerminate(_ notification: Notification) {
@@ -157,6 +171,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
   func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
     if menuItem.action == #selector(newWindow) { return true }
     if menuItem.action == #selector(openProjectWindow) { return projectPanel == nil }
+    if menuItem.action == #selector(cloneProject) { return true }
     if menuItem.action == #selector(chooseAppearance(_:)) {
       menuItem.state =
         (menuItem.representedObject as? String) == engine.appearanceMode.rawValue ? .on : .off
@@ -219,6 +234,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
       withTitle: "프로젝트 폴더에서 새 윈도우…", action: #selector(openProjectWindow), keyEquivalent: "n")
     project.keyEquivalentModifierMask = [.command, .shift]
     project.target = self
+    let clone = fileMenu.addItem(
+      withTitle: "GitHub 프로젝트 클론…", action: #selector(cloneProject), keyEquivalent: "")
+    clone.target = self
     fileItem.submenu = fileMenu
     mainMenu.addItem(fileItem)
 
