@@ -1,0 +1,282 @@
+import AppKit
+import ChopCore
+
+@MainActor
+final class GitCloneSheet: NSWindowController, NSTextFieldDelegate {
+  typealias Clone = @Sendable (GitHubRepository, URL, String, GitCloneJob) async throws -> URL
+  let repositoryField = InsetTextField(frame: .zero)
+  let nameField = InsetTextField(frame: .zero)
+  let cloneButton = NSButton(title: "클론하고 열기", target: nil, action: nil)
+  let cancelButton = NSButton(title: "취소", target: nil, action: nil)
+  let status = NSTextField(wrappingLabelWithString: "클론이 끝나면 새 창에서 터미널을 열어요.")
+  private let locationLabel = NSTextField(labelWithString: "")
+  private let chooseButton = NSButton(title: "변경…", target: nil, action: nil)
+  private let progress = NSProgressIndicator()
+  private let clone: Clone
+  private let job = GitCloneJob()
+  private var suggestedName = ""
+  private var folderPanel: NSOpenPanel?
+  private var task: Task<Void, Never>?
+  private var isCancelling = false
+  private(set) var isCloning = false
+  private(set) var parentDirectory: URL
+  var onFinish: ((URL?) -> Void)?
+
+  init(
+    parentDirectory: URL,
+    clone: @escaping Clone = { repository, parent, name, job in
+      try await job.clone(repository: repository, parent: parent, name: name)
+    }
+  ) {
+    self.parentDirectory = parentDirectory
+    self.clone = clone
+    let panel = NSPanel(
+      contentRect: NSRect(x: 0, y: 0, width: 520, height: 408),
+      styleMask: [.titled], backing: .buffered, defer: false)
+    panel.title = "GitHub 프로젝트 클론"
+    panel.preventsApplicationTerminationWhenModal = false
+    super.init(window: panel)
+    configureContent(panel)
+    updateLocation()
+    updateValidation()
+  }
+
+  @available(*, unavailable)
+  required init?(coder: NSCoder) { fatalError("Use init(parentDirectory:clone:).") }
+
+  func present(for parent: NSWindow) {
+    guard let window else { return }
+    window.appearance = parent.appearance
+    parent.beginSheet(window)
+    window.makeFirstResponder(repositoryField)
+  }
+
+  func controlTextDidChange(_ notification: Notification) {
+    guard !isCloning else { return }
+    if notification.object as? NSTextField === repositoryField {
+      let name = (try? GitHubRepository(repositoryField.stringValue))?.name ?? ""
+      if nameField.stringValue.isEmpty || nameField.stringValue == suggestedName {
+        nameField.stringValue = name
+      }
+      suggestedName = name
+    }
+    status.stringValue = "클론이 끝나면 새 창에서 터미널을 열어요."
+    status.textColor = .secondaryLabelColor
+    updateValidation()
+  }
+
+  func controlTextDidEndEditing(_ notification: Notification) {
+    guard !isCloning, let field = notification.object as? NSTextField,
+      !field.stringValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    else { return }
+    do {
+      if field === repositoryField { _ = try GitHubRepository(field.stringValue) }
+      if field === nameField {
+        try GitCloneError.validateFolderName(
+          field.stringValue.trimmingCharacters(in: .whitespacesAndNewlines))
+      }
+    } catch { showError(error) }
+  }
+
+  @objc func startClone() {
+    guard !isCloning else { return }
+    do {
+      let repository = try GitHubRepository(repositoryField.stringValue)
+      let name = nameField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
+      try GitCloneError.validateFolderName(name)
+      isCloning = true
+      setBusy(true)
+      status.stringValue = "프로젝트를 클론하고 있어요…"
+      task = Task { [self] in
+        do {
+          let url = try await clone(repository, parentDirectory, name, job)
+          finish(url)
+        } catch {
+          if isCancelling || error is CancellationError {
+            finish(nil)
+          } else {
+            isCloning = false
+            task = nil
+            setBusy(false)
+            showError(error)
+            window?.makeFirstResponder(
+              error as? GitCloneError == .destinationExists ? nameField : repositoryField)
+          }
+        }
+      }
+    } catch { showError(error) }
+  }
+
+  @objc func cancel() {
+    guard isCloning else {
+      finish(nil)
+      return
+    }
+    guard job.cancel() else { return }
+    isCancelling = true
+    cancelButton.isEnabled = false
+    status.stringValue = "클론을 취소하고 임시 파일을 정리하고 있어요…"
+    task?.cancel()
+  }
+
+  func waitForCompletion() async { await task?.value }
+
+  private func finish(_ url: URL?) {
+    isCloning = false
+    task = nil
+    if let window {
+      window.sheetParent?.endSheet(window)
+      window.orderOut(nil)
+    }
+    let completion = onFinish
+    onFinish = nil
+    completion?(url)
+  }
+
+  private func showError(_ error: Error) {
+    status.stringValue =
+      (error as? GitCloneError)?.localizedDescription
+      ?? "클론하지 못했어요. 저장 위치와 접근 권한을 확인해 주세요."
+    status.textColor = .systemRed
+    NSAccessibility.post(element: status, notification: .valueChanged)
+  }
+
+  private func updateValidation() {
+    cloneButton.isEnabled =
+      !isCloning
+      && (try? GitHubRepository(repositoryField.stringValue)) != nil
+      && (try? GitCloneError.validateFolderName(
+        nameField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines))) != nil
+  }
+
+  private func setBusy(_ busy: Bool) {
+    repositoryField.isEnabled = !busy
+    nameField.isEnabled = !busy
+    chooseButton.isEnabled = !busy
+    cloneButton.title = busy ? "클론 중…" : "클론하고 열기"
+    progress.isHidden = !busy
+    if busy { progress.startAnimation(nil) } else { progress.stopAnimation(nil) }
+    updateValidation()
+  }
+
+  @objc private func chooseFolder() {
+    guard !isCloning, folderPanel == nil, let window else { return }
+    let panel = NSOpenPanel()
+    folderPanel = panel
+    panel.title = "프로젝트를 저장할 위치"
+    panel.prompt = "선택"
+    panel.canChooseDirectories = true
+    panel.canChooseFiles = false
+    panel.canCreateDirectories = true
+    panel.allowsMultipleSelection = false
+    panel.directoryURL = parentDirectory
+    panel.beginSheetModal(for: window) { [weak self] response in
+      guard let self else { return }
+      folderPanel = nil
+      if response == .OK, let url = panel.url {
+        parentDirectory = url.standardizedFileURL
+        updateLocation()
+        status.stringValue = "클론이 끝나면 새 창에서 터미널을 열어요."
+        status.textColor = .secondaryLabelColor
+      }
+    }
+  }
+
+  private func updateLocation() {
+    locationLabel.stringValue = (parentDirectory.path as NSString).abbreviatingWithTildeInPath
+    locationLabel.toolTip = parentDirectory.path
+    locationLabel.setAccessibilityLabel("저장 위치")
+    locationLabel.setAccessibilityValue(parentDirectory.path)
+  }
+
+  private func configureContent(_ panel: NSPanel) {
+    let content = NSView()
+    panel.contentView = content
+    let title = NSTextField(labelWithString: "GitHub 프로젝트 클론")
+    title.font = .systemFont(ofSize: 20, weight: .semibold)
+    title.setContentHuggingPriority(.required, for: .vertical)
+    for (field, label, placeholder) in [
+      (repositoryField, "저장소 주소", "https://github.com/owner/repo 또는 owner/repo"),
+      (nameField, "폴더 이름", "저장할 폴더 이름"),
+    ] {
+      field.font = ChopStyle.font
+      field.placeholderString = placeholder
+      field.setAccessibilityLabel(label)
+      field.delegate = self
+      field.translatesAutoresizingMaskIntoConstraints = false
+      field.heightAnchor.constraint(equalToConstant: 28).isActive = true
+    }
+    repositoryField.toolTip = "GitHub HTTPS 주소, SSH 주소 또는 owner/repo"
+    locationLabel.font = ChopStyle.font
+    locationLabel.lineBreakMode = .byTruncatingMiddle
+    locationLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+    chooseButton.target = self
+    chooseButton.action = #selector(chooseFolder)
+    let location = NSStackView(views: [locationLabel, chooseButton])
+    location.spacing = 8
+    location.alignment = .centerY
+    status.font = ChopStyle.font
+    status.textColor = .secondaryLabelColor
+    status.maximumNumberOfLines = 3
+    progress.style = .spinning
+    progress.controlSize = .small
+    progress.isIndeterminate = true
+    progress.isDisplayedWhenStopped = false
+    progress.isHidden = true
+    let statusRow = NSStackView(views: [progress, status])
+    statusRow.alignment = .top
+    statusRow.spacing = 8
+    statusRow.heightAnchor.constraint(equalToConstant: 48).isActive = true
+    cloneButton.target = self
+    cloneButton.action = #selector(startClone)
+    cloneButton.keyEquivalent = "\r"
+    cancelButton.target = self
+    cancelButton.action = #selector(cancel)
+    cancelButton.keyEquivalent = "\u{1b}"
+    for button in [cloneButton, cancelButton, chooseButton] {
+      button.bezelStyle = .rounded
+      button.font = ChopStyle.font
+      button.heightAnchor.constraint(equalToConstant: 28).isActive = true
+    }
+    let buttons = NSStackView(views: [NSView(), cancelButton, cloneButton])
+    buttons.spacing = 8
+    let stack = NSStackView(views: [
+      title, group("저장소 주소", repositoryField), group("저장 위치", location),
+      group("폴더 이름", nameField), statusRow, NSView(), buttons,
+    ])
+    stack.orientation = .vertical
+    stack.distribution = .fill
+    stack.alignment = .leading
+    stack.spacing = 16
+    stack.translatesAutoresizingMaskIntoConstraints = false
+    content.addSubview(stack)
+    NSLayoutConstraint.activate([
+      stack.leadingAnchor.constraint(equalTo: content.leadingAnchor, constant: 24),
+      stack.trailingAnchor.constraint(equalTo: content.trailingAnchor, constant: -24),
+      stack.topAnchor.constraint(equalTo: content.topAnchor, constant: 24),
+      stack.bottomAnchor.constraint(equalTo: content.bottomAnchor, constant: -24),
+    ])
+    for row in stack.arrangedSubviews.dropFirst() {
+      row.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
+    }
+    repositoryField.nextKeyView = chooseButton
+    chooseButton.nextKeyView = nameField
+    nameField.nextKeyView = cancelButton
+    cancelButton.nextKeyView = cloneButton
+    cloneButton.nextKeyView = repositoryField
+  }
+
+  private func group(_ title: String, _ view: NSView) -> NSStackView {
+    let label = NSTextField(labelWithString: title)
+    label.font = ChopStyle.font
+    label.setContentHuggingPriority(.required, for: .vertical)
+    let stack = NSStackView(views: [label, view])
+    stack.orientation = .vertical
+    stack.distribution = .fill
+    stack.setHuggingPriority(.required, for: .vertical)
+    stack.alignment = .leading
+    stack.spacing = 8
+    view.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
+    return stack
+  }
+}

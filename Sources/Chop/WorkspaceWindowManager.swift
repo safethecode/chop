@@ -11,6 +11,49 @@ final class WorkspaceWindowManager {
   private var focusedID: UUID?
   var onChange: (() -> Void)?
   var onAppearanceChangeRequested: ((AppearanceMode) -> Void)?
+  private(set) var cloneSheet: GitCloneSheet?
+  private var preparingToTerminate = false
+
+  var isCloningProject: Bool { cloneSheet?.isCloning == true }
+
+  func prepareToTerminate() { preparingToTerminate = true }
+
+  func requestClone() {
+    guard !preparingToTerminate else { return }
+    if let sheet = cloneSheet?.window {
+      sheet.sheetParent?.makeKeyAndOrderFront(nil)
+      sheet.makeKeyAndOrderFront(nil)
+      return
+    }
+    let controller = active ?? open()
+    guard let parent = controller.window, parent.attachedSheet == nil else { return }
+    let saved = UserDefaults.standard.string(forKey: "cloneParentPath")
+    let documents =
+      FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+      ?? FileManager.default.homeDirectoryForCurrentUser
+    let directory = saved.map { URL(fileURLWithPath: $0, isDirectory: true) } ?? documents
+    let sheet = GitCloneSheet(parentDirectory: directory)
+    cloneSheet = sheet
+    sheet.onFinish = { [weak self, weak controller] url in
+      guard let self else { return }
+      cloneSheet = nil
+      guard !preparingToTerminate else { return }
+      if let url {
+        UserDefaults.standard.set(url.deletingLastPathComponent().path, forKey: "cloneParentPath")
+        open(directory: url.path)
+      } else {
+        controller?.workspace.focusedPane.focus()
+      }
+    }
+    sheet.present(for: parent)
+  }
+
+  func cancelClonesForTermination() async {
+    preparingToTerminate = true
+    let sheet = cloneSheet
+    sheet?.cancel()
+    await sheet?.waitForCompletion()
+  }
 
   init(
     engine: TerminalEngine,
@@ -69,6 +112,7 @@ final class WorkspaceWindowManager {
     controller.workspace.onAppearanceChangeRequested = { [weak self] mode in
       self?.onAppearanceChangeRequested?(mode)
     }
+    controller.workspace.onCloneRequested = { [weak self] in self?.requestClone() }
     controller.onActivate = { [weak self] in
       self?.focusedID = id
       self?.onChange?()
@@ -118,6 +162,10 @@ final class WorkspaceWindowManager {
   }
 
   func shutdown() {
+    preparingToTerminate = true
+    cloneSheet?.onFinish = nil
+    cloneSheet?.cancel()
+    cloneSheet = nil
     onChange = nil
     for controller in windows.values {
       controller.onClose = nil

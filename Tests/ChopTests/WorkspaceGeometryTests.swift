@@ -82,7 +82,19 @@ import Testing
         #expect(abs(rect.midY - area.bounds.midY) < 0.5)
         let point = button.convert(NSPoint(x: 16, y: 16), to: workspace.superview)
         #expect(workspace.hitTest(point) === button)
+        let clone = area.cloneButton
+        let cloneRect = area.convert(clone.bounds, from: clone)
+        #expect(area.bounds.contains(cloneRect))
+        #expect(cloneRect.size == NSSize(width: 32, height: 32))
+        #expect(abs(cloneRect.midX - rect.midX) < 0.5)
+        #expect(!cloneRect.intersects(rect))
+        let clonePoint = clone.convert(NSPoint(x: 16, y: 16), to: workspace.superview)
+        #expect(workspace.hitTest(clonePoint) === clone)
       }
     }
   }
+  var cloneRequests = 0
+  workspace.onCloneRequested = { cloneRequests += 1 }
+  area.cloneButton.performClick(nil)
+  #expect(cloneRequests == 1)
 }
