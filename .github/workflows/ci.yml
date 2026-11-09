@@ -61,14 +61,16 @@ jobs:
           (
             while kill -0 "$check_pid" 2>/dev/null; do
               sleep 60
-              for process_name in swiftpm-testing ChopPackageTests; do
-                for process_id in $(pgrep -x "$process_name" || true); do
-                  sample_file="$RUNNER_TEMP/chop-sample-$process_id.txt"
-                  sample "$process_id" 2 10 -file "$sample_file" >/dev/null 2>&1 || true
-                  if [[ -f "$sample_file" ]]; then
-                    head -160 "$sample_file"
-                  fi
-                done
+              ps -axo pid=,ppid=,stat=,etime=,comm= | awk '/swift|Chop|git|python/ {print}'
+              for process_id in $(pgrep -f 'swiftpm-testing|ChopPackageTests' || true); do
+                sample_file="$RUNNER_TEMP/chop-sample-$process_id.txt"
+                sample_error="$RUNNER_TEMP/chop-sample-$process_id-error.txt"
+                sample "$process_id" 2 10 -file "$sample_file" >"$sample_error" 2>&1 || true
+                if [[ -f "$sample_file" ]]; then
+                  head -240 "$sample_file"
+                else
+                  head -5 "$sample_error"
+                fi
               done
             done
           ) &
