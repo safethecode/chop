@@ -1,0 +1,89 @@
+{
+  "schema_version": 2,
+  "handoff_sha256": "67ada5c8aab1abc320189fd5331ed68f83a546611e1f5d921f9c98a74fb4fad6",
+  "target_sha256": "221a9192f7ba176965e14576f73a307006d61b25fbfe61a1b8ba32324104b1e8",
+  "core_review": {
+    "path": "design/github-clone-reference/core-review.json",
+    "sha256": "952a341b4cbca190ce873161fe1ebdca826d232793150cb13faf180fc5de1f2d"
+  },
+  "consumption": [
+    {
+      "ref": "RAW-grid",
+      "status": "applied",
+      "target": "WorkspaceView canvas/TerminalPaneView headers",
+      "interpretation": "E-C2/3의 현재 canvas와 원본 crop을 재대조했다. 동등한 격자/중앙 plus는 유지하며 하단 clone은 사용자 요청이다. 원본 폰트 실측 미확인은 그대로 남기고 제품14pt native 토큰과 시트 선택값을 구분한다."
+    },
+    {
+      "ref": "E-canvas",
+      "status": "applied",
+      "target": "WorkspaceView canvas/TerminalPaneView headers",
+      "interpretation": "E-C2/3의 현재 canvas와 원본 crop을 재대조했다. 동등한 격자/중앙 plus는 유지하며 하단 clone은 사용자 요청이다. 원본 폰트 실측 미확인은 그대로 남기고 제품14pt native 토큰과 시트 선택값을 구분한다."
+    },
+    {
+      "ref": "O-columns",
+      "status": "applied",
+      "target": "WorkspaceView canvas/TerminalPaneView headers",
+      "interpretation": "E-C2/3의 현재 canvas와 원본 crop을 재대조했다. 동등한 격자/중앙 plus는 유지하며 하단 clone은 사용자 요청이다. 원본 폰트 실측 미확인은 그대로 남기고 제품14pt native 토큰과 시트 선택값을 구분한다."
+    },
+    {
+      "ref": "O-rows",
+      "status": "applied",
+      "target": "WorkspaceView canvas/TerminalPaneView headers",
+      "interpretation": "E-C2/3의 현재 canvas와 원본 crop을 재대조했다. 동등한 격자/중앙 plus는 유지하며 하단 clone은 사용자 요청이다. 원본 폰트 실측 미확인은 그대로 남기고 제품14pt native 토큰과 시트 선택값을 구분한다."
+    },
+    {
+      "ref": "O-hierarchy",
+      "status": "applied",
+      "target": "WorkspaceView canvas/TerminalPaneView headers",
+      "interpretation": "E-C2/3의 현재 canvas와 원본 crop을 재대조했다. 동등한 격자/중앙 plus는 유지하며 하단 clone은 사용자 요청이다. 원본 폰트 실측 미확인은 그대로 남기고 제품14pt native 토큰과 시트 선택값을 구분한다."
+    },
+    {
+      "ref": "O-historical-focus",
+      "status": "applied",
+      "target": "WorkspaceView canvas/TerminalPaneView headers",
+      "interpretation": "E-C2/3의 현재 canvas와 원본 crop을 재대조했다. 동등한 격자/중앙 plus는 유지하며 하단 clone은 사용자 요청이다. 원본 폰트 실측 미확인은 그대로 남기고 제품14pt native 토큰과 시트 선택값을 구분한다."
+    },
+    {
+      "ref": "O-font",
+      "status": "unverified",
+      "target": "WorkspaceView canvas/TerminalPaneView headers",
+      "interpretation": "E-C2/3의 현재 canvas와 원본 crop을 재대조했다. 동등한 격자/중앙 plus는 유지하며 하단 clone은 사용자 요청이다. 원본 폰트 실측 미확인은 그대로 남기고 제품14pt native 토큰과 시트 선택값을 구분한다."
+    },
+    {
+      "ref": "A-current-user",
+      "status": "applied",
+      "target": "WorkspaceView canvas/TerminalPaneView headers",
+      "interpretation": "E-C2/3의 현재 canvas와 원본 crop을 재대조했다. 동등한 격자/중앙 plus는 유지하며 하단 clone은 사용자 요청이다. 원본 폰트 실측 미확인은 그대로 남기고 제품14pt native 토큰과 시트 선택값을 구분한다."
+    }
+  ],
+  "results": [
+    {
+      "id": "Q-columns",
+      "capture": {
+        "path": "design/evidence/github-clone.md",
+        "sha256": "fc83c3f2d02851bcadaca4c088aa3be81fd0edeed13248c0a78e9a32f5086330"
+      },
+      "actual": {
+        "value": 1,
+        "unit": "ratio",
+        "method": "E-C2 light2200×1504px canvas 경계의 직접 시각 추정(약±0.01); E-C3 native 최소 두 모드 및49개 검사 중 geometry 관계도 확인했다."
+      }
+    },
+    {
+      "id": "Q-rows",
+      "capture": {
+        "path": "design/evidence/github-clone.md",
+        "sha256": "fc83c3f2d02851bcadaca4c088aa3be81fd0edeed13248c0a78e9a32f5086330"
+      },
+      "actual": {
+        "value": 1,
+        "unit": "ratio",
+        "method": "E-C2 light2200×1504px canvas 경계의 직접 시각 추정(약±0.01); E-C3 native 최소 두 모드 및49개 검사 중 geometry 관계도 확인했다."
+      }
+    }
+  ],
+  "visual_review": {
+    "status": "adapted-and-verified",
+    "reason": "E-C2 실제 light canvas는 원본 default-grid의 거의 동등한 두 열/두 행과 첫 실행/나머지 중앙 plus 및 작은 header를 유지한다. 하단 clone과 새 프로젝트 결과는 사용자 신규 요구이며 다른 native control이나 canvas 면적을 밀어내지 않는다. E-C3 두 모드·최소·탭/트리 숨김도 확인했다. 원본 crop에 없던 폼은 native/기존 입력 계약의 확장이며 외부 시각 원본 복제로 주장하지 않는다."
+  }
+}
