@@ -1,10 +1,10 @@
 {
   "schema_version": 2,
   "handoff_sha256": "67ada5c8aab1abc320189fd5331ed68f83a546611e1f5d921f9c98a74fb4fad6",
-  "target_sha256": "08a97e8a1fa590dd182223eaa22abdbd2535efeeb94f2d1af3090b6212b259b6",
+  "target_sha256": "3b36527827e4377396b191a53f6b1e874dbfcc4a48d5002358301fbda3a5d024",
   "core_review": {
     "path": "design/github-clone-reference/core-review.json",
-    "sha256": "941ab217a1307d77a4022626cb788499a8db3c351cf63d94d4814c7a3bde3d27"
+    "sha256": "9ee3363ff670beafefebef1118e41487125da6eb3d78bb67b5d9c4ebd9149a5e"
   },
   "consumption": [
     {
@@ -61,7 +61,7 @@
       "id": "Q-columns",
       "capture": {
         "path": "design/evidence/github-clone.md",
-        "sha256": "1c93de13fb2ed46e0f920643867180522cabf19fe484e402192fc3305df46d2e"
+        "sha256": "3273c8847185b344a0eb76375c387c532c441b78c0f9ee30c31b6f718aed0e35"
       },
       "actual": {
         "value": 1,
@@ -73,7 +73,7 @@
       "id": "Q-rows",
       "capture": {
         "path": "design/evidence/github-clone.md",
-        "sha256": "1c93de13fb2ed46e0f920643867180522cabf19fe484e402192fc3305df46d2e"
+        "sha256": "3273c8847185b344a0eb76375c387c532c441b78c0f9ee30c31b6f718aed0e35"
       },
       "actual": {
         "value": 1,

@@ -119,3 +119,5 @@ V-59 / LOCAL-SERVERS: 사용자 요청의 terminal별 주소 표시/브라우저
 V-60 / GITHUB-CLONE: 48pt rail 하단32pt 버튼에서 URL/위치/이름→실제 GitHub clone→새 창·첫 셸·파일 트리를 연결했다. /tmp/repo 오인 허용을 거부 검사로 발견/수정했고, 실패 입력 유지/한글 이름 재시도·실제 pwd/origin·두 모드/최소/탭/트리 숨김·취소/정리와49개 검사를 확인했다. aligned (변경 범위, 셀프 리뷰). [근거](evidence/github-clone.md).
 
 V-61 / F-CLONE-MODAL-QUIT: 최초 클론 시트에서 Cmd+Q가 막힌 native 기본값을 실제 관찰했다. 해당 시트에 termination 허용을 적용하고 전송→종료 요청→취소(유지)→재요청→종료/정리, 기존 결과 보존을 실제 확인했다. fixed-and-verified (셀프 수정/검증). [근거](evidence/github-clone.md).
+
+V-62 / F-CLONE-GIT-ENV: 자동 리뷰의 상속된 Git 경로 설정 지적을 실제 주입 검사에서 .failed로 재현했다. clone과 fixture의 repository-local 환경만 정리한 뒤 원래 config 보존·잘못된 index/object 미생성·정상 clone 및49개15.179초 check.sh를 확인했다. UI/경로 목적지는 변경하지 않았다. fixed-and-verified (셀프 수정/검증, 원격 최종 상태는 PR). [근거](evidence/github-clone.md).

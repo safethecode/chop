@@ -4,12 +4,17 @@ import Foundation
 /// Owns one clone and its process group. Cancellation cannot affect an existing destination.
 public final class GitCloneJob: @unchecked Sendable {
   private let lock = NSLock()
+  private let inheritedEnvironment: [String: String]
   private var processID: pid_t = 0
   private var cancelled = false
   private var published = false
 
-  public init() {}
+  public init() { inheritedEnvironment = ProcessInfo.processInfo.environment }
 
+  init(environment: [String: String]) { inheritedEnvironment = environment }
+
+  /// Downloads into a private staging directory, then publishes without replacing a destination.
+  /// Retry after a failure is supported; each job is used by one operation at a time.
   public func clone(repository: GitHubRepository, parent: URL, name: String) async throws -> URL {
     try await clone(source: repository.cloneAddress, parent: parent, name: name)
   }
@@ -26,6 +31,7 @@ public final class GitCloneJob: @unchecked Sendable {
     }
   }
 
+  /// Stops this job's process group. Returns false after publication has already completed.
   @discardableResult
   public func cancel() -> Bool {
     lock.lock()
@@ -86,7 +92,7 @@ public final class GitCloneJob: @unchecked Sendable {
     guard posix_spawnattr_setflags(&attributes, Int16(POSIX_SPAWN_SETPGROUP)) == 0,
       posix_spawnattr_setpgroup(&attributes, 0) == 0
     else { throw GitCloneError.unavailableGit }
-    var environment = ProcessInfo.processInfo.environment
+    var environment = Self.cloneEnvironment(from: inheritedEnvironment)
     environment["GIT_TERMINAL_PROMPT"] = "0"
     environment["GIT_ASKPASS"] = "/usr/bin/false"
     environment["SSH_ASKPASS"] = "/usr/bin/false"
@@ -121,5 +127,20 @@ public final class GitCloneJob: @unchecked Sendable {
     processID = 0
     guard !cancelled else { throw CancellationError() }
     guard waited == 0, status == 0 else { throw GitCloneError.failed }
+  }
+
+  /// Git's repository-local environment must not redirect clone or fixture writes into a caller.
+  static func cloneEnvironment(from inherited: [String: String]) -> [String: String] {
+    let repositoryKeys: Set<String> = [
+      "GIT_ALTERNATE_OBJECT_DIRECTORIES", "GIT_CONFIG", "GIT_CONFIG_PARAMETERS", "GIT_CONFIG_COUNT",
+      "GIT_OBJECT_DIRECTORY", "GIT_DIR", "GIT_WORK_TREE", "GIT_IMPLICIT_WORK_TREE",
+      "GIT_GRAFT_FILE",
+      "GIT_INDEX_FILE", "GIT_NO_REPLACE_OBJECTS", "GIT_REPLACE_REF_BASE", "GIT_PREFIX",
+      "GIT_SHALLOW_FILE", "GIT_COMMON_DIR", "GIT_NAMESPACE", "GIT_INTERNAL_SUPER_PREFIX",
+    ]
+    return inherited.filter {
+      !repositoryKeys.contains($0.key)
+        && !$0.key.hasPrefix("GIT_CONFIG_KEY_") && !$0.key.hasPrefix("GIT_CONFIG_VALUE_")
+    }
   }
 }

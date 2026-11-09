@@ -44,3 +44,9 @@ Copy C1(진입): GitHub 프로젝트 클론… → 시트 열기. C2(제출): �
 ## 원격 CI 진단 후속
 
 첫 PR40 실행42613503916에서 컴파일은 끝났으나 테스트 종료/진행 출력이5분 이상 추가되지 않았다. 아직 원인은 확정하지 않았다. 기존 workflow의 pgrep -x 검색이 샘플을 출력하지 않아 comm/경과 시간과 전체 명령 기준 후보 검색, sample 실패 메시지를 보완한다. 테스트/기대값/검증 순서와 실패 반환값은 유지한다. 제품 UI 소스는 바뀌지 않았으므로 E-C1–5 실제 판독 범위를 유지하며 새 실제 앱 재실행으로 포장하지 않는다.
+
+## 자동 리뷰 후 Git 환경 격리
+
+CodeRabbit 자동 리뷰의 두 nitpick을 실제 확인했다. GIT_DIR/GIT_WORK_TREE/GIT_INDEX_FILE/GIT_OBJECT_DIRECTORY를 임시 fixture의 기존 저장소/별도 경로로 주입한 실제 clone 검사가 수정 전 .failed로 실패했다. Git의 repository-local 변수 목록(git rev-parse --local-env-vars)과 namespace/internal prefix를 child 환경에서 제거하고 global/system Git 설정·SSH agent 등 사용자 공통 인증 환경은 보존했다. fixture Git 명령에도 같은 정리를 적용해 hook에서 check.sh를 실행해도 caller 저장소를 대상으로 하지 않도록 했다. 수정 뒤 실제 clone 성공·원래 config bytes 동일·unexpected index/objects 미생성을 포함한 전체49개 check.sh15.179초가 통과했다. UI 코드와 geometry/입력/목적지는 바뀌지 않았다.
+
+원격42614696762(80314eb)는 같은49개21.937초와 전체CI를 통과했다. 앞선 정지 원인은 확정하지 않으며 진단 보완이 원인을 해결했다는 주장도 하지 않는다. 이번 Git 환경 수정은 그 뒤의 독립적인 리뷰 보완이며 최종 커밋의 CI를 다시 확인한다. Docstring coverage는 CodeRabbit의 비차단 권고이고 저장소 필수 검사와 구별한다. 공개 clone/cancel의 staging·publish/수명 계약은 함수 주석에 보완했다. 새 외부 사람 승인이나 마지막 후속에 대한 독립 리뷰를 주장하지 않는다.

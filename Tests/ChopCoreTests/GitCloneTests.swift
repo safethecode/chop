@@ -48,11 +48,23 @@ import Testing
     "-C", source.path, "-c", "user.name=Chop Test", "-c", "user.email=chop@example.invalid",
     "commit", "--no-gpg-sign", "-m", "fixture",
   ])
-  let result = try await GitCloneJob().clone(source: source.path, parent: root, name: "새 프로젝트")
+  let originalConfig = try Data(contentsOf: source.appendingPathComponent(".git/config"))
+  var inherited = ProcessInfo.processInfo.environment
+  inherited["GIT_DIR"] = source.appendingPathComponent(".git").path
+  inherited["GIT_WORK_TREE"] = source.path
+  inherited["GIT_INDEX_FILE"] = root.appendingPathComponent("unexpected-index").path
+  inherited["GIT_OBJECT_DIRECTORY"] = root.appendingPathComponent("unexpected-objects").path
+  let result = try await GitCloneJob(environment: inherited).clone(
+    source: source.path, parent: root, name: "새 프로젝트")
   #expect(
     try String(contentsOf: result.appendingPathComponent("README.md"), encoding: .utf8)
       == "fixture\n")
   #expect(FileManager.default.fileExists(atPath: result.appendingPathComponent(".git").path))
+  #expect(try Data(contentsOf: source.appendingPathComponent(".git/config")) == originalConfig)
+  #expect(
+    !FileManager.default.fileExists(atPath: root.appendingPathComponent("unexpected-index").path))
+  #expect(
+    !FileManager.default.fileExists(atPath: root.appendingPathComponent("unexpected-objects").path))
   do {
     _ = try await GitCloneJob().clone(source: source.path, parent: root, name: "새 프로젝트")
     Issue.record("An existing destination must not be replaced")
@@ -143,9 +155,10 @@ private func runFixtureGit(_ arguments: [String]) throws {
   process.executableURL = URL(fileURLWithPath: "/usr/bin/git")
   process.arguments =
     ["-c", "core.hooksPath=/dev/null", "-c", "init.defaultBranch=main"] + arguments
-  process.environment = ProcessInfo.processInfo.environment.merging([
-    "GIT_CONFIG_GLOBAL": "/dev/null", "GIT_CONFIG_SYSTEM": "/dev/null",
-  ]) { _, value in value }
+  process.environment = GitCloneJob.cloneEnvironment(from: ProcessInfo.processInfo.environment)
+    .merging([
+      "GIT_CONFIG_GLOBAL": "/dev/null", "GIT_CONFIG_SYSTEM": "/dev/null",
+    ]) { _, value in value }
   process.standardOutput = FileHandle.nullDevice
   process.standardError = FileHandle.nullDevice
   try process.run()
