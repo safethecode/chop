@@ -34,3 +34,6 @@ E-W8 자동 리뷰 후속: CodeRabbit의 두 주소 경계 지적을 먼저 테�
 
 E-W9 SDK·CI 진단 후속: e0995b3의 원격 실행42972203314는9분 동안 끝나지 않아 진단 로그를 확보하기 위해 취소했다. 반복 stack은 기존 realShellExecutesCommandAndReturnsToEmptyPane → verifyGlobalTerminalAddition:735 → TerminalPaneView.closeTerminal → Surface.deinit → pthread_join을 가리켰다.16칸에서 새로 다시 연 터미널을 즉시 닫는 위치이며 정확한 재현 조건/엔진 원인은 미확정이다. 기존 터미널 검사의 항목·기대값·실행 방식은 변경하지 않는다. 앞선73787b5의 원격54개 검사는24.733초에 통과했다.
 같은 로그에서 Xcode16.4 SDK의 JS alert completion에는 MainActor 표기가 없어 optional delegate 일치 경고가 있는 것을 확인했다. SDK 세대에 맞춘 callback typealias를 사용하고 실제 WKWebView의 alert/confirm/prompt 시트를 클릭해 각각 JS 결과를 받는55번째 검사를 추가했다. 열린 confirm을 칸과 함께 닫을 때 false가 반환되고 시트도 제거됨을 확인한다. 최신 SDK의 같은 UI 구현과 한국어 버튼은 유지한다. 최종 로컬 ./scripts/check.sh는55개21.389초에 통과했고 새 delegate 일치 경고가 없다. 취소한 CI를 성공으로 표시하지 않으며 수정본에서 같은 전체 검사를 다시 실행한다.
+
+
+E-W10 경고 정정: PR41의 최종 원격55개 검사는29.199초에 통과했지만, 최종 로그에서 typealias의 actor 표기를 반대로 바꿔도 optional delegate 경고가 남아 있음을 확인했다. 단순 SDK 세대 분기로 해소된다는 앞선 추정은 철회한다. 실제 알림 동작 검사는 통과했으므로 기능 실패와 컴파일러 진단을 구분한다. 후속 수정은 macOS14에서 지원되는 async WKUIDelegate 알림 메서드를 사용해 continuation으로 같은 시트 완료를 기다린다. SDK별 callback 타입 분기/alias는 제거했다. 같은55개19.417초 ./scripts/check.sh가 통과하고 최신 SDK에서 해당 경고가 없다. 특히 실제 JS alert/confirm/prompt와 열린 confirm 닫기 결과 검사를 그대로 유지했다. chrome/문구/색/배치/버튼은 변경하지 않는다. 이전 SDK의 최종 결과는 후속 PR의 CI에서 확인한다.

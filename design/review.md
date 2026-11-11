@@ -134,3 +134,5 @@ V-66 / WEB-SWIFT-COMPATIBILITY: 원격 Xcode16.4의 closure 명시 self 요구�
 V-67 / F-WEB-ADDRESS-BOUNDARY: CodeRabbit의 query URL/과도한 History API 주소 지적을 정상 주소3건 거부와 실제 WK didFinish 저장 실패로 재현했다. 시작 위치의 scheme 판별·호스트 경계와 공통 updateURL 검증으로 수정했다. 전체54개17.497초 check.sh 및 실제 이동 query·4128자 페이지/27자 이하 저장·재복원을 확인했다. fixed-and-verified (자동 리뷰 제보, 셀프 수정/검증). [근거](evidence/web-preview.md).
 
 V-68 / WEB-ALERT-SDK: Xcode16.4의 JS alert completion actor 표기가 최신 SDK와 달라 optional delegate 경고가 났다. SDK 세대별 typealias와 실제 alert/confirm/prompt 결과·닫기 취소 검사를 추가했다.55개21.389초 check.sh 통과. 별도 원격16칸 검사의 Surface.deinit 종료 대기는 stack과 취소 실행을 기록하고 엔진의 확정 원인으로 일반화하지 않는다. 해당 기존 검사/기대값은 유지해 원격에서 재실행한다. fixed-and-verified (callback/로컬 검사, 셀프 리뷰); 원격 진단 범위는 [근거](evidence/web-preview.md).
+
+V-69 / WEB-ASYNC-ALERT: V-68의 SDK typealias 변경 뒤 원격에서도55개는 통과했으나 optional delegate 경고는 남았다. SDK 세대 추정을 정정하고 async delegate overload로 알림 완료를 기다리도록 바꿨다. 같은55개19.417초 check.sh와 실제 JS 알림·확인·입력·닫기 응답 검사 통과. fixed-and-verified (현재 SDK/로컬 동작, 셀프 리뷰), 이전 SDK CI는 후속 PR에서 확인. [근거](evidence/web-preview.md).
