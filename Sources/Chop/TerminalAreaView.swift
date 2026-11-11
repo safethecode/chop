@@ -10,6 +10,8 @@ final class TerminalAreaView: NSView {
   private let trailingBorder = NSView()
   let addButton: NSButton
   let cloneButton: NSButton
+  let webButton: NSButton
+  var onWebRequested: (() -> Void)?
   var onCloneRequested: (() -> Void)?
 
   init(canvas: NSView, target: AnyObject, action: Selector) {
@@ -20,6 +22,9 @@ final class TerminalAreaView: NSView {
     cloneButton = NSButton(
       image: NSImage(systemSymbolName: "arrow.down.to.line", accessibilityDescription: nil)!,
       target: nil, action: nil)
+    webButton = NSButton(
+      image: NSImage(systemSymbolName: "globe", accessibilityDescription: nil)!, target: nil,
+      action: nil)
     super.init(frame: .zero)
     rail.wantsLayer = true
     addButton.bezelStyle = .circular
@@ -40,6 +45,13 @@ final class TerminalAreaView: NSView {
     cloneButton.toolTip = "GitHub 프로젝트 클론…"
     cloneButton.setAccessibilityLabel("GitHub 프로젝트 클론")
     rail.addSubview(cloneButton)
+    webButton.bezelStyle = .circular
+    webButton.controlSize = .regular
+    webButton.target = self
+    webButton.action = #selector(requestWeb)
+    webButton.toolTip = "새 칸에서 웹사이트 열기 (⌘⇧B)"
+    webButton.setAccessibilityLabel("웹사이트 추가")
+    rail.addSubview(webButton)
   }
 
   @available(*, unavailable)
@@ -58,6 +70,7 @@ final class TerminalAreaView: NSView {
   }
 
   @objc private func requestClone() { onCloneRequested?() }
+  @objc private func requestWeb() { onWebRequested?() }
 
   override func resizeSubviews(withOldSize oldSize: NSSize) {
     let width = min(Self.railWidth, bounds.width)
@@ -70,5 +83,6 @@ final class TerminalAreaView: NSView {
     addButton.frame = NSRect(
       x: (width - 32) / 2, y: (bounds.height - 32) / 2, width: 32, height: 32)
     cloneButton.frame = NSRect(x: (width - 32) / 2, y: 12, width: 32, height: 32)
+    webButton.frame = NSRect(x: (width - 32) / 2, y: 52, width: 32, height: 32)
   }
 }

@@ -90,6 +90,15 @@ import Testing
         #expect(!cloneRect.intersects(rect))
         let clonePoint = clone.convert(NSPoint(x: 16, y: 16), to: workspace.superview)
         #expect(workspace.hitTest(clonePoint) === clone)
+        let web = area.webButton
+        let webRect = area.convert(web.bounds, from: web)
+        #expect(area.bounds.contains(webRect))
+        #expect(webRect.size == NSSize(width: 32, height: 32))
+        #expect(abs(webRect.midX - rect.midX) < 0.5)
+        #expect(webRect.minY - cloneRect.maxY == 8)
+        #expect(!webRect.intersects(rect))
+        let webPoint = web.convert(NSPoint(x: 16, y: 16), to: workspace.superview)
+        #expect(workspace.hitTest(webPoint) === web)
       }
     }
   }

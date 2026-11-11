@@ -66,6 +66,9 @@ final class WorkspaceWindowController: NSWindowController, NSWindowDelegate {
 
   func windowWillClose(_ notification: Notification) { onClose?() }
   func windowDidBecomeKey(_ notification: Notification) { onActivate?() }
+  func windowDidUpdate(_ notification: Notification) {
+    workspace.updateFocusFromResponder(window?.firstResponder)
+  }
 
   @available(*, unavailable)
   required init?(coder: NSCoder) {

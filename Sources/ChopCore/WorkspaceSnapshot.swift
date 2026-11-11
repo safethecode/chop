@@ -1,16 +1,25 @@
 import Foundation
 
+public enum PaneContentKind: String, Codable, Sendable { case terminal, web }
+
 public struct PaneSnapshot: Codable, Equatable, Sendable {
   public let id: UUID
   public let name: String
   public let workingDirectory: String
   public let wasRunning: Bool
+  public let contentKind: PaneContentKind?
+  public let webURL: String?
 
-  public init(id: UUID, name: String, workingDirectory: String, wasRunning: Bool) {
+  public init(
+    id: UUID, name: String, workingDirectory: String, wasRunning: Bool,
+    contentKind: PaneContentKind? = nil, webURL: String? = nil
+  ) {
     self.id = id
     self.name = name
     self.workingDirectory = workingDirectory
     self.wasRunning = wasRunning
+    self.contentKind = contentKind
+    self.webURL = webURL
   }
 }
 
@@ -59,6 +68,13 @@ public struct WorkspaceSnapshot: Codable, Equatable, Sendable {
         pane.workingDirectory.hasPrefix("/"), pane.workingDirectory.utf8.count <= 4096,
         !pane.workingDirectory.contains("\0")
       else { throw SnapshotError.invalid }
+      if pane.contentKind == .web {
+        guard !pane.wasRunning, pane.webURL.map({ WebAddress.parse($0) != nil }) ?? true else {
+          throw SnapshotError.invalid
+        }
+      } else if pane.webURL != nil {
+        throw SnapshotError.invalid
+      }
     }
   }
 }
