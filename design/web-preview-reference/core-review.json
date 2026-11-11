@@ -8,7 +8,7 @@
   },
   "capture": {
     "path": "design/evidence/web-preview.md",
-    "sha256": "9c2ce96561a89e5f23826ce2ad085567665c3750d84948af4abfbb2e24d290a1"
+    "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
   },
   "status": "adapted-and-verified",
   "reason": "E-W0 첫 실제 로컬 페이지와 E-W4 최종 두 모드/작은 창을 원본 default-grid crop의 동등한 열/행·작은 header·중앙 plus 관계에 대조했다. 두 열/행 비율은 약1(시각 추정±0.01)로 원본 약1/허용0.02 안이다. 웹 칸의 추가 주소 행과 globe는 같은 창 새 칸이라는 사용자 확장이며 기존 terminal/header/48pt rail을 밀지 않는다. 첫 렌더와 후속 JS 시트/초점 결함 수정은 구분한다. 원본 미확인 폰트는 여전히 미확인이고 제삼자 페이지를 UI 원본으로 삼지 않는다."
