@@ -30,3 +30,7 @@ E-W7 CI 호환 후속: 최초 원격 Xcode16.4/Swift6.1 빌드가 URL KVO closur
 
 
 E-W8 자동 리뷰 후속: CodeRabbit의 두 주소 경계 지적을 먼저 테스트로 재현했다. query 안의 :// 때문에 scheme 없는 정상 주소3개가 거부됐고, 로딩 중 history.replaceState로4100자 query를 만들면 didFinish가 긴 URL을 저장해 SnapshotError.invalid를 일으켰다. scheme은 문자열 처음에서만 판별하고 호스트는 /·?·# 앞에서 자른다. updateURL의 공통 진입점에서 WebAddress.accepts를 확인해 didFinish와 History API에도 저장 계약을 적용했다. 수정 후54개 check.sh(17.497초)가 통과했다. 실제 최종 앱에서 localhost:61448/login?next=http://localhost:61448/를 입력해 정상 HTTP 문서를 확인했다. /long 페이지는 `주소 길이 4128자`를 AX로 표시하는 동안 native 주소/탭은 마지막 유효한 /long을 유지하고 종료한 검증 세션의 최장 webURL도27자였다. 후속 재실행에서도 해당 짧은 주소를 복원하고 정상 렌더했다. 새 chrome 구조·색은 바꾸지 않았다. 자동 리뷰의 최초 Swift CI 지적은 E-W7에서 이미 수정했다. 자동 리뷰를 외부 사람의 승인으로 표현하지 않으며 원격 최신 CI는 PR에서 확인한다.
+
+
+E-W9 SDK·CI 진단 후속: e0995b3의 원격 실행42972203314는9분 동안 끝나지 않아 진단 로그를 확보하기 위해 취소했다. 반복 stack은 기존 realShellExecutesCommandAndReturnsToEmptyPane → verifyGlobalTerminalAddition:735 → TerminalPaneView.closeTerminal → Surface.deinit → pthread_join을 가리켰다.16칸에서 새로 다시 연 터미널을 즉시 닫는 위치이며 정확한 재현 조건/엔진 원인은 미확정이다. 기존 터미널 검사의 항목·기대값·실행 방식은 변경하지 않는다. 앞선73787b5의 원격54개 검사는24.733초에 통과했다.
+같은 로그에서 Xcode16.4 SDK의 JS alert completion에는 MainActor 표기가 없어 optional delegate 일치 경고가 있는 것을 확인했다. SDK 세대에 맞춘 callback typealias를 사용하고 실제 WKWebView의 alert/confirm/prompt 시트를 클릭해 각각 JS 결과를 받는55번째 검사를 추가했다. 열린 confirm을 칸과 함께 닫을 때 false가 반환되고 시트도 제거됨을 확인한다. 최신 SDK의 같은 UI 구현과 한국어 버튼은 유지한다. 최종 로컬 ./scripts/check.sh는55개21.389초에 통과했고 새 delegate 일치 경고가 없다. 취소한 CI를 성공으로 표시하지 않으며 수정본에서 같은 전체 검사를 다시 실행한다.

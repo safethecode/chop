@@ -1,10 +1,10 @@
 {
   "schema_version": 2,
   "handoff_sha256": "67ada5c8aab1abc320189fd5331ed68f83a546611e1f5d921f9c98a74fb4fad6",
-  "target_sha256": "f5c59e67022483e1bc6b5a2130564b570fbe05f28231a4d0fc6fa565c85b09ef",
+  "target_sha256": "4be7cb7d3973f05c04e5b7812cb85ebeb9e189a7d4081cccf62390a47e9a1cd9",
   "core_review": {
     "path": "design/web-preview-reference/core-review.json",
-    "sha256": "6075160bed5ef1ea93d0b0217cd17994567e32787fc6a9bf63efc0b4e1c295d3"
+    "sha256": "be44ae3da2af3b575ebeef1fed921a642c56fa976adc7265bf364ec14befe5f3"
   },
   "consumption": [
     {
@@ -61,7 +61,7 @@
       "id": "Q-columns",
       "capture": {
         "path": "design/evidence/web-preview.md",
-        "sha256": "eb1e0d14dcc56038e57f6c239e5d129ade54dea95532ff2beec65aaa1d8ea86a"
+        "sha256": "9c2ce96561a89e5f23826ce2ad085567665c3750d84948af4abfbb2e24d290a1"
       },
       "actual": {
         "value": 1,
@@ -73,7 +73,7 @@
       "id": "Q-rows",
       "capture": {
         "path": "design/evidence/web-preview.md",
-        "sha256": "eb1e0d14dcc56038e57f6c239e5d129ade54dea95532ff2beec65aaa1d8ea86a"
+        "sha256": "9c2ce96561a89e5f23826ce2ad085567665c3750d84948af4abfbb2e24d290a1"
       },
       "actual": {
         "value": 1,

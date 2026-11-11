@@ -132,3 +132,5 @@ V-65 / F-WEB-TOOL-FOCUS: 터미널에서 웹 도구를 클릭할 때 이전 firs
 V-66 / WEB-SWIFT-COMPATIBILITY: 원격 Xcode16.4의 closure 명시 self 요구로 첫 빌드가 실패했다. URL KVO closure의 참조를 명시하고 같은54개17.470초 check.sh와 실제 혼합 탭 복원/링크/URL 갱신을 재검증했다. 화면 설계와 동작 계약은 유지하며 최종 CI는 별도로 확인한다. fixed-and-verified (로컬·실제 앱 범위, 셀프 리뷰). [근거](evidence/web-preview.md).
 
 V-67 / F-WEB-ADDRESS-BOUNDARY: CodeRabbit의 query URL/과도한 History API 주소 지적을 정상 주소3건 거부와 실제 WK didFinish 저장 실패로 재현했다. 시작 위치의 scheme 판별·호스트 경계와 공통 updateURL 검증으로 수정했다. 전체54개17.497초 check.sh 및 실제 이동 query·4128자 페이지/27자 이하 저장·재복원을 확인했다. fixed-and-verified (자동 리뷰 제보, 셀프 수정/검증). [근거](evidence/web-preview.md).
+
+V-68 / WEB-ALERT-SDK: Xcode16.4의 JS alert completion actor 표기가 최신 SDK와 달라 optional delegate 경고가 났다. SDK 세대별 typealias와 실제 alert/confirm/prompt 결과·닫기 취소 검사를 추가했다.55개21.389초 check.sh 통과. 별도 원격16칸 검사의 Surface.deinit 종료 대기는 stack과 취소 실행을 기록하고 엔진의 확정 원인으로 일반화하지 않는다. 해당 기존 검사/기대값은 유지해 원격에서 재실행한다. fixed-and-verified (callback/로컬 검사, 셀프 리뷰); 원격 진단 범위는 [근거](evidence/web-preview.md).

@@ -2,6 +2,13 @@ import AppKit
 import ChopCore
 import WebKit
 
+// Xcode 16.4의 알림 콜백에는 최신 SDK와 달리 MainActor 표기가 없다.
+#if compiler(>=6.2)
+  typealias WebAlertCompletion = @MainActor @Sendable () -> Void
+#else
+  typealias WebAlertCompletion = @Sendable () -> Void
+#endif
+
 /// A retained browser surface: layout changes move this view without reloading its page.
 @MainActor
 final class WebPreviewView: NSView, WKNavigationDelegate, WKUIDelegate, NSTextFieldDelegate {
@@ -302,7 +309,7 @@ final class WebPreviewView: NSView, WKNavigationDelegate, WKUIDelegate, NSTextFi
   func webView(
     _ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String,
     initiatedByFrame frame: WKFrameInfo,
-    completionHandler: @escaping @MainActor @Sendable () -> Void
+    completionHandler: @escaping WebAlertCompletion
   ) {
     let alert = makeScriptAlert(message)
     alert.addButton(withTitle: "확인")

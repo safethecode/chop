@@ -152,6 +152,47 @@ import WebKit
 }
 
 @MainActor
+@Test func webScriptDialogsReturnChoicesAndCloseWithTheirPane() async throws {
+  _ = NSApplication.shared
+  let server = try await WebPreviewFixture.make()
+  defer { server.close() }
+  try await server.activate()
+  let preview = WebPreviewView(dataStore: .nonPersistent())
+  let window = NSWindow(
+    contentRect: NSRect(x: 0, y: 0, width: 640, height: 400),
+    styleMask: [.titled], backing: .buffered, defer: false)
+  window.contentView = preview
+  window.orderFront(nil)
+  defer {
+    preview.close()
+    window.orderOut(nil)
+  }
+  preview.load(server.url)
+  try await waitForWebPreview { preview.webView.title == "미리보기 검사" && !preview.webView.isLoading }
+  func buttons(in view: NSView) -> [NSButton] {
+    (view as? NSButton).map { [$0] } ?? view.subviews.flatMap { buttons(in: $0) }
+  }
+  for (script, expected) in [
+    ("alert('알림 확인'); '알림 뒤'", "알림 뒤"),
+    ("String(confirm('선택 확인'))", "true"),
+    ("prompt('입력 확인','기본 내용')", "기본 내용"),
+  ] {
+    let result = Task { try await webScript(preview, script) }
+    try await waitForWebPreview { window.attachedSheet != nil }
+    let content = try #require(window.attachedSheet?.contentView)
+    let accept = try #require(buttons(in: content).first(where: { $0.title == "확인" }))
+    accept.performClick(nil)
+    #expect(try await result.value == expected)
+    try await waitForWebPreview { window.attachedSheet == nil }
+  }
+  let pending = Task { try await webScript(preview, "String(confirm('닫기 확인'))") }
+  try await waitForWebPreview { window.attachedSheet != nil }
+  preview.close()
+  #expect(try await pending.value == "false")
+  #expect(window.attachedSheet == nil)
+}
+
+@MainActor
 private func webScript(_ preview: WebPreviewView, _ script: String) async throws -> String {
   try await withCheckedThrowingContinuation { continuation in
     preview.webView.evaluateJavaScript(script) { value, error in
