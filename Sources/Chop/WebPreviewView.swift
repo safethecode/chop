@@ -176,7 +176,8 @@ final class WebPreviewView: NSView, WKNavigationDelegate, WKUIDelegate, NSTextFi
   }
 
   private func updateURL(_ actual: URL) {
-    guard !isClosed else { return }
+    // History API 변경도 저장 가능한 주소만 반영한다.
+    guard !isClosed, WebAddress.accepts(actual) else { return }
     let changed = url != actual
     url = actual
     if addressField.currentEditor() == nil { addressField.stringValue = actual.absoluteString }

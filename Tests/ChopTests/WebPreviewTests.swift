@@ -41,6 +41,21 @@ import WebKit
   #expect(preview.url == previous)
   preview.reload()
   try await waitForWebPreview { !preview.webView.isLoading && preview.errorMessage == nil }
+  let validAddress = server.url.appendingPathComponent("long")
+  preview.load(validAddress)
+  try await waitForWebPreview {
+    preview.webView.url?.absoluteString.utf8.count ?? 0 > 4096 && !preview.webView.isLoading
+  }
+  #expect(preview.url == validAddress, "페이지가 만든 긴 주소가 유효한 저장 주소를 덮어쓰면 안 됩니다")
+  let id = UUID()
+  try WorkspaceSnapshot(
+    layout: .pane(id),
+    panes: [
+      PaneSnapshot(
+        id: id, name: "웹 1", workingDirectory: "/tmp", wasRunning: false,
+        contentKind: .web, webURL: preview.url?.absoluteString)
+    ], focusedID: id
+  ).validate()
 }
 
 @MainActor
@@ -190,7 +205,8 @@ private final class WebPreviewFixture {
       class Handler(BaseHTTPRequestHandler):
        def do_GET(self):
         title='다음 페이지' if self.path.startswith('/next') else '미리보기 검사'
-        body=('<!doctype html><meta charset="utf-8"><title>'+title+'</title><input id="draft"><p>'+title+'</p>').encode()
+        script="<script>history.replaceState(null,'','/long?'+ 'a'.repeat(4100))</script>" if self.path.startswith('/long') else ''
+        body=('<!doctype html><meta charset="utf-8"><title>'+title+'</title><input id="draft"><p>'+title+'</p>'+script).encode()
         self.send_response(200);self.send_header('Content-Type','text/html; charset=utf-8');self.send_header('Content-Length',str(len(body)));self.end_headers();self.wfile.write(body)
       server=ThreadingHTTPServer(('127.0.0.1',0),Handler,bind_and_activate=False)
       server.server_bind();port=server.server_port;server.server_close()

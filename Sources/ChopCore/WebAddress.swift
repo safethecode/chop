@@ -8,8 +8,12 @@ public enum WebAddress {
       !text.unicodeScalars.contains(where: { CharacterSet.controlCharacters.contains($0) })
     else { return nil }
     var candidate = text
-    if !text.contains("://") {
-      let host = text.lowercased().split(separator: "/", maxSplits: 1).first.map(String.init) ?? ""
+    let hasScheme =
+      text.range(of: #"^[A-Za-z][A-Za-z0-9+.\-]*://"#, options: .regularExpression) != nil
+    if !hasScheme {
+      let host =
+        text.lowercased().split(whereSeparator: { $0 == "/" || $0 == "?" || $0 == "#" })
+        .first.map(String.init) ?? ""
       let local =
         host == "localhost" || host.hasPrefix("localhost:")
         || host == "127.0.0.1" || host.hasPrefix("127.0.0.1:")

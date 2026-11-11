@@ -11,6 +11,10 @@ import Testing
     "0.0.0.0:5000": "http://localhost:5000/",
     "example.com/path": "https://example.com/path",
     "HTTPS://example.com": "https://example.com/",
+    "localhost:3000/login?next=http://localhost:3000/":
+      "http://localhost:3000/login?next=http://localhost:3000/",
+    "example.com/r?u=https://example.org/": "https://example.com/r?u=https://example.org/",
+    "localhost?next=https://example.com/": "http://localhost/?next=https://example.com/",
   ]
   for (input, expected) in addresses {
     #expect(WebAddress.parse(input)?.absoluteString == expected)

@@ -27,3 +27,6 @@ E-W6 자동 검증: 최종 ./scripts/check.sh는 format·shell·plist·release b
 
 
 E-W7 CI 호환 후속: 최초 원격 Xcode16.4/Swift6.1 빌드가 URL KVO closure의 같은 guard에서 self를 암시한 세 위치를 거부했다. self.isClosed/self.webView/self.updateURL로 참조를 명시했다. 같은54개 check.sh(17.470초)가 다시 통과했다. 재빌드한 실제 앱에서 기존1셸/3웹 탭과 선택 주소 복원→로컬 다음 링크→URL/뒤로 버튼 갱신을1782×896px 다크 화면과 AX에서 재확인했다. 초기 CUA pipe 연결 종료는 reset 후 복구했으며 그 실패를 앱 성공으로 표시하지 않는다. chrome의 간격/색/구조는 변경하지 않았고 앞선 전체 상태 관찰을 새 캡처로 바꾸지 않는다. 원격 최종 CI 결과는 PR에서 별도로 확인한다.
+
+
+E-W8 자동 리뷰 후속: CodeRabbit의 두 주소 경계 지적을 먼저 테스트로 재현했다. query 안의 :// 때문에 scheme 없는 정상 주소3개가 거부됐고, 로딩 중 history.replaceState로4100자 query를 만들면 didFinish가 긴 URL을 저장해 SnapshotError.invalid를 일으켰다. scheme은 문자열 처음에서만 판별하고 호스트는 /·?·# 앞에서 자른다. updateURL의 공통 진입점에서 WebAddress.accepts를 확인해 didFinish와 History API에도 저장 계약을 적용했다. 수정 후54개 check.sh(17.497초)가 통과했다. 실제 최종 앱에서 localhost:61448/login?next=http://localhost:61448/를 입력해 정상 HTTP 문서를 확인했다. /long 페이지는 `주소 길이 4128자`를 AX로 표시하는 동안 native 주소/탭은 마지막 유효한 /long을 유지하고 종료한 검증 세션의 최장 webURL도27자였다. 후속 재실행에서도 해당 짧은 주소를 복원하고 정상 렌더했다. 새 chrome 구조·색은 바꾸지 않았다. 자동 리뷰의 최초 Swift CI 지적은 E-W7에서 이미 수정했다. 자동 리뷰를 외부 사람의 승인으로 표현하지 않으며 원격 최신 CI는 PR에서 확인한다.
