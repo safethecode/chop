@@ -121,3 +121,10 @@ V-60 / GITHUB-CLONE: 48pt rail 하단32pt 버튼에서 URL/위치/이름→실�
 V-61 / F-CLONE-MODAL-QUIT: 최초 클론 시트에서 Cmd+Q가 막힌 native 기본값을 실제 관찰했다. 해당 시트에 termination 허용을 적용하고 전송→종료 요청→취소(유지)→재요청→종료/정리, 기존 결과 보존을 실제 확인했다. fixed-and-verified (셀프 수정/검증). [근거](evidence/github-clone.md).
 
 V-62 / F-CLONE-GIT-ENV: 자동 리뷰의 상속된 Git 경로 설정 지적을 실제 주입 검사에서 .failed로 재현했다. clone과 fixture의 repository-local 환경만 정리한 뒤 원래 config 보존·잘못된 index/object 미생성·정상 clone 및49개15.179초 check.sh를 확인했다. UI/경로 목적지는 변경하지 않았다. fixed-and-verified (셀프 수정/검증, 원격 최종 상태는 PR). [근거](evidence/github-clone.md).
+
+
+V-63 / WEB-PREVIEW-PANES: 사용자 요청의 같은 창 새 웹 칸을48pt rail globe/⌘⇧B와 터미널 주소에 연결했다. WKWebView를 기존 배치/확대/탭/이동에 보존하고 종류·URL만 복원한다. 실제 로컬 HTTP/WebSocket·외부 HTTPS·주소 수정/외부 브라우저·두 모드/작은 창/200% 페이지·mixed restore 및54개 check.sh를 확인했다. 앱 소유의 새 문구는 한국어로 점검했다. aligned (변경 범위, 셀프 리뷰). [근거](evidence/web-preview.md).
+
+V-64 / F-WEB-SCRIPT-DIALOG: 실제 확인 버튼이 기본 WebKit 동작으로 즉시 취소됐다. native 한국어 시트와 완료 callback/종료 정리를 구현하고 확인 결과·열린 시트의⌘Q 종료를 실제 검증했다. fixed-and-verified (셀프 수정/검증). [근거](evidence/web-preview.md).
+
+V-65 / F-WEB-TOOL-FOCUS: 터미널에서 웹 도구를 클릭할 때 이전 first responder 때문에 선택이 터미널로 돌아갔다. 도구의 native focus 이동·오류/빈 주소 focus와 responder 기반 선택을 연결했다. 회귀 검사와 실제 새로고침→⌘L 주소 선택을 확인했다. 초기 실패의 reload는 이력이 없으면 새 요청을 보내도록 보완하고 offline→서버 시작→재시도를 실제 WK 검사했다. fixed-and-verified (셀프 수정/검증). [근거](evidence/web-preview.md).

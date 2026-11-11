@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "decomposition_sha256": "bedd4af43a0fa310b25a48c328183ac225846c3fdad67f0e8f7f0e3cb345a6b9",
+  "interpretation_sha256": "bb75ebdb77b50b2a7199bc6e7cf91e0e8e7aaf308be8e57f5d372daf986e20f1",
+  "source_snapshot": {
+    "path": "design/web-preview-reference/first-render-source.json",
+    "sha256": "ebc9c47ed95d07853b910289d1c7999b1adaa2352f75d033336b75ae4350aeef"
+  },
+  "capture": {
+    "path": "design/evidence/web-preview.md",
+    "sha256": "52a7a26076219970de944d46aa8351cb1d3d8dd2916bc961741a840660c90c5b"
+  },
+  "status": "adapted-and-verified",
+  "reason": "E-W0 첫 실제 로컬 페이지와 E-W4 최종 두 모드/작은 창을 원본 default-grid crop의 동등한 열/행·작은 header·중앙 plus 관계에 대조했다. 두 열/행 비율은 약1(시각 추정±0.01)로 원본 약1/허용0.02 안이다. 웹 칸의 추가 주소 행과 globe는 같은 창 새 칸이라는 사용자 확장이며 기존 terminal/header/48pt rail을 밀지 않는다. 첫 렌더와 후속 JS 시트/초점 결함 수정은 구분한다. 원본 미확인 폰트는 여전히 미확인이고 제삼자 페이지를 UI 원본으로 삼지 않는다."
+}

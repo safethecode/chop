@@ -1,0 +1,382 @@
+Base: fa0e90fbf2fb042f495657e8969bc696aad2776c
+diff --git a/Sources/Chop/TerminalAreaView.swift b/Sources/Chop/TerminalAreaView.swift
+index e0688df..6a1dd46 100644
+--- a/Sources/Chop/TerminalAreaView.swift
++++ b/Sources/Chop/TerminalAreaView.swift
+@@ -10,6 +10,8 @@ final class TerminalAreaView: NSView {
+   private let trailingBorder = NSView()
+   let addButton: NSButton
+   let cloneButton: NSButton
++  let webButton: NSButton
++  var onWebRequested: (() -> Void)?
+   var onCloneRequested: (() -> Void)?
+ 
+   init(canvas: NSView, target: AnyObject, action: Selector) {
+@@ -20,6 +22,9 @@ final class TerminalAreaView: NSView {
+     cloneButton = NSButton(
+       image: NSImage(systemSymbolName: "arrow.down.to.line", accessibilityDescription: nil)!,
+       target: nil, action: nil)
++    webButton = NSButton(
++      image: NSImage(systemSymbolName: "globe", accessibilityDescription: nil)!, target: nil,
++      action: nil)
+     super.init(frame: .zero)
+     rail.wantsLayer = true
+     addButton.bezelStyle = .circular
+@@ -40,6 +45,13 @@ final class TerminalAreaView: NSView {
+     cloneButton.toolTip = "GitHub 프로젝트 클론…"
+     cloneButton.setAccessibilityLabel("GitHub 프로젝트 클론")
+     rail.addSubview(cloneButton)
++    webButton.bezelStyle = .circular
++    webButton.controlSize = .regular
++    webButton.target = self
++    webButton.action = #selector(requestWeb)
++    webButton.toolTip = "새 칸에서 웹사이트 열기 (⌘⇧B)"
++    webButton.setAccessibilityLabel("웹사이트 추가")
++    rail.addSubview(webButton)
+   }
+ 
+   @available(*, unavailable)
+@@ -58,6 +70,7 @@ final class TerminalAreaView: NSView {
+   }
+ 
+   @objc private func requestClone() { onCloneRequested?() }
++  @objc private func requestWeb() { onWebRequested?() }
+ 
+   override func resizeSubviews(withOldSize oldSize: NSSize) {
+     let width = min(Self.railWidth, bounds.width)
+@@ -70,5 +83,6 @@ final class TerminalAreaView: NSView {
+     addButton.frame = NSRect(
+       x: (width - 32) / 2, y: (bounds.height - 32) / 2, width: 32, height: 32)
+     cloneButton.frame = NSRect(x: (width - 32) / 2, y: 12, width: 32, height: 32)
++    webButton.frame = NSRect(x: (width - 32) / 2, y: 52, width: 32, height: 32)
+   }
+ }
+diff --git a/Sources/Chop/TerminalPaneView.swift b/Sources/Chop/TerminalPaneView.swift
+index ea577f5..700ee14 100644
+--- a/Sources/Chop/TerminalPaneView.swift
++++ b/Sources/Chop/TerminalPaneView.swift
+@@ -7,6 +7,7 @@ final class TerminalPaneView: NSView {
+   let engine: TerminalEngine
+   let workspaceID: UUID
+   private(set) var terminal: TerminalView?
++  private(set) var browser: WebPreviewView?
+   var workingDirectory: String
+   var name: String {
+     didSet {
+@@ -16,6 +17,7 @@ final class TerminalPaneView: NSView {
+   }
+   var onChange: (() -> Void)?
+   var onLocalServersChange: (() -> Void)?
++  var onWebPreviewRequested: ((URL?) -> Void)?
+   var localServerURLs: [URL] { terminal?.localServerURLs ?? [] }
+   var onFocus: (() -> Void)?
+   var onSplitRequested: ((SplitAxis) -> Void)?
+@@ -81,7 +83,10 @@ final class TerminalPaneView: NSView {
+   @available(*, unavailable)
+   required init?(coder: NSCoder) { fatalError("Use init(engine:).") }
+ 
+-  var isRunning: Bool { terminal != nil }
++  var isRunning: Bool { terminal != nil || browser != nil }
++  var locationDescription: String {
++    browser.map { $0.url?.absoluteString ?? "웹사이트" } ?? workingDirectory
++  }
+   var needsConfirmClose: Bool { terminal?.needsConfirmClose ?? false }
+ 
+   /// Refreshes pane chrome, including hidden panes, without recreating the terminal surface.
+@@ -94,6 +99,7 @@ final class TerminalPaneView: NSView {
+     pathLabel.textColor = mode.secondaryForeground
+     serverButton.contentTintColor = mode.secondaryForeground
+     errorLabel.textColor = mode.secondaryForeground
++    browser?.applyAppearance(mode)
+     updateDropHighlight()
+   }
+ 
+@@ -179,7 +185,7 @@ final class TerminalPaneView: NSView {
+   }
+ 
+   @objc func openTerminal() {
+-    guard terminal == nil else {
++    guard !isRunning else {
+       focus()
+       return
+     }
+@@ -227,6 +233,16 @@ final class TerminalPaneView: NSView {
+   }
+ 
+   func closeTerminal() {
++    if let browser {
++      browser.close()
++      browser.removeFromSuperview()
++      self.browser = nil
++      updateAddButton()
++      updateHeader()
++      focus()
++      onChange?()
++      return
++    }
+     guard let terminal else { return }
+     workingDirectory = terminal.workingDirectory
+     terminal.close()
+@@ -241,6 +257,36 @@ final class TerminalPaneView: NSView {
+     onChange?()
+   }
+ 
++  func openWebPage(_ url: URL? = nil) {
++    guard !isRunning else {
++      focus()
++      return
++    }
++    let view = WebPreviewView()
++    browser = view
++    view.onFocus = { [weak self] in self?.onFocus?() }
++    view.onURLChange = { [weak self] in
++      self?.updateHeader()
++      self?.onChange?()
++    }
++    view.applyAppearance(engine.appearanceMode)
++    body.addSubview(view)
++    view.translatesAutoresizingMaskIntoConstraints = false
++    NSLayoutConstraint.activate([
++      view.leadingAnchor.constraint(equalTo: body.leadingAnchor),
++      view.trailingAnchor.constraint(equalTo: body.trailingAnchor),
++      view.topAnchor.constraint(equalTo: body.topAnchor),
++      view.bottomAnchor.constraint(equalTo: body.bottomAnchor),
++    ])
++    body.addSubview(openButton, positioned: .above, relativeTo: view)
++    updateAddButton()
++    errorLabel.isHidden = true
++    if let url { view.load(url) }
++    updateHeader()
++    focus()
++    onChange?()
++  }
++
+   /// Resolve every saved path before restore; no path is interpreted as a command.
+   func resolveWorkingDirectory() -> String? {
+     var isDirectory: ObjCBool = false
+@@ -257,6 +303,10 @@ final class TerminalPaneView: NSView {
+   }
+ 
+   func focus() {
++    if let browser {
++      browser.focus()
++      return
++    }
+     window?.makeFirstResponder(terminal ?? openButton)
+     onFocus?()
+   }
+@@ -306,7 +356,7 @@ final class TerminalPaneView: NSView {
+ 
+   private func updateAddButton() {
+     openButton.isHidden = isRunning && !isEditing
+-    let label = isRunning ? "터미널 추가" : "터미널 열기"
++    let label = isRunning ? "칸 추가" : "터미널 열기"
+     openButton.setAccessibilityLabel(label)
+     openButton.toolTip = label
+   }
+@@ -341,6 +391,11 @@ final class TerminalPaneView: NSView {
+     pathLabel.lineBreakMode = .byTruncatingMiddle
+     pathLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+     pathLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
++    serverButton.opensInPreview = true
++    serverButton.openURL = { [weak self] url in
++      self?.onFocus?()
++      self?.onWebPreviewRequested?(url)
++    }
+     let close = ChopStyle.iconButton(
+       "xmark", label: "터미널 닫기", target: self, action: #selector(requestClose))
+     closeButton = close
+@@ -403,11 +458,12 @@ final class TerminalPaneView: NSView {
+     updateMoveHandle()
+     moveHandle.setAccessibilityLabel("\(name) 이동")
+     updateNameButton()
+-    pathLabel.stringValue = (workingDirectory as NSString).abbreviatingWithTildeInPath
+-    pathLabel.toolTip = workingDirectory
++    pathLabel.stringValue =
++      browser == nil ? (workingDirectory as NSString).abbreviatingWithTildeInPath : ""
++    pathLabel.toolTip = locationDescription
+     terminal?.setAccessibilityLabel("\(name) 터미널")
+     closeButton.isEnabled = isRunning || canRemove
+-    let closeLabel = isRunning ? "터미널 닫기" : "빈 칸 제거"
++    let closeLabel = browser != nil ? "웹사이트 닫기" : isRunning ? "터미널 닫기" : "빈 칸 제거"
+     closeButton.setAccessibilityLabel(closeLabel)
+     closeButton.toolTip = closeLabel
+     let zoomLabel = isZoomed ? "전체 레이아웃으로 돌아가기" : "칸 확대"
+@@ -442,7 +498,7 @@ final class TerminalPaneView: NSView {
+     titleButton.attributedTitle = NSAttributedString(
+       string: name,
+       attributes: [.font: ChopStyle.font, .foregroundColor: engine.appearanceMode.foreground])
+-    titleButton.toolTip = "\(name) — 이름 바꾸기 (⌘⇧R)\n\(workingDirectory)"
++    titleButton.toolTip = "\(name) — 이름 바꾸기 (⌘⇧R)\n\(locationDescription)"
+     titleButton.setAccessibilityLabel("\(name) 이름 바꾸기")
+   }
+ }
+diff --git a/Sources/Chop/WorkspaceView.swift b/Sources/Chop/WorkspaceView.swift
+index b6682d9..825519b 100644
+--- a/Sources/Chop/WorkspaceView.swift
++++ b/Sources/Chop/WorkspaceView.swift
+@@ -50,6 +50,7 @@ final class WorkspaceView: NSView {
+     "sidebar.right", label: "파일 트리 보기", target: self, action: #selector(toggleFileTree))
+   private(set) var isEditing = false
+   private var restoredRunningIDs: [UUID] = []
++  private var restoredWebPanes: [(id: UUID, url: URL?)] = []
+   private let dragGroupID = UUID()
+ 
+   init(
+@@ -62,6 +63,7 @@ final class WorkspaceView: NSView {
+     let useDefaultGrid =
+       valid == nil
+       || (valid?.panes.count == 1 && valid?.panes.first?.wasRunning == false
++        && valid?.panes.first?.contentKind != .web
+         && valid?.tabbed != true)
+     if useDefaultGrid {
+       while ids.count < 4 { ids.append(UUID()) }
+@@ -77,10 +79,15 @@ final class WorkspaceView: NSView {
+     configureToolbar()
+     terminalArea.applyAppearance(engine.appearanceMode)
+     terminalArea.onCloneRequested = { [weak self] in self?.onCloneRequested?() }
++    terminalArea.onWebRequested = { [weak self] in self?.addWebPage() }
+     for id in ids {
+       let saved = valid?.panes.first { $0.id == id }
+       addPane(id, directory: saved?.workingDirectory ?? initialDirectory, name: saved?.name)
+-      if saved?.wasRunning == true { restoredRunningIDs.append(id) }
++      if saved?.contentKind == .web {
++        restoredWebPanes.append((id, saved?.webURL.flatMap(WebAddress.parse)))
++      } else if saved?.wasRunning == true {
++        restoredRunningIDs.append(id)
++      }
+     }
+     rebuild()
+   }
+@@ -149,6 +156,7 @@ final class WorkspaceView: NSView {
+       self?.onChange?()
+     }
+     pane.onLocalServersChange = { [weak self] in self?.refreshControls() }
++    pane.onWebPreviewRequested = { [weak self] url in self?.openWebPreview(url) }
+     pane.onSplitRequested = { [weak self] axis in self?.split(id, axis: axis) }
+     pane.canSplit = { [weak self] axis in self?.canSplit(id, axis: axis) ?? false }
+     pane.onRemoveRequested = { [weak self] in self?.removeEmptyPane(id) }
+@@ -213,26 +221,57 @@ final class WorkspaceView: NSView {
+   }
+ 
+   @objc func addTerminal() {
+-    if let empty = layout.paneIDs.first(where: { panes[$0]?.isRunning == false }) {
+-      focusedID = empty
++    prepareContentPane()?.openTerminal()
++  }
++
++  @objc func addWebPage() { openWebPreview(nil) }
++
++  func openWebPreview(_ url: URL?) {
++    let normalized = url.flatMap { WebAddress.parse($0.absoluteString) }
++    guard url == nil || normalized != nil else { return }
++    if let normalized,
++      let existing = panes.values.first(where: { $0.browser?.url == normalized })
++    {
++      focusedID = existing.id
+       maximizedID = nil
+       rebuild()
+-      focusedPane.openTerminal()
++      existing.focus()
+       return
+     }
+-    guard panes.count < 16 else { return }
+-    if isTabbed {
+-      addTab()
++    guard let pane = prepareContentPane() else {
++      let alert = NSAlert()
++      alert.messageText = "웹사이트를 열 칸이 없어요"
++      alert.informativeText = "칸은 최대 16개까지 열 수 있어요. 사용하지 않는 칸을 닫아 주세요."
++      alert.addButton(withTitle: "확인")
++      alert.runModal()
+       return
+     }
+-    let ids = (0..<min(2, 16 - panes.count)).map { _ in UUID() }
++    var number = 1
++    while panes.values.contains(where: { $0.name == "웹 \(number)" }) { number += 1 }
++    pane.name = "웹 \(number)"
++    pane.openWebPage(normalized)
++  }
++
++  private func prepareContentPane() -> TerminalPaneView? {
++    if let empty = layout.paneIDs.first(where: { panes[$0]?.isRunning == false }) {
++      focusedID = empty
++      maximizedID = nil
++      rebuild()
++      return focusedPane
++    }
++    guard panes.count < 16 else { return nil }
++    let ids = (0..<(isTabbed ? 1 : min(2, 16 - panes.count))).map { _ in UUID() }
+     let directory = focusedPane.workingDirectory
+     for id in ids { addPane(id, directory: directory) }
+-    layout = layout.appendingRow(ids)
++    if isTabbed, let last = layout.paneIDs.last {
++      layout = layout.splitting(last, axis: .horizontal, adding: ids[0])
++    } else {
++      layout = layout.appendingRow(ids)
++    }
+     focusedID = ids[0]
+     maximizedID = nil
+     rebuild()
+-    focusedPane.openTerminal()
++    return focusedPane
+   }
+ 
+   @objc func splitRight() { split(focusedID, axis: .horizontal) }
+@@ -316,7 +355,8 @@ final class WorkspaceView: NSView {
+         guard let pane = panes[id] else { return nil }
+         return PaneSnapshot(
+           id: id, name: pane.name, workingDirectory: pane.workingDirectory,
+-          wasRunning: pane.isRunning)
++          wasRunning: pane.terminal != nil, contentKind: pane.browser != nil ? .web : nil,
++          webURL: pane.browser?.url?.absoluteString)
+       }, focusedID: focusedID, tabbed: isTabbed ? true : nil)
+   }
+ 
+@@ -324,6 +364,9 @@ final class WorkspaceView: NSView {
+     var ids = restoredRunningIDs
+     restoredRunningIDs.removeAll()
+     var selected = focusedID
++    let webPanes = restoredWebPanes
++    restoredWebPanes.removeAll()
++    for saved in webPanes { panes[saved.id]?.openWebPage(saved.url) }
+     // A newly opened workspace is immediately usable, including an all-empty save.
+     if ids.isEmpty, !panes.values.contains(where: { $0.isRunning }),
+       let first = layout.paneIDs.first
+@@ -363,6 +406,13 @@ final class WorkspaceView: NSView {
+     onChange?()
+   }
+ 
++  func updateFocusFromResponder(_ responder: NSResponder?) {
++    guard let view = responder as? NSView,
++      let pane = panes.values.first(where: { view.isDescendant(of: $0) }), pane.id != focusedID
++    else { return }
++    didFocus(pane.id)
++  }
++
+   private func revealFocusedPane() {
+     guard !isTabbed, focusedPane.superview != nil else { return }
+     canvasScroll.updateDocumentSize()
+@@ -481,7 +531,8 @@ final class WorkspaceView: NSView {
+         mode: engine.appearanceMode,
+         onSelect: { [weak self] in self?.selectTab($0) }, onAdd: { [weak self] in self?.addTab() },
+         onClose: { [weak self] in self?.requestCloseFocused() },
+-        onRename: { [weak self] in self?.requestRename($0) })
++        onRename: { [weak self] in self?.requestRename($0) },
++        onPreview: { [weak self] in self?.openWebPreview($0) })
+       tabBar = bar
+       view = TerminalTabContentView(tabBar: bar, pane: focusedPane)
+     } else {
+@@ -599,8 +650,11 @@ final class WorkspaceView: NSView {
+     }
+     tabBar?.update(panes: layout.paneIDs.compactMap { panes[$0] }, selectedID: focusedID)
+     terminalArea.addButton.isEnabled = canAddTerminal
++    terminalArea.webButton.isEnabled = canAddTerminal
+     terminalArea.addButton.toolTip =
+-      canAddTerminal ? "터미널 추가 (⌘T)" : "터미널은 최대 16개까지 열 수 있어요"
++      canAddTerminal ? "터미널 추가 (⌘T)" : "칸은 최대 16개까지 열 수 있어요"
++    terminalArea.webButton.toolTip =
++      canAddTerminal ? "새 칸에서 웹사이트 열기 (⌘⇧B)" : "칸은 최대 16개까지 열 수 있어요"
+     editButton.state = isEditing ? .on : .off
+     editButton.title = isEditing ? "편집 완료" : "레이아웃 편집"
+   }
