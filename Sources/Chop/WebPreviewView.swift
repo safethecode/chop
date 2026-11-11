@@ -54,10 +54,11 @@ final class WebPreviewView: NSView, WKNavigationDelegate, WKUIDelegate, NSTextFi
     observations.append(
       webView.observe(\.url, options: [.new]) { [weak self] _, _ in
         Task { @MainActor [weak self] in
-          guard let self, !isClosed, let actual = webView.url, WebAddress.accepts(actual) else {
+          guard let self, !self.isClosed, let actual = self.webView.url, WebAddress.accepts(actual)
+          else {
             return
           }
-          updateURL(actual)
+          self.updateURL(actual)
         }
       })
     refreshControls()

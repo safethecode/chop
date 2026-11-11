@@ -128,3 +128,5 @@ V-63 / WEB-PREVIEW-PANES: 사용자 요청의 같은 창 새 웹 칸을48pt rail
 V-64 / F-WEB-SCRIPT-DIALOG: 실제 확인 버튼이 기본 WebKit 동작으로 즉시 취소됐다. native 한국어 시트와 완료 callback/종료 정리를 구현하고 확인 결과·열린 시트의⌘Q 종료를 실제 검증했다. fixed-and-verified (셀프 수정/검증). [근거](evidence/web-preview.md).
 
 V-65 / F-WEB-TOOL-FOCUS: 터미널에서 웹 도구를 클릭할 때 이전 first responder 때문에 선택이 터미널로 돌아갔다. 도구의 native focus 이동·오류/빈 주소 focus와 responder 기반 선택을 연결했다. 회귀 검사와 실제 새로고침→⌘L 주소 선택을 확인했다. 초기 실패의 reload는 이력이 없으면 새 요청을 보내도록 보완하고 offline→서버 시작→재시도를 실제 WK 검사했다. fixed-and-verified (셀프 수정/검증). [근거](evidence/web-preview.md).
+
+V-66 / WEB-SWIFT-COMPATIBILITY: 원격 Xcode16.4의 closure 명시 self 요구로 첫 빌드가 실패했다. URL KVO closure의 참조를 명시하고 같은54개17.470초 check.sh와 실제 혼합 탭 복원/링크/URL 갱신을 재검증했다. 화면 설계와 동작 계약은 유지하며 최종 CI는 별도로 확인한다. fixed-and-verified (로컬·실제 앱 범위, 셀프 리뷰). [근거](evidence/web-preview.md).

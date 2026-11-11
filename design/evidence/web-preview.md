@@ -24,3 +24,6 @@ E-W5 주소·초점·외부 연결: file:///tmp/미리보기 입력에서 한국
 E-W6 자동 검증: 최종 ./scripts/check.sh는 format·shell·plist·release build·codesign·icon과54개 테스트를 통과했다(17.704초 테스트). 새 주소 정규화/위험 scheme·인증정보 거부/이전 저장 호환/웹 저장 검증, 실제 WKWebView의 초기 연결 실패→서버 시작→재시도→뒤로/앞으로→잘못된 주소→복구, 혼합 칸의 두 모드·네 preset·동일 URL 재선택·기존 셸 PID/문서 입력/스크립트 보존·웹 도구 초점·재복원, 단일 빈 웹 저장 복원을 포함한다. 최초 offline fixture가 TCP socket을 bind만 한 채 남겨 연결 완료가 지연된 테스트 조건은 socket을 닫고 시작 신호에서 다시 listen하도록 수정했다. 제품의 연결 실패를 성공으로 완화하지 않았다. 테스트 저장소는 nonPersistent이고 자체 Python 서버/폴더/창을 정리한다.
 
 검증 한계: 셀프 리뷰이며 독립 승인/외부 사람 리뷰가 아니다. macOS14 실기기, 전체 VoiceOver 읽기 순서, 물리 Reduce Motion/고대비, 인증 제공자 popup/카메라·마이크·다운로드 실파일·전체 단축키 조합은 새 성공으로 주장하지 않는다. 기존 엔진/아이콘/파일 검색·clone 과정의 미변경 근거는 이전 기록으로 남긴다. 새 앱 chrome의 언어는 한국어이고 코드 식별자·URL·브랜드 고유명은 그대로 쓴다. 사용 중인 원래 Chop은 종료하지 않았다.
+
+
+E-W7 CI 호환 후속: 최초 원격 Xcode16.4/Swift6.1 빌드가 URL KVO closure의 같은 guard에서 self를 암시한 세 위치를 거부했다. self.isClosed/self.webView/self.updateURL로 참조를 명시했다. 같은54개 check.sh(17.470초)가 다시 통과했다. 재빌드한 실제 앱에서 기존1셸/3웹 탭과 선택 주소 복원→로컬 다음 링크→URL/뒤로 버튼 갱신을1782×896px 다크 화면과 AX에서 재확인했다. 초기 CUA pipe 연결 종료는 reset 후 복구했으며 그 실패를 앱 성공으로 표시하지 않는다. chrome의 간격/색/구조는 변경하지 않았고 앞선 전체 상태 관찰을 새 캡처로 바꾸지 않는다. 원격 최종 CI 결과는 PR에서 별도로 확인한다.
