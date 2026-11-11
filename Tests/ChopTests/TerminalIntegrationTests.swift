@@ -724,15 +724,29 @@ private func verifyGlobalTerminalAddition(
   workspace.addTerminal()
   #expect(workspace.layout == fullLayout, "Adding at capacity must preserve the layout")
   #expect(workspace.panes[initialIDs[0]]?.terminal === first)
-  workspace.panes[fifthID]?.closeTerminal()
+  // Surface 생성과 실제 셸 준비는 비동기다. 닫기 전에 새 셸의 입력·출력을 검증한다.
+  @MainActor func closeFifthPaneAfterRoundTrip() async throws {
+    let terminal = try #require(workspace.panes[fifthID]?.terminal)
+    terminal.insertText(
+      "printf 'CHOP_REOPEN_READY\\n'", replacementRange: NSRange(location: NSNotFound, length: 0))
+    try pressReturn(on: terminal, window: window)
+    try await waitFor {
+      (terminal.accessibilityValue() as? String ?? "")
+        .components(separatedBy: "\n").contains {
+          $0.trimmingCharacters(in: .whitespacesAndNewlines) == "CHOP_REOPEN_READY"
+        } && !terminal.needsConfirmClose
+    }
+    workspace.panes[fifthID]?.closeTerminal()
+  }
+  try await closeFifthPaneAfterRoundTrip()
   #expect(workspace.canAddTerminal)
   workspace.addTerminal()
   #expect(workspace.focusedID == fifthID && workspace.panes.count == 16)
-  workspace.panes[fifthID]?.closeTerminal()
+  try await closeFifthPaneAfterRoundTrip()
   workspace.applyPreset(.single)
   workspace.addTerminal()
   #expect(workspace.isTabbed && workspace.focusedID == fifthID)
-  workspace.panes[fifthID]?.closeTerminal()
+  try await closeFifthPaneAfterRoundTrip()
   workspace.removeEmptyPane(fifthID)
   workspace.addTerminal()
   #expect(workspace.isTabbed && workspace.panes.count == 16 && workspace.focusedPane.isRunning)
