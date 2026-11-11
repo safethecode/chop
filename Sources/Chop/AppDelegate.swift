@@ -132,6 +132,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
   }
 
   @objc private func openTerminal() { workspaceWindow?.workspace.addTerminal() }
+  @objc private func openWebPage() { workspaceWindow?.workspace.addWebPage() }
+  @objc private func focusWebAddress() { workspaceWindow?.pane.browser?.focusAddress() }
+  @objc private func reloadWebPage() { workspaceWindow?.pane.browser?.reload() }
+  @objc private func webBack() { workspaceWindow?.pane.browser?.goBack() }
+  @objc private func webForward() { workspaceWindow?.pane.browser?.goForward() }
+  @objc private func webZoomIn() { workspaceWindow?.pane.browser?.changeZoom(by: 0.25) }
+  @objc private func webZoomOut() { workspaceWindow?.pane.browser?.changeZoom(by: -0.25) }
+  @objc private func webResetZoom() { workspaceWindow?.pane.browser?.resetZoom() }
+  @objc private func openWebInBrowser() { workspaceWindow?.pane.browser?.openInBrowser() }
   @objc private func closeTerminal() { workspaceWindow?.workspace.requestCloseFocused() }
   @objc private func splitRight() { workspaceWindow?.workspace.splitRight() }
   @objc private func splitDown() { workspaceWindow?.workspace.splitDown() }
@@ -181,6 +190,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     else { return false }
     switch menuItem.action {
     case #selector(openTerminal): return workspace.canAddTerminal
+    case #selector(openWebPage): return workspace.canAddTerminal
+    case #selector(focusWebAddress), #selector(reloadWebPage), #selector(webZoomIn),
+      #selector(webZoomOut), #selector(webResetZoom), #selector(openWebInBrowser):
+      return workspace.focusedPane.browser != nil
+    case #selector(webBack): return workspace.focusedPane.browser?.canGoBack == true
+    case #selector(webForward): return workspace.focusedPane.browser?.webView.canGoForward == true
     case #selector(toggleFileTree):
       menuItem.title =
         workspaceWindow?.content.isFileTreeVisible == true
@@ -195,7 +210,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     case #selector(swapDown): return workspace.canSwapFocusedPane(.down)
     case #selector(closeTerminal):
       menuItem.title =
-        workspace.isTabbed ? "탭 닫기" : workspace.focusedPane.isRunning ? "터미널 닫기" : "빈 칸 제거"
+        workspace.isTabbed
+        ? "탭 닫기"
+        : workspace.focusedPane.browser != nil
+          ? "웹사이트 닫기"
+          : workspace.focusedPane.isRunning ? "터미널 닫기" : "빈 칸 제거"
       return workspace.focusedPane.isRunning || workspace.layout.paneIDs.count > 1
     default: return true
     }
@@ -295,6 +314,26 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     }
     terminalItem.submenu = terminalMenu
     mainMenu.addItem(terminalItem)
+
+    let webItem = NSMenuItem()
+    let webMenu = NSMenu(title: "웹사이트")
+    for (title, action, key, modifiers) in [
+      ("새 칸에서 웹사이트 열기", #selector(openWebPage), "b", NSEvent.ModifierFlags([.command, .shift])),
+      ("주소 입력", #selector(focusWebAddress), "l", .command),
+      ("새로고침", #selector(reloadWebPage), "r", .command),
+      ("뒤로", #selector(webBack), "[", .command),
+      ("앞으로", #selector(webForward), "]", .command),
+      ("웹페이지 확대", #selector(webZoomIn), "=", .command),
+      ("웹페이지 축소", #selector(webZoomOut), "-", .command),
+      ("웹페이지 원래 크기", #selector(webResetZoom), "0", .command),
+      ("브라우저에서 열기", #selector(openWebInBrowser), "", .command),
+    ] {
+      let item = webMenu.addItem(withTitle: title, action: action, keyEquivalent: key)
+      item.target = self
+      item.keyEquivalentModifierMask = modifiers
+    }
+    webItem.submenu = webMenu
+    mainMenu.addItem(webItem)
 
     let editItem = NSMenuItem()
     let editMenu = NSMenu(title: "편집")

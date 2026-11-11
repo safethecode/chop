@@ -1,0 +1,14 @@
+{
+  "base_commit": "fa0e90fbf2fb042f495657e8969bc696aad2776c",
+  "note": "E-W0 첫 실제 렌더의 추적 소스 diff와 당시 새 웹 뷰 원문. 후속 수정을 덮어쓰지 않은 원본 보존.",
+  "sources": [
+    {
+      "path": "design/web-preview-reference/first-source.patch.txt",
+      "sha256": "344861f1383862b92e483846bda9677dadf4ed0ceb2a617a6e603a73ecd1a3c6"
+    },
+    {
+      "path": "design/web-preview-reference/first-web-preview.swift.txt",
+      "sha256": "7965e52809c3c16a0c3eadd8a97d333898abae67d57e24d2bc7edb7420fb8cc1"
+    }
+  ]
+}

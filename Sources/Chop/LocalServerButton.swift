@@ -6,6 +6,14 @@ final class LocalServerButton: NSButton {
   private(set) var urls: [URL] = []
   private var compact = false
   var openURL: (URL) -> Void = { NSWorkspace.shared.open($0) }
+  var opensInPreview = false {
+    didSet {
+      image = NSImage(
+        systemSymbolName: opensInPreview ? "globe" : "arrow.up.right", accessibilityDescription: nil
+      )?
+      .withSymbolConfiguration(.init(pointSize: 14, weight: .medium))
+    }
+  }
 
   init() {
     super.init(frame: .zero)
@@ -40,9 +48,22 @@ final class LocalServerButton: NSButton {
         .replacingOccurrences(of: "https://", with: "").replacingOccurrences(
           of: "http://", with: "")
     title = address + (urls.count > 1 ? " +\(urls.count - 1)" : "")
-    toolTip = urls.map(\.absoluteString).joined(separator: "\n")
+    toolTip =
+      urls.map(\.absoluteString).joined(separator: "\n")
+      + (opensInPreview ? "\n클릭: 새 칸에서 미리보기 · 우클릭: 브라우저에서 열기" : "")
     setAccessibilityLabel(
-      urls.count == 1 ? "로컬 서버 \(first.absoluteString) 열기" : "로컬 서버 \(urls.count)개 보기")
+      urls.count == 1
+        ? "로컬 서버 \(first.absoluteString) \(opensInPreview ? "새 칸에서 미리보기" : "열기")"
+        : "로컬 서버 \(urls.count)개 보기")
+    let externalMenu = NSMenu()
+    for url in urls {
+      let item = externalMenu.addItem(
+        withTitle: urls.count == 1 ? "브라우저에서 열기" : "\(url.absoluteString) 브라우저에서 열기",
+        action: #selector(openExternal(_:)), keyEquivalent: "")
+      item.target = self
+      item.representedObject = url
+    }
+    menu = externalMenu
   }
 
   func setCompact(_ value: Bool) {
@@ -71,5 +92,10 @@ final class LocalServerButton: NSButton {
     // A menu can remain open while the listener exits; do not open a removed endpoint.
     guard let url = sender.representedObject as? URL, urls.contains(url) else { return }
     openURL(url)
+  }
+
+  @objc private func openExternal(_ sender: NSMenuItem) {
+    guard let url = sender.representedObject as? URL, urls.contains(url) else { return }
+    NSWorkspace.shared.open(url)
   }
 }

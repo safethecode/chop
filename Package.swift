@@ -22,6 +22,7 @@ let package = Package(
         .linkedFramework("Metal"),
         .linkedFramework("QuartzCore"),
         .linkedFramework("IOSurface"),
+        .linkedFramework("WebKit"),
       ]
     ),
     .testTarget(name: "ChopTests", dependencies: ["Chop"]),

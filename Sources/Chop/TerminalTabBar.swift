@@ -19,7 +19,8 @@ final class TerminalTabBar: NSView {
   init(
     panes: [TerminalPaneView], selectedID: UUID, mode: AppearanceMode,
     onSelect: @escaping (UUID) -> Void, onAdd: @escaping () -> Void, onClose: @escaping () -> Void,
-    onRename: @escaping (UUID) -> Void
+    onRename: @escaping (UUID) -> Void,
+    onPreview: @escaping (URL) -> Void = { NSWorkspace.shared.open($0) }
   ) {
     ids = panes.map(\.id)
     self.selectedID = selectedID
@@ -64,6 +65,8 @@ final class TerminalTabBar: NSView {
     scroll.drawsBackground = false
     addSubview(scroll)
     addSubview(serverButton)
+    serverButton.opensInPreview = true
+    serverButton.openURL = onPreview
     for button in [addButton, closeButton] {
       button.target = self
       addSubview(button)
@@ -94,13 +97,20 @@ final class TerminalTabBar: NSView {
     for (button, id) in zip(buttons, ids) {
       guard let pane = panes.first(where: { $0.id == id }) else { continue }
       button.title = pane.name
-      button.toolTip = "\(pane.name) — \(pane.workingDirectory)\n우클릭으로 이름 바꾸기"
+      button.image =
+        pane.browser == nil
+        ? nil : NSImage(systemSymbolName: "globe", accessibilityDescription: "웹사이트")
+      button.imagePosition = .imageLeading
+      button.toolTip = "\(pane.name) — \(pane.locationDescription)\n우클릭으로 이름 바꾸기"
       button.setAccessibilityLabel(pane.name)
       button.state = id == selectedID ? .on : .off
     }
     addButton.isEnabled = panes.count < 16
     closeButton.isEnabled =
       panes.first { $0.id == selectedID }.map { $0.isRunning || panes.count > 1 } ?? false
+    let isWeb = panes.first { $0.id == selectedID }?.browser != nil
+    closeButton.setAccessibilityLabel(isWeb ? "선택한 웹사이트 닫기" : "선택한 터미널 닫기")
+    closeButton.toolTip = isWeb ? "선택한 웹사이트 닫기" : "선택한 터미널 닫기"
     needsLayout = true
   }
 

@@ -7,6 +7,7 @@ final class TerminalPaneView: NSView {
   let engine: TerminalEngine
   let workspaceID: UUID
   private(set) var terminal: TerminalView?
+  private(set) var browser: WebPreviewView?
   var workingDirectory: String
   var name: String {
     didSet {
@@ -16,6 +17,7 @@ final class TerminalPaneView: NSView {
   }
   var onChange: (() -> Void)?
   var onLocalServersChange: (() -> Void)?
+  var onWebPreviewRequested: ((URL?) -> Void)?
   var localServerURLs: [URL] { terminal?.localServerURLs ?? [] }
   var onFocus: (() -> Void)?
   var onSplitRequested: ((SplitAxis) -> Void)?
@@ -81,7 +83,10 @@ final class TerminalPaneView: NSView {
   @available(*, unavailable)
   required init?(coder: NSCoder) { fatalError("Use init(engine:).") }
 
-  var isRunning: Bool { terminal != nil }
+  var isRunning: Bool { terminal != nil || browser != nil }
+  var locationDescription: String {
+    browser.map { $0.url?.absoluteString ?? "웹사이트" } ?? workingDirectory
+  }
   var needsConfirmClose: Bool { terminal?.needsConfirmClose ?? false }
 
   /// Refreshes pane chrome, including hidden panes, without recreating the terminal surface.
@@ -94,6 +99,7 @@ final class TerminalPaneView: NSView {
     pathLabel.textColor = mode.secondaryForeground
     serverButton.contentTintColor = mode.secondaryForeground
     errorLabel.textColor = mode.secondaryForeground
+    browser?.applyAppearance(mode)
     updateDropHighlight()
   }
 
@@ -179,7 +185,7 @@ final class TerminalPaneView: NSView {
   }
 
   @objc func openTerminal() {
-    guard terminal == nil else {
+    guard !isRunning else {
       focus()
       return
     }
@@ -227,6 +233,16 @@ final class TerminalPaneView: NSView {
   }
 
   func closeTerminal() {
+    if let browser {
+      browser.close()
+      browser.removeFromSuperview()
+      self.browser = nil
+      updateAddButton()
+      updateHeader()
+      focus()
+      onChange?()
+      return
+    }
     guard let terminal else { return }
     workingDirectory = terminal.workingDirectory
     terminal.close()
@@ -236,6 +252,36 @@ final class TerminalPaneView: NSView {
     errorLabel.isHidden = true
     openButton.setAccessibilityLabel("터미널 열기")
     openButton.toolTip = "터미널 열기"
+    updateHeader()
+    focus()
+    onChange?()
+  }
+
+  func openWebPage(_ url: URL? = nil) {
+    guard !isRunning else {
+      focus()
+      return
+    }
+    let view = WebPreviewView()
+    browser = view
+    view.onFocus = { [weak self] in self?.onFocus?() }
+    view.onURLChange = { [weak self] in
+      self?.updateHeader()
+      self?.onChange?()
+    }
+    view.applyAppearance(engine.appearanceMode)
+    body.addSubview(view)
+    view.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      view.leadingAnchor.constraint(equalTo: body.leadingAnchor),
+      view.trailingAnchor.constraint(equalTo: body.trailingAnchor),
+      view.topAnchor.constraint(equalTo: body.topAnchor),
+      view.bottomAnchor.constraint(equalTo: body.bottomAnchor),
+    ])
+    body.addSubview(openButton, positioned: .above, relativeTo: view)
+    updateAddButton()
+    errorLabel.isHidden = true
+    if let url { view.load(url) }
     updateHeader()
     focus()
     onChange?()
@@ -257,6 +303,10 @@ final class TerminalPaneView: NSView {
   }
 
   func focus() {
+    if let browser {
+      browser.focus()
+      return
+    }
     window?.makeFirstResponder(terminal ?? openButton)
     onFocus?()
   }
@@ -306,7 +356,7 @@ final class TerminalPaneView: NSView {
 
   private func updateAddButton() {
     openButton.isHidden = isRunning && !isEditing
-    let label = isRunning ? "터미널 추가" : "터미널 열기"
+    let label = isRunning ? "칸 추가" : "터미널 열기"
     openButton.setAccessibilityLabel(label)
     openButton.toolTip = label
   }
@@ -341,6 +391,11 @@ final class TerminalPaneView: NSView {
     pathLabel.lineBreakMode = .byTruncatingMiddle
     pathLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     pathLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+    serverButton.opensInPreview = true
+    serverButton.openURL = { [weak self] url in
+      self?.onFocus?()
+      self?.onWebPreviewRequested?(url)
+    }
     let close = ChopStyle.iconButton(
       "xmark", label: "터미널 닫기", target: self, action: #selector(requestClose))
     closeButton = close
@@ -403,11 +458,12 @@ final class TerminalPaneView: NSView {
     updateMoveHandle()
     moveHandle.setAccessibilityLabel("\(name) 이동")
     updateNameButton()
-    pathLabel.stringValue = (workingDirectory as NSString).abbreviatingWithTildeInPath
-    pathLabel.toolTip = workingDirectory
+    pathLabel.stringValue =
+      browser == nil ? (workingDirectory as NSString).abbreviatingWithTildeInPath : ""
+    pathLabel.toolTip = locationDescription
     terminal?.setAccessibilityLabel("\(name) 터미널")
     closeButton.isEnabled = isRunning || canRemove
-    let closeLabel = isRunning ? "터미널 닫기" : "빈 칸 제거"
+    let closeLabel = browser != nil ? "웹사이트 닫기" : isRunning ? "터미널 닫기" : "빈 칸 제거"
     closeButton.setAccessibilityLabel(closeLabel)
     closeButton.toolTip = closeLabel
     let zoomLabel = isZoomed ? "전체 레이아웃으로 돌아가기" : "칸 확대"
@@ -442,7 +498,7 @@ final class TerminalPaneView: NSView {
     titleButton.attributedTitle = NSAttributedString(
       string: name,
       attributes: [.font: ChopStyle.font, .foregroundColor: engine.appearanceMode.foreground])
-    titleButton.toolTip = "\(name) — 이름 바꾸기 (⌘⇧R)\n\(workingDirectory)"
+    titleButton.toolTip = "\(name) — 이름 바꾸기 (⌘⇧R)\n\(locationDescription)"
     titleButton.setAccessibilityLabel("\(name) 이름 바꾸기")
   }
 }

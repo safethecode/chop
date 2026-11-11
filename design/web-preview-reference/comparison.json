@@ -1,0 +1,89 @@
+{
+  "schema_version": 2,
+  "handoff_sha256": "67ada5c8aab1abc320189fd5331ed68f83a546611e1f5d921f9c98a74fb4fad6",
+  "target_sha256": "4be7cb7d3973f05c04e5b7812cb85ebeb9e189a7d4081cccf62390a47e9a1cd9",
+  "core_review": {
+    "path": "design/web-preview-reference/core-review.json",
+    "sha256": "be44ae3da2af3b575ebeef1fed921a642c56fa976adc7265bf364ec14befe5f3"
+  },
+  "consumption": [
+    {
+      "ref": "RAW-grid",
+      "status": "applied",
+      "target": "혼합 Workspace canvas/TerminalPaneView header/WebPreviewView native chrome",
+      "interpretation": "E-W0/4에서 원본 동등 격자/작은 header/중앙 plus를 직접 대조했다. 웹 주소 행/하단 globe는 사용자 요청의 확장이며 페이지 본문은 제삼자 문서로 분리한다. 원본 폰트 미확인은 유지하고14pt native 토큰과 사이트 CSS를 구분한다."
+    },
+    {
+      "ref": "E-canvas",
+      "status": "applied",
+      "target": "혼합 Workspace canvas/TerminalPaneView header/WebPreviewView native chrome",
+      "interpretation": "E-W0/4에서 원본 동등 격자/작은 header/중앙 plus를 직접 대조했다. 웹 주소 행/하단 globe는 사용자 요청의 확장이며 페이지 본문은 제삼자 문서로 분리한다. 원본 폰트 미확인은 유지하고14pt native 토큰과 사이트 CSS를 구분한다."
+    },
+    {
+      "ref": "O-columns",
+      "status": "applied",
+      "target": "혼합 Workspace canvas/TerminalPaneView header/WebPreviewView native chrome",
+      "interpretation": "E-W0/4에서 원본 동등 격자/작은 header/중앙 plus를 직접 대조했다. 웹 주소 행/하단 globe는 사용자 요청의 확장이며 페이지 본문은 제삼자 문서로 분리한다. 원본 폰트 미확인은 유지하고14pt native 토큰과 사이트 CSS를 구분한다."
+    },
+    {
+      "ref": "O-rows",
+      "status": "applied",
+      "target": "혼합 Workspace canvas/TerminalPaneView header/WebPreviewView native chrome",
+      "interpretation": "E-W0/4에서 원본 동등 격자/작은 header/중앙 plus를 직접 대조했다. 웹 주소 행/하단 globe는 사용자 요청의 확장이며 페이지 본문은 제삼자 문서로 분리한다. 원본 폰트 미확인은 유지하고14pt native 토큰과 사이트 CSS를 구분한다."
+    },
+    {
+      "ref": "O-hierarchy",
+      "status": "applied",
+      "target": "혼합 Workspace canvas/TerminalPaneView header/WebPreviewView native chrome",
+      "interpretation": "E-W0/4에서 원본 동등 격자/작은 header/중앙 plus를 직접 대조했다. 웹 주소 행/하단 globe는 사용자 요청의 확장이며 페이지 본문은 제삼자 문서로 분리한다. 원본 폰트 미확인은 유지하고14pt native 토큰과 사이트 CSS를 구분한다."
+    },
+    {
+      "ref": "O-historical-focus",
+      "status": "applied",
+      "target": "혼합 Workspace canvas/TerminalPaneView header/WebPreviewView native chrome",
+      "interpretation": "E-W0/4에서 원본 동등 격자/작은 header/중앙 plus를 직접 대조했다. 웹 주소 행/하단 globe는 사용자 요청의 확장이며 페이지 본문은 제삼자 문서로 분리한다. 원본 폰트 미확인은 유지하고14pt native 토큰과 사이트 CSS를 구분한다."
+    },
+    {
+      "ref": "O-font",
+      "status": "unverified",
+      "target": "혼합 Workspace canvas/TerminalPaneView header/WebPreviewView native chrome",
+      "interpretation": "E-W0/4에서 원본 동등 격자/작은 header/중앙 plus를 직접 대조했다. 웹 주소 행/하단 globe는 사용자 요청의 확장이며 페이지 본문은 제삼자 문서로 분리한다. 원본 폰트 미확인은 유지하고14pt native 토큰과 사이트 CSS를 구분한다."
+    },
+    {
+      "ref": "A-current-user",
+      "status": "applied",
+      "target": "혼합 Workspace canvas/TerminalPaneView header/WebPreviewView native chrome",
+      "interpretation": "E-W0/4에서 원본 동등 격자/작은 header/중앙 plus를 직접 대조했다. 웹 주소 행/하단 globe는 사용자 요청의 확장이며 페이지 본문은 제삼자 문서로 분리한다. 원본 폰트 미확인은 유지하고14pt native 토큰과 사이트 CSS를 구분한다."
+    }
+  ],
+  "results": [
+    {
+      "id": "Q-columns",
+      "capture": {
+        "path": "design/evidence/web-preview.md",
+        "sha256": "9c2ce96561a89e5f23826ce2ad085567665c3750d84948af4abfbb2e24d290a1"
+      },
+      "actual": {
+        "value": 1,
+        "unit": "ratio",
+        "method": "E-W0와 최종 E-W4의 실제 canvas 경계 직접 판독, 두 열/행 약1(시각 추정±0.01), 최초원본 약1/허용0.02; native 최소 관계도54개 검사에서 확인."
+      }
+    },
+    {
+      "id": "Q-rows",
+      "capture": {
+        "path": "design/evidence/web-preview.md",
+        "sha256": "9c2ce96561a89e5f23826ce2ad085567665c3750d84948af4abfbb2e24d290a1"
+      },
+      "actual": {
+        "value": 1,
+        "unit": "ratio",
+        "method": "E-W0와 최종 E-W4의 실제 canvas 경계 직접 판독, 두 열/행 약1(시각 추정±0.01), 최초원본 약1/허용0.02; native 최소 관계도54개 검사에서 확인."
+      }
+    }
+  ],
+  "visual_review": {
+    "status": "adapted-and-verified",
+    "reason": "E-W0 첫 실제 로컬 페이지와 E-W4 최종 두 모드/작은 창을 원본 default-grid crop의 동등한 열/행·작은 header·중앙 plus 관계에 대조했다. 두 열/행 비율은 약1(시각 추정±0.01)로 원본 약1/허용0.02 안이다. 웹 칸의 추가 주소 행과 globe는 같은 창 새 칸이라는 사용자 확장이며 기존 terminal/header/48pt rail을 밀지 않는다. 첫 렌더와 후속 JS 시트/초점 결함 수정은 구분한다. 원본 미확인 폰트는 여전히 미확인이고 제삼자 페이지를 UI 원본으로 삼지 않는다."
+  }
+}
