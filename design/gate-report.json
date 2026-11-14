@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
   "reviewer": "Codex 셀프 리뷰 (독립 승인 아님)",
-  "reviewed_at": "2026-11-11",
-  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics. PR #8: changed appearance scopes rechecked against actual light/dark screenshots and E-A1–A6; unchanged structure/native exceptions retain earlier evidence; local 10-test suite rerun. No independent approval or exported PNG claimed. PR #10: toolbar icon roles, copy, geometry and actions rechecked in actual CUA images/AX, four layouts, both modes, minimum window and restart. Existing scopes outside changed toolbar retain prior observations and rerun PTY checks. PR #11: changed handle, preview, movement, keyboard, same live PTY and persisted order rechecked; direct user acceptance covers requested motion. CUA cannot capture transient drag frames; Reduce Motion physical settings were not changed. Unchanged exclusions/native exceptions retain prior evidence; 11-test checks rerun. PR #12: actual CUA light/dark header/body contrast, five-pane editing/zoom/hidden-pane updates rechecked; no new text/geometry. Existing exceptions and unrelated observations retained. 11-test check passed. Final PR #12 review follow-up adds only three doc comments in response to CodeRabbit coverage warning. Strict format/diff checks passed; no executable behavior or visual contract changed, so E-H1–5 remains applicable. External review coverage is explicitly fccec, follow-up comments self-reviewed. PR #13: pane focus outline removed by explicit user request. Real mouse/keyboard shell input and AX focus, light/dark, zoom and drag swap-back were rechecked in current CUA renders. Previous focus-border appearance is historical; RUI-23 declares the user-requested terminal-only exception, native control focus remains. No transient drag screenshot or full VoiceOver claim. Unchanged scopes retain prior evidence. PR #14: changed toolbar/body/file-panel consumers rechecked in actual CUA, including user hierarchy and stray-line corrections, long path, reopen, two-mode minimum, native folder picker, literal paths, folder expansion, copy/Finder and live shell preservation.15 tests passed. Final restart OS open wait and picker recovery are documented; no permission root cause claimed. Final pointer swap succeeded with2× image coordinates, keyboard restored original order. No drag implementation change or transient-frame claim. Unchanged native exclusions retain prior evidence. PR #14 follow-up: CodeRabbit actual review5101fb1/19files found one valid child metadata failure propagation. Minimal fallback plus deterministic injected-I/O regression test passed with all16 tests3.737s. Latest app restored project root and expanded Sources. Unchanged layout/appearance observations remain applicable; no external re-review of this follow-up is claimed. Path field actual dark/light click/selection/caret/edit+Enter rechecked;16 tests3.597s passed. Other native/layout/terminal consumers are unchanged. Header seam scope rechecked in actual light/dark,300→340→300pt file width,hide/reopen and editing headers.16 tests3.606s passed; no new input/drag/icon behavior. Location shortcut actual CUA icon click/three destinations, two modes,842×442 minimum and empty/long folder states rechecked;16 tests4.907s passed. Initial native glyph-width alignment failure is retained. File drop19 tests6.307s pass, typed pasteboard/argv/PTY/focus/no-Enter/lifecycle verified. Actual OS source writer observed but drop completion not verified; RUI-04/PROJECT-FILE-DROP unknown. No native endpoint or independent approval claimed.  Actual user-operated native file endpoint observed via CUA AX; no-Enter is established separately by the real PTY test, not inferred from subsequent shell output.  CUA shortcut section actual checks and19 tests4.852s passed; no external approval claimed.  Twenty tests4.923s plus native CUA endpoint checks; initial resize-hidden selection fixed and rechecked.  Twenty-two tests4.734s; unwanted scroll axis and native display-cycle crash found/fixed, native repeated switches and final zoom checks completed.  Twenty-two tests5.388s; actual four/five PTYs, ENV, native rows restore and minimum681x442 both modes passed.  Twenty-two tests5.065s and bundled icon decode; original bytes preserved; generated preview rejected, production native mask verified at actual consumers. README 변경은 readme-presentation 관찰에서 검증했다. 기존 앱 소스는 변경되지 않아 기존 규칙의 이유·예외·관찰을 유지한다. 스크롤 안정성은 즉시 native geometry 회귀와 실제 window resize/보기/확대/기존 셸 유지로 추가 검증했다. 과거 지연 수렴의 검사 한계와 native crash 기록을 지우지 않았다. 비표시 window 검사는 수정 전에도 통과했으므로 실제 앱 최초 결함과 최종 판독을 별도로 기록한다. 실제 연필 클릭·비선택 대상·잘못된 이름·취소·긴 탭·두 모드/최소·PTY·재실행을 최신main의스크롤/중앙 배치와 결합해 확인했다. 두 모드·기본/최소 창·실제 목적지/빈/오류/복구와27개 검사를 확인했다. 이번 포인터 파일 드래그 미확인은 별도로 기록하며 새 성공으로 표시하지 않는다. 파일 목록 색의 변경 범위만 새 두 모드 release 화면/27개 검사로 판독했다. 검색 변경 범위를 실제 입력/키보드/복구/두 모드·최소 창 새 렌더와32개 검사로 확인했다. V-48/F-README-MACOS-PRESENTATION의 실제 캡처/생성 배경/로컬·GitHub 판독 범위를 별도로 기록했다. 2026-10-20: changed canvas/rail/grid/search scopes rechecked in the actual isolated AppKit app, with36 passing tests. Changed dimensions/actions/theme consumers use terminal-add-rail evidence; unchanged assets/platform exceptions retain earlier observations only. No new pointer file-drop, physical Reduce Motion or full VoiceOver result is claimed. 프로젝트 윈도우 변경 범위는 project-windows.md의 실제 AppKit 관찰과38개 검사로 검증했다. Dock 항목은 코드로만 확인했고, 임시 첨부 이미지의 시각 대조나 독립적인 승인을 주장하지 않는다. 기존 미변경 근거와 플랫폼 예외는 유지한다. CodeRabbit 자동 리뷰의 설정 수명 지적을 수정하고38개 검사·실제 설정 정리/보존/재실행을 다시 검증했다. 외부 사람의 승인으로 표시하지 않는다. Input inset: actual light/dark baseline/focus and native editing/search/cancel/path/rename checked. Hover event, CAAnimation, composition and reduced-motion branch tested automatically; pointer-only hover capture unavailable through CUA coordinate actions. 40 checks pass. Unchanged assets/platform observations remain historical. CI follow-up: historical main and two PR attempts reached completed builds then stopped in testing; exact cause unproven. check.sh now explicitly disables test parallelism to isolate shared AppKit/engine process state. Same 40 assertions/tests passed sequentially in the final local check.sh (11.835s). UI source unchanged; prior actual E-I1–4 observations remain scoped. Remote CI result is recorded in the PR, not inferred from local success. Final input optimization: unchanged opacity no longer commits a layer update; same-state Reduce Motion still removes active animation. Same 40 checks passed (12.321s); actual isolated app light path/dark search caret, Tab and inset appearance rechecked. CI stack sampling added without changing checks or exit status. No CI deadlock cause is asserted. Local servers: actual isolated app light/dark, pane minimum, selected tabs, multi menu, browser pages, stop/restore observed. All44 checks pass. Markdown records directly viewed CUA images, not exported PNGs. v2 reference comparison scopes only the retained original grid and explicit user adaptations; unchanged assets retain historical observations. Self-review follow-up bounds HTTPS hint reads to the active output screen/32KiB and retains per-live-listener schemes; same44 checks passed14.196s. Changed text extraction/HTTPS fallback rechecked automatically. HTTP UI layout and action consumers are unchanged; E-L1–5 actual images are not claimed as new captures of this follow-up. Final scheme normalization/fixture read-race follow-up: uppercase HTTPS and valid-port readiness checked; same44 checks passed14.435s. UI source unchanged. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. Native sheet 최초 Cmd+Q 차단은 V-61에서 별도로 수정/실제 재검증했다. 원래 사용자 Chop은 조작/종료하지 않았다. private auth/provider·물리 VoiceOver/200%/고대비 전체는 새 성공으로 표시하지 않는다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
-  "catalog_sha256": "9af51eedfbd6625fdcae46aa6a55e6206c447fe43b23fb1d0ff61f8ac800114f",
-  "contract_sha256": "e947c610e610c02c554481c1f7c4750a67b4037cf424b922d9c4e415ef5d1fd7",
-  "target_sha256": "da3302d26e7f36c129009d372fe4c989804156fd9e5b9f8209b998ad95126d6b",
+  "reviewed_at": "2026-11-15",
+  "evidence_note": "visual Markdown files record images directly viewed in the CUA conversation; they are not exported PNG files. CLI validates record integrity, not image aesthetics. PR #8: changed appearance scopes rechecked against actual light/dark screenshots and E-A1–A6; unchanged structure/native exceptions retain earlier evidence; local 10-test suite rerun. No independent approval or exported PNG claimed. PR #10: toolbar icon roles, copy, geometry and actions rechecked in actual CUA images/AX, four layouts, both modes, minimum window and restart. Existing scopes outside changed toolbar retain prior observations and rerun PTY checks. PR #11: changed handle, preview, movement, keyboard, same live PTY and persisted order rechecked; direct user acceptance covers requested motion. CUA cannot capture transient drag frames; Reduce Motion physical settings were not changed. Unchanged exclusions/native exceptions retain prior evidence; 11-test checks rerun. PR #12: actual CUA light/dark header/body contrast, five-pane editing/zoom/hidden-pane updates rechecked; no new text/geometry. Existing exceptions and unrelated observations retained. 11-test check passed. Final PR #12 review follow-up adds only three doc comments in response to CodeRabbit coverage warning. Strict format/diff checks passed; no executable behavior or visual contract changed, so E-H1–5 remains applicable. External review coverage is explicitly fccec, follow-up comments self-reviewed. PR #13: pane focus outline removed by explicit user request. Real mouse/keyboard shell input and AX focus, light/dark, zoom and drag swap-back were rechecked in current CUA renders. Previous focus-border appearance is historical; RUI-23 declares the user-requested terminal-only exception, native control focus remains. No transient drag screenshot or full VoiceOver claim. Unchanged scopes retain prior evidence. PR #14: changed toolbar/body/file-panel consumers rechecked in actual CUA, including user hierarchy and stray-line corrections, long path, reopen, two-mode minimum, native folder picker, literal paths, folder expansion, copy/Finder and live shell preservation.15 tests passed. Final restart OS open wait and picker recovery are documented; no permission root cause claimed. Final pointer swap succeeded with2× image coordinates, keyboard restored original order. No drag implementation change or transient-frame claim. Unchanged native exclusions retain prior evidence. PR #14 follow-up: CodeRabbit actual review5101fb1/19files found one valid child metadata failure propagation. Minimal fallback plus deterministic injected-I/O regression test passed with all16 tests3.737s. Latest app restored project root and expanded Sources. Unchanged layout/appearance observations remain applicable; no external re-review of this follow-up is claimed. Path field actual dark/light click/selection/caret/edit+Enter rechecked;16 tests3.597s passed. Other native/layout/terminal consumers are unchanged. Header seam scope rechecked in actual light/dark,300→340→300pt file width,hide/reopen and editing headers.16 tests3.606s passed; no new input/drag/icon behavior. Location shortcut actual CUA icon click/three destinations, two modes,842×442 minimum and empty/long folder states rechecked;16 tests4.907s passed. Initial native glyph-width alignment failure is retained. File drop19 tests6.307s pass, typed pasteboard/argv/PTY/focus/no-Enter/lifecycle verified. Actual OS source writer observed but drop completion not verified; RUI-04/PROJECT-FILE-DROP unknown. No native endpoint or independent approval claimed.  Actual user-operated native file endpoint observed via CUA AX; no-Enter is established separately by the real PTY test, not inferred from subsequent shell output.  CUA shortcut section actual checks and19 tests4.852s passed; no external approval claimed.  Twenty tests4.923s plus native CUA endpoint checks; initial resize-hidden selection fixed and rechecked.  Twenty-two tests4.734s; unwanted scroll axis and native display-cycle crash found/fixed, native repeated switches and final zoom checks completed.  Twenty-two tests5.388s; actual four/five PTYs, ENV, native rows restore and minimum681x442 both modes passed.  Twenty-two tests5.065s and bundled icon decode; original bytes preserved; generated preview rejected, production native mask verified at actual consumers. README 변경은 readme-presentation 관찰에서 검증했다. 기존 앱 소스는 변경되지 않아 기존 규칙의 이유·예외·관찰을 유지한다. 스크롤 안정성은 즉시 native geometry 회귀와 실제 window resize/보기/확대/기존 셸 유지로 추가 검증했다. 과거 지연 수렴의 검사 한계와 native crash 기록을 지우지 않았다. 비표시 window 검사는 수정 전에도 통과했으므로 실제 앱 최초 결함과 최종 판독을 별도로 기록한다. 실제 연필 클릭·비선택 대상·잘못된 이름·취소·긴 탭·두 모드/최소·PTY·재실행을 최신main의스크롤/중앙 배치와 결합해 확인했다. 두 모드·기본/최소 창·실제 목적지/빈/오류/복구와27개 검사를 확인했다. 이번 포인터 파일 드래그 미확인은 별도로 기록하며 새 성공으로 표시하지 않는다. 파일 목록 색의 변경 범위만 새 두 모드 release 화면/27개 검사로 판독했다. 검색 변경 범위를 실제 입력/키보드/복구/두 모드·최소 창 새 렌더와32개 검사로 확인했다. V-48/F-README-MACOS-PRESENTATION의 실제 캡처/생성 배경/로컬·GitHub 판독 범위를 별도로 기록했다. 2026-10-20: changed canvas/rail/grid/search scopes rechecked in the actual isolated AppKit app, with36 passing tests. Changed dimensions/actions/theme consumers use terminal-add-rail evidence; unchanged assets/platform exceptions retain earlier observations only. No new pointer file-drop, physical Reduce Motion or full VoiceOver result is claimed. 프로젝트 윈도우 변경 범위는 project-windows.md의 실제 AppKit 관찰과38개 검사로 검증했다. Dock 항목은 코드로만 확인했고, 임시 첨부 이미지의 시각 대조나 독립적인 승인을 주장하지 않는다. 기존 미변경 근거와 플랫폼 예외는 유지한다. CodeRabbit 자동 리뷰의 설정 수명 지적을 수정하고38개 검사·실제 설정 정리/보존/재실행을 다시 검증했다. 외부 사람의 승인으로 표시하지 않는다. Input inset: actual light/dark baseline/focus and native editing/search/cancel/path/rename checked. Hover event, CAAnimation, composition and reduced-motion branch tested automatically; pointer-only hover capture unavailable through CUA coordinate actions. 40 checks pass. Unchanged assets/platform observations remain historical. CI follow-up: historical main and two PR attempts reached completed builds then stopped in testing; exact cause unproven. check.sh now explicitly disables test parallelism to isolate shared AppKit/engine process state. Same 40 assertions/tests passed sequentially in the final local check.sh (11.835s). UI source unchanged; prior actual E-I1–4 observations remain scoped. Remote CI result is recorded in the PR, not inferred from local success. Final input optimization: unchanged opacity no longer commits a layer update; same-state Reduce Motion still removes active animation. Same 40 checks passed (12.321s); actual isolated app light path/dark search caret, Tab and inset appearance rechecked. CI stack sampling added without changing checks or exit status. No CI deadlock cause is asserted. Local servers: actual isolated app light/dark, pane minimum, selected tabs, multi menu, browser pages, stop/restore observed. All44 checks pass. Markdown records directly viewed CUA images, not exported PNGs. v2 reference comparison scopes only the retained original grid and explicit user adaptations; unchanged assets retain historical observations. Self-review follow-up bounds HTTPS hint reads to the active output screen/32KiB and retains per-live-listener schemes; same44 checks passed14.196s. Changed text extraction/HTTPS fallback rechecked automatically. HTTP UI layout and action consumers are unchanged; E-L1–5 actual images are not claimed as new captures of this follow-up. Final scheme normalization/fixture read-race follow-up: uppercase HTTPS and valid-port readiness checked; same44 checks passed14.435s. UI source unchanged. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. Native sheet 최초 Cmd+Q 차단은 V-61에서 별도로 수정/실제 재검증했다. 원래 사용자 Chop은 조작/종료하지 않았다. private auth/provider·물리 VoiceOver/200%/고대비 전체는 새 성공으로 표시하지 않는다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
+  "catalog_sha256": "87c11b78536f7259e3bd838df9a14a495c0af13fdd69ba6d7c871408ff0a6216",
+  "contract_sha256": "c1c6e45b50b54589b3e6423a80e3bb0f6e220720c183424296d5a6e42f75d049",
+  "target_sha256": "7cf7e7763bfe998961aef7f0fae9586d563a2919e308becca949b45ea0cec2ac",
   "results": [
     {
       "id": "ORC-F01",
       "status": "pass",
-      "reason": "오른쪽 파일 트리와 터미널 본문은 같은 mode.background를 사용하고 헤더도 동일 neutral 역할이다. E-T1/8/9의 두 모드·최소 창에서 밝기/톤 분리를 확인했다. 이 규칙은 새 사이드바 때문에 적용 대상으로 바꿨다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "오른쪽 파일 트리와 터미널 본문은 같은 mode.background를 사용하고 헤더도 동일 neutral 역할이다. E-T1/8/9의 두 모드·최소 창에서 밝기/톤 분리를 확인했다. 이 규칙은 새 사이드바 때문에 적용 대상으로 바꿨다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "code",
@@ -111,6 +111,16 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
@@ -234,7 +244,7 @@
     {
       "id": "ORC-F03",
       "status": "exception",
-      "reason": "두 모드의 경로 글자/선택/caret 대비를 실제 확인했다. 사용자 요청으로 경로 field 외곽 focus ring만 제거했고 기존 terminal 입력 커서와 다른 native 컨트롤의 초점은 유지한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "두 모드의 경로 글자/선택/caret 대비를 실제 확인했다. 사용자 요청으로 경로 field 외곽 focus ring만 제거했고 기존 terminal 입력 커서와 다른 native 컨트롤의 초점은 유지한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "code",
@@ -340,6 +350,16 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ],
       "exception_id": "CHOP-ORC-F03"
@@ -347,7 +367,7 @@
     {
       "id": "ORC-F04",
       "status": "exception",
-      "reason": "2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "code",
@@ -413,6 +433,16 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ],
       "exception_id": "CHOP-ORC-F04"
@@ -729,7 +759,7 @@
     {
       "id": "ORC-F10",
       "status": "pass",
-      "reason": "바로가기의16pt aspect-fit 아이콘과14pt 이름을 동일 세로 중앙/고정 시작선으로 배치했다. 두 모드·최소 창 실제 화면에서 glyph 고유 폭에 따른 어긋남을 수정해 확인했다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "바로가기의16pt aspect-fit 아이콘과14pt 이름을 동일 세로 중앙/고정 시작선으로 배치했다. 두 모드·최소 창 실제 화면에서 glyph 고유 폭에 따른 어긋남을 수정해 확인했다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "code",
@@ -860,6 +890,16 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
@@ -903,7 +943,7 @@
     {
       "id": "ORC-F12",
       "status": "pass",
-      "reason": "기존 panel inset12/그룹 간8을 유지하고 바로가기 내부는 row28/gap4/icon16/name-gap8로 선택했다. 실제 최소 창/빈·긴 목록에서 중복 여백·겹침이 없었다. 바로가기 묶음 내부8pt를 추가하고108pt 높이를 실제 최소/기본 창에서 확인했다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "기존 panel inset12/그룹 간8을 유지하고 바로가기 내부는 row28/gap4/icon16/name-gap8로 선택했다. 실제 최소 창/빈·긴 목록에서 중복 여백·겹침이 없었다. 바로가기 묶음 내부8pt를 추가하고108pt 높이를 실제 최소/기본 창에서 확인했다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "code",
@@ -1039,6 +1079,16 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
@@ -1144,7 +1194,7 @@
     {
       "id": "ORC-F16",
       "status": "pass",
-      "reason": "세 바로가기는 고정 높이의 목적지 행이고 외부 scroller를 추가하지 않았다. 실제 빈 폴더는 scrollbar가 없고 긴 파일 목록만 기존 native scroll을 표시했다. 이번 overflow canvas는 실제 pane 최소 크기 때문에만 native 스크롤하며 반대 축 불필요 scroller를 legacy 회귀와 실제 두 모드로 검증했다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "세 바로가기는 고정 높이의 목적지 행이고 외부 scroller를 추가하지 않았다. 실제 빈 폴더는 scrollbar가 없고 긴 파일 목록만 기존 native scroll을 표시했다. 이번 overflow canvas는 실제 pane 최소 크기 때문에만 native 스크롤하며 반대 축 불필요 scroller를 legacy 회귀와 실제 두 모드로 검증했다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "code",
@@ -1290,6 +1340,21 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
@@ -2345,7 +2410,7 @@
     {
       "id": "ORC-G10",
       "status": "pass",
-      "reason": "terminal/file 헤더가 동일 mode.headerBackground/foreground와 공통 행을 소비한다. 두 모드 실제 화면에서 header 사이 기능 경계의 색 틈이 없어 같은 표면으로 읽힌다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "terminal/file 헤더가 동일 mode.headerBackground/foreground와 공통 행을 소비한다. 두 모드 실제 화면에서 header 사이 기능 경계의 색 틈이 없어 같은 표면으로 읽힌다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "code",
@@ -2466,13 +2531,23 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
     {
       "id": "ORC-G11",
       "status": "exception",
-      "reason": "일반/편집/폭 변경의 실제 화면에서 terminal/file 제목·경로·아이콘이 같은 중앙선에 놓이고 읽혔다. 글자/본문 치수는 바꾸지 않았다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "일반/편집/폭 변경의 실제 화면에서 terminal/file 제목·경로·아이콘이 같은 중앙선에 놓이고 읽혔다. 글자/본문 치수는 바꾸지 않았다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "code",
@@ -2588,6 +2663,16 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ],
       "exception_id": "CHOP-ORC-G11"
@@ -2595,7 +2680,7 @@
     {
       "id": "ORC-G12",
       "status": "exception",
-      "reason": "2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "code",
@@ -2661,6 +2746,16 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ],
       "exception_id": "CHOP-ORC-G12"
@@ -2942,7 +3037,7 @@
     {
       "id": "ORC-G18",
       "status": "pass",
-      "reason": "house/arrow.down.circle/doc의 다른 고유 폭이 이름 시작선을 바꾸지 않게16pt icon 열과8pt 간격을 적용했다. 실제 glyph/name 중앙과 세 목적지 행동을 확인했다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "house/arrow.down.circle/doc의 다른 고유 폭이 이름 시작선을 바꾸지 않게16pt icon 열과8pt 간격을 적용했다. 실제 glyph/name 중앙과 세 목적지 행동을 확인했다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "code",
@@ -3068,6 +3163,16 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
@@ -3111,7 +3216,7 @@
     {
       "id": "ORC-G20",
       "status": "pass",
-      "reason": "동일28pt 행/4pt 간격/16pt icon/8pt 이름 간격을 공유한다. 실제 기본/최소 창과 빈·긴 목록에서 부모 padding 중첩 없이 정렬됐다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "동일28pt 행/4pt 간격/16pt icon/8pt 이름 간격을 공유한다. 실제 기본/최소 창과 빈·긴 목록에서 부모 padding 중첩 없이 정렬됐다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "code",
@@ -3237,6 +3342,16 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
@@ -3373,7 +3488,7 @@
     {
       "id": "ORC-G23",
       "status": "pass",
-      "reason": "바로가기 그룹 자체는 스크롤하지 않으며 빈 임시 폴더에 불필요한 scroller가 없다. 실제 긴 Downloads 목록은 native scroll을 유지하고 최소 창에서도 조작을 가리지 않는다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "바로가기 그룹 자체는 스크롤하지 않으며 빈 임시 폴더에 불필요한 scroller가 없다. 실제 긴 Downloads 목록은 native scroll을 유지하고 최소 창에서도 조작을 가리지 않는다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "code",
@@ -3504,6 +3619,21 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
@@ -4145,7 +4275,7 @@
     {
       "id": "ORC-A10",
       "status": "exception",
-      "reason": "실제 async loading/빈 폴더/없는 경로 오류/복구/늦은 응답 거절을 확인했다. OS open 대기 조합은 별도 관찰로 남기고 다른 경로/폴더 선택기로 복구했다. 상태 문구가 실제 읽기 상태와 일치한다. CodeRabbit의 개별 metadata 실패 전파를 확인해 이름/leaf fallback으로 수정했다. 오류 주입 회귀 검사와 최신 앱의 일반 폴더 표시/펼치기로 재검증했다. 검색어 변경은10초/10만 항목 캐시를 재사용하며75ms 입력 대기와 부분 결과/읽기 취소를 적용했다. 실제 Sources 검색3→2건·새로고침·지우기·두 모드/축소 창을 확인했다. 1만 파일 측정459→39ms는 환경 한정이며 새로고침·캐시 만료로 외부 변경을 반영한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "실제 async loading/빈 폴더/없는 경로 오류/복구/늦은 응답 거절을 확인했다. OS open 대기 조합은 별도 관찰로 남기고 다른 경로/폴더 선택기로 복구했다. 상태 문구가 실제 읽기 상태와 일치한다. CodeRabbit의 개별 metadata 실패 전파를 확인해 이름/leaf fallback으로 수정했다. 오류 주입 회귀 검사와 최신 앱의 일반 폴더 표시/펼치기로 재검증했다. 검색어 변경은10초/10만 항목 캐시를 재사용하며75ms 입력 대기와 부분 결과/읽기 취소를 적용했다. 실제 Sources 검색3→2건·새로고침·지우기·두 모드/축소 창을 확인했다. 1만 파일 측정459→39ms는 환경 한정이며 새로고침·캐시 만료로 외부 변경을 반영한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "code",
@@ -4281,6 +4411,21 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ],
       "exception_id": "CHOP-ORC-A10"
@@ -4293,7 +4438,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "spec",
@@ -4452,7 +4597,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "spec",
@@ -4509,12 +4654,12 @@
     {
       "id": "RUI-04",
       "status": "pass",
-      "reason": "홈 아이콘 포인터 클릭과 문서/다운로드 실제 클릭으로 각 목적지 경로가 바뀌는 것을 확인했다. native full-row hit/AX 버튼 역할과16개 기존 경로/PTY 검사를 보존한다. 파일 드롭의 실제 사용자 조작 후 endpoint를 AX로 확인했으며 Enter 미전송은 실제 PTY 검사로 별도 확인했다. 이번 단일 탭 보기는 실제4셸 전환/ENV 보존/추가·닫기/가로 탐색/복원을 확인했다. 실제4/5셸 좌우/격자/탭 전환과 keyboard/manual scroll, ENV 보존 및 확대를 확인했다. 상하4/5셸 전환과 모든 모드 연속 전환/ENV 유지/Scroll Up·keyboard focus/재실행을 실제 확인했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 실제 세로 +/⌘T로 빈 칸을 채워5·8·16개를 만들고 한도 비활성/닫기 후 활성·확대 중 추가·탭/패널 숨김·키보드 focus/스크롤과 ENV 출력을 확인했다. 16개 실제 재실행과36개 check.sh 검사에서 분할/PTY 보존과 cwd·snapshot을 검증했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "홈 아이콘 포인터 클릭과 문서/다운로드 실제 클릭으로 각 목적지 경로가 바뀌는 것을 확인했다. native full-row hit/AX 버튼 역할과16개 기존 경로/PTY 검사를 보존한다. 파일 드롭의 실제 사용자 조작 후 endpoint를 AX로 확인했으며 Enter 미전송은 실제 PTY 검사로 별도 확인했다. 이번 단일 탭 보기는 실제4셸 전환/ENV 보존/추가·닫기/가로 탐색/복원을 확인했다. 실제4/5셸 좌우/격자/탭 전환과 keyboard/manual scroll, ENV 보존 및 확대를 확인했다. 상하4/5셸 전환과 모든 모드 연속 전환/ENV 유지/Scroll Up·keyboard focus/재실행을 실제 확인했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 실제 세로 +/⌘T로 빈 칸을 채워5·8·16개를 만들고 한도 비활성/닫기 후 활성·확대 중 추가·탭/패널 숨김·키보드 focus/스크롤과 ENV 출력을 확인했다. 16개 실제 재실행과36개 check.sh 검사에서 분할/PTY 보존과 cwd·snapshot을 검증했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "interaction",
@@ -4695,6 +4840,16 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
@@ -4706,7 +4861,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "visual",
@@ -4778,7 +4933,7 @@
     {
       "id": "RUI-06",
       "status": "pass",
-      "reason": "바로가기 native button 구성·hitTest/AX 의미를 셀프 리뷰했다. strict format/build/signature와 전체16개 테스트4.907초 및 실제 목적지 입력을 확인했다. 파일 드롭 source/대상 수명·인용을 셀프 리뷰했고19개 검사4.111초와 최신 원격 CI가 통과했다. 좌우↔탭 실제 전환에서 발견한 display-cycle crash를 다음 main queue 크기 정리로 수정하고 실제5회 왕복과22개 검사를 다시 확인했다. 실제 세로 +/⌘T로 빈 칸을 채워5·8·16개를 만들고 한도 비활성/닫기 후 활성·확대 중 추가·탭/패널 숨김·키보드 focus/스크롤과 ENV 출력을 확인했다. 16개 실제 재실행과36개 check.sh 검사에서 분할/PTY 보존과 cwd·snapshot을 검증했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "바로가기 native button 구성·hitTest/AX 의미를 셀프 리뷰했다. strict format/build/signature와 전체16개 테스트4.907초 및 실제 목적지 입력을 확인했다. 파일 드롭 source/대상 수명·인용을 셀프 리뷰했고19개 검사4.111초와 최신 원격 CI가 통과했다. 좌우↔탭 실제 전환에서 발견한 display-cycle crash를 다음 main queue 크기 정리로 수정하고 실제5회 왕복과22개 검사를 다시 확인했다. 실제 세로 +/⌘T로 빈 칸을 채워5·8·16개를 만들고 한도 비활성/닫기 후 활성·확대 중 추가·탭/패널 숨김·키보드 focus/스크롤과 ENV 출력을 확인했다. 16개 실제 재실행과36개 check.sh 검사에서 분할/PTY 보존과 cwd·snapshot을 검증했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "code",
@@ -4849,18 +5004,23 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
     {
       "id": "RUI-07",
       "status": "pass",
-      "reason": "파일 header/path 아래 목적지 묶음과 그 아래 파일 outline의 계층을 유지한다. 사용자 crop의 왼쪽 icon+이름 관계를 최소 폭에서도 읽히도록 세로 행으로 적용했다. 바로가기만 중립 surface로 구분해 목적지 묶음과 실제 파일 contents의 계층을 명확히 했다. 단일 모드에서는 중복 pane header 대신 같은40pt 가로 탭 행을 file header와 정렬하며 toolbar 계층을 보존한다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "파일 header/path 아래 목적지 묶음과 그 아래 파일 outline의 계층을 유지한다. 사용자 crop의 왼쪽 icon+이름 관계를 최소 폭에서도 읽히도록 세로 행으로 적용했다. 바로가기만 중립 surface로 구분해 목적지 묶음과 실제 파일 contents의 계층을 명확히 했다. 단일 모드에서는 중복 pane header 대신 같은40pt 가로 탭 행을 file header와 정렬하며 toolbar 계층을 보존한다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "visual",
@@ -5046,6 +5206,16 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
@@ -5057,7 +5227,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "code",
@@ -5234,7 +5404,7 @@
     {
       "id": "RUI-09",
       "status": "exception",
-      "reason": "바로가기 라벨은 system14pt medium을 재사용한다.16pt icon box와 native 버튼 높이를 글자 크기로 오인하지 않으며 작은 자체 보조 문구를 추가하지 않았다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "바로가기 라벨은 system14pt medium을 재사용한다.16pt icon box와 native 버튼 높이를 글자 크기로 오인하지 않으며 작은 자체 보조 문구를 추가하지 않았다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "code",
@@ -5375,6 +5545,16 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ],
       "exception_id": "CHOP-RUI-09"
@@ -5382,12 +5562,12 @@
     {
       "id": "RUI-10",
       "status": "pass",
-      "reason": "세 바로가기는 이름이 명시된 목적지 행이며 CTA나 새 navigation 탭이 아니다. native NSButton target-action/tooltip/AX 이름과 실제 폴더 이동을 유지한다. 2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "세 바로가기는 이름이 명시된 목적지 행이며 CTA나 새 navigation 탭이 아니다. native NSButton target-action/tooltip/AX 이름과 실제 폴더 이동을 유지한다. 2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "visual",
@@ -5483,18 +5663,28 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
     {
       "id": "RUI-11",
       "status": "pass",
-      "reason": "파일 제목과 직접 경로를 표시하고 매 행에 설명을 붙이지 않는다. loading/empty/error는 실제 해당 상태에서만 나타나며 실패 후 입력/선택/새로고침으로 복구한다. 2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "파일 제목과 직접 경로를 표시하고 매 행에 설명을 붙이지 않는다. loading/empty/error는 실제 해당 상태에서만 나타나며 실패 후 입력/선택/새로고침으로 복구한다. 2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "visual",
@@ -5590,6 +5780,16 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
@@ -6046,7 +6246,7 @@
     {
       "id": "RUI-14",
       "status": "exception",
-      "reason": "새 장식 바를 만들지 않고 기능 divider의 header 부분만 동일 배경으로 채운다. 본문 resize hit 영역을 유지하며 숨김 때 divider와 잔상이 없다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "새 장식 바를 만들지 않고 기능 divider의 header 부분만 동일 배경으로 채운다. 본문 resize hit 영역을 유지하며 숨김 때 divider와 잔상이 없다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "code",
@@ -6177,6 +6377,16 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ],
       "exception_id": "CHOP-RUI-14"
@@ -6190,7 +6400,7 @@
     {
       "id": "RUI-16",
       "status": "pass",
-      "reason": "Finder crop의 같은 icon 열/이름 시작선·세로 행 관계를 실제 구현에 연결했다. 한국어 세 목적지는 기존 요청을 유지하고 glyph 폭 어긋남을 실제 화면에서 수정했다. 사용자가 지정한 PCMag macOS 구도에 따라 원본 실제 창과 오리지널 생성 배경을 HTML/CSS로 구성했다. 같은1280×720 구도의 세 사진·GitHub picture/목차/실제 이미지 로드를 판독했고 생성 범위와 실제 앱 픽셀/출력을 구분한다. 앱 UI는 변경하지 않았다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20: Ghostty처럼 프로젝트별 창을 여는 행동 요청을 기존 native 파일/윈도우 메뉴·폴더 선택기에 적용했다. 첨부 임시 이미지는 OS 권한으로 읽지 못했으므로 시각 복제라고 주장하지 않는다. 새 사이드바/장식/상시 설명은 추가하지 않았다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "Finder crop의 같은 icon 열/이름 시작선·세로 행 관계를 실제 구현에 연결했다. 한국어 세 목적지는 기존 요청을 유지하고 glyph 폭 어긋남을 실제 화면에서 수정했다. 사용자가 지정한 PCMag macOS 구도에 따라 원본 실제 창과 오리지널 생성 배경을 HTML/CSS로 구성했다. 같은1280×720 구도의 세 사진·GitHub picture/목차/실제 이미지 로드를 판독했고 생성 범위와 실제 앱 픽셀/출력을 구분한다. 앱 UI는 변경하지 않았다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20: Ghostty처럼 프로젝트별 창을 여는 행동 요청을 기존 native 파일/윈도우 메뉴·폴더 선택기에 적용했다. 첨부 임시 이미지는 OS 권한으로 읽지 못했으므로 시각 복제라고 주장하지 않는다. 새 사이드바/장식/상시 설명은 추가하지 않았다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "spec",
@@ -6210,7 +6420,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "visual",
@@ -6391,13 +6601,23 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
     {
       "id": "RUI-17",
       "status": "pass",
-      "reason": "초기 image-leading/size만으로는 이름 정렬이 맞지 않는 것을 실제 화면에서 발견해 고정16pt icon 열로 수정했다. 두 모드/최소 창/실제 목적지·빈 목록의 전체 조합으로 다시 확인했다. 버튼색을 그대로 넓힌 목록 면이 너무 강하다는 최신 사용자 교정으로 fileListBackground만 light F8F8F8/dark24262C의 연한 중립 면으로 조정했다. 두 모드의 새 release 화면과27개 검사에서 글자/아이콘 대비·헤더 정렬·기존 최소 폭 입력 경계를 확인했다. 버튼의 native 상태와본문/헤더는 유지한다. 사용자가 지정한 PCMag macOS 구도에 따라 원본 실제 창과 오리지널 생성 배경을 HTML/CSS로 구성했다. 같은1280×720 구도의 세 사진·GitHub picture/목차/실제 이미지 로드를 판독했고 생성 범위와 실제 앱 픽셀/출력을 구분한다. 앱 UI는 변경하지 않았다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20: 최종 기존 toolbar·두 열·중앙 plus·오른쪽 트리와 새 native 창/메뉴를 조합해 실제 재실행/창 생성/닫기를 판독했다. 검증 범위는 실제 관찰과38개 검사에 한정하며 이전 미변경 자산/플랫폼 예외는 새 검증으로 표시하지 않는다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "초기 image-leading/size만으로는 이름 정렬이 맞지 않는 것을 실제 화면에서 발견해 고정16pt icon 열로 수정했다. 두 모드/최소 창/실제 목적지·빈 목록의 전체 조합으로 다시 확인했다. 버튼색을 그대로 넓힌 목록 면이 너무 강하다는 최신 사용자 교정으로 fileListBackground만 light F8F8F8/dark24262C의 연한 중립 면으로 조정했다. 두 모드의 새 release 화면과27개 검사에서 글자/아이콘 대비·헤더 정렬·기존 최소 폭 입력 경계를 확인했다. 버튼의 native 상태와본문/헤더는 유지한다. 사용자가 지정한 PCMag macOS 구도에 따라 원본 실제 창과 오리지널 생성 배경을 HTML/CSS로 구성했다. 같은1280×720 구도의 세 사진·GitHub picture/목차/실제 이미지 로드를 판독했고 생성 범위와 실제 앱 픽셀/출력을 구분한다. 앱 UI는 변경하지 않았다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20: 최종 기존 toolbar·두 열·중앙 plus·오른쪽 트리와 새 native 창/메뉴를 조합해 실제 재실행/창 생성/닫기를 판독했다. 검증 범위는 실제 관찰과38개 검사에 한정하며 이전 미변경 자산/플랫폼 예외는 새 검증으로 표시하지 않는다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "spec",
@@ -6417,7 +6637,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "visual",
@@ -6608,6 +6828,16 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
@@ -6619,7 +6849,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "visual",
@@ -6707,7 +6937,7 @@
     {
       "id": "RUI-20",
       "status": "pass",
-      "reason": "이름 변경/오류/닫기 목적 제목은 native NSAlert heading이며 입력/설명보다 위계가 높다. 실제 폴더/작업 닫기 경고 화면에서 제목·본문·버튼이 읽혔다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "이름 변경/오류/닫기 목적 제목은 native NSAlert heading이며 입력/설명보다 위계가 높다. 실제 폴더/작업 닫기 경고 화면에서 제목·본문·버튼이 읽혔다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "code",
@@ -6763,6 +6993,16 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
@@ -6775,7 +7015,7 @@
     {
       "id": "RUI-22",
       "status": "pass",
-      "reason": "부모 inset12·그룹 간8과 내부 row28/gap4/icon16/name-gap8의 소유를 구별한다. 실제 빈/긴 목록·최소/기본 창에서 padding 중첩이나 잘림이 없다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "부모 inset12·그룹 간8과 내부 row28/gap4/icon16/name-gap8의 소유를 구별한다. 실제 빈/긴 목록·최소/기본 창에서 padding 중첩이나 잘림이 없다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 후속 사용자 요청으로108pt 세로 묶음을28pt 개별 native rounded 가로 버튼/gap8로 대체했다. 아이콘 의미·14pt 글자·AX·목적지를 유지하고 목록/빈/오류를 기존 보조 배경의 별도 면으로 구분했다. 두 모드·최소280pt·실제 이동/상태와27개 검사/최소 폭 native hitTest를 확인했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 새 TerminalAreaView는 canvas 스크롤 밖80pt 영역에 기존56pt native plus를 좌우12pt로 중앙 배치한다. 모든 보기·패널 개폐·두 모드의 최소 창 hitTest/배치 검사와 실제 4·8칸/축소·탭·확대를 확인했다. default4 격자는 외부 스크롤이 없고 좌우/상하 넘침에 필요한 축만 유지했다. 최소 격자에서는 native 세로 손잡이가 요구하는 가로 탐색을 숨기지 않는다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "code",
@@ -6946,18 +7186,28 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
     {
       "id": "RUI-23",
       "status": "exception",
-      "reason": "바로가기만 같은14pt/동적 labelColor/네이티브 버튼 역할 안에서 바꿨다. 사용자 요청의 path field/pane focus-ring 생략과 실제 caret/selection, native 버튼/메뉴 의미는 유지한다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20: 새 파일 메뉴와 native 폴더 선택기는 기존 AppKit 메뉴 글자/포커스/키보드 의미를 유지한다. 실제 선택/취소·단축키를 실행했다. 기존 사용자 지정 본문/경로 포커스 예외는 유지한다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "바로가기만 같은14pt/동적 labelColor/네이티브 버튼 역할 안에서 바꿨다. 사용자 요청의 path field/pane focus-ring 생략과 실제 caret/selection, native 버튼/메뉴 의미는 유지한다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 2026-10-20: 세로 추가 영역은 기존 fileListBackground를 재사용하고 새 색/장식을 만들지 않았다. 실제 라이트/다크 4·8칸과 native 축소 창에서 중립 톤·버튼·헤더를 확인했다. 2026-10-20 양옆 border 후속 요청: 48pt 세로 추가 영역 내부 좌우에1pt light B9BDC6/dark555B67 경계를 추가한다. 장식 선 없음의 이전 기록은 이 사용자 지정 영역에 한해 대체한다. 본문 포커스 border는 바꾸지 않는다. 실제 두 모드·트리 표시/숨김·탭/격자·native 축소와 클릭,36개 검사를 확인했다. 2026-10-20 후속 교정: 파일 트리 표시 시 자체 오른쪽 선을 숨기고 기존 native divider 하나를 함께 쓴다. 숨김 시만 자체 오른쪽 선을 표시한다. 자체 색은 light DEDEDE/dark3D3D3D로 완화했다. 이전 진한 색과 겹친 두 선은 과거 상태다. 실제 라이트 격자·다크 탭·트리 개폐와36개 검사로 확인했다. 2026-10-20: 새 파일 메뉴와 native 폴더 선택기는 기존 AppKit 메뉴 글자/포커스/키보드 의미를 유지한다. 실제 선택/취소·단축키를 실행했다. 기존 사용자 지정 본문/경로 포커스 예외는 유지한다. 2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "code",
@@ -7238,6 +7488,21 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ],
       "exception_id": "CHOP-PATH-FOCUS-RUI23"
@@ -7245,12 +7510,12 @@
     {
       "id": "RUI-24",
       "status": "pass",
-      "reason": "파일 제목은 탐색 영역 이름이고 행 이름은 실제 항목이다. 경로를 매 행에 반복하거나 loading/empty 상태를 배지로 중복하지 않는다. tooltip/AX 전체 경로는 접근/긴 경로 보완이다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "파일 제목은 탐색 영역 이름이고 행 이름은 실제 항목이다. 경로를 매 행에 반복하거나 loading/empty 상태를 배지로 중복하지 않는다. tooltip/AX 전체 경로는 접근/긴 경로 보완이다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "visual",
@@ -7331,18 +7596,28 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
     {
       "id": "RUI-25",
       "status": "pass",
-      "reason": "path→세 목적지 행→파일 outline 순서로 탐색 소속을 유지한다. 목적지 이름을 별도 설명/배지로 반복하지 않고 공통 toolbar 아래 peer 구조와 header 연결을 보존한다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "path→세 목적지 행→파일 outline 순서로 탐색 소속을 유지한다. 목적지 이름을 별도 설명/배지로 반복하지 않고 공통 toolbar 아래 peer 구조와 header 연결을 보존한다. 바로가기 아래28pt native 검색창과 같은 목록 면의 상대 경로 결과를 추가했다. 두 모드·최소280pt·실제 입력/지우기/한글 붙여넣기·폴더 Enter·501개 안내/끝 스크롤·오류 복구와32개 검사로 변경 범위를 판독했다. 글자14pt medium/간격8·inset12·40pt 헤더/연한 목록색/실제 URL을 유지한다. 새 포인터 드래그 성공은 미확인으로 따로 기록한다. 2026-10-20 사용자 명시 요청의 세로 +는 첫 빈 칸/새 아래 행을 대상으로 하고 빈 칸 중앙 +는 그 칸만 연다. 탭 +는 항상 새 탭이며 메뉴/⌘T는 키보드 접근을 제공한다. 이 범위의 중복은 사용자 요청과 서로 다른 적용 대상에 따른 예외다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-09 GitHub 클론 변경 범위: 기존48pt/32pt/단일 옅은 경계에 하단 clone을 추가하고 native 시트→완료 후 새 창/셸/트리를 연결했다. E-C1–5의 두 모드·최소·실제 GitHub/충돌 후 한글 이름 재시도·취소/종료 정리와49개 검사로 새 사용처를 확인했다. 이전 미변경 범위의 관찰과 구별한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "visual",
@@ -7473,6 +7748,16 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
@@ -7484,7 +7769,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "code",
@@ -7686,7 +7971,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "code",
@@ -7963,12 +8248,12 @@
     {
       "id": "PROJECT-MANAGE",
       "status": "pass",
-      "reason": "새 파일 탐색과 panel 개폐는 기존 canvas/view/surface를 재사용한다. 실제 PID/변수 보존, terminal zoom과11→16 교환/원위치 복원, 자동 surface/focus 검사로 확인했다. 경로 탐색은 셸 cwd를 바꾸지 않는다. 파일 드롭 시 기존 target focus/surface·다른 셸 유지와 닫힌 대상 거절을 PTY로 확인했다. 실제 단일 탭 전환 전후 같은 ENV를 출력했고 자동 검사에서4개 surface/포커스 유지와5번째 추가·닫기를 확인했다. 4/5셸의 surface/포커스/ENV·순서를 유지하고 실제 keyboard scroll/five roundtrips/zoom 복귀를 확인했다. 상하4/5셸의 실제 ENV 보존과 자동 surface/UUID/viewport focus를 확인했다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 2026-10-20: 전역 +/⌘T의 첫 빈 칸 우선, 아래 새 행,16개 한도/닫힌 칸 재사용을 실제 앱과 통합 검사로 확인했다. 2026-10-20: 파일 메뉴/⌘N/⌘⇧N으로 독립 창을 만들며 명령은 활성 창을 대상으로 한다. 실제 cwd 상속·프로젝트 폴더 선택/취소·창 전환과 활성 창만 두 셸 추가를 확인했다. Dock 메뉴는 같은 target/action 연결을 코드로 확인했다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "새 파일 탐색과 panel 개폐는 기존 canvas/view/surface를 재사용한다. 실제 PID/변수 보존, terminal zoom과11→16 교환/원위치 복원, 자동 surface/focus 검사로 확인했다. 경로 탐색은 셸 cwd를 바꾸지 않는다. 파일 드롭 시 기존 target focus/surface·다른 셸 유지와 닫힌 대상 거절을 PTY로 확인했다. 실제 단일 탭 전환 전후 같은 ENV를 출력했고 자동 검사에서4개 surface/포커스 유지와5번째 추가·닫기를 확인했다. 4/5셸의 surface/포커스/ENV·순서를 유지하고 실제 keyboard scroll/five roundtrips/zoom 복귀를 확인했다. 상하4/5셸의 실제 ENV 보존과 자동 surface/UUID/viewport focus를 확인했다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 2026-10-20: 전역 +/⌘T의 첫 빈 칸 우선, 아래 새 행,16개 한도/닫힌 칸 재사용을 실제 앱과 통합 검사로 확인했다. 2026-10-20: 파일 메뉴/⌘N/⌘⇧N으로 독립 창을 만들며 명령은 활성 창을 대상으로 한다. 실제 cwd 상속·프로젝트 폴더 선택/취소·창 전환과 활성 창만 두 셸 추가를 확인했다. Dock 메뉴는 같은 target/action 연결을 코드로 확인했다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "code",
@@ -8269,6 +8554,26 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
@@ -8280,7 +8585,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "code",
@@ -8407,12 +8712,12 @@
     {
       "id": "PROJECT-RESTORE",
       "status": "pass",
-      "reason": "기존 session snapshot은 바꾸지 않고 file root/표시/폭만 별도 UserDefaults에 저장한다. 실제 사용자4칸 복원, 마지막 성공 루트만 저장하는 격리 테스트를 확인했다. 최종 재실행 OS open 대기와 선택기 복구는 E-T10 후속 기록에 명시한다. 이후 단일 탭 보기 요구에 따라 v1 snapshot에 optional tabbed 필드를 추가했다. 구 저장 decode/새 flag roundtrip과 실제 네 셸·선택 복원을 확인했다. 임의 개수 balanced split tree는 기존 Codable schema로 저장하고 실제4열 복원 및22개 roundtrip 검사를 확인했다. 실제 앱을 종료/재실행해 상하4행·6번 선택·네 셸 복원을 확인했다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 2026-10-20: 실제 검증 앱의16개 배치/순서/선택을 재실행해 새 셸이 열리는 것을 확인했다.36개 테스트는16개 snapshot 유효성과 기존 복원을 함께 검증했다. 2026-10-20: 현재 v2 세션은 열린 창 목록/선택 창과 각 v1 workspace를 원자 저장한다. 단일 v1은 첫 창으로 읽고 기존 파일 트리 설정을 이전한다. 실제 세 창 재실행과 최종 Sources 두 셸 복원, 이전/손상/과대/중복/빈 창 목록의 자동 검사를 확인했다. 자동 리뷰 후: 사용자 닫기에서만 창별 suite와 frame 저장을 정리하고 shutdown 설정은 보존한다. NSWindowController 초기화 뒤 autosave 이름을 등록한다. 실제 닫힌 ID/suite/frame 삭제·종료 후 두 창 설정 보존과 재실행, 새 회귀 검사를 포함한38개 검사를 확인했다. 닫기 직후 남은 창 AX 시간 초과는 성공으로 표시하지 않으며 다른 관찰/검사와 구분한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "기존 session snapshot은 바꾸지 않고 file root/표시/폭만 별도 UserDefaults에 저장한다. 실제 사용자4칸 복원, 마지막 성공 루트만 저장하는 격리 테스트를 확인했다. 최종 재실행 OS open 대기와 선택기 복구는 E-T10 후속 기록에 명시한다. 이후 단일 탭 보기 요구에 따라 v1 snapshot에 optional tabbed 필드를 추가했다. 구 저장 decode/새 flag roundtrip과 실제 네 셸·선택 복원을 확인했다. 임의 개수 balanced split tree는 기존 Codable schema로 저장하고 실제4열 복원 및22개 roundtrip 검사를 확인했다. 실제 앱을 종료/재실행해 상하4행·6번 선택·네 셸 복원을 확인했다. 이름/연필 native 버튼과 탭 우클릭을 추가해 실제 클릭/비선택 칸/공백 오류/Esc취소/두 모드·최소 긴 이름/240pt 탭 전체 표시/PTY와재실행 복원을 확인했다. 전체26개 검사를 통과했고 기존 스타일·예외는 보존했다. 2026-10-20: 실제 검증 앱의16개 배치/순서/선택을 재실행해 새 셸이 열리는 것을 확인했다.36개 테스트는16개 snapshot 유효성과 기존 복원을 함께 검증했다. 2026-10-20: 현재 v2 세션은 열린 창 목록/선택 창과 각 v1 workspace를 원자 저장한다. 단일 v1은 첫 창으로 읽고 기존 파일 트리 설정을 이전한다. 실제 세 창 재실행과 최종 Sources 두 셸 복원, 이전/손상/과대/중복/빈 창 목록의 자동 검사를 확인했다. 자동 리뷰 후: 사용자 닫기에서만 창별 suite와 frame 저장을 정리하고 shutdown 설정은 보존한다. NSWindowController 초기화 뒤 autosave 이름을 등록한다. 실제 닫힌 ID/suite/frame 삭제·종료 후 두 창 설정 보존과 재실행, 새 회귀 검사를 포함한38개 검사를 확인했다. 닫기 직후 남은 창 AX 시간 초과는 성공으로 표시하지 않으며 다른 관찰/검사와 구분한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "code",
@@ -8653,6 +8958,26 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
@@ -8664,7 +8989,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "code",
@@ -8776,7 +9101,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "code",
@@ -8983,12 +9308,12 @@
     {
       "id": "PROJECT-TRUTH",
       "status": "pass",
-      "reason": "사용자 crop 원본 관찰·선택한 pt/각색·초기 정렬 실패/수정·실제 세 목적지 클릭을 구분했다.16개 검사와 실제 화면을 구별하며 새 파일 drag를 완료했다고 표시하지 않는다. 파일 드롭은 최초 CUA 놓기 대기와 후속 사용자 조작 후 실제 endpoint 관찰을 구분해 기록한다. 아이콘 원본 SHA/cmp, 폐기한 imagegen 후보, 선택한 native mask/작은 shadow 수정, 실제 About/Finder 표시와 자동 패키지 검사를 구분한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "사용자 crop 원본 관찰·선택한 pt/각색·초기 정렬 실패/수정·실제 세 목적지 클릭을 구분했다.16개 검사와 실제 화면을 구별하며 새 파일 drag를 완료했다고 표시하지 않는다. 파일 드롭은 최초 CUA 놓기 대기와 후속 사용자 조작 후 실제 endpoint 관찰을 구분해 기록한다. 아이콘 원본 SHA/cmp, 폐기한 imagegen 후보, 선택한 native mask/작은 shadow 수정, 실제 About/Finder 표시와 자동 패키지 검사를 구분한다. 2026-11-04 로컬 서버: 해당 pane/선택 tab의 native 주소 버튼과 목록을 기존40pt·14pt·12pt/28pt·중립색 안에 추가했다. 실제 두 모드/280pt pane 축소·단일/복수·탭/빈/중지·브라우저 두 주소를 확인했고 전체44개 검사가 통과했다. 경로는 좁을 때 이름 툴팁에 보존하고 주소 대상은 해당 셸의 실제 listener로 제한한다. 세로 영역/기존 입력·자산은 변경하지 않았다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "code",
@@ -9259,13 +9584,33 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
     {
       "id": "PROJECT-DEFAULT",
       "status": "pass",
-      "reason": "사용자 승인 기본값: 2×2로 시작해 좌상단 터미널 1을 즉시 실행하고 2·3·4번은 중앙 +로 연다. fresh/이전 단일 빈 저장/all-empty 저장/기존 사용 중 복원/중복 호출과 실제 순차 클릭을 검증했다. 실행 칸이 없는 저장에서는 이전 선택 위치와 무관하게 첫 칸에 포커스를 준다. 2026-10-20: 실제 새 작업 공간에서 첫 셸과 세 빈 칸을 두 모드로 확인했다. 최신 사용자 요청의 세로 추가 영역은 기존 canvas 바깥의 명시 변경이며 빈 칸 중앙 추가는 보존한다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "사용자 승인 기본값: 2×2로 시작해 좌상단 터미널 1을 즉시 실행하고 2·3·4번은 중앙 +로 연다. fresh/이전 단일 빈 저장/all-empty 저장/기존 사용 중 복원/중복 호출과 실제 순차 클릭을 검증했다. 실행 칸이 없는 저장에서는 이전 선택 위치와 무관하게 첫 칸에 포커스를 준다. 2026-10-20: 실제 새 작업 공간에서 첫 셸과 세 빈 칸을 두 모드로 확인했다. 최신 사용자 요청의 세로 추가 영역은 기존 canvas 바깥의 명시 변경이며 빈 칸 중앙 추가는 보존한다. 2026-10-20 후속 사용자 교정: 세로 추가 영역은 현재48pt/32pt plus/좌우8pt다. 기존80/56pt 기록은 과거 관찰이다. 라이트 격자 클릭·다크 탭/패널 숨김·native 축소와36개 검사로 확인했으며 빈 칸56pt는 유지한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "spec",
@@ -9300,7 +9645,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "code",
@@ -9386,6 +9731,26 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
@@ -9397,7 +9762,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "code",
@@ -9854,7 +10219,7 @@
         {
           "kind": "spec",
           "path": "DESIGN.md",
-          "sha256": "50151bb8733692a36363038d55f83bf56e0798c541f14aee4954dc3af48cbc4f"
+          "sha256": "c2e6502bc216904605a31bf9c9cb49a2bd41aa37aea17a185f7d1682297fc5c5"
         },
         {
           "kind": "code",
@@ -12063,7 +12428,7 @@
     {
       "id": "PROJECT-WINDOWS",
       "status": "pass",
-      "reason": "파일 메뉴와⌘N/⌘⇧N·native 폴더 선택/취소·윈도우 메뉴 전환을 실제 실행했다. 다른 창 ENV 보존·세 창 복원·0창 후 생성·cwd 상속·최종 경계 결합을 확인했다. Dock 항목은 코드 연결을 확인했고 별도 포인터 실행으로 표시하지 않는다. 전체38개 검사와 이전/쓰기 실패 보존·다른 창 실행 작업 중 닫기를 확인했다. 자동 리뷰 후: 사용자 닫기에서만 창별 suite와 frame 저장을 정리하고 shutdown 설정은 보존한다. NSWindowController 초기화 뒤 autosave 이름을 등록한다. 실제 닫힌 ID/suite/frame 삭제·종료 후 두 창 설정 보존과 재실행, 새 회귀 검사를 포함한38개 검사를 확인했다. 닫기 직후 남은 창 AX 시간 초과는 성공으로 표시하지 않으며 다른 관찰/검사와 구분한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "파일 메뉴와⌘N/⌘⇧N·native 폴더 선택/취소·윈도우 메뉴 전환을 실제 실행했다. 다른 창 ENV 보존·세 창 복원·0창 후 생성·cwd 상속·최종 경계 결합을 확인했다. Dock 항목은 코드 연결을 확인했고 별도 포인터 실행으로 표시하지 않는다. 전체38개 검사와 이전/쓰기 실패 보존·다른 창 실행 작업 중 닫기를 확인했다. 자동 리뷰 후: 사용자 닫기에서만 창별 suite와 frame 저장을 정리하고 shutdown 설정은 보존한다. NSWindowController 초기화 뒤 autosave 이름을 등록한다. 실제 닫힌 ID/suite/frame 삭제·종료 후 두 창 설정 보존과 재실행, 새 회귀 검사를 포함한38개 검사를 확인했다. 닫기 직후 남은 창 AX 시간 초과는 성공으로 표시하지 않으며 다른 관찰/검사와 구분한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "spec",
@@ -12104,13 +12469,33 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
     {
       "id": "PROJECT-INPUT-MOTION",
       "status": "pass",
-      "reason": "2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다.",
+      "reason": "2026-10-20 최신 입력창 요청: 경로·검색·이름에 중립 blur inset과0.18초 hover/focus opacity 전환을 허용한다. native 편집기·아이콘·AX·키보드/IME와 기존28pt/14pt를 유지하며 이름 accessory만24→28pt다. 실제 두 모드 기본/포커스·검색/취소·한글·Tab·경로 Enter·이름 저장과40개 검사로 확인했다. hover는 native 이벤트 자동 검사이며 실제 포인터 단독 캡처와 물리 Reduce Motion 실행은 주장하지 않는다. 이전 입력 포커스/그림자 금지 기록은 이 명시 범위에서 최신 계약으로 대체한다. 2026-11-11 웹 칸 변경 범위: E-W0–6에서 로컬 HTTP/WebSocket·일반 HTTPS·native 확인창/종료·주소 오류/복구·외부 브라우저·두 모드/작은 창/긴 한글 주소/페이지200%·탭/확대/메뉴 자리 바꾸기/입력 보존/혼합 복원을 실제 확인했다. native초점/JS기본취소 결함을 수정하고54개 check.sh가 통과했다. 원본의 동등 격자·중앙 plus·header는 유지하고48pt rail/32pt button/8pt 하단 간격과40/28/8/4pt 주소 행을 검사했다. 제삼자 문서의 CSS/언어는 강제하지 않는다. CUA 등호/복합 방향키 미동작은 메뉴 동작과 구분하며 물리 전체 단축키·VoiceOver·고대비·Reduce Motion·macOS14·provider 인증/실다운로드는 새 성공으로 주장하지 않는다. 2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
       "evidence": [
         {
           "kind": "spec",
@@ -12151,6 +12536,26 @@
           "kind": "interaction",
           "path": "design/evidence/web-preview.md",
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
+        },
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
         }
       ]
     },
@@ -12274,10 +12679,59 @@
           "sha256": "1a57e013d3a99c4ffe7817d5404d0cebdaaa3aebd61803002d96345be5ecd70b"
         }
       ]
+    },
+    {
+      "id": "PROJECT-PROJECT-LIBRARY",
+      "status": "pass",
+      "reason": "2026-11-15 프로젝트 기록/종료 안정성: P-0–8에서 실제 새 메뉴·두 모드 native 표면·한글65자 오류/입력 보존·덮어쓰기 취소/갱신·새 창/cwd·기존 셸 환경과 웹 입력·읽기 실패→수정/재시도·삭제/최근 분리·없는 폴더·재실행·기본4칸 원본 대조를 확인했다. 전체60개26.220초 검사 통과. 이전 불변 자산/검색/클론/모든 IME·보조기술을 새 검증으로 표시하지 않는다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "visual",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/project-library.md",
+          "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+        }
+      ]
+    },
+    {
+      "id": "PROJECT-TERMINAL-LIFECYCLE",
+      "status": "pass",
+      "reason": "L-1–4의 재현·큐별 소유권/참조 정리·글꼴 변경/공백·따옴표 경로·48개 즉시 종료/남은 셸 응답·제한 시간과 전체56개 최종 CI53.477초 통과를 확인했다. UI 원본/고정 커밋/라이선스는 유지한다.",
+      "evidence": [
+        {
+          "kind": "spec",
+          "path": "design/evidence/terminal-lifecycle.md",
+          "sha256": "9b3b70ed260568186f1d0f16ed9f160db77bd0cd5a54ed593468c9bf5cc418d5"
+        },
+        {
+          "kind": "code",
+          "path": "design/evidence/terminal-lifecycle.md",
+          "sha256": "9b3b70ed260568186f1d0f16ed9f160db77bd0cd5a54ed593468c9bf5cc418d5"
+        },
+        {
+          "kind": "interaction",
+          "path": "design/evidence/terminal-lifecycle.md",
+          "sha256": "9b3b70ed260568186f1d0f16ed9f160db77bd0cd5a54ed593468c9bf5cc418d5"
+        }
+      ]
     }
   ],
   "reference_comparison": {
-    "path": "design/web-preview-reference/comparison.json",
-    "sha256": "2f0cec9b12f94d801ded4c236d9ce67e45e481b067703310439b718e4737bc93"
+    "path": "design/project-library-reference/comparison.json",
+    "sha256": "fab8155cbd2627644d94ebd2c0323a6a0576a9be9f986729efcb67c4182aa66f"
   }
 }
