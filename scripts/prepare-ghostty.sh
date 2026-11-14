@@ -21,7 +21,7 @@ case "$(uname -m)" in
 esac
 
 mkdir -p .cache/downloads .cache/toolchains Dependencies
-build_fingerprint="$(cat scripts/prepare-ghostty.sh scripts/ghostty-xcrun.sh scripts/ghostty-libtool.sh Dependencies/ghostty-config.patch; uname -m; xcodebuild -version; echo "${CHOP_GHOSTTY_SDKROOT:-auto}")"
+build_fingerprint="$(cat scripts/prepare-ghostty.sh scripts/ghostty-xcrun.sh scripts/ghostty-libtool.sh Dependencies/ghostty-config.patch Dependencies/ghostty-lifecycle.patch; uname -m; xcodebuild -version; echo "${CHOP_GHOSTTY_SDKROOT:-auto}")"
 build_fingerprint="$(echo "$build_fingerprint" | shasum -a 256 | cut -d ' ' -f 1)"
 if [[ -f Dependencies/.ghostty-build ]] &&
   [[ "$(cat Dependencies/.ghostty-build)" == "$build_fingerprint" ]] &&
@@ -47,12 +47,13 @@ if [[ ! -x "$zig_directory/zig" ]]; then
 fi
 
 download "https://codeload.github.com/ghostty-org/ghostty/tar.gz/$ghostty_revision" .cache/downloads/ghostty.tar.gz "$ghostty_sha256"
-source_fingerprint="$(echo "$ghostty_revision $(shasum -a 256 Dependencies/ghostty-config.patch)" | shasum -a 256 | cut -d ' ' -f 1)"
+source_fingerprint="$(echo "$ghostty_revision $(shasum -a 256 Dependencies/ghostty-config.patch Dependencies/ghostty-lifecycle.patch)" | shasum -a 256 | cut -d ' ' -f 1)"
 if [[ ! -f .cache/ghostty/.chop-source ]] || [[ "$(cat .cache/ghostty/.chop-source)" != "$source_fingerprint" ]]; then
   rm -rf .cache/ghostty
   mkdir -p .cache/ghostty
   tar -xzf .cache/downloads/ghostty.tar.gz --strip-components=1 -C .cache/ghostty
   patch -d .cache/ghostty -p1 < Dependencies/ghostty-config.patch
+  patch -d .cache/ghostty -p1 < Dependencies/ghostty-lifecycle.patch
   echo "$source_fingerprint" > .cache/ghostty/.chop-source
 fi
 

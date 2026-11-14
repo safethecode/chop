@@ -35,7 +35,7 @@ jobs:
             .cache/downloads
             .cache/toolchains
             .cache/zig
-          key: ${{ runner.os }}-${{ runner.arch }}-ghostty-${{ hashFiles('scripts/prepare-ghostty.sh', 'scripts/ghostty-xcrun.sh', 'scripts/ghostty-libtool.sh', 'Dependencies/ghostty-config.patch') }}
+          key: ${{ runner.os }}-${{ runner.arch }}-ghostty-${{ hashFiles('scripts/prepare-ghostty.sh', 'scripts/ghostty-xcrun.sh', 'scripts/ghostty-libtool.sh', 'Dependencies/ghostty-config.patch', 'Dependencies/ghostty-lifecycle.patch') }}
       - name: Show toolchain
         run: |
           xcodebuild -version
@@ -53,7 +53,7 @@ jobs:
             .cache/downloads
             .cache/toolchains
             .cache/zig
-          key: ${{ runner.os }}-${{ runner.arch }}-ghostty-${{ hashFiles('scripts/prepare-ghostty.sh', 'scripts/ghostty-xcrun.sh', 'scripts/ghostty-libtool.sh', 'Dependencies/ghostty-config.patch') }}
+          key: ${{ runner.os }}-${{ runner.arch }}-ghostty-${{ hashFiles('scripts/prepare-ghostty.sh', 'scripts/ghostty-xcrun.sh', 'scripts/ghostty-libtool.sh', 'Dependencies/ghostty-config.patch', 'Dependencies/ghostty-lifecycle.patch') }}
       - name: Check and package app
         run: |
           ./scripts/check.sh &

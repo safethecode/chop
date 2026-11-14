@@ -29,3 +29,13 @@ Git 전송을 사용하는 `zg`와 `zigimg`는 같은 커밋의 아카이브를 
 Codeberg의 Git capability 조회가 실패하는 CI 환경에서도 패키지 버전을 바꾸지 않고 빌드하기 위한 처리입니다.
 
 `chop_ghostty_surface_child_pid`는 IO 스레드가 publish한 atomic PID만 읽습니다. 실행 중인 터미널에 속한 TCP listener를 구분하는 용도이며 원래 버전·라이선스는 유지합니다.
+
+`ghostty-lifecycle.patch`는 종료 시 app·renderer·IO 메시지 큐의 역압력 때문에
+스레드 join이 끝나지 않는 문제를 보완합니다. Ghostty의 [이슈 #14245](https://github.com/ghostty-org/ghostty/issues/14245)와
+[PR #14444](https://github.com/ghostty-org/ghostty/pull/14444)의 MIT 코드
+(`3cc748e676cf7fdd5e3d2ca48caf316415354069`)를 고정 버전과 Zig 0.14.1에 맞춰 적용했습니다.
+닫는 surface의 메시지는 소유 메모리와 함께 정리하고 다른 surface의 메시지는 순서대로 app 스레드에 돌려줍니다.
+이미 보류한 메시지도 닫는 surface를 참조하지 않게 정리하며, 다른 터미널의 출력이 계속돼도 drain 종료가 밀리지 않도록 처리량을 제한합니다.
+업스트림 PR의 머지 여부와 별개로 Chop의 고정 커밋과 라이선스 고지는 유지합니다.
+`TerminalLifecycleTests`는 별도 검사 프로세스에서 큐 포화·다른 터미널 응답 보존·준비 대기 없는 반복 종료를 검증하고,
+멈춤이 재발해도 제한 시간 뒤 해당 검사만 중단합니다.
