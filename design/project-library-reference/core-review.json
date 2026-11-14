@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "decomposition_sha256": "bedd4af43a0fa310b25a48c328183ac225846c3fdad67f0e8f7f0e3cb345a6b9",
+  "interpretation_sha256": "bb75ebdb77b50b2a7199bc6e7cf91e0e8e7aaf308be8e57f5d372daf986e20f1",
+  "source_snapshot": {
+    "path": "design/project-library-reference/source-snapshot.json",
+    "sha256": "6680c5dbf71c4ae0b4a7ad518e2da61f1baa08fb094e325d68432323ca49dbbc"
+  },
+  "capture": {
+    "path": "design/evidence/project-library.md",
+    "sha256": "3cea8151b8d44ce4286858ffe7ab47be7bfd8e527b9204d406a401b8e480a90a"
+  },
+  "status": "adapted-and-verified",
+  "reason": "P-8 현재 기본 canvas와 원본 default-grid-user.png를 직접 대조했다. 동등한 두 열/행·작은 헤더·첫 셸/중앙 plus 관계가 유지된다. 각 비율은 약1(직접 시각 추정±0.01),원본 약1/허용0.02 안이다. 메뉴/표준 대화상자는 상시 canvas 면적을 차지하지 않는다. P-2/3의 실제 두 모드 이름/덮어쓰기와 P-4 혼합 구성을 별도로 확인했다. 원본의 정확한 폰트 미확인과 이후 명시 사용자 교정은 보존한다."
+}

@@ -142,3 +142,5 @@ V-70 / TERMINAL-REOPEN-READINESS: 두 원격 실행에서16칸 검사의 즉시 
 V-71 / TERMINAL-TEARDOWN-BACKPRESSURE: 고정 엔진에서 제목 출력 폭주 직후 종료가 45초 넘게 join에 머무는 현상을 격리 검사로 재현했다. 종료 중 app/renderer/IO 큐를 drain하되 다른 surface의 메시지·순서·app 스레드 콜백을 보존하도록 업스트림 MIT 수정을 backport했다. 세 종류의 큐 포화·16개씩3회 즉시 종료·남은 셸 응답, 전체56개26.276초 검사와 Zig FIFO 검사를 확인했다. fixed-and-verified (이 재현과 변경 범위, 셀프 리뷰). 과거 모든 멈춤의 원인을 소급 확정하거나 기존 화면 관찰을 새 검증으로 표시하지 않는다. [근거](evidence/terminal-lifecycle.md).
 
 V-72 / TERMINAL-TEARDOWN-REVIEW: 자동 리뷰가 지적한 font_grid.old_key는 renderer 해제 뒤 app 스레드에서 정리한다. 검사 스크립트는 공백/작은따옴표 경로를 실제 사용하고 즉시 종료 전에 글꼴 변경도 요청한다. 별도로 관찰한 기존 서버 검사의 waitUntilExit 대기는 main actor/5초 비동기 종료 확인으로 보완했다. 전체56개36.689초 검사 통과, 종료 검사4.038초. fixed-and-verified (소스 소유권·해당 실행 범위, 셀프 수정/검증). [근거](evidence/terminal-lifecycle.md).
+
+V-73 / PROJECT-LIBRARY: 최근 프로젝트12개와 프로젝트별 이름 있는 구성을 기존 파일 메뉴/native 대화상자에 추가했다. 새 window UUID·셸·웹 URL·트리 설정,기존 셸 환경과 웹 입력 보존,한글 이름 오류/덮어쓰기 취소·갱신,새 버전 파일 보호→수정·재시도,선택 삭제/최근 이력 분리와 재실행을 실제 앱에서 확인했다. 같은 소스의 두 모드 native 표면·다크 기본4칸을 원본/현재 토큰에 대조했고 전체60개26.220초 검사가 통과했다. aligned (이 변경 범위,셀프 리뷰). 미실행 하드웨어/보조기술과 과거 전체 UI 검증은 구분한다. [근거](evidence/project-library.md).
