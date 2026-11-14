@@ -11,6 +11,7 @@ final class WorkspaceWindowManager {
   private var focusedID: UUID?
   var onChange: (() -> Void)?
   var onAppearanceChangeRequested: ((AppearanceMode) -> Void)?
+  var onProjectOpened: ((String) -> Void)?
   private(set) var cloneSheet: GitCloneSheet?
   private var preparingToTerminate = false
 
@@ -84,7 +85,8 @@ final class WorkspaceWindowManager {
   @discardableResult
   func open(
     directory: String? = nil, snapshot: WorkspaceWindowSnapshot? = nil,
-    legacyDefaults: UserDefaults? = nil
+    legacyDefaults: UserDefaults? = nil, fileBrowser: ProjectFileBrowserSettings? = nil,
+    recordVisit: Bool = true
   ) -> WorkspaceWindowController {
     let id = snapshot?.id ?? UUID()
     if let existing = windows[id] {
@@ -99,8 +101,13 @@ final class WorkspaceWindowManager {
       for key in ["fileTreeRootPath", "fileTreeVisible", "fileTreeWidth"] {
         if let value = legacyDefaults.object(forKey: key) { defaults.set(value, forKey: key) }
       }
-    } else if snapshot == nil {
+    } else if defaults.object(forKey: "fileTreeRootPath") == nil {
       defaults.set(path, forKey: "fileTreeRootPath")
+    }
+    if let fileBrowser {
+      defaults.set(fileBrowser.directory, forKey: "fileTreeRootPath")
+      defaults.set(fileBrowser.isVisible, forKey: "fileTreeVisible")
+      defaults.set(fileBrowser.width, forKey: "fileTreeWidth")
     }
     let controller = WorkspaceWindowController(
       engine: engine, id: id, snapshot: snapshot?.workspace, projectDirectory: path,
@@ -124,8 +131,17 @@ final class WorkspaceWindowManager {
     activate(id)
     controller.workspace.layoutSubtreeIfNeeded()
     controller.workspace.startRestoredTerminals()
+    if recordVisit { onProjectOpened?(path) }
     onChange?()
     return controller
+  }
+
+  @discardableResult
+  func open(configuration: ProjectConfiguration) -> WorkspaceWindowController {
+    open(
+      snapshot: WorkspaceWindowSnapshot(
+        id: UUID(), projectDirectory: configuration.projectDirectory,
+        workspace: configuration.workspace), fileBrowser: configuration.fileBrowser)
   }
 
   func activate(_ id: UUID) {

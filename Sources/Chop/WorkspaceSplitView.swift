@@ -17,6 +17,12 @@ final class WorkspaceSplitView: NSSplitView, NSSplitViewDelegate {
   private var headerBackground = NSColor.white
   private(set) var isFileTreeVisible: Bool
 
+  var projectSettings: ProjectFileBrowserSettings {
+    ProjectFileBrowserSettings(
+      directory: fileBrowser.rootURL.path, isVisible: isFileTreeVisible,
+      width: Double(min(600, max(Self.fileTreeMinimumWidth, browserWidth))))
+  }
+
   override var dividerThickness: CGFloat { isFileTreeVisible ? 1 : 0 }
 
   var minimumContentSize: CGSize {

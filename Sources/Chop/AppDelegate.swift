@@ -5,6 +5,11 @@ import ChopCore
 final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
   private var workspaceWindow: WorkspaceWindowController? { windowManager.active }
   private lazy var windowManager = WorkspaceWindowManager(engine: engine)
+  private lazy var projectLibrary = ProjectLibraryController(
+    manager: windowManager,
+    store: ProjectLibraryStore(
+      fileURL: FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+        .appendingPathComponent("Chop/projects.json")))
   private var projectPanel: NSOpenPanel?
   private let engine = TerminalEngine()
   private let session = SessionCoordinator(
@@ -28,12 +33,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
       return
     }
     configureMainMenu()
+    projectLibrary.load()
     let saved = session.load()
     windowManager.onAppearanceChangeRequested = { [weak self] mode in self?.applyAppearance(mode) }
     if let saved, !saved.windows.isEmpty {
       for snapshot in saved.windows {
         windowManager.open(
-          snapshot: snapshot, legacyDefaults: session.migratedLegacyWorkspace ? .standard : nil)
+          snapshot: snapshot, legacyDefaults: session.migratedLegacyWorkspace ? .standard : nil,
+          recordVisit: false)
       }
       if let id = saved.focusedWindowID { windowManager.activate(id) }
     } else {
@@ -256,6 +263,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     let clone = fileMenu.addItem(
       withTitle: "GitHub 프로젝트 클론…", action: #selector(cloneProject), keyEquivalent: "")
     clone.target = self
+    projectLibrary.install(in: fileMenu)
     fileItem.submenu = fileMenu
     mainMenu.addItem(fileItem)
 
