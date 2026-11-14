@@ -1,6 +1,7 @@
 import AppKit
 import Darwin
 import Foundation
+import GhosttyKit
 import Testing
 
 @testable import Chop
@@ -14,7 +15,7 @@ private final class LifecycleTestBundle: NSObject {}
     return
   }
   let directory = FileManager.default.temporaryDirectory.appendingPathComponent(
-    "chop-lifecycle-\(UUID())")
+    "chop lifecycle's-\(UUID())")
   try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: false)
   defer { try? FileManager.default.removeItem(at: directory) }
   let script = """
@@ -74,7 +75,9 @@ private func runLifecycleProbe(at directory: URL) async throws {
   _ = NSApplication.shared
   let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
     .deletingLastPathComponent().deletingLastPathComponent()
-  let engine = TerminalEngine(command: "/usr/bin/python3 -u \(directory.path)/terminal.py")
+  let scriptPath = directory.appendingPathComponent("terminal.py").path
+  let quotedPath = "'" + scriptPath.replacingOccurrences(of: "'", with: "'\\''") + "'"
+  let engine = TerminalEngine(command: "/usr/bin/python3 -u \(quotedPath)")
   try engine.start(
     resources: root.appendingPathComponent("build/release/Chop.app/Contents/Resources"))
   let window = NSWindow(
@@ -111,11 +114,18 @@ private func runLifecycleProbe(at directory: URL) async throws {
         charactersIgnoringModifiers: "\r", isARepeat: false, keyCode: 36))
     terminal.keyDown(with: event)
   }
+  func changeFont(in terminal: TerminalView) throws {
+    let surface = try #require(terminal.surface)
+    let action = "increase_font_size:1"
+    #expect(
+      action.withCString { ghostty_surface_binding_action(surface, $0, UInt(action.utf8.count)) })
+  }
   let survivor = try addTerminal()
   try await waitFor { (survivor.accessibilityValue() as? String ?? "").contains("READY") }
   for mode in ["title", "reply", "render"] {
     let closing = try addTerminal()
     try await waitFor { (closing.accessibilityValue() as? String ?? "").contains("READY") }
+    try changeFont(in: closing)
     try send(mode, to: closing)
     let title = "keep-\(mode)"
     try send(title, to: survivor)
@@ -136,6 +146,7 @@ private func runLifecycleProbe(at directory: URL) async throws {
       to: directory.appendingPathComponent("progress"), atomically: true, encoding: .utf8)
     let batch = try (0..<16).map { _ in try addTerminal() }
     for terminal in batch {
+      try changeFont(in: terminal)
       terminal.close()
       terminal.removeFromSuperview()
     }

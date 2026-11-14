@@ -140,3 +140,5 @@ V-69 / WEB-ASYNC-ALERT: V-68의 SDK typealias 변경 뒤 원격에서도55개는
 V-70 / TERMINAL-REOPEN-READINESS: 두 원격 실행에서16칸 검사의 즉시 닫기가 Surface.deinit join에 머물렀다. 엔진 root cause는 미확정으로 유지한다. 생성된 surface만 보던 fixture에 실제 새 셸 명령/독립 출력 줄/유휴 확인을 추가한 뒤 기존 닫기·재생성 assertions를 그대로 실행한다.55개20.692초 check.sh 통과. 검사를 제거하거나 한도를 줄이지 않았으며 원격 최종 상태는 후속 PR에서 확인한다. [근거](evidence/web-preview.md).
 
 V-71 / TERMINAL-TEARDOWN-BACKPRESSURE: 고정 엔진에서 제목 출력 폭주 직후 종료가 45초 넘게 join에 머무는 현상을 격리 검사로 재현했다. 종료 중 app/renderer/IO 큐를 drain하되 다른 surface의 메시지·순서·app 스레드 콜백을 보존하도록 업스트림 MIT 수정을 backport했다. 세 종류의 큐 포화·16개씩3회 즉시 종료·남은 셸 응답, 전체56개26.276초 검사와 Zig FIFO 검사를 확인했다. fixed-and-verified (이 재현과 변경 범위, 셀프 리뷰). 과거 모든 멈춤의 원인을 소급 확정하거나 기존 화면 관찰을 새 검증으로 표시하지 않는다. [근거](evidence/terminal-lifecycle.md).
+
+V-72 / TERMINAL-TEARDOWN-REVIEW: 자동 리뷰가 지적한 font_grid.old_key는 renderer 해제 뒤 app 스레드에서 정리한다. 검사 스크립트는 공백/작은따옴표 경로를 실제 사용하고 즉시 종료 전에 글꼴 변경도 요청한다. 별도로 관찰한 기존 서버 검사의 waitUntilExit 대기는 main actor/5초 비동기 종료 확인으로 보완했다. 전체56개36.689초 검사 통과, 종료 검사4.038초. fixed-and-verified (소스 소유권·해당 실행 범위, 셀프 수정/검증). [근거](evidence/terminal-lifecycle.md).

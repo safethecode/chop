@@ -236,37 +236,59 @@
      // Stop rendering thread
      {
          self.renderer_thread.stop.notify() catch |err|
-@@ -705,12 +709,21 @@
+@@ -705,6 +709,13 @@
          self.renderer.threadEnter(self.rt_surface) catch unreachable;
      }
  
 +    // The joined renderer cannot consume messages from the IO/reader threads.
++    var renderer_discard: rendererpkg.Thread.ChopMailboxDiscard = .{};
 +    var renderer_drain: rendererpkg.Thread.ChopMailboxDrain = .{
-+        .queue = self.renderer_thread.mailbox, .context = {},
++        .queue = self.renderer_thread.mailbox, .context = &renderer_discard,
 +    };
 +    renderer_drain.start();
 +
      // Stop our IO thread
      {
          self.io_thread.stop.notify() catch |err|
-             log.err("error notifying io thread to stop, may stall err={}", .{err});
+@@ -712,10 +723,14 @@
          self.io_thr.join();
      }
-+
+ 
 +    renderer_drain.finish();
 +    app_drain.finish();
- 
++
      // We need to deinit AFTER everything is stopped, since there are
      // shared values between the two threads.
+     self.renderer_thread.deinit();
+     self.renderer.deinit();
++    renderer_discard.deinit();
+     self.io_thread.deinit();
+     self.io.deinit();
+ 
 --- a/src/renderer/Thread.zig
 +++ b/src/renderer/Thread.zig
-@@ -34,6 +34,9 @@
+@@ -34,6 +34,24 @@
  /// hardcoded with a capacity. We can make this a comptime parameter in
  /// the future if we want it configurable.
  pub const Mailbox = BlockingQueue(rendererpkg.Message, 64);
 +
-+pub const ChopMailboxDrain = @import("../datastruct/main.zig").QueueDrain(Mailbox, void, chopDiscard);
-+fn chopDiscard(_: void, message: rendererpkg.Message) void { message.deinit(); }
++pub const ChopMailboxDrain = @import("../datastruct/main.zig").QueueDrain(Mailbox, *ChopMailboxDiscard, ChopMailboxDiscard.discard);
++pub const ChopMailboxDiscard = struct {
++    // Only the paused app thread produces font_grid messages, so at most the
++    // mailbox capacity can remain. Keep old grids alive through renderer.deinit.
++    fonts: std.BoundedArray(std.meta.TagPayload(rendererpkg.Message, .font_grid), 64) = .{},
++
++    fn discard(self: *ChopMailboxDiscard, message: rendererpkg.Message) void {
++        switch (message) {
++            .font_grid => |grid| self.fonts.append(grid) catch unreachable,
++            else => message.deinit(),
++        }
++    }
++
++    pub fn deinit(self: *ChopMailboxDiscard) void {
++        for (self.fonts.constSlice()) |grid| grid.set.deref(grid.old_key);
++    }
++};
  
  /// Allocator used for some state
  alloc: std.mem.Allocator,

@@ -35,3 +35,22 @@ thread 생성 자체가 OS 자원 부족으로 실패한 조건이나 모든 sub
 출처: [Ghostty #14245](https://github.com/ghostty-org/ghostty/issues/14245),
 [PR #14444](https://github.com/ghostty-org/ghostty/pull/14444),
 참고 커밋 `3cc748e676cf7fdd5e3d2ca48caf316415354069`.
+
+## L-3 자동 리뷰 보완
+
+첫 원격 Xcode 16.4 CI에서도 56개가 43.886초에 통과했다. 자동 리뷰가 지적한
+미처리 `font_grid.old_key` 참조는 기존 `Message.deinit()`에서 해제되지 않는 것을 확인했다.
+종료한 renderer 큐의 글꼴 변경만 bounded buffer에 보관하고 실제 `renderer.deinit()` 뒤 app 스레드에서
+old key를 해제한다. renderer가 기존 grid를 사용하는 동안 먼저 해제하지 않는다.
+글꼴 변경은 app 스레드만 생산하고 종료 중에는 해당 스레드가 멈춰 있으므로 최대 mailbox 용량 64개다.
+회귀 검사는 즉시 종료 전에 글꼴 변경도 요청한다.
+검사 스크립트 전체 경로를 셸 인용하고 임시 디렉터리 이름에 실제 공백과 작은따옴표를 넣었다.
+보완 후 `./scripts/check.sh`는 56개 36.689초 통과, 격리 종료 검사는 4.038초 통과했다.
+
+## L-4 기존 서버 검사 종료 대기
+
+L-3 전체 검사 도중 기존 `localServerDiscoveryReadsAChildProcessWithoutIncludingOtherRoots`에서
+자식 프로세스가 남아 있지 않은데 `NSConcreteTask.waitUntilExit`에 머무는 별도 대기를 관찰했다.
+이 검사만 실행 중인 helper를 중단하고, Foundation Process를 main actor에서 만들고 종료를 비동기로
+최대 5초 확인하도록 변경했다. 실패 경로는 자신이 띄운 서버만 중단한다. listener·부모 격리 assertions는 유지했다.
+정확한 Foundation 내부 원인은 확정하지 않으며 L-2 libghostty 교착과 구분한다. 이후 전체 56개 검사는 통과했다.
