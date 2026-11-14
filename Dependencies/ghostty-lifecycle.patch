@@ -1,0 +1,336 @@
+--- /dev/null
++++ b/src/datastruct/queue_drain.zig
+@@ -0,0 +1,75 @@
++//! Teardown queue drain, adapted for Zig 0.14.1 from Ghostty PR #14444.
++//! Upstream commit: 3cc748e676cf7fdd5e3d2ca48caf316415354069 (MIT).
++const std = @import("std");
++
++/// Drain only while the normal consumer joins its producers. Never dispatch
++/// native UI actions here; the handler owns or defers each popped message.
++pub fn QueueDrain(
++    comptime Queue: type,
++    comptime Context: type,
++    comptime handle: fn (Context, Value(Queue)) void,
++) type {
++    return struct {
++        const Self = @This();
++        const capacity = @typeInfo(@TypeOf(@as(Queue, undefined).data)).array.len;
++        queue: *Queue,
++        context: Context,
++        stop: std.atomic.Value(bool) = std.atomic.Value(bool).init(false),
++        thread: ?std.Thread = null,
++
++        pub fn start(self: *Self) void {
++            self.thread = std.Thread.spawn(.{}, run, .{self}) catch |err| {
++                std.log.err("queue drain spawn failed err={}", .{err});
++                return;
++            };
++        }
++
++        pub fn finish(self: *Self) void {
++            const thread = self.thread orelse return;
++            self.stop.store(true, .release);
++            thread.join();
++            self.thread = null;
++        }
++
++        fn run(self: *Self) void {
++            while (true) {
++                const stopping = self.stop.load(.acquire);
++                // A bounded FIFO pass releases every item queued before finish,
++                // even if other live surfaces keep producing indefinitely.
++                for (0..capacity) |_| {
++                    const value = self.queue.pop() orelse break;
++                    handle(self.context, value);
++                }
++                if (stopping) return;
++                std.Thread.sleep(std.time.ns_per_ms);
++            }
++        }
++    };
++}
++
++fn Value(comptime Queue: type) type {
++    return @typeInfo(@TypeOf(@as(Queue, undefined).data)).array.child;
++}
++
++test "drain releases a blocked producer and preserves FIFO" {
++    const Q = @import("blocking_queue.zig").BlockingQueue(u64, 4);
++    var queue: Q = .{};
++    const Seen = struct {
++        values: [5]u64 = undefined,
++        len: usize = 0,
++        fn handle(self: *@This(), value: u64) void {
++            self.values[self.len] = value;
++            self.len += 1;
++        }
++        fn produce(q: *Q) void { _ = q.push(5, .{ .forever = {} }); }
++    };
++    var seen: Seen = .{};
++    for (1..5) |i| try std.testing.expect(queue.push(i, .{ .instant = {} }) > 0);
++    const producer = try std.Thread.spawn(.{}, Seen.produce, .{&queue});
++    var drain: QueueDrain(Q, *Seen, Seen.handle) = .{ .queue = &queue, .context = &seen };
++    drain.start();
++    producer.join();
++    drain.finish();
++    try std.testing.expect(queue.pop() == null);
++    try std.testing.expectEqualSlices(u64, &.{ 1, 2, 3, 4, 5 }, seen.values[0..seen.len]);
++}
+--- a/src/datastruct/main.zig
++++ b/src/datastruct/main.zig
+@@ -9,6 +9,7 @@
+ const split_tree = @import("split_tree.zig");
+ 
+ pub const lru = @import("lru.zig");
++pub const QueueDrain = @import("queue_drain.zig").QueueDrain;
+ pub const BlockingQueue = blocking_queue.BlockingQueue;
+ pub const CacheTable = cache_table.CacheTable;
+ pub const CircBuf = circ_buf.CircBuf;
+--- a/src/App.zig
++++ b/src/App.zig
+@@ -54,6 +54,11 @@
+ /// this is a blocking queue so if it is full you will get errors (or block).
+ mailbox: Mailbox.Queue,
+ 
++/// App-thread messages retained by a teardown drain, processed before newer mail.
++/// Only the drain thread touches this while the app thread is joining workers.
++chop_deferred: std.ArrayListUnmanaged(Message) = .{},
++chop_deferred_head: usize = 0,
++
+ /// The set of font GroupCache instances shared by surfaces with the
+ /// same font configuration.
+ font_grid_set: font.SharedGridSet,
+@@ -111,6 +116,8 @@
+     // Clean up all our surfaces
+     for (self.surfaces.items) |surface| surface.deinit();
+     self.surfaces.deinit(self.alloc);
++    for (self.chop_deferred.items[self.chop_deferred_head..]) |message| chopDiscardMessage(message);
++    self.chop_deferred.deinit(self.alloc);
+ 
+     // Clean up our font group cache
+     // We should have zero items in the grid set at this point because
+@@ -241,26 +248,96 @@
+ 
+ /// Drain the mailbox.
+ fn drainMailbox(self: *App, rt_app: *apprt.App) !void {
++    while (self.chop_deferred_head < self.chop_deferred.items.len) {
++        const message = self.chop_deferred.items[self.chop_deferred_head];
++        self.chop_deferred_head += 1;
++        if (!try self.chopProcessMessage(rt_app, message)) return;
++    }
++    self.chop_deferred.clearRetainingCapacity();
++    self.chop_deferred_head = 0;
+     while (self.mailbox.pop()) |message| {
+-        log.debug("mailbox message={s}", .{@tagName(message)});
+-        switch (message) {
+-            .open_config => try self.performAction(rt_app, .open_config),
+-            .new_window => |msg| try self.newWindow(rt_app, msg),
+-            .close => |surface| self.closeSurface(surface),
+-            .surface_message => |msg| try self.surfaceMessage(msg.surface, msg.message),
+-            .redraw_surface => |surface| try self.redrawSurface(rt_app, surface),
+-            .redraw_inspector => |surface| self.redrawInspector(rt_app, surface),
+-
+-            // If we're quitting, then we set the quit flag and stop
+-            // draining the mailbox immediately. This lets us defer
+-            // mailbox processing to the next tick so that the apprt
+-            // can try to quit as quickly as possible.
+-            .quit => {
+-                log.info("quit message received, short circuiting mailbox drain", .{});
+-                try self.performAction(rt_app, .quit);
+-                return;
++        if (!try self.chopProcessMessage(rt_app, message)) return;
++    }
++}
++
++fn chopProcessMessage(self: *App, rt_app: *apprt.App, message: Message) !bool {
++    log.debug("mailbox message={s}", .{@tagName(message)});
++    switch (message) {
++        .open_config => try self.performAction(rt_app, .open_config),
++        .new_window => |msg| try self.newWindow(rt_app, msg),
++        .close => |surface| self.closeSurface(surface),
++        .surface_message => |msg| try self.surfaceMessage(msg.surface, msg.message),
++        .redraw_surface => |surface| try self.redrawSurface(rt_app, surface),
++        .redraw_inspector => |surface| self.redrawInspector(rt_app, surface),
++        .quit => {
++            try self.performAction(rt_app, .quit);
++            return false;
++        },
++    }
++    return true;
++}
++
++/// Adapted from Ghostty PR #14444. Keep UI callbacks on the app thread.
++pub const ChopTeardownDrain = @import("datastruct/main.zig").QueueDrain(
++    Mailbox.Queue, ChopTeardown, ChopTeardown.keep,
++);
++
++pub fn chopTeardownDrain(self: *App, surface: *const Surface) ChopTeardownDrain {
++    const context: ChopTeardown = .{ .app = self, .surface = surface, .rt_surface = surface.rt_surface };
++    // A previous close may already have deferred messages for this surface.
++    // Remove those too before its address can be reused for a new surface.
++    var write: usize = self.chop_deferred_head;
++    for (self.chop_deferred.items[self.chop_deferred_head..]) |message| {
++        if (context.retained(message)) |kept| {
++            self.chop_deferred.items[write] = kept;
++            write += 1;
++        }
++    }
++    self.chop_deferred.items.len = write;
++    return .{ .queue = &self.mailbox, .context = context };
++}
++
++const ChopTeardown = struct {
++    app: *App,
++    surface: *const Surface,
++    rt_surface: *const apprt.Surface,
++
++    fn retained(self: ChopTeardown, message: Message) ?Message {
++        var kept = message;
++        const closing = switch (kept) {
++            .close => |v| v == self.surface,
++            .surface_message => |v| v.surface == self.surface,
++            .redraw_surface, .redraw_inspector => |v| v == self.rt_surface,
++            .new_window => |*v| new_window: {
++                if (v.parent == self.surface) v.parent = null;
++                break :new_window false;
+             },
++            .open_config, .quit => false,
++        };
++        if (closing) {
++            chopDiscardMessage(kept);
++            return null;
+         }
++        return kept;
++    }
++
++    fn keep(self: ChopTeardown, message: Message) void {
++        const kept = self.retained(message) orelse return;
++        self.app.chop_deferred.append(self.app.alloc, kept) catch {
++            chopDiscardMessage(kept);
++            log.err("unable to retain app message during teardown", .{});
++        };
++    }
++};
++
++fn chopDiscardMessage(message: Message) void {
++    switch (message) {
++        .surface_message => |v| switch (v.message) {
++            .clipboard_write => |write| write.req.deinit(),
++            .pwd_change => |write| write.deinit(),
++            else => {},
++        },
++        else => {},
+     }
+ }
+ 
+--- a/src/Surface.zig
++++ b/src/Surface.zig
+@@ -695,6 +695,10 @@
+ }
+ 
+ pub fn deinit(self: *Surface) void {
++    // Keep app mail moving while this app thread joins its producers.
++    var app_drain = self.app.chopTeardownDrain(self);
++    app_drain.start();
++
+     // Stop rendering thread
+     {
+         self.renderer_thread.stop.notify() catch |err|
+@@ -705,6 +709,13 @@
+         self.renderer.threadEnter(self.rt_surface) catch unreachable;
+     }
+ 
++    // The joined renderer cannot consume messages from the IO/reader threads.
++    var renderer_discard: rendererpkg.Thread.ChopMailboxDiscard = .{};
++    var renderer_drain: rendererpkg.Thread.ChopMailboxDrain = .{
++        .queue = self.renderer_thread.mailbox, .context = &renderer_discard,
++    };
++    renderer_drain.start();
++
+     // Stop our IO thread
+     {
+         self.io_thread.stop.notify() catch |err|
+@@ -712,10 +723,14 @@
+         self.io_thr.join();
+     }
+ 
++    renderer_drain.finish();
++    app_drain.finish();
++
+     // We need to deinit AFTER everything is stopped, since there are
+     // shared values between the two threads.
+     self.renderer_thread.deinit();
+     self.renderer.deinit();
++    renderer_discard.deinit();
+     self.io_thread.deinit();
+     self.io.deinit();
+ 
+--- a/src/renderer/Thread.zig
++++ b/src/renderer/Thread.zig
+@@ -34,6 +34,24 @@
+ /// hardcoded with a capacity. We can make this a comptime parameter in
+ /// the future if we want it configurable.
+ pub const Mailbox = BlockingQueue(rendererpkg.Message, 64);
++
++pub const ChopMailboxDrain = @import("../datastruct/main.zig").QueueDrain(Mailbox, *ChopMailboxDiscard, ChopMailboxDiscard.discard);
++pub const ChopMailboxDiscard = struct {
++    // Only the paused app thread produces font_grid messages, so at most the
++    // mailbox capacity can remain. Keep old grids alive through renderer.deinit.
++    fonts: std.BoundedArray(std.meta.TagPayload(rendererpkg.Message, .font_grid), 64) = .{},
++
++    fn discard(self: *ChopMailboxDiscard, message: rendererpkg.Message) void {
++        switch (message) {
++            .font_grid => |grid| self.fonts.append(grid) catch unreachable,
++            else => message.deinit(),
++        }
++    }
++
++    pub fn deinit(self: *ChopMailboxDiscard) void {
++        for (self.fonts.constSlice()) |grid| grid.set.deref(grid.old_key);
++    }
++};
+ 
+ /// Allocator used for some state
+ alloc: std.mem.Allocator,
+--- a/src/termio/mailbox.zig
++++ b/src/termio/mailbox.zig
+@@ -96,6 +96,18 @@
+         }
+     }
+ 
++    pub const ChopDrain = @import("../datastruct/main.zig").QueueDrain(Queue, void, chopDiscard);
++    pub fn chopDrain(self: *Mailbox) ChopDrain {
++        return switch (self.*) { .spsc => |v| .{ .queue = v.queue, .context = {} } };
++    }
++    fn chopDiscard(_: void, message: termio.Message) void {
++        switch (message) {
++            .write_alloc => |v| v.alloc.free(v.data),
++            .change_config => |v| { v.ptr.deinit(); v.alloc.destroy(v.ptr); },
++            else => {},
++        }
++    }
++
+     /// Notify that there are new messages. This may be a noop depending
+     /// on the writer type.
+     pub fn notify(self: *Mailbox) void {
+--- a/src/termio/Exec.zig
++++ b/src/termio/Exec.zig
+@@ -207,6 +207,10 @@
+     const exec = &td.backend.exec;
+ 
+     if (exec.exited) self.subprocess.externalExit();
++    // This IO loop has stopped. Its reader must still be able to send replies
++    // while the child process handles SIGHUP and the reader drains the PTY.
++    var drain = td.mailbox.chopDrain();
++    drain.start();
+     self.subprocess.stop();
+ 
+     // Quit our read thread after exiting the subprocess so that
+@@ -235,6 +239,7 @@
+     }
+ 
+     exec.read_thread.join();
++    drain.finish();
+ }
+ 
+ pub fn focusGained(

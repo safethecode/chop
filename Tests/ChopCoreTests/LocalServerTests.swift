@@ -4,6 +4,7 @@ import Testing
 
 @testable import ChopCore
 
+@MainActor
 @Test func localServerDiscoveryReadsAChildProcessWithoutIncludingOtherRoots() async throws {
   let marker = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
   let process = Process()
@@ -16,8 +17,7 @@ import Testing
   try process.run()
   defer {
     if process.isRunning {
-      process.terminate()
-      process.waitUntilExit()
+      kill(process.processIdentifier, SIGKILL)
     }
     try? FileManager.default.removeItem(at: marker)
   }
@@ -33,6 +33,13 @@ import Testing
   let found = LocalServerDiscovery.scan(rootPIDs: [root])
   #expect(found[root]?.contains(LocalServer(host: "localhost", port: port)) == true)
   #expect(LocalServerDiscovery.scan(rootPIDs: [getppid()]).isEmpty)
+  process.terminate()
+  // Foundation Process keeps run-loop state. Never block a test indefinitely in waitUntilExit.
+  let exitDeadline = ContinuousClock.now.advanced(by: .seconds(5))
+  while process.isRunning, ContinuousClock.now < exitDeadline {
+    try await Task.sleep(for: .milliseconds(20))
+  }
+  #expect(!process.isRunning, "검사 서버가 제한 시간 안에 종료되어야 합니다.")
 }
 
 @Test func localServerHintsCannotReplaceTheListenerDestination() {
