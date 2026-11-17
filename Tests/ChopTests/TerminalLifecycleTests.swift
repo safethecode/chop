@@ -65,7 +65,11 @@ private final class LifecycleTestBundle: NSObject {}
     Issue.record("터미널 종료가 제한 시간을 넘겼습니다: \(progress ?? "진행 기록 없음")")
   }
   let text = (try? String(contentsOf: log, encoding: .utf8)) ?? ""
-  #expect(process.terminationStatus == 0, "하위 검사 실패: \(text.suffix(4000))")
+  let progress = try? String(
+    contentsOf: directory.appendingPathComponent("progress"), encoding: .utf8)
+  #expect(
+    process.terminationStatus == 0,
+    "하위 검사 실패 (\(progress ?? "진행 기록 없음")): \(text.suffix(4000))")
   #expect(
     FileManager.default.fileExists(atPath: directory.appendingPathComponent("completed").path))
 }
@@ -98,12 +102,20 @@ private func runLifecycleProbe(at directory: URL) async throws {
     terminals.append(terminal)
     return terminal
   }
-  func waitFor(_ condition: () -> Bool) async throws {
+  func waitFor(_ phase: String, terminal: TerminalView, _ condition: () -> Bool) async throws {
+    try phase.write(
+      to: directory.appendingPathComponent("progress"), atomically: true, encoding: .utf8)
     let deadline = ContinuousClock.now.advanced(by: .seconds(10))
     while !condition(), ContinuousClock.now < deadline {
       try await Task.sleep(for: .milliseconds(20))
     }
-    try #require(condition())
+    let completed = condition()
+    let details =
+      completed
+      ? phase
+      : "\(phase), PID=\(terminal.childPID), 제목=\(terminal.terminalTitle), 화면="
+        + String((terminal.accessibilityValue() as? String ?? "").suffix(1500))
+    try #require(completed, Comment(rawValue: details))
   }
   func send(_ text: String, to terminal: TerminalView) throws {
     terminal.insertText(text, replacementRange: NSRange(location: NSNotFound, length: 0))
@@ -121,10 +133,14 @@ private func runLifecycleProbe(at directory: URL) async throws {
       action.withCString { ghostty_surface_binding_action(surface, $0, UInt(action.utf8.count)) })
   }
   let survivor = try addTerminal()
-  try await waitFor { (survivor.accessibilityValue() as? String ?? "").contains("READY") }
+  try await waitFor("유지할 셸 준비", terminal: survivor) {
+    (survivor.accessibilityValue() as? String ?? "").contains("READY")
+  }
   for mode in ["title", "reply", "render"] {
     let closing = try addTerminal()
-    try await waitFor { (closing.accessibilityValue() as? String ?? "").contains("READY") }
+    try await waitFor("종료할 셸 준비: \(mode)", terminal: closing) {
+      (closing.accessibilityValue() as? String ?? "").contains("READY")
+    }
     try changeFont(in: closing)
     try send(mode, to: closing)
     let title = "keep-\(mode)"
@@ -134,10 +150,12 @@ private func runLifecycleProbe(at directory: URL) async throws {
     blockAppThreadForQueuePressure()
     closing.close()
     closing.removeFromSuperview()
-    try await waitFor { survivor.terminalTitle == title }
+    try await waitFor("다른 셸 제목 수신: \(mode)", terminal: survivor) {
+      survivor.terminalTitle == title
+    }
     let marker = "ping-\(mode)"
     try send(marker, to: survivor)
-    try await waitFor {
+    try await waitFor("다른 셸 입력 응답: \(mode)", terminal: survivor) {
       (survivor.accessibilityValue() as? String ?? "").contains("ACK:\(marker)")
     }
   }
@@ -152,7 +170,7 @@ private func runLifecycleProbe(at directory: URL) async throws {
     }
   }
   try send("after-batch", to: survivor)
-  try await waitFor {
+  try await waitFor("연속 종료 후 입력 응답", terminal: survivor) {
     (survivor.accessibilityValue() as? String ?? "").contains("ACK:after-batch")
   }
   survivor.close()
