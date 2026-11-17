@@ -25,11 +25,14 @@ final class TerminalEngine: NSObject {
   private var configs: [AppearanceMode: ghostty_config_t] = [:]
   private let terminals = NSHashTable<TerminalView>.weakObjects()
   private(set) var appearanceMode: AppearanceMode = .light
-  private let clipboard: NSPasteboard
+  private let clipboard: () -> NSPasteboard?
   let command: String?
   private var serverMonitor: Task<Void, Never>?
 
-  init(clipboard: NSPasteboard = .general, command: String? = nil) {
+  init(
+    clipboard: @escaping () -> NSPasteboard? = { SystemPasteboard.general() },
+    command: String? = nil
+  ) {
     self.clipboard = clipboard
     self.command = command
     super.init()
@@ -81,7 +84,7 @@ final class TerminalEngine: NSObject {
       read_clipboard_cb: { userdata, _, state in
         MainActor.assumeIsolated {
           guard let view = TerminalEngine.view(userdata), let surface = view.surface else { return }
-          let text = TerminalEngine.shared?.clipboard.string(forType: .string) ?? ""
+          let text = TerminalEngine.shared?.readClipboardText() ?? ""
           text.withCString { ghostty_surface_complete_clipboard_request(surface, $0, state, false) }
         }
       },
@@ -94,9 +97,7 @@ final class TerminalEngine: NSObject {
       write_clipboard_cb: { _, text, _, confirm in
         MainActor.assumeIsolated {
           guard !confirm, let text else { return }
-          guard let clipboard = TerminalEngine.shared?.clipboard else { return }
-          clipboard.clearContents()
-          clipboard.setString(String(cString: text), forType: .string)
+          TerminalEngine.shared?.writeClipboardText(String(cString: text))
         }
       },
       close_surface_cb: { userdata, _ in
@@ -136,6 +137,15 @@ final class TerminalEngine: NSObject {
     configs.removeAll()
     terminals.removeAllObjects()
     Self.shared = nil
+  }
+
+  func readClipboardText() -> String { clipboard()?.string(forType: .string) ?? "" }
+
+  @discardableResult
+  func writeClipboardText(_ text: String) -> Bool {
+    guard let clipboard = clipboard() else { return false }
+    clipboard.clearContents()
+    return clipboard.setString(text, forType: .string)
   }
 
   private func monitorLocalServers() {

@@ -16,7 +16,7 @@ import Testing
   try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
   defer { try? FileManager.default.removeItem(at: directory) }
   let clipboard = NSPasteboard.withUniqueName()
-  let engine = TerminalEngine(clipboard: clipboard, command: "/bin/zsh -l")
+  let engine = TerminalEngine(clipboard: { clipboard }, command: "/bin/zsh -l")
   try engine.start(resources: resources)
   let pane = TerminalPaneView(engine: engine, workingDirectory: directory.path)
   let window = NSWindow(
