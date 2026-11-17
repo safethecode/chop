@@ -1,0 +1,89 @@
+{
+  "schema_version": 2,
+  "handoff_sha256": "67ada5c8aab1abc320189fd5331ed68f83a546611e1f5d921f9c98a74fb4fad6",
+  "target_sha256": "addd8d7f875404e78697081236724e492f68d9ac60cff5631e445e698067fc9b",
+  "core_review": {
+    "path": "design/local-server-transport-reference/core-review.json",
+    "sha256": "7d858c9d4fdd0caabb910292952015d9ca9e4a5521ceefe396e2ac82e1b220ca"
+  },
+  "consumption": [
+    {
+      "ref": "RAW-grid",
+      "status": "applied",
+      "target": "변경 없는 Workspace 격자/헤더/탭/rail + LocalServerDiscovery 주소 후보",
+      "interpretation": "S-1 라이트 격자의 동등 두 열/행·기존 작은 헤더·중앙 plus 및 S-3 다크 탭/파일 트리를 현재 CUA 이미지로 확인했다. UI 소스·40/28pt·48pt rail·옅은 경계·인셋 입력은 변경하지 않았다. 원본 grid의 두 비율 약1/허용0.02 및 이후 사용자 교정을 유지한다. 주소 후보만 Codex 내부 소켓을 제외하고3000 자식 서버는 유지한다. 전체 자동 검사/PR/CI의 환경 차단은 문서에서 별도로 미완료로 남긴다."
+    },
+    {
+      "ref": "E-canvas",
+      "status": "applied",
+      "target": "변경 없는 Workspace 격자/헤더/탭/rail + LocalServerDiscovery 주소 후보",
+      "interpretation": "S-1 라이트 격자의 동등 두 열/행·기존 작은 헤더·중앙 plus 및 S-3 다크 탭/파일 트리를 현재 CUA 이미지로 확인했다. UI 소스·40/28pt·48pt rail·옅은 경계·인셋 입력은 변경하지 않았다. 원본 grid의 두 비율 약1/허용0.02 및 이후 사용자 교정을 유지한다. 주소 후보만 Codex 내부 소켓을 제외하고3000 자식 서버는 유지한다. 전체 자동 검사/PR/CI의 환경 차단은 문서에서 별도로 미완료로 남긴다."
+    },
+    {
+      "ref": "O-columns",
+      "status": "applied",
+      "target": "변경 없는 Workspace 격자/헤더/탭/rail + LocalServerDiscovery 주소 후보",
+      "interpretation": "S-1 라이트 격자의 동등 두 열/행·기존 작은 헤더·중앙 plus 및 S-3 다크 탭/파일 트리를 현재 CUA 이미지로 확인했다. UI 소스·40/28pt·48pt rail·옅은 경계·인셋 입력은 변경하지 않았다. 원본 grid의 두 비율 약1/허용0.02 및 이후 사용자 교정을 유지한다. 주소 후보만 Codex 내부 소켓을 제외하고3000 자식 서버는 유지한다. 전체 자동 검사/PR/CI의 환경 차단은 문서에서 별도로 미완료로 남긴다."
+    },
+    {
+      "ref": "O-rows",
+      "status": "applied",
+      "target": "변경 없는 Workspace 격자/헤더/탭/rail + LocalServerDiscovery 주소 후보",
+      "interpretation": "S-1 라이트 격자의 동등 두 열/행·기존 작은 헤더·중앙 plus 및 S-3 다크 탭/파일 트리를 현재 CUA 이미지로 확인했다. UI 소스·40/28pt·48pt rail·옅은 경계·인셋 입력은 변경하지 않았다. 원본 grid의 두 비율 약1/허용0.02 및 이후 사용자 교정을 유지한다. 주소 후보만 Codex 내부 소켓을 제외하고3000 자식 서버는 유지한다. 전체 자동 검사/PR/CI의 환경 차단은 문서에서 별도로 미완료로 남긴다."
+    },
+    {
+      "ref": "O-hierarchy",
+      "status": "applied",
+      "target": "변경 없는 Workspace 격자/헤더/탭/rail + LocalServerDiscovery 주소 후보",
+      "interpretation": "S-1 라이트 격자의 동등 두 열/행·기존 작은 헤더·중앙 plus 및 S-3 다크 탭/파일 트리를 현재 CUA 이미지로 확인했다. UI 소스·40/28pt·48pt rail·옅은 경계·인셋 입력은 변경하지 않았다. 원본 grid의 두 비율 약1/허용0.02 및 이후 사용자 교정을 유지한다. 주소 후보만 Codex 내부 소켓을 제외하고3000 자식 서버는 유지한다. 전체 자동 검사/PR/CI의 환경 차단은 문서에서 별도로 미완료로 남긴다."
+    },
+    {
+      "ref": "O-historical-focus",
+      "status": "applied",
+      "target": "변경 없는 Workspace 격자/헤더/탭/rail + LocalServerDiscovery 주소 후보",
+      "interpretation": "S-1 라이트 격자의 동등 두 열/행·기존 작은 헤더·중앙 plus 및 S-3 다크 탭/파일 트리를 현재 CUA 이미지로 확인했다. UI 소스·40/28pt·48pt rail·옅은 경계·인셋 입력은 변경하지 않았다. 원본 grid의 두 비율 약1/허용0.02 및 이후 사용자 교정을 유지한다. 주소 후보만 Codex 내부 소켓을 제외하고3000 자식 서버는 유지한다. 전체 자동 검사/PR/CI의 환경 차단은 문서에서 별도로 미완료로 남긴다."
+    },
+    {
+      "ref": "O-font",
+      "status": "unverified",
+      "target": "변경 없는 Workspace 격자/헤더/탭/rail + LocalServerDiscovery 주소 후보",
+      "interpretation": "S-1 라이트 격자의 동등 두 열/행·기존 작은 헤더·중앙 plus 및 S-3 다크 탭/파일 트리를 현재 CUA 이미지로 확인했다. UI 소스·40/28pt·48pt rail·옅은 경계·인셋 입력은 변경하지 않았다. 원본 grid의 두 비율 약1/허용0.02 및 이후 사용자 교정을 유지한다. 주소 후보만 Codex 내부 소켓을 제외하고3000 자식 서버는 유지한다. 전체 자동 검사/PR/CI의 환경 차단은 문서에서 별도로 미완료로 남긴다."
+    },
+    {
+      "ref": "A-current-user",
+      "status": "applied",
+      "target": "변경 없는 Workspace 격자/헤더/탭/rail + LocalServerDiscovery 주소 후보",
+      "interpretation": "S-1 라이트 격자의 동등 두 열/행·기존 작은 헤더·중앙 plus 및 S-3 다크 탭/파일 트리를 현재 CUA 이미지로 확인했다. UI 소스·40/28pt·48pt rail·옅은 경계·인셋 입력은 변경하지 않았다. 원본 grid의 두 비율 약1/허용0.02 및 이후 사용자 교정을 유지한다. 주소 후보만 Codex 내부 소켓을 제외하고3000 자식 서버는 유지한다. 전체 자동 검사/PR/CI의 환경 차단은 문서에서 별도로 미완료로 남긴다."
+    }
+  ],
+  "results": [
+    {
+      "id": "Q-columns",
+      "capture": {
+        "path": "design/evidence/local-server-transport.md",
+        "sha256": "1b422d06f70f93c04074c907050f4428a9e5d1ba8b8083d0ba48532576f0aabc"
+      },
+      "actual": {
+        "value": 1,
+        "unit": "ratio",
+        "method": "S-1 현재 라이트 격자 직접 판독. 두 열/행 약1(시각 추정±0.01),기존과 같은 canvas. 원본약1/허용0.02 안. 이미지 px를 native pt로 등치하지 않음."
+      }
+    },
+    {
+      "id": "Q-rows",
+      "capture": {
+        "path": "design/evidence/local-server-transport.md",
+        "sha256": "1b422d06f70f93c04074c907050f4428a9e5d1ba8b8083d0ba48532576f0aabc"
+      },
+      "actual": {
+        "value": 1,
+        "unit": "ratio",
+        "method": "S-1 현재 라이트 격자 직접 판독. 두 열/행 약1(시각 추정±0.01),기존과 같은 canvas. 원본약1/허용0.02 안. 이미지 px를 native pt로 등치하지 않음."
+      }
+    }
+  ],
+  "visual_review": {
+    "status": "adapted-and-verified",
+    "reason": "S-1 라이트 격자의 동등 두 열/행·기존 작은 헤더·중앙 plus 및 S-3 다크 탭/파일 트리를 현재 CUA 이미지로 확인했다. UI 소스·40/28pt·48pt rail·옅은 경계·인셋 입력은 변경하지 않았다. 원본 grid의 두 비율 약1/허용0.02 및 이후 사용자 교정을 유지한다. 주소 후보만 Codex 내부 소켓을 제외하고3000 자식 서버는 유지한다. 전체 자동 검사/PR/CI의 환경 차단은 문서에서 별도로 미완료로 남긴다."
+  }
+}

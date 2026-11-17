@@ -144,3 +144,5 @@ V-71 / TERMINAL-TEARDOWN-BACKPRESSURE: 고정 엔진에서 제목 출력 폭주 
 V-72 / TERMINAL-TEARDOWN-REVIEW: 자동 리뷰가 지적한 font_grid.old_key는 renderer 해제 뒤 app 스레드에서 정리한다. 검사 스크립트는 공백/작은따옴표 경로를 실제 사용하고 즉시 종료 전에 글꼴 변경도 요청한다. 별도로 관찰한 기존 서버 검사의 waitUntilExit 대기는 main actor/5초 비동기 종료 확인으로 보완했다. 전체56개36.689초 검사 통과, 종료 검사4.038초. fixed-and-verified (소스 소유권·해당 실행 범위, 셀프 수정/검증). [근거](evidence/terminal-lifecycle.md).
 
 V-73 / PROJECT-LIBRARY: 최근 프로젝트12개와 프로젝트별 이름 있는 구성을 기존 파일 메뉴/native 대화상자에 추가했다. 새 window UUID·셸·웹 URL·트리 설정,기존 셸 환경과 웹 입력 보존,한글 이름 오류/덮어쓰기 취소·갱신,새 버전 파일 보호→수정·재시도,선택 삭제/최근 이력 분리와 재실행을 실제 앱에서 확인했다. 같은 소스의 두 모드 native 표면·다크 기본4칸을 원본/현재 토큰에 대조했고 전체60개26.220초 검사가 통과했다. aligned (이 변경 범위,셀프 리뷰). 미실행 하드웨어/보조기술과 과거 전체 UI 검증은 구분한다. [근거](evidence/project-library.md).
+
+V-74 / F-LOCAL-SERVER-TRANSPORT: 사용자가 보고한50252 주소는 Codex 내부 listener였다. 그 실행 파일 자체의 소켓만 제외하고 자식 탐색을 유지했다. 실제 프로세스 회귀 검사와 라이트 격자/다크 탭의3000 주소·같은 창 웹 열기·종료 제거를 확인했다. fixed-and-verified (변경 범위, 셀프 리뷰). 전체 검사는 기존 NSPasteboard null 실행 오류로 중단됐고 PR·CI·머지는 인증 접근 복구 후 남아 있다. [근거](evidence/local-server-transport.md).

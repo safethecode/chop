@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "decomposition_sha256": "bedd4af43a0fa310b25a48c328183ac225846c3fdad67f0e8f7f0e3cb345a6b9",
+  "interpretation_sha256": "bb75ebdb77b50b2a7199bc6e7cf91e0e8e7aaf308be8e57f5d372daf986e20f1",
+  "source_snapshot": {
+    "path": "design/local-server-transport-reference/source-snapshot.json",
+    "sha256": "b83dd1bf8dd9a90b5825c2625c73bf0e0c491a34b7939443a98aef46247e2a91"
+  },
+  "capture": {
+    "path": "design/evidence/local-server-transport.md",
+    "sha256": "1b422d06f70f93c04074c907050f4428a9e5d1ba8b8083d0ba48532576f0aabc"
+  },
+  "status": "adapted-and-verified",
+  "reason": "S-1 라이트 격자의 동등 두 열/행·기존 작은 헤더·중앙 plus 및 S-3 다크 탭/파일 트리를 현재 CUA 이미지로 확인했다. UI 소스·40/28pt·48pt rail·옅은 경계·인셋 입력은 변경하지 않았다. 원본 grid의 두 비율 약1/허용0.02 및 이후 사용자 교정을 유지한다. 주소 후보만 Codex 내부 소켓을 제외하고3000 자식 서버는 유지한다. 전체 자동 검사/PR/CI의 환경 차단은 문서에서 별도로 미완료로 남긴다."
+}
