@@ -146,3 +146,5 @@ V-72 / TERMINAL-TEARDOWN-REVIEW: 자동 리뷰가 지적한 font_grid.old_key는
 V-73 / PROJECT-LIBRARY: 최근 프로젝트12개와 프로젝트별 이름 있는 구성을 기존 파일 메뉴/native 대화상자에 추가했다. 새 window UUID·셸·웹 URL·트리 설정,기존 셸 환경과 웹 입력 보존,한글 이름 오류/덮어쓰기 취소·갱신,새 버전 파일 보호→수정·재시도,선택 삭제/최근 이력 분리와 재실행을 실제 앱에서 확인했다. 같은 소스의 두 모드 native 표면·다크 기본4칸을 원본/현재 토큰에 대조했고 전체60개26.220초 검사가 통과했다. aligned (이 변경 범위,셀프 리뷰). 미실행 하드웨어/보조기술과 과거 전체 UI 검증은 구분한다. [근거](evidence/project-library.md).
 
 V-74 / F-LOCAL-SERVER-TRANSPORT: 사용자가 보고한50252 주소는 Codex 내부 listener였다. 그 실행 파일 자체의 소켓만 제외하고 자식 탐색을 유지했다. 실제 프로세스 회귀 검사와 라이트 격자/다크 탭의3000 주소·같은 창 웹 열기·종료 제거를 확인했다. fixed-and-verified (변경 범위, 셀프 리뷰). 전체 검사는 기존 NSPasteboard null 실행 오류로 중단됐고 PR·CI·머지는 인증 접근 복구 후 남아 있다. [근거](evidence/local-server-transport.md).
+
+V-75 / F-CLIPBOARD-STARTUP: 게시 전 검사에서 시스템 클립보드의 nil 반환이 nonnull 초기 인자로 들어가 signal6이 났다. 실제 요청 시 nullable 경계를 거치도록 바꾸고 파일 트리의 직접 접근도 보완했다. nil 공급자 회귀 검사와 실제 앱의 경로 복사·터미널 읽기/쓰기·두 모드를 확인했다. 전체62개는 충돌 없이 완료했으나7개/10issue가 실패하므로 전체 통과가 아니다. 임시 native 클립보드 사전 확인은 같은 환경에서 명확한 exit1을 반환한다. fixed-and-verified (충돌·실제 앱 변경 범위, 셀프 리뷰), 환경 정상화 뒤 전체 검사·PR·CI는 미완료. [근거](evidence/clipboard-service.md).

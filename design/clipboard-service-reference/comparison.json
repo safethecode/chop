@@ -1,0 +1,89 @@
+{
+  "schema_version": 2,
+  "handoff_sha256": "67ada5c8aab1abc320189fd5331ed68f83a546611e1f5d921f9c98a74fb4fad6",
+  "target_sha256": "c5205415ce38e283fd67efd1e91aca59b7d959a114c26c9eb2501f5ecb1cce8f",
+  "core_review": {
+    "path": "design/clipboard-service-reference/core-review.json",
+    "sha256": "8394b4761e91afbc7f3e15a2c33fdd4ab0efaadc86fd48f57f4cfa2cbfa79b44"
+  },
+  "consumption": [
+    {
+      "ref": "RAW-grid",
+      "status": "applied",
+      "target": "변경 없는 Workspace 격자/헤더/rail/파일 트리 + nullable 클립보드 동작",
+      "interpretation": "C-3–6 현재 CUA 라이트/다크 격자에서 기존 동등 두 열/행·40pt 헤더·중앙 plus·48pt rail·파일 트리·28pt 인셋 입력을 대조했다. 원본 비율 약1/허용0.02 및 후속 사용자 교정을 유지한다. 새 시각 표면 없이 클립보드 경계/요청 시점만 변경했다. C-5의 CUA 초점 전달 관찰과 전체 검사7건 실패는 별도로 남기며 새 전 조합 성공이나 제품 통합 완료로 포장하지 않는다."
+    },
+    {
+      "ref": "E-canvas",
+      "status": "applied",
+      "target": "변경 없는 Workspace 격자/헤더/rail/파일 트리 + nullable 클립보드 동작",
+      "interpretation": "C-3–6 현재 CUA 라이트/다크 격자에서 기존 동등 두 열/행·40pt 헤더·중앙 plus·48pt rail·파일 트리·28pt 인셋 입력을 대조했다. 원본 비율 약1/허용0.02 및 후속 사용자 교정을 유지한다. 새 시각 표면 없이 클립보드 경계/요청 시점만 변경했다. C-5의 CUA 초점 전달 관찰과 전체 검사7건 실패는 별도로 남기며 새 전 조합 성공이나 제품 통합 완료로 포장하지 않는다."
+    },
+    {
+      "ref": "O-columns",
+      "status": "applied",
+      "target": "변경 없는 Workspace 격자/헤더/rail/파일 트리 + nullable 클립보드 동작",
+      "interpretation": "C-3–6 현재 CUA 라이트/다크 격자에서 기존 동등 두 열/행·40pt 헤더·중앙 plus·48pt rail·파일 트리·28pt 인셋 입력을 대조했다. 원본 비율 약1/허용0.02 및 후속 사용자 교정을 유지한다. 새 시각 표면 없이 클립보드 경계/요청 시점만 변경했다. C-5의 CUA 초점 전달 관찰과 전체 검사7건 실패는 별도로 남기며 새 전 조합 성공이나 제품 통합 완료로 포장하지 않는다."
+    },
+    {
+      "ref": "O-rows",
+      "status": "applied",
+      "target": "변경 없는 Workspace 격자/헤더/rail/파일 트리 + nullable 클립보드 동작",
+      "interpretation": "C-3–6 현재 CUA 라이트/다크 격자에서 기존 동등 두 열/행·40pt 헤더·중앙 plus·48pt rail·파일 트리·28pt 인셋 입력을 대조했다. 원본 비율 약1/허용0.02 및 후속 사용자 교정을 유지한다. 새 시각 표면 없이 클립보드 경계/요청 시점만 변경했다. C-5의 CUA 초점 전달 관찰과 전체 검사7건 실패는 별도로 남기며 새 전 조합 성공이나 제품 통합 완료로 포장하지 않는다."
+    },
+    {
+      "ref": "O-hierarchy",
+      "status": "applied",
+      "target": "변경 없는 Workspace 격자/헤더/rail/파일 트리 + nullable 클립보드 동작",
+      "interpretation": "C-3–6 현재 CUA 라이트/다크 격자에서 기존 동등 두 열/행·40pt 헤더·중앙 plus·48pt rail·파일 트리·28pt 인셋 입력을 대조했다. 원본 비율 약1/허용0.02 및 후속 사용자 교정을 유지한다. 새 시각 표면 없이 클립보드 경계/요청 시점만 변경했다. C-5의 CUA 초점 전달 관찰과 전체 검사7건 실패는 별도로 남기며 새 전 조합 성공이나 제품 통합 완료로 포장하지 않는다."
+    },
+    {
+      "ref": "O-historical-focus",
+      "status": "applied",
+      "target": "변경 없는 Workspace 격자/헤더/rail/파일 트리 + nullable 클립보드 동작",
+      "interpretation": "C-3–6 현재 CUA 라이트/다크 격자에서 기존 동등 두 열/행·40pt 헤더·중앙 plus·48pt rail·파일 트리·28pt 인셋 입력을 대조했다. 원본 비율 약1/허용0.02 및 후속 사용자 교정을 유지한다. 새 시각 표면 없이 클립보드 경계/요청 시점만 변경했다. C-5의 CUA 초점 전달 관찰과 전체 검사7건 실패는 별도로 남기며 새 전 조합 성공이나 제품 통합 완료로 포장하지 않는다."
+    },
+    {
+      "ref": "O-font",
+      "status": "unverified",
+      "target": "변경 없는 Workspace 격자/헤더/rail/파일 트리 + nullable 클립보드 동작",
+      "interpretation": "C-3–6 현재 CUA 라이트/다크 격자에서 기존 동등 두 열/행·40pt 헤더·중앙 plus·48pt rail·파일 트리·28pt 인셋 입력을 대조했다. 원본 비율 약1/허용0.02 및 후속 사용자 교정을 유지한다. 새 시각 표면 없이 클립보드 경계/요청 시점만 변경했다. C-5의 CUA 초점 전달 관찰과 전체 검사7건 실패는 별도로 남기며 새 전 조합 성공이나 제품 통합 완료로 포장하지 않는다."
+    },
+    {
+      "ref": "A-current-user",
+      "status": "applied",
+      "target": "변경 없는 Workspace 격자/헤더/rail/파일 트리 + nullable 클립보드 동작",
+      "interpretation": "C-3–6 현재 CUA 라이트/다크 격자에서 기존 동등 두 열/행·40pt 헤더·중앙 plus·48pt rail·파일 트리·28pt 인셋 입력을 대조했다. 원본 비율 약1/허용0.02 및 후속 사용자 교정을 유지한다. 새 시각 표면 없이 클립보드 경계/요청 시점만 변경했다. C-5의 CUA 초점 전달 관찰과 전체 검사7건 실패는 별도로 남기며 새 전 조합 성공이나 제품 통합 완료로 포장하지 않는다."
+    }
+  ],
+  "results": [
+    {
+      "id": "Q-columns",
+      "capture": {
+        "path": "design/evidence/clipboard-service.md",
+        "sha256": "132f6b732e46d0131d4dddb233c4a680d9b773fae6e7f5e107084d2c0380f800"
+      },
+      "actual": {
+        "value": 1,
+        "unit": "ratio",
+        "method": "C-3–6 현재 두 모드 격자 직접 판독. 두 열/행 약1(시각 추정±0.01),동일 canvas 소스. 원본약1/허용0.02 안. 이미지 px와 native pt는 등치하지 않음."
+      }
+    },
+    {
+      "id": "Q-rows",
+      "capture": {
+        "path": "design/evidence/clipboard-service.md",
+        "sha256": "132f6b732e46d0131d4dddb233c4a680d9b773fae6e7f5e107084d2c0380f800"
+      },
+      "actual": {
+        "value": 1,
+        "unit": "ratio",
+        "method": "C-3–6 현재 두 모드 격자 직접 판독. 두 열/행 약1(시각 추정±0.01),동일 canvas 소스. 원본약1/허용0.02 안. 이미지 px와 native pt는 등치하지 않음."
+      }
+    }
+  ],
+  "visual_review": {
+    "status": "adapted-and-verified",
+    "reason": "C-3–6 현재 CUA 라이트/다크 격자에서 기존 동등 두 열/행·40pt 헤더·중앙 plus·48pt rail·파일 트리·28pt 인셋 입력을 대조했다. 원본 비율 약1/허용0.02 및 후속 사용자 교정을 유지한다. 새 시각 표면 없이 클립보드 경계/요청 시점만 변경했다. C-5의 CUA 초점 전달 관찰과 전체 검사7건 실패는 별도로 남기며 새 전 조합 성공이나 제품 통합 완료로 포장하지 않는다."
+  }
+}

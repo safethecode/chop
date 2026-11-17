@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "decomposition_sha256": "bedd4af43a0fa310b25a48c328183ac225846c3fdad67f0e8f7f0e3cb345a6b9",
+  "interpretation_sha256": "bb75ebdb77b50b2a7199bc6e7cf91e0e8e7aaf308be8e57f5d372daf986e20f1",
+  "source_snapshot": {
+    "path": "design/clipboard-service-reference/source-snapshot.json",
+    "sha256": "1d0393070412d07b9320619e5ee999c95a64b24f689b49a5c5ae98c3e30699ea"
+  },
+  "capture": {
+    "path": "design/evidence/clipboard-service.md",
+    "sha256": "132f6b732e46d0131d4dddb233c4a680d9b773fae6e7f5e107084d2c0380f800"
+  },
+  "status": "adapted-and-verified",
+  "reason": "C-3–6 현재 CUA 라이트/다크 격자에서 기존 동등 두 열/행·40pt 헤더·중앙 plus·48pt rail·파일 트리·28pt 인셋 입력을 대조했다. 원본 비율 약1/허용0.02 및 후속 사용자 교정을 유지한다. 새 시각 표면 없이 클립보드 경계/요청 시점만 변경했다. C-5의 CUA 초점 전달 관찰과 전체 검사7건 실패는 별도로 남기며 새 전 조합 성공이나 제품 통합 완료로 포장하지 않는다."
+}
