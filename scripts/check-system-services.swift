@@ -5,6 +5,7 @@ let pasteboard =
   NSPasteboard.perform(NSSelectorFromString("pasteboardWithUniqueName"))?.takeUnretainedValue()
   as? NSPasteboard
 let marker = UUID().uuidString
+_ = pasteboard?.clearContents()
 let available =
   pasteboard?.setString(marker, forType: .string) == true
   && pasteboard?.string(forType: .string) == marker
