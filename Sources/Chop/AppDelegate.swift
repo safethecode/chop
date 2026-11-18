@@ -139,6 +139,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
   }
 
   @objc private func openTerminal() { workspaceWindow?.workspace.addTerminal() }
+  @objc private func findTerminalOutput() { workspaceWindow?.pane.showSearch() }
+  @objc private func findNextOutput() { workspaceWindow?.pane.searchView?.selectMatch(by: 1) }
+  @objc private func findPreviousOutput() { workspaceWindow?.pane.searchView?.selectMatch(by: -1) }
   @objc private func openWebPage() { workspaceWindow?.workspace.addWebPage() }
   @objc private func focusWebAddress() { workspaceWindow?.pane.browser?.focusAddress() }
   @objc private func reloadWebPage() { workspaceWindow?.pane.browser?.reload() }
@@ -196,6 +199,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     guard let workspace = workspaceWindow?.workspace, workspaceWindow?.window?.isVisible == true
     else { return false }
     switch menuItem.action {
+    case #selector(findTerminalOutput): return workspace.focusedPane.terminal != nil
+    case #selector(findNextOutput), #selector(findPreviousOutput):
+      return workspace.focusedPane.searchView?.matches.isEmpty == false
     case #selector(openTerminal): return workspace.canAddTerminal
     case #selector(openWebPage): return workspace.canAddTerminal
     case #selector(focusWebAddress), #selector(reloadWebPage), #selector(webZoomIn),
@@ -350,6 +356,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
       withTitle: "붙여넣기", action: #selector(TerminalView.paste(_:)), keyEquivalent: "v")
     editMenu.addItem(
       withTitle: "전체 선택", action: #selector(TerminalView.selectAll(_:)), keyEquivalent: "a")
+    editMenu.addItem(.separator())
+    for (title, action, key, modifiers) in [
+      ("터미널 출력 검색…", #selector(findTerminalOutput), "f", NSEvent.ModifierFlags.command),
+      ("다음 검색 결과", #selector(findNextOutput), "g", .command),
+      ("이전 검색 결과", #selector(findPreviousOutput), "g", [.command, .shift]),
+    ] {
+      let item = editMenu.addItem(withTitle: title, action: action, keyEquivalent: key)
+      item.target = self
+      item.keyEquivalentModifierMask = modifiers
+    }
     editMenu.addItem(.separator())
     for (title, action, key, modifiers) in [
       (
