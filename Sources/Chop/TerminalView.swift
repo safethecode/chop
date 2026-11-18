@@ -381,8 +381,8 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
     return window.convertToScreen(convert(rect, to: nil))
   }
 
-  override func accessibilityValue() -> Any? {
-    guard let surface else { return "" }
+  func outputSnapshot() -> String? {
+    guard let surface else { return nil }
     let selection = ghostty_selection_s(
       top_left: ghostty_point_s(
         tag: GHOSTTY_POINT_SCREEN, coord: GHOSTTY_POINT_COORD_TOP_LEFT, x: 0, y: 0),
@@ -391,9 +391,12 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
       rectangle: false)
     var text = ghostty_text_s()
     guard ghostty_surface_read_text(surface, selection, &text), let contents = text.text else {
-      return ""
+      return nil
     }
     defer { ghostty_surface_free_text(surface, &text) }
-    return String(cString: contents)
+    let bytes = UnsafeBufferPointer(start: contents, count: Int(text.text_len))
+    return String(decoding: bytes.map { UInt8(bitPattern: $0) }, as: UTF8.self)
   }
+
+  override func accessibilityValue() -> Any? { outputSnapshot() ?? "" }
 }

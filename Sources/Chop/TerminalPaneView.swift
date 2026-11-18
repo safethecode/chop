@@ -8,6 +8,7 @@ final class TerminalPaneView: NSView {
   let workspaceID: UUID
   private(set) var terminal: TerminalView?
   private(set) var browser: WebPreviewView?
+  private(set) var searchView: TerminalSearchView?
   var workingDirectory: String
   var name: String {
     didSet {
@@ -100,6 +101,7 @@ final class TerminalPaneView: NSView {
     serverButton.contentTintColor = mode.secondaryForeground
     errorLabel.textColor = mode.secondaryForeground
     browser?.applyAppearance(mode)
+    searchView?.applyAppearance(mode)
     updateDropHighlight()
   }
 
@@ -233,6 +235,7 @@ final class TerminalPaneView: NSView {
   }
 
   func closeTerminal() {
+    closeSearch(restoreFocus: false)
     if let browser {
       browser.close()
       browser.removeFromSuperview()
@@ -303,12 +306,50 @@ final class TerminalPaneView: NSView {
   }
 
   func focus() {
+    if let searchView {
+      searchView.focusSearch()
+      onFocus?()
+      return
+    }
     if let browser {
       browser.focus()
       return
     }
     window?.makeFirstResponder(terminal ?? openButton)
     onFocus?()
+  }
+
+  func showSearch() {
+    if let searchView {
+      searchView.focusSearch()
+      return
+    }
+    guard let terminal, let text = terminal.outputSnapshot() else {
+      NSSound.beep()
+      return
+    }
+    let view = TerminalSearchView(text: text, mode: engine.appearanceMode)
+    searchView = view
+    terminal.setAccessibilityHidden(true)
+    view.onRefresh = { [weak terminal] in terminal?.outputSnapshot() }
+    view.onClose = { [weak self] in self?.closeSearch() }
+    body.addSubview(view, positioned: .above, relativeTo: terminal)
+    view.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      view.leadingAnchor.constraint(equalTo: body.leadingAnchor),
+      view.trailingAnchor.constraint(equalTo: body.trailingAnchor),
+      view.topAnchor.constraint(equalTo: body.topAnchor),
+      view.bottomAnchor.constraint(equalTo: body.bottomAnchor),
+    ])
+    view.focusSearch()
+  }
+
+  func closeSearch(restoreFocus: Bool = true) {
+    searchView?.stop()
+    searchView?.removeFromSuperview()
+    searchView = nil
+    terminal?.setAccessibilityHidden(false)
+    if restoreFocus { focus() }
   }
 
   @objc func requestClose() {
