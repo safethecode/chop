@@ -12,6 +12,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
         .appendingPathComponent("Chop/projects.json")))
   private var projectPanel: NSOpenPanel?
   private let engine = TerminalEngine()
+  private lazy var activityNotifications = TerminalActivityNotifications()
   private let session = SessionCoordinator(
     store: SessionStore(
       fileURL:
@@ -33,6 +34,25 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
       return
     }
     configureMainMenu()
+    engine.onAttention = { [weak self] terminal, status in
+      guard let self else { return }
+      for controller in windowManager.windows.values {
+        guard
+          let pane = controller.workspace.panes.values.first(where: { $0.terminal === terminal })
+        else { continue }
+        let paneID = pane.id
+        activityNotifications.post(id: terminal.activityID, name: pane.name, status: status) {
+          [weak self, weak controller, weak terminal] in
+          guard let self, let controller, let terminal,
+            controller.workspace.panes[paneID]?.terminal === terminal
+          else { return }
+          controller.workspace.activatePane(paneID)
+          windowManager.activate(controller.id)
+        }
+        break
+      }
+    }
+    engine.onActivityAcknowledged = { [weak self] id in self?.activityNotifications.clear(id) }
     projectLibrary.load()
     let saved = session.load()
     windowManager.onAppearanceChangeRequested = { [weak self] mode in self?.applyAppearance(mode) }
@@ -139,6 +159,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
   }
 
   @objc private func openTerminal() { workspaceWindow?.workspace.addTerminal() }
+  @objc private func toggleActivityNotifications() {
+    Task { [weak self] in await self?.activityNotifications.toggle() }
+  }
   @objc private func findTerminalOutput() { workspaceWindow?.pane.showSearch() }
   @objc private func findNextOutput() { workspaceWindow?.pane.searchView?.selectMatch(by: 1) }
   @objc private func findPreviousOutput() { workspaceWindow?.pane.searchView?.selectMatch(by: -1) }
@@ -188,6 +211,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
   }
 
   func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+    if menuItem.action == #selector(toggleActivityNotifications) {
+      menuItem.state = activityNotifications.isEnabled ? .on : .off
+      return !activityNotifications.isRequestingAuthorization
+    }
     if menuItem.action == #selector(newWindow) { return true }
     if menuItem.action == #selector(openProjectWindow) { return projectPanel == nil }
     if menuItem.action == #selector(cloneProject) { return true }
@@ -327,6 +354,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
       item.keyEquivalentModifierMask = modifiers
     }
     terminalItem.submenu = terminalMenu
+    terminalMenu.addItem(.separator())
+    terminalMenu.addItem(
+      withTitle: "작업 완료·확인 요청 알림", action: #selector(toggleActivityNotifications),
+      keyEquivalent: ""
+    ).target = self
     mainMenu.addItem(terminalItem)
 
     let webItem = NSMenuItem()

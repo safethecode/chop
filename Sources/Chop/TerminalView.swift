@@ -11,6 +11,13 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
   var onFocus: (() -> Void)?
   var onMetadataChange: (() -> Void)?
   var onLocalServersChange: (() -> Void)?
+  var onActivityChange: (() -> Void)?
+  var onAttention: ((ProgramStatus) -> Void)?
+  var onActivityAcknowledged: (() -> Void)?
+  let activityID = UUID()
+  private var activity = ProgramStatusRecords()
+  private var hasProgramStatus = false
+  var programStatus: ProgramStatus? { activity.display }
   private(set) var localServerURLs: [URL] = []
   private var serverSchemes: [LocalServer: Bool] = [:]
   var childPID: Int32 { surface.map { chop_ghostty_surface_child_pid($0) } ?? 0 }
@@ -69,6 +76,8 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
   }
 
   func close() {
+    activity = ProgramStatusRecords()
+    onActivityAcknowledged?()
     updateLocalServers([])
     if let surface { ghostty_surface_free(surface) }
     surface = nil
@@ -149,6 +158,7 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
   }
 
   override func becomeFirstResponder() -> Bool {
+    acknowledgeActivity()
     if let surface { ghostty_surface_set_focus(surface, true) }
     onFocus?()
     return true
@@ -160,6 +170,7 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
   }
 
   override func keyDown(with event: NSEvent) {
+    acknowledgeActivity()
     let wasComposing = hasMarkedText()
     textAccumulator = []
     interpretKeyEvents([event])
@@ -235,6 +246,7 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
   }
 
   override func mouseDown(with event: NSEvent) {
+    acknowledgeActivity()
     window?.makeFirstResponder(self)
     mouseMoved(with: event)
     if let surface {
@@ -399,4 +411,75 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
   }
 
   override func accessibilityValue() -> Any? { outputSnapshot() ?? "" }
+
+  func receiveProgramStatus(_ body: String) {
+    guard let report = ProgramStatus.parse(body) else { return }
+    hasProgramStatus = true
+    applyActivity(report)
+  }
+
+  func beginActivityPrompt() {
+    let previous = programStatus
+    activity.beginPrompt()
+    publishActivityChange(from: previous)
+  }
+
+  func resetActivity() {
+    activity = ProgramStatusRecords()
+    hasProgramStatus = false
+    onActivityAcknowledged?()
+    onActivityChange?()
+  }
+
+  func receiveProgress(state: ghostty_action_progress_report_state_e, progress: Int8) {
+    guard !hasProgramStatus else { return }
+    let next: String
+    switch state {
+    case GHOSTTY_PROGRESS_STATE_SET, GHOSTTY_PROGRESS_STATE_INDETERMINATE: next = "working"
+    case GHOSTTY_PROGRESS_STATE_PAUSE: next = "idle"
+    case GHOSTTY_PROGRESS_STATE_ERROR: next = "error"
+    case GHOSTTY_PROGRESS_STATE_REMOVE:
+      guard programStatus?.state == .working || programStatus?.state == .blocked else { return }
+      next = "done"
+    default: return
+    }
+    let percentage = (0...100).contains(progress) ? ":progress=\(progress)" : ""
+    if let report = ProgramStatus.parse("state=\(next)\(percentage)") { applyActivity(report) }
+  }
+
+  private func applyActivity(_ report: ProgramStatus) {
+    let previous = programStatus
+    activity.apply(report, observed: isActivityObserved)
+    publishActivityChange(from: previous)
+  }
+
+  private var isActivityObserved: Bool {
+    NSApp.isActive && window?.isKeyWindow == true && window?.firstResponder === self
+  }
+
+  func refreshActivityFocus() {
+    if isActivityObserved { acknowledgeActivity() }
+  }
+
+  private func publishActivityChange(from previous: ProgramStatus?) {
+    let current = programStatus
+    if previous != current { onActivityChange?() }
+    if current == nil || current?.state == .working || current?.state == .idle {
+      onActivityAcknowledged?()
+    }
+    if !isActivityObserved, let current,
+      current.state == .blocked || current.state == .done || current.state == .error,
+      previous?.id != current.id || previous?.state != current.state
+        || previous?.kind != current.kind
+    {
+      onAttention?(current)
+    }
+  }
+
+  private func acknowledgeActivity() {
+    let previous = programStatus
+    activity.acknowledge()
+    if previous != programStatus { onActivityChange?() }
+    onActivityAcknowledged?()
+  }
 }

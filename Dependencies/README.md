@@ -10,6 +10,9 @@ Chop은 macOS용 libghostty embedder API와 Metal 렌더러를 사용합니다.
 외부용 libghostty-vt는 렌더링과 프로세스 관리를 직접 구현해야 하므로 현재 버전에는 사용하지 않습니다.
 
 `ghostty-config.patch`는 Chop의 번들 설정 파일 읽기·surface의 셸 PID 조회 함수와 아카이브 도구 어댑터 연결을 추가합니다.
+`ghostty-status.patch`는 [Program Status Protocol](https://www.superlogical.com/rex/docs/build/program-status)의
+지원 조회·상태 보고·셸 프롬프트와 초기화 이벤트를 Chop에 전달합니다. 보고는 최대 4096바이트이며,
+콜백 데이터는 호출 중에만 유효합니다. 종료 중 버리는 메시지의 할당 메모리도 정리합니다.
 사용자의 Ghostty 설정이나 프로세스 인자를 수정하지 않고 설정을 읽습니다.
 최신 Apple libtool이 Zig 아카이브의 정렬되지 않은 객체를 누락하는 문제는
 `scripts/ghostty-libtool.sh`에서 객체를 꺼내 재조립해 해결합니다. 완성한 라이브러리의 공개 함수도 검사합니다.
