@@ -5,6 +5,89 @@ import Testing
 @testable import ChopCore
 
 @MainActor
+@Test func agentTransportIsExcludedWithoutHidingItsDevServer() async throws {
+  let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+  try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: false)
+  defer { try? FileManager.default.removeItem(at: directory) }
+  // A real executable named codex owns an internal listener and launches a separate server.
+  // This catches filtering the whole agent subtree instead of just its transport sockets.
+  let source = """
+    #include <arpa/inet.h>
+    #include <signal.h>
+    #include <stdio.h>
+    #include <sys/wait.h>
+    #include <unistd.h>
+    int main(int argc, char **argv) {
+      int fd = socket(AF_INET, SOCK_STREAM, 0);
+      struct sockaddr_in addr = {.sin_family=AF_INET, .sin_addr.s_addr=htonl(INADDR_LOOPBACK)};
+      if (bind(fd, (struct sockaddr *)&addr, sizeof(addr)) || listen(fd, 4)) return 1;
+      socklen_t len = sizeof(addr);
+      if (getsockname(fd, (struct sockaddr *)&addr, &len)) return 2;
+      FILE *out = fopen(argv[1], "w");
+      if (!out) return 3;
+      fprintf(out, "%u", ntohs(addr.sin_port)); fclose(out);
+      pid_t child = fork();
+      if (child < 0) return 4;
+      if (!child) {
+        close(fd);
+        execl("/usr/bin/python3", "python3", "-c",
+          "import socket,sys,time; s=socket.socket(); s.bind(('127.0.0.1',0)); s.listen(); open(sys.argv[1],'w').write(str(s.getsockname()[1])); time.sleep(30)",
+          argv[2], NULL);
+        _exit(5);
+      }
+      char command;
+      read(STDIN_FILENO, &command, 1);
+      kill(child, SIGKILL); waitpid(child, NULL, 0); close(fd);
+      return 0;
+    }
+    """
+  let sourceURL = directory.appendingPathComponent("fixture.c")
+  let executable = directory.appendingPathComponent("codex")
+  try source.write(to: sourceURL, atomically: true, encoding: .utf8)
+  let compiler = Process()
+  compiler.executableURL = URL(fileURLWithPath: "/usr/bin/clang")
+  compiler.arguments = [sourceURL.path, "-o", executable.path]
+  try compiler.run()
+  defer { if compiler.isRunning { kill(compiler.processIdentifier, SIGKILL) } }
+  let compileDeadline = ContinuousClock.now.advanced(by: .seconds(15))
+  while compiler.isRunning, ContinuousClock.now < compileDeadline {
+    try await Task.sleep(for: .milliseconds(20))
+  }
+  try #require(!compiler.isRunning)
+  try #require(compiler.terminationStatus == 0)
+  let agentPortFile = directory.appendingPathComponent("agent-port")
+  let serverPortFile = directory.appendingPathComponent("server-port")
+  let input = Pipe()
+  let agent = Process()
+  agent.executableURL = executable
+  agent.arguments = [agentPortFile.path, serverPortFile.path]
+  agent.standardInput = input
+  try agent.run()
+  defer { try? input.fileHandleForWriting.close() }
+  let deadline = ContinuousClock.now.advanced(by: .seconds(5))
+  var serverPort: UInt16?
+  while serverPort == nil, ContinuousClock.now < deadline {
+    serverPort = (try? String(contentsOf: serverPortFile, encoding: .utf8)).flatMap(UInt16.init)
+    if serverPort == nil { try await Task.sleep(for: .milliseconds(20)) }
+  }
+  let port = try #require(serverPort)
+  let internalPort = try #require(
+    (try? String(contentsOf: agentPortFile, encoding: .utf8)).flatMap(UInt16.init))
+  let servers = LocalServerDiscovery.scan(rootPIDs: [agent.processIdentifier])
+  #expect(
+    servers[agent.processIdentifier]?.contains(LocalServer(host: "localhost", port: port)) == true)
+  #expect(
+    servers[agent.processIdentifier]?.contains(LocalServer(host: "localhost", port: internalPort))
+      == false)
+  try input.fileHandleForWriting.close()
+  let exitDeadline = ContinuousClock.now.advanced(by: .seconds(5))
+  while agent.isRunning, ContinuousClock.now < exitDeadline {
+    try await Task.sleep(for: .milliseconds(20))
+  }
+  #expect(!agent.isRunning)
+}
+
+@MainActor
 @Test func localServerDiscoveryReadsAChildProcessWithoutIncludingOtherRoots() async throws {
   let marker = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
   let process = Process()

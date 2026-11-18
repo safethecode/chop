@@ -279,8 +279,12 @@ final class FileBrowserView: NSView, NSOutlineViewDataSource, NSOutlineViewDeleg
 
   @objc private func copyPath() {
     guard let entry = selectedEntry else { return }
-    NSPasteboard.general.clearContents()
-    NSPasteboard.general.setString(entry.url.path, forType: .string)
+    guard let pasteboard = SystemPasteboard.general() else {
+      NSSound.beep()
+      return
+    }
+    pasteboard.clearContents()
+    if !pasteboard.setString(entry.url.path, forType: .string) { NSSound.beep() }
   }
 
   func menuNeedsUpdate(_ menu: NSMenu) {

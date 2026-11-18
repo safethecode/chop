@@ -56,7 +56,9 @@ public enum LocalServerDiscovery {
           visited.insert(pid).inserted
         else { continue }
         if let process {
-          let found = listeners(pid)
+          // Agent transports listen on loopback too. Their own sockets are not app previews;
+          // keep traversing their children so an agent-started dev server is still discovered.
+          let found = isPreviewProcess(pid) ? listeners(pid) : []
           if let current = identity(pid), process.pbi_start_tvsec == current.pbi_start_tvsec,
             process.pbi_start_tvusec == current.pbi_start_tvusec,
             process.pbi_ppid == current.pbi_ppid
@@ -96,6 +98,16 @@ public enum LocalServerDiscovery {
     var info = proc_bsdinfo()
     let size = Int32(MemoryLayout.size(ofValue: info))
     return proc_pidinfo(pid, PROC_PIDTBSDINFO, 0, &info, size) == size ? info : nil
+  }
+
+  private static func isPreviewProcess(_ pid: Int32) -> Bool {
+    // PROC_PIDPATHINFO_MAXSIZE is a C expression macro, unavailable to Swift.
+    var buffer = [CChar](repeating: 0, count: 4 * Int(MAXPATHLEN))
+    let count = proc_pidpath(pid, &buffer, UInt32(buffer.count))
+    guard count > 0 else { return true }
+    let path = String(
+      decoding: buffer.prefix { $0 != 0 }.map { UInt8(bitPattern: $0) }, as: UTF8.self)
+    return URL(fileURLWithPath: path).lastPathComponent != "codex"
   }
 
   private static func listeners(_ pid: Int32) -> [LocalServer] {
