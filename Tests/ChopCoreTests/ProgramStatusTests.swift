@@ -37,6 +37,10 @@ import Testing
   #expect(ProgramStatus.parse("state=done:title=\(title)") == nil)
   #expect(ProgramStatus.parse("state=done:app=" + String(repeating: "a", count: 33)) == nil)
   #expect(ProgramStatus.parse("state=done:unknown=" + String(repeating: "a", count: 4087)) == nil)
+  #expect(ProgramStatus.parse("state=clear:" + String(repeating: "k", count: 17) + "=x") == nil)
+  #expect(
+    ProgramStatus.parse("state=clear:" + String(repeating: "k", count: 16) + "=x")?.state == .clear)
+  #expect(ProgramStatus.parse("state=clear:app=" + String(repeating: "@", count: 33)) == nil)
 }
 
 @Test func programStatusKeepsChildAttentionAndClearsOnlyTheAddressedSubtree() throws {
@@ -75,17 +79,26 @@ import Testing
   #expect(store.apply(done, observed: true) == nil && store.display == nil)
 }
 
-@Test func programStatusBoundsTheRecordCountWithoutOverwritingAnotherRecord() throws {
+@Test func programStatusEvictsTheOldestRecordAndKeepsRecentlyUpdatedRecords() throws {
   var store = ProgramStatusRecords()
   for index in 0..<64 {
-    store.apply(try #require(ProgramStatus.parse("state=working:id=job\(index)")), observed: false)
+    store.apply(try #require(ProgramStatus.parse("state=done:id=job\(index)")), observed: false)
   }
+  store.acknowledge()
+  store.beginPrompt()
+  store.apply(try #require(ProgramStatus.parse("state=done:id=job0")), observed: false)
+  #expect(store.display == nil)
   #expect(
     store.apply(try #require(ProgramStatus.parse("state=blocked:id=overflow")), observed: false)
-      == nil)
-  #expect(store.records.count == 64 && store.records["overflow"] == nil)
-  store.apply(try #require(ProgramStatus.parse("state=done:id=job0")), observed: false)
-  #expect(store.records["job0"]?.state == .done)
+      != nil)
+  #expect(store.records.count == 64 && store.records["job1"] == nil)
+  #expect(store.records["job0"]?.state == .done && store.display?.id == "overflow")
+  store.apply(try #require(ProgramStatus.parse("state=error:id=job0")), observed: true)
+  #expect(store.records.count == 64 && store.records["job2"] != nil)
+  store.apply(try #require(ProgramStatus.parse("state=done:id=job1")), observed: false)
+  #expect(store.records.count == 64 && store.records["job2"] == nil)
+  store.apply(try #require(ProgramStatus.parse("state=clear:id=overflow")), observed: false)
+  #expect(store.display?.id == "job1" && store.display?.state == .done)
   store.apply(try #require(ProgramStatus.parse("state=clear")), observed: false)
   #expect(store.records.isEmpty)
 }

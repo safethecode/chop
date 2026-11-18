@@ -123,6 +123,9 @@ final class TerminalEngine: NSObject {
       self, selector: #selector(focusChanged), name: NSApplication.didResignActiveNotification,
       object: nil)
     center.addObserver(
+      self, selector: #selector(focusChanged), name: NSWindow.didBecomeKeyNotification,
+      object: nil)
+    center.addObserver(
       self, selector: #selector(keyboardChanged),
       name: NSTextInputContext.keyboardSelectionDidChangeNotification, object: nil)
     focusChanged()
@@ -204,6 +207,7 @@ final class TerminalEngine: NSObject {
 
   @objc private func focusChanged() {
     if let app { ghostty_app_set_focus(app, NSApp.isActive) }
+    for terminal in terminals.allObjects { terminal.refreshActivityFocus() }
   }
 
   @objc private func keyboardChanged() {

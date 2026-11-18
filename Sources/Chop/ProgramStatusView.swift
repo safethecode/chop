@@ -41,6 +41,7 @@ extension ProgramStatus {
 
   var statusDescription: String {
     [app, statusLabel, title, message].compactMap { $0 }.filter { !$0.isEmpty }
+      .map { String($0.unicodeScalars.filter { $0.properties.generalCategory != .format }) }
       .joined(separator: " · ")
   }
 }

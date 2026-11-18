@@ -457,6 +457,10 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
     NSApp.isActive && window?.isKeyWindow == true && window?.firstResponder === self
   }
 
+  func refreshActivityFocus() {
+    if isActivityObserved { acknowledgeActivity() }
+  }
+
   private func publishActivityChange(from previous: ProgramStatus?) {
     let current = programStatus
     if previous != current { onActivityChange?() }

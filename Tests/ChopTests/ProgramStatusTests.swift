@@ -50,13 +50,14 @@ import Testing
   print('QUERY_OK' if good else 'QUERY_BAD:'+repr(reply),flush=True)
   payloads={
    'progress':b'\\x1b]9;4;1;42\\x07',
+     'legacy-after-status':b'\\x1b]9;4;1;42\\x07',
      'paused':b'\\x1b]9;4;4;42\\x07',
    'working':b'\\x1b]7501;state=working:app=fixture\\x1b\\\\',
    'blocked':b'\\x1b]7501;state=blocked:kind=permission:app=fixture\\x07',
      'child':b'\\x1b]7501;state=done:id=worker\\x07',
      'childclear':b'\\x1b]7501;state=clear:id=worker\\x07',
    'invalid':b'\\x1b]7501;state=done:msg=Cg==\\x07',
-   'large':b'\\x1b]7501;state=blocked:kind=question:msg='+base64.b64encode(('설명'*200).encode())+b'\\x07',
+     'large':b'\\x1b]7501;state=blocked:kind=question:msg='+base64.b64encode(('설명'*200+chr(0x202e)).encode())+b'\\x07',
    'done-prompt':b'\\x1b]7501;state=done\\x07\\x1b]133;A\\x07',
    'working-prompt':b'\\x1b]7501;state=working\\x07\\x1b]133;A\\x07',
    'reset':b'\\x1bc',
@@ -132,9 +133,9 @@ import Testing
     descendants(bar).compactMap { $0 as? NSButton }.contains {
       $0.accessibilityLabel()?.contains("승인 필요") == true
     })
-  try send("progress")
+  try send("legacy-after-status")
   try await waitFor("legacy report acknowledged") {
-    terminal.outputSnapshot()?.contains("ACK:progress") == true
+    terminal.outputSnapshot()?.contains("ACK:legacy-after-status") == true
   }
   #expect(pane.programStatus?.kind == .permission)
   try send("invalid")
@@ -144,8 +145,9 @@ import Testing
   #expect(pane.programStatus?.kind == .permission && attention.count == 1)
   try send("large")
   try await waitFor("allocated report") {
-    pane.programStatus?.message == String(repeating: "설명", count: 200)
+    pane.programStatus?.message == String(repeating: "설명", count: 200) + "\u{202E}"
   }
+  #expect(pane.programStatus?.statusDescription.contains("\u{202E}") == false)
   #expect(pane.programStatus?.statusLabel == "답변 필요" && attention.count == 2)
   try send("done-prompt")
   try await waitFor("completion survives prompt") { pane.programStatus?.state == .done }

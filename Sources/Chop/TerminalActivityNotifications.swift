@@ -53,7 +53,13 @@ final class TerminalActivityNotifications: NSObject, UNUserNotificationCenterDel
     }
     isRequestingAuthorization = true
     defer { isRequestingAuthorization = false }
-    let allowed = (try? await center().requestAuthorization(options: [.alert, .sound])) == true
+    let center = center()
+    // Callback APIs keep notification objects on the main actor with older SDKs too.
+    let allowed = await withCheckedContinuation { continuation in
+      center.requestAuthorization(options: [.alert, .sound]) { allowed, error in
+        continuation.resume(returning: allowed && error == nil)
+      }
+    }
     defaults.set(allowed, forKey: "terminalActivityNotifications")
     if !allowed {
       let alert = NSAlert()
@@ -85,7 +91,14 @@ final class TerminalActivityNotifications: NSObject, UNUserNotificationCenterDel
       deliver = delivery
     } else {
       let center = center()
-      deliver = { try await center.add($0) }
+      deliver = { request in
+        try await withCheckedThrowingContinuation {
+          (continuation: CheckedContinuation<Void, any Error>) in
+          center.add(request) { error in
+            if let error { continuation.resume(throwing: error) } else { continuation.resume() }
+          }
+        }
+      }
     }
     let request = UNNotificationRequest(identifier: identifier, content: content, trigger: nil)
     deliveryTasks[id] = Task { [weak self] in

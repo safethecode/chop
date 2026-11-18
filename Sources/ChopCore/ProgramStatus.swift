@@ -34,11 +34,20 @@ public struct ProgramStatus: Equatable, Sendable {
       let parts = pair.split(separator: "=", maxSplits: 1, omittingEmptySubsequences: false)
       guard let first = parts.first else { continue }
       let key = first.trimmingCharacters(in: .whitespacesAndNewlines)
+      guard key.utf8.count <= 16 else { return nil }
       guard parts.count == 2 else {
         if key == "id" { return nil }
         continue
       }
       let value = parts[1].trimmingCharacters(in: .whitespacesAndNewlines)
+      let limit: Int? =
+        switch key {
+        case "msg": 2732
+        case "title": 256
+        case "app": 32
+        default: nil
+        }
+      if let limit, value.utf8.count > limit { return nil }
       if key == "id", !validID(value) { return nil }
       guard !key.isEmpty, key.utf8.allSatisfy({ (97...122).contains($0) }),
         value.utf8.allSatisfy({
@@ -100,6 +109,7 @@ public struct ProgramStatus: Equatable, Sendable {
 public struct ProgramStatusRecords: Sendable {
   public private(set) var records: [String: ProgramStatus] = [:]
   private var seen: Set<String> = []
+  private var updateOrder: [String] = []
 
   public init() {}
 
@@ -132,10 +142,19 @@ public struct ProgramStatusRecords: Sendable {
       }
       records = records.filter { $0.key != report.id && !$0.key.hasPrefix(report.id + "/") }
       seen.formIntersection(records.keys)
+      updateOrder = updateOrder.filter { records[$0] != nil }
       return nil
     }
     let previous = records[report.id]
-    guard previous != report, previous != nil || records.count < 64 else { return nil }
+    if previous == nil, records.count >= 64 {
+      guard let oldest = updateOrder.first else { return nil }
+      records.removeValue(forKey: oldest)
+      seen.remove(oldest)
+      updateOrder.removeFirst()
+    }
+    updateOrder.removeAll { $0 == report.id }
+    updateOrder.append(report.id)
+    guard previous != report else { return nil }
     records[report.id] = report
     seen.remove(report.id)
     if observed, report.state == .done || report.state == .error { seen.insert(report.id) }
@@ -156,5 +175,6 @@ public struct ProgramStatusRecords: Sendable {
   public mutating func beginPrompt() {
     records = records.filter { $0.value.state == .done || $0.value.state == .error }
     seen.formIntersection(records.keys)
+    updateOrder = updateOrder.filter { records[$0] != nil }
   }
 }
