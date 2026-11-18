@@ -18,6 +18,8 @@ final class TerminalPaneView: NSView {
   }
   var onChange: (() -> Void)?
   var onLocalServersChange: (() -> Void)?
+  var onActivityChange: (() -> Void)?
+  var programStatus: ProgramStatus? { terminal?.programStatus }
   var onWebPreviewRequested: ((URL?) -> Void)?
   var localServerURLs: [URL] { terminal?.localServerURLs ?? [] }
   var onFocus: (() -> Void)?
@@ -57,6 +59,7 @@ final class TerminalPaneView: NSView {
   private let titleButton = NSButton()
   private let pathLabel = NSTextField(labelWithString: "")
   private let serverButton = LocalServerButton()
+  private let statusView = ProgramStatusView(frame: .zero)
   private let errorLabel = NSTextField(wrappingLabelWithString: "")
   private var openButton: NSButton!
   private var closeButton: NSButton!
@@ -99,6 +102,7 @@ final class TerminalPaneView: NSView {
     updateNameButton()
     pathLabel.textColor = mode.secondaryForeground
     serverButton.contentTintColor = mode.secondaryForeground
+    statusView.update(programStatus, mode: mode)
     errorLabel.textColor = mode.secondaryForeground
     browser?.applyAppearance(mode)
     searchView?.applyAppearance(mode)
@@ -211,6 +215,11 @@ final class TerminalPaneView: NSView {
       view.onLocalServersChange = { [weak self] in
         self?.updateServerDisplay()
         self?.onLocalServersChange?()
+      }
+      view.onActivityChange = { [weak self] in
+        guard let self else { return }
+        statusView.update(programStatus, mode: engine.appearanceMode)
+        onActivityChange?()
       }
       body.addSubview(view)
       view.translatesAutoresizingMaskIntoConstraints = false
@@ -452,7 +461,7 @@ final class TerminalPaneView: NSView {
     }
     moveHandle.isHidden = true
     let row = ChopStyle.headerRow(views: [
-      moveHandle, titleButton, pathLabel, serverButton, zoomButton, close,
+      moveHandle, titleButton, statusView, pathLabel, serverButton, zoomButton, close,
     ])
     header.addSubview(row)
     openButton = NSButton(
@@ -495,6 +504,7 @@ final class TerminalPaneView: NSView {
   }
 
   private func updateHeader() {
+    statusView.update(programStatus, mode: engine.appearanceMode)
     updateServerDisplay()
     updateMoveHandle()
     moveHandle.setAccessibilityLabel("\(name) 이동")

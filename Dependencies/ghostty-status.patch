@@ -1,0 +1,280 @@
+--- a/src/terminal/osc.zig
++++ b/src/terminal/osc.zig
+@@ -166,12 +166,21 @@
+     /// ConEmu progress report (OSC 9;4)
+     conemu_progress_report: ProgressReport,
+ 
++    // Chop: forward bounded Program Status Protocol reports to the embedder.
++    chop_program_status: ChopProgramStatus,
++
+     /// ConEmu wait input (OSC 9;5)
+     conemu_wait_input,
+ 
+     /// ConEmu GUI macro (OSC 9;6)
+     conemu_guimacro: []const u8,
+ 
++    pub const ChopProgramStatus = struct {
++        value: []const u8,
++        terminator: Terminator = .st,
++        pub const Event = enum(c_int) { report, prompt, reset };
++    };
++
+     pub const ProgressReport = struct {
+         pub const State = enum(c_int) {
+             remove,
+@@ -290,7 +299,7 @@
+     //
+     // NOTE: This does mean certain OSC sequences such as OSC 8 (hyperlinks)
+     //       won't work if their parameters are larger than fit in the buffer.
+-    const MAX_BUF = 2048;
++    const MAX_BUF = 4092; // OSC 7501: 4096 bytes including OSC and ST.
+ 
+     pub const State = enum {
+         empty,
+@@ -322,6 +331,9 @@
+         @"7",
+         @"77",
+         @"777",
++        @"75",
++        @"750",
++        @"7501",
+         @"8",
+         @"9",
+ 
+@@ -929,9 +941,29 @@
+                     self.buf_start = self.buf_idx;
+                 },
+                 '7' => self.state = .@"77",
++                '5' => self.state = .@"75",
+                 else => self.state = .invalid,
+             },
+ 
++            .@"75" => switch (c) {
++                '0' => self.state = .@"750",
++                else => self.state = .invalid,
++            },
++            .@"750" => switch (c) {
++                '1' => self.state = .@"7501",
++                else => self.state = .invalid,
++            },
++            .@"7501" => switch (c) {
++                ';' => {
++                    self.command = .{ .chop_program_status = .{ .value = "" } };
++                    self.complete = true;
++                    self.state = .string;
++                    self.temp_state = .{ .str = &self.command.chop_program_status.value };
++                    self.buf_start = self.buf_idx;
++                },
++                else => self.state = .invalid,
++            },
++
+             .@"77" => switch (c) {
+                 '7' => self.state = .@"777",
+                 else => self.state = .invalid,
+@@ -1623,6 +1655,7 @@
+         switch (self.command) {
+             .kitty_color_protocol => |*c| c.terminator = .init(terminator_ch),
+             .color_operation => |*c| c.terminator = .init(terminator_ch),
++            .chop_program_status => |*c| c.terminator = .init(terminator_ch),
+             else => {},
+         }
+ 
+--- a/src/terminal/stream.zig
++++ b/src/terminal/stream.zig
+@@ -1609,6 +1609,13 @@
+                     } else log.warn("unimplemented OSC callback: {}", .{cmd});
+                 },
+ 
++                .chop_program_status => |v| {
++                    if (@hasDecl(T, "handleChopProgramStatus")) {
++                        try self.handler.handleChopProgramStatus(v);
++                    }
++                    return;
++                },
++
+                 .conemu_progress_report => |v| {
+                     if (@hasDecl(T, "handleProgressReport")) {
+                         try self.handler.handleProgressReport(v);
+--- a/src/termio/stream_handler.zig
++++ b/src/termio/stream_handler.zig
+@@ -901,6 +901,10 @@
+         self: *StreamHandler,
+     ) !void {
+         self.terminal.fullReset();
++        self.surfaceMessageWriter(.{ .chop_program_status = .{
++            .event = .reset,
++            .data = .{ .stable = "" },
++        } });
+         try self.setMouseShape(.text);
+ 
+         // Reset resets our palette so we report it for mode 2031.
+@@ -1040,6 +1044,10 @@
+     pub inline fn promptStart(self: *StreamHandler, aid: ?[]const u8, redraw: bool) !void {
+         _ = aid;
+         self.terminal.markSemanticPrompt(.prompt);
++        self.surfaceMessageWriter(.{ .chop_program_status = .{
++            .event = .prompt,
++            .data = .{ .stable = "" },
++        } });
+         self.terminal.flags.shell_redraws_prompt = redraw;
+     }
+ 
+@@ -1584,6 +1592,22 @@
+         // Note: we don't have to do a queueRender here because every
+         // processed stream will queue a render once it is done processing
+         // the read() syscall.
++    }
++
++    pub fn handleChopProgramStatus(self: *StreamHandler, report: terminal.osc.Command.ChopProgramStatus) !void {
++        const value = std.mem.trim(u8, report.value, " \t\r\n");
++        if (std.mem.eql(u8, value, "?")) {
++            self.messageWriter(.{ .write_stable = switch (report.terminator) {
++                .bel => "\x1b]7501;?:states=idle,working,done,blocked,error:kinds=permission,question,auth\x07",
++                .st => "\x1b]7501;?:states=idle,working,done,blocked,error:kinds=permission,question,auth\x1b\\",
++            } });
++            return;
++        }
++        if (value.len > 4087) return;
++        self.surfaceMessageWriter(.{ .chop_program_status = .{
++            .event = .report,
++            .data = try apprt.surface.Message.WriteReq.init(self.alloc, value),
++        } });
+     }
+ 
+     /// Display a GUI progress report.
+--- a/src/apprt/surface.zig
++++ b/src/apprt/surface.zig
+@@ -95,6 +95,10 @@
+ 
+     /// Report the progress of an action using a GUI element
+     progress_report: terminal.osc.Command.ProgressReport,
++    chop_program_status: struct {
++        event: terminal.osc.Command.ChopProgramStatus.Event,
++        data: WriteReq,
++    },
+ 
+     pub const ReportTitleStyle = enum {
+         csi_21_t,
+--- a/src/apprt/action.zig
++++ b/src/apprt/action.zig
+@@ -294,6 +294,7 @@
+ 
+     /// Show the on-screen keyboard.
+     show_on_screen_keyboard,
++    chop_program_status: ChopProgramStatus,
+ 
+     /// Sync with: ghostty_action_tag_e
+     pub const Key = enum(c_int) {
+@@ -350,6 +351,7 @@
+         show_child_exited,
+         progress_report,
+         show_on_screen_keyboard,
++        chop_program_status,
+     };
+ 
+     /// Sync with: ghostty_action_u
+@@ -740,4 +742,18 @@
+     this,
+     /// Close all other tabs.
+     other,
++};
++
++// Chop's OSC 7501 callback. Data is borrowed for the duration of the action.
++pub const ChopProgramStatus = struct {
++    event: terminal.osc.Command.ChopProgramStatus.Event,
++    data: []const u8,
++    pub const C = extern struct {
++        event: terminal.osc.Command.ChopProgramStatus.Event,
++        data: [*]const u8,
++        len: usize,
++    };
++    pub fn cval(self: ChopProgramStatus) C {
++        return .{ .event = self.event, .data = self.data.ptr, .len = self.data.len };
++    }
+ };
+--- a/src/App.zig
++++ b/src/App.zig
+@@ -279,7 +279,9 @@
+ 
+ /// Adapted from Ghostty PR #14444. Keep UI callbacks on the app thread.
+ pub const ChopTeardownDrain = @import("datastruct/main.zig").QueueDrain(
+-    Mailbox.Queue, ChopTeardown, ChopTeardown.keep,
++    Mailbox.Queue,
++    ChopTeardown,
++    ChopTeardown.keep,
+ );
+ 
+ pub fn chopTeardownDrain(self: *App, surface: *const Surface) ChopTeardownDrain {
+@@ -335,6 +337,7 @@
+         .surface_message => |v| switch (v.message) {
+             .clipboard_write => |write| write.req.deinit(),
+             .pwd_change => |write| write.deinit(),
++            .chop_program_status => |status| status.data.deinit(),
+             else => {},
+         },
+         else => {},
+--- a/src/Surface.zig
++++ b/src/Surface.zig
+@@ -712,7 +712,8 @@
+     // The joined renderer cannot consume messages from the IO/reader threads.
+     var renderer_discard: rendererpkg.Thread.ChopMailboxDiscard = .{};
+     var renderer_drain: rendererpkg.Thread.ChopMailboxDrain = .{
+-        .queue = self.renderer_thread.mailbox, .context = &renderer_discard,
++        .queue = self.renderer_thread.mailbox,
++        .context = &renderer_discard,
+     };
+     renderer_drain.start();
+ 
+@@ -983,6 +984,15 @@
+             ) catch |err| {
+                 log.warn("apprt failed to ring bell={}", .{err});
+             };
++        },
++
++        .chop_program_status => |v| {
++            defer v.data.deinit();
++            _ = try self.rt_app.performAction(
++                .{ .surface = self },
++                .chop_program_status,
++                .{ .event = v.event, .data = v.data.slice() },
++            );
+         },
+ 
+         .progress_report => |v| {
+--- a/include/ghostty.h
++++ b/include/ghostty.h
+@@ -732,6 +732,18 @@
+   // completeness.
+   int8_t progress;
+ } ghostty_action_progress_report_s;
++
++// Chop extension: OSC 7501 data is borrowed only for this action callback.
++typedef enum {
++  CHOP_PROGRAM_STATUS_REPORT,
++  CHOP_PROGRAM_STATUS_PROMPT,
++  CHOP_PROGRAM_STATUS_RESET,
++} chop_program_status_event_e;
++typedef struct {
++  chop_program_status_event_e event;
++  const char* data;
++  uintptr_t len;
++} chop_action_program_status_s;
+ 
+ // apprt.Action.Key
+ typedef enum {
+@@ -788,6 +800,7 @@
+   GHOSTTY_ACTION_SHOW_CHILD_EXITED,
+   GHOSTTY_ACTION_PROGRESS_REPORT,
+   GHOSTTY_ACTION_SHOW_ON_SCREEN_KEYBOARD,
++  CHOP_ACTION_PROGRAM_STATUS,
+ } ghostty_action_tag_e;
+ 
+ typedef union {
+@@ -819,6 +832,7 @@
+   ghostty_action_close_tab_mode_e close_tab_mode;
+   ghostty_surface_message_childexited_s child_exited;
+   ghostty_action_progress_report_s progress_report;
++  chop_action_program_status_s chop_program_status;
+ } ghostty_action_u;
+ 
+ typedef struct {

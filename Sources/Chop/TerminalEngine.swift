@@ -28,6 +28,8 @@ final class TerminalEngine: NSObject {
   private let clipboard: () -> NSPasteboard?
   let command: String?
   private var serverMonitor: Task<Void, Never>?
+  var onAttention: ((TerminalView, ProgramStatus) -> Void)?
+  var onActivityAcknowledged: ((UUID) -> Void)?
 
   init(
     clipboard: @escaping () -> NSPasteboard? = { SystemPasteboard.general() },
@@ -181,6 +183,14 @@ final class TerminalEngine: NSObject {
 
   func register(_ terminal: TerminalView) {
     terminals.add(terminal)
+    terminal.onAttention = { [weak self, weak terminal] status in
+      guard let terminal else { return }
+      self?.onAttention?(terminal, status)
+    }
+    terminal.onActivityAcknowledged = { [weak self, weak terminal] in
+      guard let terminal else { return }
+      self?.onActivityAcknowledged?(terminal.activityID)
+    }
     terminal.applyAppearance(appearanceMode)
   }
 
@@ -211,6 +221,21 @@ final class TerminalEngine: NSObject {
       let view = view(ghostty_surface_userdata(surface))
     else { return false }
     switch action.tag {
+    case CHOP_ACTION_PROGRAM_STATUS:
+      let value = action.action.chop_program_status
+      switch value.event {
+      case CHOP_PROGRAM_STATUS_REPORT:
+        guard value.len <= 4087, let data = value.data else { return false }
+        let bytes = UnsafeBufferPointer(start: data, count: Int(value.len))
+        let body = String(decoding: bytes.map { UInt8(bitPattern: $0) }, as: UTF8.self)
+        view.receiveProgramStatus(body)
+      case CHOP_PROGRAM_STATUS_PROMPT: view.beginActivityPrompt()
+      case CHOP_PROGRAM_STATUS_RESET: view.resetActivity()
+      default: return false
+      }
+    case GHOSTTY_ACTION_PROGRESS_REPORT:
+      let value = action.action.progress_report
+      view.receiveProgress(state: value.state, progress: value.progress)
     case GHOSTTY_ACTION_SHOW_CHILD_EXITED:
       // Ghostty classifies very short macOS sessions as abnormal regardless
       // of exit status. Chop always returns an exited shell to an empty slot.

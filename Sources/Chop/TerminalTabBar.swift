@@ -98,11 +98,18 @@ final class TerminalTabBar: NSView {
       guard let pane = panes.first(where: { $0.id == id }) else { continue }
       button.title = pane.name
       button.image =
-        pane.browser == nil
-        ? nil : NSImage(systemSymbolName: "globe", accessibilityDescription: "웹사이트")
+        pane.browser != nil
+        ? NSImage(systemSymbolName: "globe", accessibilityDescription: "웹사이트")
+        : pane.programStatus.flatMap {
+          NSImage(systemSymbolName: $0.statusSymbol, accessibilityDescription: $0.statusLabel)
+        }
       button.imagePosition = .imageLeading
       button.toolTip = "\(pane.name) — \(pane.locationDescription)\n우클릭으로 이름 바꾸기"
       button.setAccessibilityLabel(pane.name)
+      if let status = pane.programStatus {
+        button.toolTip = "\(pane.name) — \(pane.locationDescription)\n\(status.statusDescription)"
+        button.setAccessibilityLabel("\(pane.name), \(status.statusLabel)")
+      }
       button.state = id == selectedID ? .on : .off
     }
     addButton.isEnabled = panes.count < 16

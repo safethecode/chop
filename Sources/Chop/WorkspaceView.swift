@@ -156,6 +156,7 @@ final class WorkspaceView: NSView {
       self?.onChange?()
     }
     pane.onLocalServersChange = { [weak self] in self?.refreshControls() }
+    pane.onActivityChange = { [weak self] in self?.refreshControls() }
     pane.onWebPreviewRequested = { [weak self] url in self?.openWebPreview(url) }
     pane.onSplitRequested = { [weak self] axis in self?.split(id, axis: axis) }
     pane.canSplit = { [weak self] axis in self?.canSplit(id, axis: axis) ?? false }
@@ -562,6 +563,16 @@ final class WorkspaceView: NSView {
     guard isTabbed, panes[id] != nil, id != focusedID else { return }
     focusedID = id
     rebuild()
+  }
+
+  func activatePane(_ id: UUID) {
+    guard let pane = panes[id] else { return }
+    if isTabbed { selectTab(id) }
+    if let maximizedID, maximizedID != id {
+      self.maximizedID = id
+      rebuild()
+    }
+    pane.focus()
   }
 
   func requestCloseFocused() {

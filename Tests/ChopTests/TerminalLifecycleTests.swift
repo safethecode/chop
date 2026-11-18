@@ -22,10 +22,11 @@ private final class LifecycleTestBundle: NSObject {}
     import os,sys
     print('READY',flush=True)
     for line in sys.stdin:
-     if line.strip() in ('title','reply','render'):
+     if line.strip() in ('title','reply','render','status'):
       payload={'title':b'\\x1b]0;CHOP_BUSY\\x07',
        'reply':b'\\x1b[6n',
-       'render':b'\\x1b]11;#123456\\x07\\x1b]11;#654321\\x07'}[line.strip()]
+       'render':b'\\x1b]11;#123456\\x07\\x1b]11;#654321\\x07',
+       'status':b'\\x1b]7501;state=working:msg='+b'YWFh'*200+b'\\x07'}[line.strip()]
       while True: os.write(1,payload)
      if line.startswith('keep-'): print('\\x1b]0;'+line.strip()+'\\x07',flush=True)
      print('ACK:'+line.strip(),flush=True)
@@ -136,7 +137,7 @@ private func runLifecycleProbe(at directory: URL) async throws {
   try await waitFor("유지할 셸 준비", terminal: survivor) {
     (survivor.accessibilityValue() as? String ?? "").contains("READY")
   }
-  for mode in ["title", "reply", "render"] {
+  for mode in ["title", "reply", "render", "status"] {
     let closing = try addTerminal()
     try await waitFor("종료할 셸 준비: \(mode)", terminal: closing) {
       (closing.accessibilityValue() as? String ?? "").contains("READY")
