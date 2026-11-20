@@ -62,6 +62,11 @@ final class TerminalEngine: NSObject {
           }
         }
         ghostty_config_finalize(config)
+        for pattern in TerminalFileLink.patterns {
+          guard pattern.withCString({ chop_ghostty_config_add_file_link(config, $0) }) else {
+            throw TerminalError.configuration
+          }
+        }
         guard ghostty_config_diagnostics_count(config) == 0 else {
           throw TerminalError.configuration
         }
@@ -249,13 +254,32 @@ final class TerminalEngine: NSObject {
     case GHOSTTY_ACTION_PWD:
       if let path = action.action.pwd.pwd { view.workingDirectory = String(cString: path) }
     case GHOSTTY_ACTION_MOUSE_SHAPE:
-      NSCursor.iBeam.set()
+      view.setMouseShape(action.action.mouse_shape)
+    case GHOSTTY_ACTION_MOUSE_OVER_LINK:
+      let value = action.action.mouse_over_link
+      view.setHoveredLink(linkText(value.url, count: value.len))
+    case GHOSTTY_ACTION_OPEN_URL:
+      let value = action.action.open_url
+      if let text = linkText(value.url, count: value.len) {
+        // The callback runs with the terminal lock held. Copy the text and open after it returns.
+        let directory = view.workingDirectory
+        DispatchQueue.main.async { [weak view] in view?.openLink(text, workingDirectory: directory)
+        }
+      }
     case GHOSTTY_ACTION_RENDER:
       ghostty_surface_draw(surface)
     default:
       return false
     }
     return true
+  }
+
+  private static func linkText<T: BinaryInteger>(_ pointer: UnsafePointer<CChar>?, count: T)
+    -> String?
+  {
+    guard let pointer, count > 0, count <= 16_384 else { return nil }
+    let bytes = UnsafeRawBufferPointer(start: pointer, count: Int(count))
+    return String(bytes: bytes, encoding: .utf8)
   }
 
   private static func confirmPaste(

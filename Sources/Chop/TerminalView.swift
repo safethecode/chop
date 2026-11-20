@@ -27,6 +27,20 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
   private var textAccumulator: [String]?
   private var lastPixelSize: CGSize = .zero
   private var lastScale: CGFloat = 0
+  private(set) var hoveredLink: String?
+  var revealFile: (URL) -> Void = { url in
+    var isDirectory: ObjCBool = false
+    guard FileManager.default.fileExists(atPath: url.path, isDirectory: &isDirectory) else {
+      return
+    }
+    let isPackage = (try? url.resourceValues(forKeys: [.isPackageKey]).isPackage) == true
+    if isDirectory.boolValue && !isPackage {
+      NSWorkspace.shared.open(url)
+    } else {
+      NSWorkspace.shared.activateFileViewerSelecting([url])
+    }
+  }
+  var openExternalURL: (URL) -> Void = { NSWorkspace.shared.open($0) }
 
   override var acceptsFirstResponder: Bool { true }
 
@@ -76,6 +90,7 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
   }
 
   func close() {
+    setHoveredLink(nil)
     activity = ProgramStatusRecords()
     onActivityAcknowledged?()
     updateLocalServers([])
@@ -243,6 +258,40 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
     let point = convert(event.locationInWindow, from: nil)
     ghostty_surface_mouse_pos(
       surface, point.x, bounds.height - point.y, Self.modifiers(event.modifierFlags))
+  }
+
+  override func flagsChanged(with event: NSEvent) {
+    guard let surface, let window else { return }
+    let point = convert(window.mouseLocationOutsideOfEventStream, from: nil)
+    ghostty_surface_mouse_pos(
+      surface, point.x, bounds.height - point.y, Self.modifiers(event.modifierFlags))
+  }
+
+  func setMouseShape(_ shape: ghostty_action_mouse_shape_e) {
+    if shape == GHOSTTY_MOUSE_SHAPE_POINTER {
+      NSCursor.pointingHand.set()
+    } else {
+      NSCursor.iBeam.set()
+    }
+  }
+
+  func setHoveredLink(_ text: String?) {
+    hoveredLink = text
+    toolTip = text.map { "⌘클릭하여 열기\n\($0)" }
+  }
+
+  func openLink(_ text: String, workingDirectory directory: String? = nil) {
+    guard surface != nil else { return }
+    if let url = TerminalFileLink.localURL(
+      for: text,
+      workingDirectory: URL(fileURLWithPath: directory ?? workingDirectory, isDirectory: true))
+    {
+      revealFile(url)
+    } else if let url = URL(string: text), let scheme = url.scheme,
+      scheme.lowercased() != "file"
+    {
+      openExternalURL(url)
+    }
   }
 
   override func mouseDown(with event: NSEvent) {

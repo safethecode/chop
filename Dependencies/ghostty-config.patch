@@ -1,25 +1,48 @@
 diff --git a/include/ghostty.h b/include/ghostty.h
 --- a/include/ghostty.h
 +++ b/include/ghostty.h
-@@ -887,6 +887,7 @@
+@@ -887,6 +887,8 @@
  void ghostty_config_load_default_files(ghostty_config_t);
  void ghostty_config_load_recursive_files(ghostty_config_t);
  void ghostty_config_finalize(ghostty_config_t);
 +bool chop_ghostty_config_load_file(ghostty_config_t, const char*);
++bool chop_ghostty_config_add_file_link(ghostty_config_t, const char*);
  bool ghostty_config_get(ghostty_config_t, void*, const char*, uintptr_t);
  ghostty_input_trigger_s ghostty_config_trigger(ghostty_config_t,
                                                 const char*,
 diff --git a/src/config/CAPI.zig b/src/config/CAPI.zig
 --- a/src/config/CAPI.zig
 +++ b/src/config/CAPI.zig
-@@ -12,6 +12,13 @@
+@@ -12,6 +12,35 @@
  
  const log = std.log.scoped(.config);
  
-+// Chop's sole extension: load its bundled defaults without changing the
++// Chop extension: load its bundled defaults without changing the
 +// user's Ghostty config location or the host process's command-line args.
 +export fn chop_ghostty_config_load_file(self: *Config, path: [*:0]const u8) bool {
 +    self.loadFile(state.alloc, std.mem.span(path)) catch return false;
++    return true;
++}
++
++// Add a path link after finalize, keeping scheme URLs first. The default
++// bare-path matcher must not shadow complete quoted or escaped paths.
++// Config owns the pattern; surface and renderer use their existing link maps.
++export fn chop_ghostty_config_add_file_link(self: *Config, pattern: [*:0]const u8) bool {
++    const url = @import("url.zig");
++    for (self.link.links.items) |*configured| {
++        if (std.mem.eql(u8, configured.regex, url.regex)) {
++            configured.regex = url.chop_scheme_regex;
++        }
++    }
++    const alloc = self._arena.?.allocator();
++    const link: inputpkg.Link = .{
++        .regex = alloc.dupe(u8, std.mem.span(pattern)) catch return false,
++        .action = .open,
++        .highlight = .{ .hover_mods = inputpkg.ctrlOrSuper(.{}) },
++    };
++    var regex = link.oniRegex() catch return false;
++    defer regex.deinit();
++    self.link.links.append(alloc, link) catch return false;
 +    return true;
 +}
 +
@@ -29,7 +52,7 @@ diff --git a/src/config/CAPI.zig b/src/config/CAPI.zig
 diff --git a/src/build/LibtoolStep.zig b/src/build/LibtoolStep.zig
 --- a/src/build/LibtoolStep.zig
 +++ b/src/build/LibtoolStep.zig
-@@ -44 +44 @@
+@@ -44,1 +44,1 @@
 -    run_step.addArgs(&.{ "libtool", "-static", "-o" });
 +    run_step.addArgs(&.{ "chop-libtool", "-static", "-o" });
 diff --git a/include/ghostty.h b/include/ghostty.h
@@ -98,3 +121,24 @@ diff --git a/src/apprt/embedded.zig b/src/apprt/embedded.zig
      /// Returns true if the surface has a selection.
      export fn ghostty_surface_has_selection(surface: *Surface) bool {
          return surface.core_surface.hasSelection();
+diff --git a/src/config/url.zig b/src/config/url.zig
+--- a/src/config/url.zig
++++ b/src/config/url.zig
+@@ -22,11 +22,15 @@
+ ///
+ /// There are many complicated cases where these heuristics break down, but
+ /// handling them well requires a non-regex approach.
+-pub const regex =
++pub const chop_scheme_regex =
+     "(?:" ++ url_schemes ++
+     \\)(?:
+     ++ ipv6_url_pattern ++
+-    \\|[\w\-.~:/?#@!$&*+,;=%]+(?:[\(\[]\w*[\)\]])?)+(?<![,.])|(?:\.\.\/|\.\/|\/)[\w\-.~:\/?#@!$&*+,;=%]+(?:\/[\w\-.~:\/?#@!$&*+,;=%]*)*
++    \\|[\w\-.~:/?#@!$&*+,;=%]+(?:[\(\[]\w*[\)\]])?)+(?<![,.])
++;
++
++pub const regex = chop_scheme_regex ++
++    \\|(?:\.\.\/|\.\/|\/)[\w\-.~:\/?#@!$&*+,;=%]+(?:\/[\w\-.~:\/?#@!$&*+,;=%]*)*
+     ;
+ const url_schemes =
+     \\https?://|mailto:|ftp://|file:|ssh:|git://|ssh://|tel:|magnet:|ipfs://|ipns://|gemini://|gopher://|news:
