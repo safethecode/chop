@@ -10,6 +10,9 @@ Chop은 macOS용 libghostty embedder API와 Metal 렌더러를 사용합니다.
 외부용 libghostty-vt는 렌더링과 프로세스 관리를 직접 구현해야 하므로 현재 버전에는 사용하지 않습니다.
 
 `ghostty-config.patch`는 Chop의 번들 설정 파일 읽기·surface의 셸 PID 조회 함수와 아카이브 도구 어댑터 연결을 추가합니다.
+또한 설정에 경로 링크 정규식을 추가해 기존 Ghostty의 셀 매핑·줄바꿈·밑줄·클릭 처리를 사용합니다.
+기본 URL 인식에서 겹치는 일반 경로 부분만 분리해 공백 경로의 앞부분이 잘리지 않게 합니다.
+경로 존재 확인과 Finder 연결은 Chop에서 처리하며 엔진의 버전은 유지합니다.
 `ghostty-status.patch`는 [Program Status Protocol](https://www.superlogical.com/rex/docs/build/program-status)의
 지원 조회·상태 보고·셸 프롬프트와 초기화 이벤트를 Chop에 전달합니다. 보고는 최대 4096바이트이며,
 콜백 데이터는 호출 중에만 유효합니다. 종료 중 버리는 메시지의 할당 메모리도 정리합니다.
