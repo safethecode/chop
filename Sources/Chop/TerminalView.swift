@@ -20,6 +20,7 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
   var programStatus: ProgramStatus? { activity.display }
   private(set) var localServerURLs: [URL] = []
   private var serverSchemes: [LocalServer: Bool] = [:]
+  private var serverDirectory: String?
   var childPID: Int32 { surface.map { chop_ghostty_surface_child_pid($0) } ?? 0 }
   var terminalTitle = "" { didSet { onMetadataChange?() } }
   var workingDirectory: String { didSet { onMetadataChange?() } }
@@ -101,6 +102,7 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
   }
 
   func updateLocalServers(_ listeners: [LocalServer]) {
+    serverDirectory = workingDirectory
     let text = listeners.isEmpty ? "" : serverScreenText()
     var schemes: [LocalServer: Bool] = [:]
     let urls = listeners.map {
@@ -112,6 +114,26 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
     guard urls != localServerURLs else { return }
     localServerURLs = urls
     onLocalServersChange?()
+  }
+
+  func serverDiscoveryTarget() -> LocalServerDiscovery.Target {
+    let remembered =
+      !localServerURLs.isEmpty && serverDirectoryMatches
+      ? Set(localServerURLs.compactMap { $0.port.flatMap(UInt16.init(exactly:)) }) : []
+    return .init(
+      rootPID: childPID, workingDirectory: workingDirectory,
+      advertisedPorts: LocalServer.advertisedPorts(in: serverScreenText()).union(remembered))
+  }
+
+  private var serverDirectoryMatches: Bool {
+    guard let serverDirectory else { return false }
+    // Ordinary polling needs no filesystem reads; resolve aliases only after a directory change.
+    if serverDirectory == workingDirectory { return true }
+    let previous = URL(fileURLWithPath: serverDirectory, isDirectory: true)
+      .resolvingSymlinksInPath().standardizedFileURL.path
+    let current = URL(fileURLWithPath: workingDirectory, isDirectory: true)
+      .resolvingSymlinksInPath().standardizedFileURL.path
+    return previous == current
   }
 
   private func serverScreenText() -> String {
@@ -128,7 +150,9 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
       return ""
     }
     defer { ghostty_surface_free_text(surface, &text) }
-    let bytes = UnsafeBufferPointer(start: contents, count: min(Int(text.text_len), 32_768))
+    let count = Int(text.text_len)
+    let length = min(count, 32_768)
+    let bytes = UnsafeBufferPointer(start: contents.advanced(by: count - length), count: length)
     return String(decoding: bytes.map { UInt8(bitPattern: $0) }, as: UTF8.self)
   }
 
