@@ -162,17 +162,21 @@ final class TerminalEngine: NSObject {
     serverMonitor = Task { [weak self] in
       while !Task.isCancelled {
         guard let self, app != nil else { return }
-        let targets = terminals.allObjects.map { ($0, $0.childPID) }.filter { $0.1 > 0 }
+        let targets = terminals.allObjects.map { ($0, $0.serverDiscoveryTarget()) }
+          .filter { $0.1.rootPID > 0 }
         let roots = targets.map(\.1)
-        let scan = Task.detached(priority: .utility) { LocalServerDiscovery.scan(rootPIDs: roots) }
+        let scan = Task.detached(priority: .utility) { LocalServerDiscovery.scan(targets: roots) }
         let result = await withTaskCancellationHandler {
           await scan.value
         } onCancel: {
           scan.cancel()
         }
         guard !Task.isCancelled, app != nil else { return }
-        for (terminal, pid) in targets where terminal.childPID == pid {
-          terminal.updateLocalServers(result[pid] ?? [])
+        for (terminal, target) in targets
+        where terminal.childPID == target.rootPID
+          && terminal.workingDirectory == target.workingDirectory
+        {
+          terminal.updateLocalServers(result[target.rootPID] ?? [])
         }
         do { try await Task.sleep(for: .seconds(1)) } catch { return }
       }
