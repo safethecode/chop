@@ -25,6 +25,7 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
   var workingDirectory: String { didSet { onMetadataChange?() } }
   private var markedText = ""
   private var textAccumulator: [String]?
+  private var copyShortcutKeys: Set<UInt16> = []
   private var lastPixelSize: CGSize = .zero
   private var lastScale: CGFloat = 0
   private(set) var hoveredLink: String?
@@ -90,6 +91,7 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
   }
 
   func close() {
+    copyShortcutKeys.removeAll()
     setHoveredLink(nil)
     activity = ProgramStatusRecords()
     onActivityAcknowledged?()
@@ -180,11 +182,32 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
   }
 
   override func resignFirstResponder() -> Bool {
+    copyShortcutKeys.removeAll()
     if let surface { ghostty_surface_set_focus(surface, false) }
     return true
   }
 
+  override func performKeyEquivalent(with event: NSEvent) -> Bool {
+    if copySelectionShortcut(event) { return true }
+    return super.performKeyEquivalent(with: event)
+  }
+
+  private func copySelectionShortcut(_ event: NSEvent) -> Bool {
+    guard event.type == .keyDown, surface != nil, window?.firstResponder === self,
+      event.modifierFlags.intersection([.command, .control, .option, .shift]) == .command
+    else { return false }
+    let key = event.charactersIgnoringModifiers?.lowercased() ?? ""
+    // Korean and other non-Latin input methods may report a composed character for the C key.
+    // Latin layouts use their actual character so Dvorak shortcuts retain their normal position.
+    let nonLatinC = event.keyCode == 8 && (key.isEmpty || !key.unicodeScalars.allSatisfy(\.isASCII))
+    guard key == "c" || nonLatinC else { return false }
+    copyShortcutKeys.insert(event.keyCode)
+    copy(nil)
+    return true
+  }
+
   override func keyDown(with event: NSEvent) {
+    if copySelectionShortcut(event) { return }
     acknowledgeActivity()
     let wasComposing = hasMarkedText()
     textAccumulator = []
@@ -206,6 +229,7 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
   }
 
   override func keyUp(with event: NSEvent) {
+    if copyShortcutKeys.remove(event.keyCode) != nil { return }
     sendKey(event, action: GHOSTTY_ACTION_RELEASE, text: nil, composing: hasMarkedText())
   }
 
