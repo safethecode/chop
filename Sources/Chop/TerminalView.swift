@@ -102,7 +102,7 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
   }
 
   func updateLocalServers(_ listeners: [LocalServer]) {
-    serverDirectory = workingDirectory
+    serverDirectory = serverDirectoryKey
     let text = listeners.isEmpty ? "" : serverScreenText()
     var schemes: [LocalServer: Bool] = [:]
     let urls = listeners.map {
@@ -118,11 +118,16 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
 
   func serverDiscoveryTarget() -> LocalServerDiscovery.Target {
     let remembered =
-      serverDirectory == workingDirectory
+      serverDirectory == serverDirectoryKey
       ? Set(localServerURLs.compactMap { $0.port.flatMap(UInt16.init(exactly:)) }) : []
     return .init(
       rootPID: childPID, workingDirectory: workingDirectory,
       advertisedPorts: LocalServer.advertisedPorts(in: serverScreenText()).union(remembered))
+  }
+
+  private var serverDirectoryKey: String {
+    URL(fileURLWithPath: workingDirectory, isDirectory: true)
+      .resolvingSymlinksInPath().standardizedFileURL.path
   }
 
   private func serverScreenText() -> String {
@@ -139,7 +144,9 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
       return ""
     }
     defer { ghostty_surface_free_text(surface, &text) }
-    let bytes = UnsafeBufferPointer(start: contents, count: min(Int(text.text_len), 32_768))
+    let count = Int(text.text_len)
+    let length = min(count, 32_768)
+    let bytes = UnsafeBufferPointer(start: contents.advanced(by: count - length), count: length)
     return String(decoding: bytes.map { UInt8(bitPattern: $0) }, as: UTF8.self)
   }
 
