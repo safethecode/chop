@@ -102,7 +102,7 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
   }
 
   func updateLocalServers(_ listeners: [LocalServer]) {
-    serverDirectory = serverDirectoryKey
+    serverDirectory = workingDirectory
     let text = listeners.isEmpty ? "" : serverScreenText()
     var schemes: [LocalServer: Bool] = [:]
     let urls = listeners.map {
@@ -118,16 +118,22 @@ final class TerminalView: NSView, @preconcurrency NSTextInputClient {
 
   func serverDiscoveryTarget() -> LocalServerDiscovery.Target {
     let remembered =
-      serverDirectory == serverDirectoryKey
+      !localServerURLs.isEmpty && serverDirectoryMatches
       ? Set(localServerURLs.compactMap { $0.port.flatMap(UInt16.init(exactly:)) }) : []
     return .init(
       rootPID: childPID, workingDirectory: workingDirectory,
       advertisedPorts: LocalServer.advertisedPorts(in: serverScreenText()).union(remembered))
   }
 
-  private var serverDirectoryKey: String {
-    URL(fileURLWithPath: workingDirectory, isDirectory: true)
+  private var serverDirectoryMatches: Bool {
+    guard let serverDirectory else { return false }
+    // Ordinary polling needs no filesystem reads; resolve aliases only after a directory change.
+    if serverDirectory == workingDirectory { return true }
+    let previous = URL(fileURLWithPath: serverDirectory, isDirectory: true)
       .resolvingSymlinksInPath().standardizedFileURL.path
+    let current = URL(fileURLWithPath: workingDirectory, isDirectory: true)
+      .resolvingSymlinksInPath().standardizedFileURL.path
+    return previous == current
   }
 
   private func serverScreenText() -> String {
